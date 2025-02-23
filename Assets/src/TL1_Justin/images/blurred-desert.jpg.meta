@@ -134,7 +134,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      blurred-desert_0: -4140792623421078310
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
