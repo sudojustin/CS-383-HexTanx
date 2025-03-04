@@ -509,7 +509,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   projectilePrefab: {fileID: 5096755278267770118, guid: fa59b1c497cc9ef4ca4c4b6d92ed3e24, type: 3}
-  projectileSpeed: 5
 --- !u!1 &1796920184
 GameObject:
   m_ObjectHideFlags: 0
@@ -547,8 +546,8 @@ MonoBehaviour:
   xpos: 0
   offset: 0.5
   offset2: 0.6
-  min: 4
-  max: 8
+  min: 2
+  max: 2
   Tile: {fileID: 3187486204259752003, guid: 218c447d144faae4596758fb1a1b7fea, type: 3}
   cam: {fileID: 519420032}
 --- !u!4 &1796920186
