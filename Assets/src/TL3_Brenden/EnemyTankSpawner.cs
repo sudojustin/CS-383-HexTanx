@@ -27,7 +27,7 @@ public class EnemyTankSpawner : MonoBehaviour
         }
     }
 
-    void SpawnEnemyTankWithRandomPosition()
+    public void SpawnEnemyTankWithRandomPosition()
     {
         if (placeTileScript.Grid == null || placeTileScript.Grid.GetLength(0) == 0)
         {
