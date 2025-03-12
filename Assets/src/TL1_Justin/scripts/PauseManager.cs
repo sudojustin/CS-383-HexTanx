@@ -48,6 +48,7 @@ public class PauseManager : MonoBehaviour
     {
         Debug.Log("Main menu button pressed");
         // UnityEngine.SceneManagement.SceneManager.LoadScene("GameLevel1");
+        Time.timeScale = 1.0f;
         UnityEngine.SceneManagement.SceneManager.LoadScene("Assets/src/TL1_Justin/scenes/MainMenu.unity");
     }
 
