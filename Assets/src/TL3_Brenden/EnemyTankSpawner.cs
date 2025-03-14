@@ -67,6 +67,7 @@ public class EnemyTankSpawner : MonoBehaviour
         if (tank != null)
         {
             tank.Initialize();// Call Initialize() since we made it parameterless
+            tank.UpdateTankLocation(spawnLocation);
             Debug.Log("Enemy tank initialized successfully!");
         }
         else
