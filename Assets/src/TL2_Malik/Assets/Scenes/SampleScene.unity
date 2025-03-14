@@ -468,8 +468,8 @@ MonoBehaviour:
   xpos: 0
   offset: 0.5
   offset2: 0.6
-  min: 5
-  max: 5
+  min: 6
+  max: 6
   Tile: {fileID: 3187486204259752003, guid: 218c447d144faae4596758fb1a1b7fea, type: 3}
   cam: {fileID: 519420032}
 --- !u!4 &1796920186
