@@ -1,4 +1,3 @@
-using Unity.VisualScripting.YamlDotNet.Core.Tokens;
 using UnityEngine;
 
 public class PauseManager : MonoBehaviour
@@ -9,8 +8,17 @@ public class PauseManager : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        if (Input.GetKey(KeyCode.Escape))
+        isPaused = false;
+        Time.timeScale = 1f;
+        PauseMenu.SetActive(false);
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
         {
+            Debug.Log("Escape key pressed");
             if (isPaused)
             {
                 ResumeGame();
@@ -20,12 +28,6 @@ public class PauseManager : MonoBehaviour
                 PauseGame();
             }
         }
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 
     public void ResumeGame()
