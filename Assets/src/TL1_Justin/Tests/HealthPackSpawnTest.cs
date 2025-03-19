@@ -31,7 +31,7 @@ public class HealthPackSpawnTest
             // Vector3 spawnPosition = new Vector3(Random.Range(-10, 10), Random.Range(-10, 10), -1);
             // Instantiate(healthPackPrefab, spawnPosition, Quaternion.identity);
 
-            yield return itemManager.StartCoroutine(itemManager.WaitForGridAnd)
+            // yield return itemManager.StartCoroutine(itemManager.WaitForGridAnd)
 
             spawnCount++;
 
