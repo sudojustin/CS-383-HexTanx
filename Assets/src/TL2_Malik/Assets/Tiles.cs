@@ -16,9 +16,9 @@ public class Tiles : MonoBehaviour
     public GameObject playertank;
     void Start()
     {
-        playertank = GameObject.Find("PlayerTank");
+        this.isplayer = true;
     }
-    void Update()
+    else
     {
         /*
         if (playertank.transform.position.x == this.transform.position.x && playertank.transform.position.y == this.transform.position.y)
@@ -31,7 +31,8 @@ public class Tiles : MonoBehaviour
         }
         */
     }
-    void OnMouseEnter()
+}
+void OnMouseEnter()
     {
         rend.color = hightlight;
     }
@@ -58,7 +59,7 @@ public class Tiles : MonoBehaviour
         //HeightlightMove();
     }
     */
-    
+
     void OnMouseUp()
     {
         /*
@@ -78,4 +79,3 @@ public class Tiles : MonoBehaviour
         }
     }
     */
-}
