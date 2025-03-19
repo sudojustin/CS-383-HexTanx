@@ -11,25 +11,24 @@ public class Tiles : MonoBehaviour
     private Color iscolor;
     public Color playerhere;
     private bool isplayer = false;
-
-
-    private GameObject playertank;
-    void Start()
+  
+private GameObject playertank;
+void Start()
+{
+    playertank = GameObject.Find("PlayerTank");
+}
+void Update()
+{
+    if (playertank.transform.position.x == this.transform.position.x && playertank.transform.position.y == this.transform.position.y)
     {
-        playertank = GameObject.Find("PlayerTank");
+        this.isplayer = true;
     }
-    void Update()
+    else
     {
-        if (playertank.transform.position.x == this.transform.position.x && playertank.transform.position.y == this.transform.position.y)
-        {
-            this.isplayer = true;
-        }
-        else
-        {
-            isplayer = false;
-        }
+        isplayer = false;
     }
-    void OnMouseEnter()
+}
+void OnMouseEnter()
     {
         rend.color = hightlight;
     }
