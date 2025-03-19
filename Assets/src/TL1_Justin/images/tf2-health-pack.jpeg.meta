@@ -134,7 +134,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      tf2-health-pack_0: 4562801793170853941
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
