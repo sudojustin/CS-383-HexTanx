@@ -12,7 +12,8 @@ public class BoundaryTest
     public void BoundaryTestSimplePasses()
     {
         // Use the Assert class to test conditions
-        SceneManager.LoadScene("MainMenu");
+        // SceneManager.LoadScene("MainMenu");
+        SceneManager.LoadScene("Assets/src/TL2_Malik/Assets/Scenes/SampleScene.unity");
     }
 
     // A UnityTest behaves like a coroutine in Play Mode. In Edit Mode you can use
@@ -22,7 +23,7 @@ public class BoundaryTest
     {
         // Use the Assert class to test conditions.
         // Use yield to skip a frame.
-        var mainMenu = GameObject.Find("MainMenuScreen");
+        var healthPack = GameObject.Find("HealthPack");
         // mainMenu.PlayButton();
         yield return null;
     }
