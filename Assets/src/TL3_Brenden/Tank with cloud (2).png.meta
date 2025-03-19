@@ -1,0 +1,239 @@
+fileFormatVersion: 2
+guid: 946e8071228e3ee4ebbe38e58362550e
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 2165817250126958090
+    second: Tank with cloud (2)_0
+  - first:
+      213: -6090336729287748949
+    second: Tank with cloud (2)_1
+  - first:
+      213: 6829925872663299381
+    second: Tank with cloud (2)_2
+  - first:
+      213: -9096337453121025610
+    second: Tank with cloud (2)_3
+  - first:
+      213: -5350045467933448820
+    second: Tank with cloud (2)_4
+  - first:
+      213: -6582443195080977969
+    second: Tank with cloud (2)_5
+  - first:
+      213: 6684002797614468151
+    second: Tank with cloud (2)_6
+  - first:
+      213: 7237113262698417672
+    second: Tank with cloud (2)_7
+  - first:
+      213: 5498831391829125118
+    second: Tank with cloud (2)_8
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Tank with cloud (2)_0
+      rect:
+        serializedVersion: 2
+        x: 200
+        y: 597
+        width: 222
+        height: 462
+      alignment: 9
+      pivot: {x: 0.30757484, y: 0.3150718}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a0e0b3260578e0e10800000000000000
+      internalID: 2165817250126958090
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tank with cloud (2)_1
+      rect:
+        serializedVersion: 2
+        x: 482
+        y: 597
+        width: 222
+        height: 462
+      alignment: 9
+      pivot: {x: 0.28619412, y: 0.30479795}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bb927781df2cf3a4298413423fd5d2a8
+      internalID: 2060675099
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tank with cloud (2)_2
+      rect:
+        serializedVersion: 2
+        x: 743
+        y: 595
+        width: 222
+        height: 462
+      alignment: 9
+      pivot: {x: 0.2750002, y: 0.31027368}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: feb1630fefffe11419e02f57c86edef2
+      internalID: 2147265028
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tank with cloud (2)_3
+      rect:
+        serializedVersion: 2
+        x: 995
+        y: 595
+        width: 222
+        height: 462
+      alignment: 9
+      pivot: {x: 0.28569072, y: 0.29999995}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 28c5454be45b27e4f8123b78db5133e2
+      internalID: -1994646286
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: b660f9086c906bc40bb0b264dbc7c54e
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      Tank with cloud (2)_0: 2165817250126958090
+      Tank with cloud (2)_1: 2060675099
+      Tank with cloud (2)_2: 2147265028
+      Tank with cloud (2)_3: -1994646286
+      Tank with cloud (2)_6: 6684002797614468151
+      Tank with cloud (2)_7: 7237113262698417672
+      Tank with cloud (2)_8: 5498831391829125118
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
