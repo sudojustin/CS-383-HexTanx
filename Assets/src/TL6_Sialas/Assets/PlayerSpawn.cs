@@ -38,6 +38,27 @@ public class PlayerTankSpawner : MonoBehaviour
         SpawnPlayerTank(playerPos);
     }
 
+    public void SpawnPlayerTankWithRandomPosition() // New method for test only
+    {
+        if (placeTileScript == null) placeTileScript = FindObjectOfType<PlaceTile>();
+
+        if (placeTileScript.Grid == null || placeTileScript.Grid.GetLength(0) == 0 || placeTileScript.Grid.GetLength(1) == 0)
+        {
+            Debug.LogError("Grid is not populated properly.");
+            return;
+        }
+
+        int width = placeTileScript.width;
+        int height = placeTileScript.height;
+
+        // Spawn at a random position within grid bounds
+        int spawnX = Random.Range(0, width); // 0 to width-1
+        int spawnY = Random.Range(0, height); // 0 to height-1
+        Vector3 playerPos = placeTileScript.Grid[spawnX, spawnY];
+        playerPos.z = -1f;
+        SpawnPlayerTank(playerPos);
+    }
+
     public void SpawnPlayerTank(Vector3 spawnLocation)
     {
         if (playerTankPrefab == null)
