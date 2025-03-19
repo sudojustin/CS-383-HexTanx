@@ -1,0 +1,10 @@
+{
+    "name": "TestsTerrain",
+    "optionalUnityReferences": [
+        "TestAssemblies"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ]
+    
+}

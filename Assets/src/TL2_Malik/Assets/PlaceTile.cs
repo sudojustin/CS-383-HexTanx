@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class PlaceTile : MonoBehaviour
 {
+    private int isTerrain = 0;
     private float hexwidth = 1f;
     public float hexHeight = Mathf.Sqrt(3) / 2f;
     public float heightspacing;
@@ -14,6 +15,7 @@ public class PlaceTile : MonoBehaviour
     public int min;
     public int max;
     public GameObject Tile;
+    public GameObject Terrain;
     public Vector3[,] Grid;
 
     private GameObject playertank;
@@ -24,12 +26,12 @@ public class PlaceTile : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        playertank = GameObject.Find("PlayerTank");
+        //playertank = GameObject.Find("PlayerTank");
         height = Random.Range(min,max);
         width = Random.Range(min,max);
         Grid = new Vector3[width,height];
         MakeMap(width, height);
-        playertank.transform.position = Grid[width/2,1];
+        //playertank.transform.position = Grid[width/2,1];
     }
 
     void MakeMap(int width, int height)
@@ -38,6 +40,7 @@ public class PlaceTile : MonoBehaviour
         {
             for(int y = 0; y < height; ++y)
             {
+                isTerrain = Random.Range(1,3);
                 xpos = x * hexwidth;
                 ypos = y * hexHeight * 1.0f;
             
@@ -45,10 +48,16 @@ public class PlaceTile : MonoBehaviour
                 {
                     xpos += offset;
                 }
-                
-                
-                Grid[x, y] = new Vector3(xpos+=hexwidth/2f, ypos, 0); 
-                Instantiate(Tile,Grid[x, y],Quaternion.identity);
+                if(isTerrain == 2)
+                {
+                    Grid[x, y] = new Vector3(xpos+=hexwidth/2f, ypos, 0);
+                    Instantiate(Terrain,Grid[x, y],Quaternion.identity);
+                }
+                else
+                {
+                    Grid[x, y] = new Vector3(xpos+=hexwidth/2f, ypos, 0); 
+                    Instantiate(Tile,Grid[x, y],Quaternion.identity);
+                }
                 
                 
             }
@@ -56,4 +65,5 @@ public class PlaceTile : MonoBehaviour
 
         cam.transform.position = new Vector3((float)width/2 -0.5f, (float)height/2 -0.5f,-10); 
     }
+    
 }
