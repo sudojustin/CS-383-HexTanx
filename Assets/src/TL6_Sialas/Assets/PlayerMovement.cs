@@ -22,10 +22,11 @@ public class PlayerMovement : MonoBehaviour
             mouseWorldPos.z = -1; 
             playerTank.transform.position = FindNearestTile(mouseWorldPos);
             Debug.Log("Tank moved to " + playerTank.transform.position);
+            Debug.Log("Mouse position " + mouseWorldPos);
         }
     }
 
-    Vector3 FindNearestTile(Vector3 position)
+    public Vector3 FindNearestTile(Vector3 position)
     {
         if (placeTile == null || placeTile.Grid == null)
         {

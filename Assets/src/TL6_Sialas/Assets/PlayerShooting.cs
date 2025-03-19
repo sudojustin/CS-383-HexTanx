@@ -2,13 +2,18 @@ using UnityEngine;
 
 public class PlayerShooting : MonoBehaviour
 {
-    [SerializeField] private GameObject projectilePrefab; 
-
+    [SerializeField] private GameObject projectilePrefab;
+    [SerializeField] private AudioSource shootAudio;  
+    [SerializeField] private AudioClip shootSound;    
     private Camera mainCamera;
 
     void Start()
     {
         mainCamera = Camera.main;
+        if (shootAudio == null)
+        {
+            shootAudio = GetComponent<AudioSource>();
+        }
     }
 
     void Update()
@@ -21,6 +26,11 @@ public class PlayerShooting : MonoBehaviour
 
     void Shoot()
     {
+        if (shootAudio && shootSound)
+        {
+            shootAudio.PlayOneShot(shootSound);
+        }
+
         // Get mouse position and convert to world coordinates
         Vector3 mousePosition = mainCamera.ScreenToWorldPoint(Input.mousePosition);
         mousePosition.z = 0; 
