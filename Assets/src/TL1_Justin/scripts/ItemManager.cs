@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class ItemManager : MonoBehaviour
@@ -7,6 +8,7 @@ public class ItemManager : MonoBehaviour
     // private ItemManager itemManager;
     private static ItemManager instance;
     public GameObject healthPack;
+    public List<GameObject> spawnedHealthPacks = new List<GameObject>();
 
     private bool isSpawningHealthPack = false; // Prevent multiple coroutines
  
@@ -69,7 +71,7 @@ public class ItemManager : MonoBehaviour
         }
     }
 
-    private IEnumerator WaitForGridAndSpawnHealthPack()
+    public IEnumerator WaitForGridAndSpawnHealthPack()
     {
         if (isSpawningHealthPack) yield break; // Stop if already running
         isSpawningHealthPack = true;           // Mark as running
@@ -90,6 +92,7 @@ public class ItemManager : MonoBehaviour
 
         int randX = Random.Range(0, width);
         int randY = Random.Range(0, height);
+        Debug.Log($"Random health pack locations are {randX} and {randY}");
         Vector3 healthPackPos = placeTileScript.Grid[randX, randY];
         healthPackPos.z = -1f; // Ensure health pack appears above the tiles
 
@@ -101,6 +104,7 @@ public class ItemManager : MonoBehaviour
         GameObject spawnedHealthPack = Instantiate(healthPack, healthPackPos, Quaternion.identity);
         Debug.Log("Health pack instantiated at: " + spawnedHealthPack.transform.position);
 
+        spawnedHealthPacks.Add(spawnedHealthPack);
 
         isSpawningHealthPack = false; // Reset flag after completion
     }
