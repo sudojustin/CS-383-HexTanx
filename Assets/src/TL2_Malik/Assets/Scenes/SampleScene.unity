@@ -430,7 +430,7 @@ AudioSource:
   m_audioClip: {fileID: 8300000, guid: 98a6386ec8337794aba5192894e0bb4a, type: 3}
   m_Resource: {fileID: 8300000, guid: 98a6386ec8337794aba5192894e0bb4a, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.175
+  m_Volume: 0.085
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -682,6 +682,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PauseMenuCanvas: {fileID: 3329697144788229011, guid: dd25ea57c3a9de742bbe99c54b466c26, type: 3}
+  playerMovement: {fileID: 0}
 --- !u!4 &957404755
 Transform:
   m_ObjectHideFlags: 0
@@ -904,3 +905,4 @@ SceneRoots:
   - {fileID: 957404755}
   - {fileID: 1267710195}
   - {fileID: 842686177}
+  - {fileID: 749800100}
