@@ -21,7 +21,7 @@ public class UIManager : MonoBehaviour
 
         // Instantiate the health bar UI from the prefab
         GameObject healthBarInstance = Instantiate(healthBarPrefab, transform);
-        healthBar = healthBarInstance.transform.Find("TotalHealth").GetComponent<Image>(); // Reference the TotalHealth Image
+        healthBar = healthBarInstance.transform.Find("TotalHealth").GetComponent<Image>();
 
         if (healthBar == null)
         {

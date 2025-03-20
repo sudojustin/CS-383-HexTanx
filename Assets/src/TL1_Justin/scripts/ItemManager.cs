@@ -48,9 +48,9 @@ public class ItemManager : MonoBehaviour
     {
         Debug.Log("Collision detected with: " + collision.gameObject.name);
 
-        if (collision.GetComponent<Projectile>() != null)
+        if (collision.GetComponent<PlayerTank>() != null)
         {
-            Debug.Log("Projectile collided with item");
+            Debug.Log("Player tank collided with item");
 
             PlayerTank playerTank = FindObjectOfType<PlayerTank>();
 
