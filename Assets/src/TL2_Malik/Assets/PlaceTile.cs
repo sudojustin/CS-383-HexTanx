@@ -34,7 +34,7 @@ public class PlaceTile : MonoBehaviour
         //playertank.transform.position = Grid[width/2,1];
     }
 
-    void MakeMap(int width, int height)
+    public void MakeMap(int width, int height)
     {
        for(int x = 0; x < width; ++x)
         {
