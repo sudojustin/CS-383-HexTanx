@@ -26,10 +26,10 @@ public class Terrains : Tiles
         playerHealthshown = playertc.GetHealth();
         if(playertank.transform.position.x == this.transform.position.x && playertank.transform.position.y == this.transform.position.y)
         {
-            Debug.Log(": "+playerHealthshown);
+            //Debug.Log(": "+playerHealthshown);
             playertc.SetHealth(playerHealthshown-damage);
             playerHealthshown = playertc.GetHealth();
-            Debug.Log(": "+playerHealthshown);
+           // Debug.Log(": "+playerHealthshown);
             
         }
     }

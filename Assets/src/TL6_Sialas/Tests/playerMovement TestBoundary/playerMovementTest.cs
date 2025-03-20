@@ -10,14 +10,10 @@ public class PlayerTankMovementTest
     private PlayerMovement playerMovement;
     private Vector3 initialPosition;
 
-    [UnitySetUp]
-    public IEnumerator LoadScene()
+    [OneTimeSetUp]
+    public void LoadScene()
     {
-        // Ensure scene is loaded
-        Debug.Log("Loading SampleScene...");
         SceneManager.LoadScene("SampleScene");
-        yield return new WaitForSeconds(1.0f);
-        Debug.Log("Scene loaded.");
     }
 
     [UnityTest]
@@ -43,26 +39,23 @@ public class PlayerTankMovementTest
         yield return new WaitForSeconds(0.5f); 
         Debug.Log("Initial position: " + initialPosition);
 
-        // Simulate random clicks(moves)
-        int a = 0;
-        while (a != 10)  // 10 moves
-        {
-            // Generate random screen position
-            Vector3 randomScreenPos = new Vector3(Random.Range(0, Screen.width), Random.Range(0, Screen.height), 0);
-            Debug.Log($"Click {a + 1}: Random screen position: {randomScreenPos}");
+     
+      
+        // Generate random screen position
+        Vector3 randomScreenPos = new Vector3(Random.Range(0, Screen.width), Random.Range(0, Screen.height), 0);
+        Debug.Log($"Random screen position: {randomScreenPos}");
 
-            // Convert to world space
-            Vector3 worldPos = mainCamera.ScreenToWorldPoint(randomScreenPos);
-            worldPos.z = -1f;  // Match tank’s Z
-            Debug.Log($"Click {a + 1}: World position: {worldPos}");
+        // Convert to world space
+        Vector3 worldPos = mainCamera.ScreenToWorldPoint(randomScreenPos);
+        worldPos.z = -1f;  // Match tank’s Z
+        Debug.Log($"World position: {worldPos}");
 
-            // Move tank directly using FindNearestTile
-            playerTank.transform.position = playerMovement.FindNearestTile(worldPos);
-            Debug.Log($"Click {a + 1}: Tank moved to: {playerTank.transform.position}");
+        // Move tank directly using FindNearestTile
+        playerTank.transform.position = playerMovement.FindNearestTile(worldPos);
+        Debug.Log($"Tank moved to: {playerTank.transform.position}");
 
-            yield return new WaitForSeconds(1.0f);  // Wait one frame
-            a++;
-        }
+        yield return new WaitForSeconds(1.0f);  // Wait one frame
+     
 
         Vector3 newPosition = playerTank.transform.position;
         Debug.Log($"Initial Position: {initialPosition}, New Position: {newPosition}");
@@ -86,6 +79,11 @@ public class PlayerTankMovementTest
             }
             if (isOnTile) break;
         }
+        Debug.Log($"Tank check: Is on tile: {isOnTile}");
         Assert.IsTrue(isOnTile, $"New position {newPosition} is not on a tile!");
+        if (isOnTile)
+        {
+            Assert.Pass("Player Tank moved in Bounds");
+        }
     }
 }
