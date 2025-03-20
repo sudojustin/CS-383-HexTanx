@@ -128,9 +128,14 @@ public class playerSpawnTest
 
             fps = 1.0f / Time.deltaTime; // Calculate FPS
             Debug.Log($"Spawned Tanks: {tankCount}, FPS: {fps}");
+            if (fps < FPS_LIMIT)
+            {
+                yield return new WaitForSeconds(1f);
+                Assert.Fail("FPS below 20");
+            }
         }
 
         Debug.Log($"Test Stopped - Final FPS: {fps}, Total Tanks Spawned: {tankCount}");
-        Assert.Less(fps, FPS_LIMIT, "FPS did not drop below 20 within the spawn limit.");
+        Assert.Pass("FPS did not drop below 40 within the spawn limit.");
     }
 }
