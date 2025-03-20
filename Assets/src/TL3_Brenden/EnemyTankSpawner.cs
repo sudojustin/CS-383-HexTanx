@@ -59,7 +59,7 @@ public class EnemyTankSpawner : MonoBehaviour
             Debug.LogError("EnemyTankSpawner: No tank prefab returned from TankManager!");
             return;
         }
-        Debug.Log("Spawning an enemy tank at: " + spawnLocation);  //  Confirm method runs
+        //Debug.Log("Spawning an enemy tank at: " + spawnLocation);  //  Confirm method runs
 
         GameObject spawnedTank = Instantiate(tankPrefab, spawnLocation, Quaternion.identity);
         TankType tank = spawnedTank.GetComponent<TankType>();
@@ -68,7 +68,7 @@ public class EnemyTankSpawner : MonoBehaviour
         {
             tank.Initialize();// Call Initialize() since we made it parameterless
             tank.UpdateTankLocation(spawnLocation);
-            Debug.Log("Enemy tank initialized successfully!");
+            //Debug.Log("Enemy tank initialized successfully!");
         }
         else
         {
