@@ -7,8 +7,8 @@ using UnityEngine.SceneManagement;
 public class EnemyTankSpawnTest
 {
     private EnemyTankSpawner enemyTankSpawner;
-    private const float FPS_LIMIT = 20f; // Stop spawning when FPS drops below this
-    private const int MAX_SPAWN_COUNT = 50000; // Safety limit to prevent infinite loops
+    private const float FPS_LIMIT = 40f; // Stop spawning when FPS drops below this
+    private const int MAX_SPAWN_COUNT = 500; //Safeyly Limit to prevent infinite loops
 
     [OneTimeSetUp]
     public void LoadScene()
@@ -30,13 +30,18 @@ public class EnemyTankSpawnTest
             enemyTankSpawner.SpawnEnemyTankWithRandomPosition();
             tankCount++;
 
-            yield return new WaitForSeconds(0.1f); // Allow FPS to update
+            yield return new WaitForSeconds(.1f); // Allow FPS to update
 
             fps = 1.0f / Time.deltaTime; // Calculate FPS
-            Debug.Log($"Spawned Tanks: {tankCount}, FPS: {fps}");
+            Debug.Log($"Tank No: {tankCount}, FPS: {fps}");
+            if(fps < FPS_LIMIT)
+            {
+                yield return new WaitForSeconds(1f);
+                Assert.Fail("FPS below 40");
+            }
         }
 
         Debug.Log($"Test Stopped - Final FPS: {fps}, Total Tanks Spawned: {tankCount}");
-        Assert.Less(fps, FPS_LIMIT, "FPS did not drop below 20 within the spawn limit.");
+        Assert.Pass("FPS did not drop below 40 within the spawn limit.");
     }
 }

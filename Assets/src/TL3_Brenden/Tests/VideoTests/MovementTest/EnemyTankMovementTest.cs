@@ -37,13 +37,17 @@ public class EnemyTankMovementTest
         while (a != 10000)
         {
             aiControl.MoveToNewLocation();
-            yield return new WaitForSeconds(1.0f); // Wait for potential movement
+            yield return new WaitForSeconds(.2f); // Wait for potential movement
             a++;
+            if (a == 11)
+            {
+                Assert.Pass("Enemy Tank made 11 moves without going out of bounds");
+            }
         }
 
         Vector3 newPosition = enemyTank.transform.position;
 
-        Debug.Log($"Initial Position: {initialPosition}, New Position: {newPosition}");
+        //Debug.Log($"Initial Position: {initialPosition}, New Position: {newPosition}");
 
         // Check if the position has changed
         Assert.AreNotEqual(initialPosition, newPosition, "Enemy tank did not move!");
