@@ -8,6 +8,7 @@ public class PauseManager : MonoBehaviour
     public static bool isPaused;
     private GameObject pauseMenuInstance;
     public PlayerMovement playerMovement;
+    public PlayerShooting playerShooting;
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -59,8 +60,9 @@ public class PauseManager : MonoBehaviour
 
         if (playerMovement != null)
         {
-            Debug.Log("Player movement is enabled");
+            Debug.Log("Player movement and shooting are enabled");
             playerMovement.enabled = true;
+            playerShooting.enabled = true;
         }
     }
 
@@ -73,8 +75,9 @@ public class PauseManager : MonoBehaviour
 
         if (playerMovement != null)
         {
-            Debug.Log("Player movement is disabled");
+            Debug.Log("Player movement and shooting are disabled");
             playerMovement.enabled = false;
+            playerShooting.enabled = false;
         }
     }
 
@@ -106,6 +109,7 @@ public class PauseManager : MonoBehaviour
         if (playerTank != null)
         {
             playerMovement = playerTank.GetComponent<PlayerMovement>();
+            playerShooting = playerTank.GetComponent<PlayerShooting>();
             Debug.Log("PlayerTank found and PlayerMovement initialized.");
         }
         else

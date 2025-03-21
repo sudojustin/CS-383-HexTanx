@@ -3,8 +3,9 @@ using UnityEngine;
 public class Projectile : MonoBehaviour
 {
     private Vector3 targetPosition;
-    public float speed = 5f; 
-    public int damage = 10; 
+    public float speed = 5f;
+    public int damage = 10;
+    [SerializeField] private AudioClip explosionSound;
 
     public void SetTarget(Vector3 target)
     {
@@ -13,7 +14,7 @@ public class Projectile : MonoBehaviour
 
     void Update()
     {
-        // shoot shell towards target
+        // Move shell towards target
         transform.position = Vector3.MoveTowards(transform.position, targetPosition, speed * Time.deltaTime);
 
         // Destroy projectile when it reaches target position
@@ -25,23 +26,32 @@ public class Projectile : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        // Check if the shell hit enemy tank
         TankType enemyTank = other.GetComponent<TankType>();
 
         if (enemyTank != null)
         {
-            // Apply damage
-            enemyTank.health -= damage; 
+            enemyTank.health -= damage;
             Debug.Log("Enemy tank hit! Remaining HP: " + enemyTank.health);
 
             if (enemyTank.health <= 0)
             {
+                if (explosionSound != null)
+                {
+                    AudioSource.PlayClipAtPoint(explosionSound, transform.position);
+                    Debug.Log("Explosion sound triggered at position: " + transform.position);
+                }
+                else
+                {
+                    Debug.LogWarning("Explosion sound not played: AudioClip missing!");
+                }
                 Destroy(enemyTank.gameObject);
+                Destroy(gameObject);  // No delay needed
                 Debug.Log("Enemy tank destroyed!");
             }
-
-            Destroy(gameObject); 
+            else
+            {
+                Destroy(gameObject);
+            }
         }
     }
 }
-
