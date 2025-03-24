@@ -728,6 +728,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PauseMenuCanvas: {fileID: 3329697144788229011, guid: dd25ea57c3a9de742bbe99c54b466c26, type: 3}
   playerMovement: {fileID: 0}
+  playerShooting: {fileID: 0}
 --- !u!4 &957404755
 Transform:
   m_ObjectHideFlags: 0
@@ -826,11 +827,11 @@ MonoBehaviour:
   xpos: 0
   offset: 0.5
   offset2: 0.6
-  min: 6
-  max: 6
+  min: 5
+  max: 5
   Tile: {fileID: 3187486204259752003, guid: 218c447d144faae4596758fb1a1b7fea, type: 3}
   Terrain: {fileID: 3591277320102712311, guid: 72ca29d6cca473a49bb60cf2fabf75bd, type: 3}
-  cam: {fileID: 519420032}
+  cam: {fileID: 519420031}
 --- !u!4 &1796920186
 Transform:
   m_ObjectHideFlags: 0

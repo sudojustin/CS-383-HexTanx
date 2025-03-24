@@ -18,24 +18,33 @@ public class PlaceTile : MonoBehaviour
     public GameObject Terrain;
     public Vector3[,] Grid;
 
-    private GameObject playertank;
+    //private GameObject playertank;
    
 
     [SerializeField]
-    private Transform cam;
+    private Camera cam;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        //playertank = GameObject.Find("PlayerTank");
+        cam = Camera.main;  
+        if (cam == null)
+        {
+            Debug.LogError("Main camera is not assigned or not found!");
+            return;
+        }
         height = Random.Range(min,max);
         width = Random.Range(min,max);
-        Grid = new Vector3[width,height];
+        Grid = null;
         MakeMap(width, height);
         //playertank.transform.position = Grid[width/2,1];
     }
 
     public void MakeMap(int width, int height)
-    {
+    {  
+        if (Grid == null)
+        {
+            Grid = new Vector3[width, height];
+        }
        for(int x = 0; x < width; ++x)
         {
             for(int y = 0; y < height; ++y)
@@ -63,7 +72,14 @@ public class PlaceTile : MonoBehaviour
             }
         }
 
-        cam.transform.position = new Vector3((float)width/2 -0.5f, (float)height/2 -0.5f,-10); 
+        if (cam != null)
+        {
+            cam.transform.position = new Vector3((float)width / 2 - 0.5f, (float)height / 2 - 0.5f, -10);
+        }
+        else
+        {
+            Debug.LogError("Camera (cam) is not assigned!");
+        }
     }
     
 }
