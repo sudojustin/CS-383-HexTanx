@@ -166,8 +166,8 @@ public class PlaceTileTests
         //Assert.AreEqual(placeTileScript.width * placeTileScript.height, tileCount + terrainCount, "Total number of tiles and terrain is incorrect");
 
         // Log the count of instantiated objects
-        Debug.Log($"Number of Tiles instantiated: {tileCount}");
-        Debug.Log($"Number of Terrain instantiated: {terrainCount}");
+        //Debug.Log($"Number of Tiles instantiated: {tileCount}");
+        //Debug.Log($"Number of Terrain instantiated: {terrainCount}");
 
         // Optional: Check if the frame rate dropped below a threshold (e.g., 30 FPS) during the test
         float frameRate = 1 / Time.unscaledDeltaTime;
