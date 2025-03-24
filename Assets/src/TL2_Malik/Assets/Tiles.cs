@@ -13,7 +13,7 @@ public class Tiles : MonoBehaviour
     
 
 
-    public GameObject playertank;
+    //public GameObject playertank;
     void Start()
     {
     
