@@ -6,10 +6,12 @@ public class PlayerShooting : MonoBehaviour
     [SerializeField] private AudioSource shootAudio;  
     [SerializeField] private AudioClip shootSound;    
     private Camera mainCamera;
+    private PlayerTank playerTank;
 
     void Start()
     {
         mainCamera = Camera.main;
+        playerTank = GetComponent<PlayerTank>();
         if (shootAudio == null)
         {
             shootAudio = GetComponent<AudioSource>();
@@ -18,9 +20,22 @@ public class PlayerShooting : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetMouseButtonDown(1)) // Right-click to shoot
+ 
+        // Right-click to shoot
+        if (Input.GetMouseButtonDown(1))
         {
-            Shoot();
+            if (playerTank.UseActionPoint() && playerTank.GetAmmoCount() > 0)  // Check action point and ammo
+            {
+                Vector3 mouseWorldPos = mainCamera.ScreenToWorldPoint(Input.mousePosition);
+                mouseWorldPos.z = -1;
+                Shoot();
+                playerTank.SetAmmoCount(playerTank.GetAmmoCount() - 1);  // Deduct ammo
+                Debug.Log("Shot fired toward " + mouseWorldPos);
+            }
+            else if (playerTank.GetAmmoCount() <= 0)
+            {
+                Debug.Log("No ammo remaining!");
+            }
         }
     }
 
