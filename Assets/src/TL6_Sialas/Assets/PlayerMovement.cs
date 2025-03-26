@@ -35,6 +35,7 @@ public class PlayerMovement : MonoBehaviour
                 playerTankComponent.SetTankLocation(newPosition);  // Use setter for consistency
                 Debug.Log("Tank moved to " + playerTank.transform.position);
                 Debug.Log("Mouse position " + mouseWorldPos);
+                FindObjectOfType<BattleSystem>().PlayerActionTaken();
             }
         }
     }
