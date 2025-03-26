@@ -25,6 +25,7 @@ public class PlayerShooting : MonoBehaviour
                 Shoot();
                 playerTank.SetAmmoCount(playerTank.GetAmmoCount() - 1);  // Deduct ammo
                 Debug.Log("Shot fired toward " + mouseWorldPos);
+                FindObjectOfType<BattleSystem>().PlayerActionTaken();
             }
             else if (playerTank.GetAmmoCount() <= 0)
             {

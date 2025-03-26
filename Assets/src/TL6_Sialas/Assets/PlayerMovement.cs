@@ -53,6 +53,8 @@ public class PlayerMovement : MonoBehaviour
                     SoundManager.Instance.PlayerMoveSound(); // Play movement sound
                     Debug.Log("Tank moving to " + targetPosition);
                     Debug.Log("Mouse position " + mouseWorldPos);
+                    FindObjectOfType<BattleSystem>().PlayerActionTaken();
+
                 }
             }
         }
