@@ -4,11 +4,12 @@ public class PlayerMovement : MonoBehaviour
 {
     private Camera mainCamera;
     private GameObject playerTank;
-    private PlayerTank playerTankComponent;  // Reference to PlayerTank script
+    private PlayerTank playerTankComponent;
     private PlaceTile placeTile;
 
-    [SerializeField] private GameObject projectilePrefab;  // Assign in Inspector
-    [SerializeField] private Transform firePoint;          // Where projectile spawns (e.g., tank barrel)
+    private Vector3 targetPosition; // The tile position to move towards
+    private bool isMoving = false;  // Flag to track if the tank is currently moving
+    [SerializeField] private float moveSpeed = 5f; // Speed of the tank movement (adjust in Inspector)
 
     void Start()
     {
@@ -16,26 +17,44 @@ public class PlayerMovement : MonoBehaviour
         playerTank = gameObject;
         playerTankComponent = playerTank.GetComponent<PlayerTank>();
         placeTile = FindObjectOfType<PlaceTile>();
-        if (projectilePrefab == null || firePoint == null)
-        {
-            Debug.LogError("Projectile Prefab or Fire Point not assigned in PlayerMovement!");
-        }
+        targetPosition = transform.position; // Initialize target to current position
     }
 
     void Update()
     {
-        // Left-click to move
-        if (Input.GetMouseButtonDown(0))
+        // Handle movement towards the target position
+        if (isMoving)
         {
-            if (playerTankComponent.UseActionPoint())  // Check and deduct action point
+            // Move towards the target position at moveSpeed
+            transform.position = Vector3.MoveTowards(transform.position, targetPosition, moveSpeed * Time.deltaTime);
+
+            // Check if the tank has reached the target
+            if (Vector3.Distance(transform.position, targetPosition) < 0.1f)
+            {
+                transform.position = targetPosition; // Snap to target to avoid floating-point issues
+                isMoving = false; // Stop moving
+                playerTankComponent.SetTankLocation(targetPosition); // Update PlayerTank's location
+                SoundManager.Instance.StopMovementSound(); // Stop the movement sound
+                Debug.Log("Tank reached target: " + transform.position);
+            }
+        }
+
+        // Left-click to initiate movement
+        if (Input.GetMouseButtonDown(0) && !isMoving) // Only allow new movement if not currently moving
+        {
+            if (playerTankComponent.UseActionPoint()) // Check and deduct action point
             {
                 Vector3 mouseWorldPos = mainCamera.ScreenToWorldPoint(Input.mousePosition);
                 mouseWorldPos.z = -1;
-                Vector3 newPosition = FindNearestTile(mouseWorldPos);
-                playerTankComponent.SetTankLocation(newPosition);  // Use setter for consistency
-                Debug.Log("Tank moved to " + playerTank.transform.position);
-                Debug.Log("Mouse position " + mouseWorldPos);
-                FindObjectOfType<BattleSystem>().PlayerActionTaken();
+                targetPosition = FindNearestTile(mouseWorldPos);
+                if (targetPosition != transform.position) // Only move if the target is different
+                {
+                    isMoving = true; // Start moving
+                    SoundManager.Instance.PlayerMoveSound(); // Play movement sound
+                    Debug.Log("Tank moving to " + targetPosition);
+                    Debug.Log("Mouse position " + mouseWorldPos);
+                    FindObjectOfType<BattleSystem>().PlayerActionTaken();
+                }
             }
         }
     }
@@ -45,7 +64,7 @@ public class PlayerMovement : MonoBehaviour
         if (placeTile == null || placeTile.Grid == null)
         {
             Debug.LogError("PlaceTile or Grid not available");
-            return playerTank.transform.position;
+            return transform.position;
         }
 
         Vector3 nearestPos = placeTile.Grid[0, 0];
@@ -65,18 +84,5 @@ public class PlayerMovement : MonoBehaviour
         }
 
         return new Vector3(nearestPos.x, nearestPos.y, -1);
-    }
-
-    private void Shoot(Vector3 targetPosition)
-    {
-        if (projectilePrefab != null && firePoint != null)
-        {
-            GameObject projectile = Instantiate(projectilePrefab, firePoint.position, Quaternion.identity);
-            Projectile projectileScript = projectile.GetComponent<Projectile>();
-            if (projectileScript != null)
-            {
-                projectileScript.SetTarget(targetPosition);
-            }
-        }
     }
 }
