@@ -25,7 +25,6 @@ public class PlayerShooting : MonoBehaviour
                 Shoot();
                 playerTank.SetAmmoCount(playerTank.GetAmmoCount() - 1);  // Deduct ammo
                 Debug.Log("Shot fired toward " + mouseWorldPos);
-
                 FindObjectOfType<BattleSystem>().PlayerActionTaken();
             }
             else if (playerTank.GetAmmoCount() <= 0)
@@ -40,11 +39,11 @@ public class PlayerShooting : MonoBehaviour
         // Play shoot sound via SoundManager
         if (shootSoundOverride != null)
         {
-            //SoundManager.Instance.Play(shootSoundOverride); // Use override if assigned
+            SoundManager.Instance.Play(shootSoundOverride); // Use override if assigned
         }
         else
         {
-            //SoundManager.Instance.ShootSound(); // Use default from SoundManager
+            SoundManager.Instance.ShootSound(); // Use default from SoundManager
         }
         Debug.Log("Shoot sound triggered via SoundManager");
 
