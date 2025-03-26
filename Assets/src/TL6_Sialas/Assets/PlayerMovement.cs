@@ -54,6 +54,7 @@ public class PlayerMovement : MonoBehaviour
                     Debug.Log("Tank moving to " + targetPosition);
                     Debug.Log("Mouse position " + mouseWorldPos);
                     FindObjectOfType<BattleSystem>().PlayerActionTaken();
+
                 }
             }
         }
