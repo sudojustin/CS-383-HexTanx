@@ -167,5 +167,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 5
   damage: 10
-  explosionSound: {fileID: 8300000, guid: 31356047f04d8674aae9ad9d8632bf2f, type: 3}
-  explosionVolume: 1
+  explosionSoundOverride: {fileID: 0}

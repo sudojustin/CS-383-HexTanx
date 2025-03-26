@@ -5,7 +5,7 @@ public class AIControl : MonoBehaviour
     private TankType tank;
     private PlaceTile placeTileScript;
 
-    void Start()
+    public void Start()
     {
         tank = GetComponent<TankType>();
         if (tank == null)
@@ -61,11 +61,11 @@ public class AIControl : MonoBehaviour
         }
         else
         {
-             Debug.Log(gameObject.name + " tried to move out of bounds, staying in place." + newLocation);
+            Debug.Log(gameObject.name + " tried to move out of bounds, staying in place." + newLocation);
         }
     }
 
-private Vector3 GetRandomAdjacentHex()
+    private Vector3 GetRandomAdjacentHex()
     {
         float hexHeight = Mathf.Sqrt(3) / 2f;
         Vector3[] possibleMoves = {
@@ -82,11 +82,6 @@ private Vector3 GetRandomAdjacentHex()
     private bool IsWithinMapBounds(Vector3 position)
     {
         float hexHeight = Mathf.Sqrt(3) / 2f;
-        // Convert the position to the grid's coordinates (ignoring the z-axis)
-        //float x = Mathf.RoundToInt(position.x);
-        //float y = Mathf.RoundToInt(position.y);
-
-        // Check if the x and y are within the grid bounds
         if (position.x > 0f && position.x <= placeTileScript.width && position.y >= 0f && position.y < (placeTileScript.height - hexHeight))
         {
             return true;
