@@ -51,7 +51,7 @@ public class PlayerTankMovementTest
         Debug.Log($"World position: {worldPos}");
 
         // Move tank directly using FindNearestTile
-        playerTank.transform.position = playerMovement.FindNearestTile(worldPos);
+       // playerTank.transform.position = playerMovement.FindNearestTile(worldPos);
         Debug.Log($"Tank moved to: {playerTank.transform.position}");
 
         yield return new WaitForSeconds(1.0f);  // Wait one frame

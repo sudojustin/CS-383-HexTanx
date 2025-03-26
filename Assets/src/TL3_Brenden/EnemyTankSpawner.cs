@@ -19,7 +19,7 @@ public class EnemyTankSpawner : MonoBehaviour
 
         if (placeTileScript != null)
         {
-            Invoke("SpawnEnemyTankWithRandomPosition", 0.1f);
+            //Invoke("SpawnEnemyTankWithRandomPosition", 0.1f);
         }
         else
         {
