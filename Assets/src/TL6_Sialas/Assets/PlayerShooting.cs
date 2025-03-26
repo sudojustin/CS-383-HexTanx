@@ -3,8 +3,7 @@ using UnityEngine;
 public class PlayerShooting : MonoBehaviour
 {
     [SerializeField] private GameObject projectilePrefab;
-    [SerializeField] private AudioSource shootAudio;  
-    [SerializeField] private AudioClip shootSound;    
+    [SerializeField] private AudioClip shootSoundOverride; // Optional override for shoot sound
     private Camera mainCamera;
     private PlayerTank playerTank;
 
@@ -12,15 +11,10 @@ public class PlayerShooting : MonoBehaviour
     {
         mainCamera = Camera.main;
         playerTank = GetComponent<PlayerTank>();
-        if (shootAudio == null)
-        {
-            shootAudio = GetComponent<AudioSource>();
-        }
     }
 
     void Update()
     {
- 
         // Right-click to shoot
         if (Input.GetMouseButtonDown(1))
         {
@@ -31,6 +25,8 @@ public class PlayerShooting : MonoBehaviour
                 Shoot();
                 playerTank.SetAmmoCount(playerTank.GetAmmoCount() - 1);  // Deduct ammo
                 Debug.Log("Shot fired toward " + mouseWorldPos);
+
+                FindObjectOfType<BattleSystem>().PlayerActionTaken();
             }
             else if (playerTank.GetAmmoCount() <= 0)
             {
@@ -41,19 +37,25 @@ public class PlayerShooting : MonoBehaviour
 
     void Shoot()
     {
-        if (shootAudio && shootSound)
+        // Play shoot sound via SoundManager
+        if (shootSoundOverride != null)
         {
-            shootAudio.PlayOneShot(shootSound);
+            //SoundManager.Instance.Play(shootSoundOverride); // Use override if assigned
         }
+        else
+        {
+            //SoundManager.Instance.ShootSound(); // Use default from SoundManager
+        }
+        Debug.Log("Shoot sound triggered via SoundManager");
 
         // Get mouse position and convert to world coordinates
         Vector3 mousePosition = mainCamera.ScreenToWorldPoint(Input.mousePosition);
-        mousePosition.z = 0; 
+        mousePosition.z = 0;
 
         // Instantiate projectile at player position
         GameObject bullet = Instantiate(projectilePrefab, transform.position, Quaternion.identity);
 
-        // Move projectile toward target 
+        // Move projectile toward target
         Projectile projectileScript = bullet.GetComponent<Projectile>();
         if (projectileScript != null)
         {
