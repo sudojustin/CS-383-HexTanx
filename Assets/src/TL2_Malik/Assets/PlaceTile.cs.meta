@@ -5,7 +5,8 @@ MonoImporter:
   serializedVersion: 2
   defaultReferences:
   - Tile: {fileID: 3187486204259752003, guid: 218c447d144faae4596758fb1a1b7fea, type: 3}
-  - Terrain: {fileID: 3591277320102712311, guid: 72ca29d6cca473a49bb60cf2fabf75bd, type: 3}
+  - Terrain1: {fileID: 3591277320102712311, guid: 72ca29d6cca473a49bb60cf2fabf75bd, type: 3}
+  - Terrain2: {fileID: 823776615930616340, guid: 0886b4cdd3ebfc5449ec78d0087bbf46, type: 3}
   - cam: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
