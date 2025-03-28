@@ -32,7 +32,6 @@ public class EnemyTankMovementTest
         yield return new WaitForSeconds(0.5f); // Allow initialization
 
         // Call AI decision function
-        //aiControl.MakeDecision();
         int a = 0;
         while (a != 10000)
         {
@@ -41,7 +40,7 @@ public class EnemyTankMovementTest
             a++;
             if (a == 11)
             {
-                Assert.Pass("Enemy Tank made 11 moves without going out of bounds");
+                //Assert.Pass("Enemy Tank made 11 moves without going out of bounds");
             }
         }
 

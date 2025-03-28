@@ -19,7 +19,7 @@ public class EnemyTankSpawner : MonoBehaviour
 
         if (placeTileScript != null)
         {
-            Invoke("SpawnEnemyTankWithRandomPosition", 0.1f);
+            //Invoke("SpawnEnemyTankWithRandomPosition", 0.1f);
         }
         else
         {
@@ -38,8 +38,8 @@ public class EnemyTankSpawner : MonoBehaviour
         int width = placeTileScript.width;
         int height = placeTileScript.height;
 
-        int randX = Random.Range(0, width);
-        int randY = Random.Range(0, height);
+        int randX = Random.Range((width / 2), width);
+        int randY = Random.Range((height / 2), height);
         Vector3 enemyPos = placeTileScript.Grid[randX, randY];
         enemyPos.z = -1f; // Ensure the enemy appears above the tiles
 

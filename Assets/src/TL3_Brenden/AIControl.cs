@@ -4,8 +4,12 @@ public class AIControl : MonoBehaviour
 {
     private TankType tank;
     private PlaceTile placeTileScript;
+    private PlayerTank playerTank;
+    [SerializeField]
+    private GameObject projectilePrefab;
+    private AudioClip shootSoundOverride;
 
-    void Start()
+    public void Start()
     {
         tank = GetComponent<TankType>();
         if (tank == null)
@@ -19,6 +23,13 @@ public class AIControl : MonoBehaviour
         {
             Debug.LogError("AIControl: No PlaceTile found in the scene!");
         }
+
+        playerTank = FindObjectOfType<PlayerTank>();
+        if (playerTank == null)
+        {
+            Debug.Log("AICONTROL: No PlayerTank found in the scene!");
+        }
+
     }
 
 
@@ -40,14 +51,37 @@ public class AIControl : MonoBehaviour
 
     private void ShootAtPlayer()
     {
-        if (tank.ShotHitsPlayer())
-        {
-            Debug.Log(gameObject.name + " shot hit the player!");
+         Debug.Log("MakeDecision was shootatplayer");
+         if(playerTank == null)
+         {
+             Debug.Log("player tank in AIControl:ShootAtPlayer is null");
+             return;
+         }
+         Vector3 targetPosition = playerTank.GetTankLocation();
+         Vector3 direction = (targetPosition - transform.position).normalized;
+         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+         Quaternion rotation = Quaternion.Euler(0, 0, angle);
+         GameObject bullet = Instantiate(projectilePrefab, transform.position, rotation);
+         EnemyProjectile projectileScript = bullet.GetComponent<EnemyProjectile>();
+         Debug.Log("Vector3, bullet gamebobject");
+
+         if (tank.ShotHitsPlayer())
+         {
+             Debug.Log(gameObject.name + " shot hit the player!");
             // Implement damage logic for player
+            if (projectileScript != null)
+            {
+                projectileScript.SetTarget(targetPosition);
+            }
         }
         else
         {
             Debug.Log(gameObject.name + " shot missed!");
+            targetPosition.x = targetPosition.x - 1.0f;
+            if (projectileScript != null)
+            {
+                projectileScript.SetTarget(targetPosition);
+            }
         }
     }
 
@@ -61,16 +95,17 @@ public class AIControl : MonoBehaviour
         }
         else
         {
-             Debug.Log(gameObject.name + " tried to move out of bounds, staying in place." + newLocation);
+            Debug.Log(gameObject.name + " tried to move out of bounds, staying in place." + newLocation);
+            MoveToNewLocation();
         }
     }
 
-private Vector3 GetRandomAdjacentHex()
+    private Vector3 GetRandomAdjacentHex()
     {
         float hexHeight = Mathf.Sqrt(3) / 2f;
         Vector3[] possibleMoves = {
-            new Vector3(tank.tankLocation.x + 1f, tank.tankLocation.y, -1), //East
-            new Vector3(tank.tankLocation.x - 1f, tank.tankLocation.y, -1), //West
+            new Vector3(tank.tankLocation.x + 1.0f, tank.tankLocation.y, -1), //East
+            new Vector3(tank.tankLocation.x - 1.0f, tank.tankLocation.y, -1), //West
             new Vector3(tank.tankLocation.x + 0.5f, tank.tankLocation.y + hexHeight, -1), // NorthEast
             new Vector3(tank.tankLocation.x - 0.5f, tank.tankLocation.y + hexHeight, -1), //NorthWest
             new Vector3(tank.tankLocation.x + 0.5f, tank.tankLocation.y - hexHeight, -1), //SouthEast
@@ -82,12 +117,7 @@ private Vector3 GetRandomAdjacentHex()
     private bool IsWithinMapBounds(Vector3 position)
     {
         float hexHeight = Mathf.Sqrt(3) / 2f;
-        // Convert the position to the grid's coordinates (ignoring the z-axis)
-        //float x = Mathf.RoundToInt(position.x);
-        //float y = Mathf.RoundToInt(position.y);
-
-        // Check if the x and y are within the grid bounds
-        if (position.x > 0f && position.x <= placeTileScript.width && position.y >= 0f && position.y < (placeTileScript.height - hexHeight))
+        if (position.x > 0f && position.x <= placeTileScript.width && position.y >= 0.00f && position.y < (placeTileScript.height - hexHeight- 0.3f))
         {
             return true;
         }

@@ -105,6 +105,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 150
   tankLocation: {x: 0, y: 0, z: 0}
+  damage: 0
 --- !u!60 &-700224409345068961
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -167,6 +168,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 95ec4b370c65d1a459df11104b2f5276, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  projectilePrefab: {fileID: 5096755278267770118, guid: f654c3d41696a0c43834dbb6cd54d24e, type: 3}
 --- !u!95 &5457754132651638851
 Animator:
   serializedVersion: 7

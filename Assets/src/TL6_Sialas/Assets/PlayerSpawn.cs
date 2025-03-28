@@ -11,7 +11,7 @@ public class PlayerTankSpawner : MonoBehaviour
 
         if (placeTileScript != null)
         {
-            Invoke("SpawnPlayerTankWithPosition", 0.0f); 
+            //Invoke("SpawnPlayerTankWithPosition", 0.0f); 
         }
         else
         {
@@ -21,6 +21,7 @@ public class PlayerTankSpawner : MonoBehaviour
 
     public void SpawnPlayerTankWithPosition()
     {
+        Debug.Log("SpawnPlayerTankWithPosition() called!");
         if (placeTileScript.Grid == null || placeTileScript.Grid.GetLength(0) == 0)
         {
             Debug.LogError("Grid is not populated properly.");
@@ -34,7 +35,8 @@ public class PlayerTankSpawner : MonoBehaviour
         int spawnX = width / 2;
         int spawnY = 1;         
         Vector3 playerPos = placeTileScript.Grid[spawnX, spawnY];
-        playerPos.z = -1f; 
+        playerPos.z = -1f;
+        Debug.Log($"Calling SpawnPlayerTank() at {playerPos}");
         SpawnPlayerTank(playerPos);
     }
 
@@ -61,6 +63,7 @@ public class PlayerTankSpawner : MonoBehaviour
 
     public void SpawnPlayerTank(Vector3 spawnLocation)
     {
+        Debug.Log("SpawnPlayerTank() called!");
         if (playerTankPrefab == null)
         {
             Debug.LogError("PlayerTankSpawner: No player tank prefab assigned!");
