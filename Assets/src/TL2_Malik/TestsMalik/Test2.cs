@@ -69,7 +69,7 @@ public class PlaceTileTests
 
         // Assign the prefabs to the PlaceTile script
         placeTileScript.Tile = tilePrefab;
-        placeTileScript.Terrain = terrainPrefab;
+        placeTileScript.Terrain1 = terrainPrefab;
 
         // Optionally, you can assign random values for min/max
         placeTileScript.min = 5;

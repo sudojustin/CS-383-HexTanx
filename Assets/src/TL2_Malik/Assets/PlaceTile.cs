@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class PlaceTile : MonoBehaviour
 {
+    private int choseTerrain = 0;
     private int isTerrain = 0;
     private float hexwidth = 1f;
     public float hexHeight = Mathf.Sqrt(3) / 2f;
@@ -15,7 +16,8 @@ public class PlaceTile : MonoBehaviour
     public int min;
     public int max;
     public GameObject Tile;
-    public GameObject Terrain;
+    public GameObject Terrain1;
+    public GameObject Terrain2;
     public Vector3[,] Grid;
 
     //private GameObject playertank;
@@ -50,6 +52,7 @@ public class PlaceTile : MonoBehaviour
             for(int y = 0; y < height; ++y)
             {
                 isTerrain = Random.Range(1,3);
+                choseTerrain = Random.Range(1,3);
                 xpos = x * hexwidth;
                 ypos = y * hexHeight * 1.0f;
             
@@ -59,8 +62,16 @@ public class PlaceTile : MonoBehaviour
                 }
                 if(isTerrain == 2)
                 {
-                    Grid[x, y] = new Vector3(xpos+=hexwidth/2f, ypos, 0);
-                    Instantiate(Terrain,Grid[x, y],Quaternion.identity);
+                    if(choseTerrain == 1)
+                    {
+                        Grid[x, y] = new Vector3(xpos+=hexwidth/2f, ypos, 0);
+                        Instantiate(Terrain2,Grid[x, y],Quaternion.identity);
+                    }
+                    else
+                    {
+                        Grid[x, y] = new Vector3(xpos+=hexwidth/2f, ypos, 0);
+                        Instantiate(Terrain1,Grid[x, y],Quaternion.identity);
+                    }
                 }
                 else
                 {
