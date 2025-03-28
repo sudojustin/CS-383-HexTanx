@@ -237,7 +237,7 @@ AudioListener:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
-  m_Enabled: 1
+  m_Enabled: 0
 --- !u!114 &519420030
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -849,7 +849,8 @@ MonoBehaviour:
   min: 5
   max: 5
   Tile: {fileID: 3187486204259752003, guid: 218c447d144faae4596758fb1a1b7fea, type: 3}
-  Terrain: {fileID: 3591277320102712311, guid: 72ca29d6cca473a49bb60cf2fabf75bd, type: 3}
+  Terrain1: {fileID: 3591277320102712311, guid: 72ca29d6cca473a49bb60cf2fabf75bd, type: 3}
+  Terrain2: {fileID: 823776615930616340, guid: 0886b4cdd3ebfc5449ec78d0087bbf46, type: 3}
   cam: {fileID: 519420031}
 --- !u!4 &1796920186
 Transform:
