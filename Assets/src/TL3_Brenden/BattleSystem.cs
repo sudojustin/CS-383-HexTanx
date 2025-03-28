@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 
 public enum BattleState { START, PLAYERTURN, ENEMYTURN, WON, LOST }
 
@@ -58,7 +59,7 @@ public class BattleSystem : MonoBehaviour
         if (playerTank == null)
         {
             Debug.LogError("PlayerTank not found!");
-            return;
+            Invoke("GameLost", 1.0f);
         }
         playerTank.SetActionPoints(3); // Reset action points for new turn
         Debug.Log("Player Turn Started! Action Points: " + playerTank.GetActionPoints());
@@ -80,7 +81,7 @@ public class BattleSystem : MonoBehaviour
     {
         Debug.Log("Player turn ended!");
         state = BattleState.ENEMYTURN;
-        Invoke("StartEnemyTurn", 1f); // Delay enemy turn start
+        Invoke("StartEnemyTurn", 2.5f); // Delay enemy turn start
     }
 
     void StartEnemyTurn()
@@ -88,9 +89,23 @@ public class BattleSystem : MonoBehaviour
         Debug.Log("Enemy turn started!");
         // Handle enemy AI behavior here
         enemyTank = GameObject.FindWithTag("EnemyTank");
+        if (enemyTank == null)
+        {
+            Debug.Log("No enemy tank found. Ending enemy turn.");
+            Invoke("GameWon", 1.0f);
+            return;
+        }
         aiControl = enemyTank.GetComponent<AIControl>();
+        TankType enemyTankType = enemyTank.GetComponent<TankType>();
+
+        if (enemyTankType != null && enemyTankType.health <= 0)
+        {
+            Debug.Log("Enemy tank is destroyed. Ending enemy turn.");
+            EndEnemyTurn();
+            return;
+        }
         aiControl.MakeDecision();
-        Invoke("EndEnemyTurn", 1f); // Delay before ending the enemy's turn
+        Invoke("EndEnemyTurn", 1.0f); // Delay before ending the enemy's turn
     }
     void EndEnemyTurn()
     {
@@ -98,4 +113,15 @@ public class BattleSystem : MonoBehaviour
         state = BattleState.PLAYERTURN; // Switch back to player's turn
         StartPlayerTurn(); // Start the player's turn
     }
+    void GameWon()
+    {
+        state = BattleState.WON;
+        Debug.Log("Game Won");
+    }
+    void GameLost()
+    {
+        state = BattleState.LOST;
+        Debug.Log("Game Lost");
+    }
+
 }
