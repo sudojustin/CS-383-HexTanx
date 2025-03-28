@@ -1,45 +1,62 @@
 using UnityEngine;
 
+
+public class TerrainDamageBC
+{
+    //int virtural getDamage()
+   public virtual int getDamage()//damage is 0 in BC mode.
+    {
+        return 0;
+    }
+}
+
+public class TerrainDamage: TerrainDamageBC
+{
+    //int override getDamage()
+    public override int getDamage()//Normal damage
+    {
+        return 10;
+    }
+}
+
 public class Terrains : Tiles
 {
+    private bool isactive = true;
     
     private GameObject playertankOBJ;
     private int playerHealthshown;
-    private int damage = 10;
+    //private int damage = 10;
+    private TerrainDamageBC Damage;
     private PlayerTank playertc;
     void Start()
     {
-        playertankOBJ = GameObject.Find("PlayerTank");
-
-    if (playertankOBJ != null)
-    {
-        playertc = playertankOBJ.GetComponent<PlayerTank>();
-
-        if (playertc == null)
-        {
-            Debug.LogError("PlayerTank component not found on PlayerTank object.");
-        }
-    }
-    else
-    {
-        Debug.LogError("PlayerTank object not found.");
-    }
-       //playertank = GameObject.Find("PlayerTank");
-       //PlayerTank playertc = playertank.GetComponent<PlayerTank>();
+        isactive = true;
+        Damage = new TerrainDamage();
+        Invoke("getPlayer",8f);
     }
     void Update()
     {
+        
         if(playertankOBJ == null)
         {
             playertankOBJ = GameObject.Find("PlayerTank");
             if(playertc == null)
             {
-                playertc = playertankOBJ.GetComponent<PlayerTank>();
+                if(playertankOBJ != null)
+                {
+                    playertc = playertankOBJ.GetComponent<PlayerTank>(); 
+                }
+                
             }
         }
-        //playertankOBJ = GameObject.Find("PlayerTank");
-        //playertc = playertankOBJ.GetComponent<PlayerTank>();
-        takeDamage();
+        //check is player has already been on this tile and if they havent they take damage.
+        if(isactive == true && playertankOBJ.transform.position.x == this.transform.position.x && playertankOBJ.transform.position.y == this.transform.position.y)
+        {
+            takeDamage();
+            isactive = false;
+            TurnOff();//Visually show what fire tiles are deactivated.
+        }
+            
     }
     void takeDamage()
     {
@@ -47,11 +64,26 @@ public class Terrains : Tiles
         playerHealthshown = playertc.GetHealth();
         if(playertankOBJ.transform.position.x == this.transform.position.x && playertankOBJ.transform.position.y == this.transform.position.y)
         {
-            //Debug.Log(": "+playerHealthshown);
-            playertc.SetHealth(playerHealthshown-damage);
-            playerHealthshown = playertc.GetHealth();
-           // Debug.Log(": "+playerHealthshown);
-            
+            playertc.SetHealth(playerHealthshown-Damage.getDamage());
+            playerHealthshown = playertc.GetHealth(); 
+        }
+    }
+    private void getPlayer()
+    {
+        playertankOBJ = GameObject.Find("PlayerTank");
+
+        if (playertankOBJ != null)
+        {
+            playertc = playertankOBJ.GetComponent<PlayerTank>();
+
+            if (playertc == null)
+            {
+                Debug.LogError("PlayerTank component not found on PlayerTank object.");
+            }
+        }
+        else
+        {
+            Debug.LogError("PlayerTank object not found.");
         }
     }
 }

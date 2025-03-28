@@ -148,8 +148,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Base: {r: 0.8862746, g: 0, b: 0, a: 1}
-  Offset: {r: 0, g: 0, b: 0, a: 0}
+  Offset: {r: 0.9496855, g: 0.6540286, b: 0.6540286, a: 1}
   hightlight: {r: 0.9685534, g: 0.45381904, b: 0.45381904, a: 1}
   rend: {fileID: 5971121349773992636}
   playerhere: {r: 0, g: 0, b: 0, a: 0}
-  playertank: {fileID: 6702523169278737926, guid: 0a3d5ad884d5df04aa75d2cb516b5448, type: 3}

@@ -4,9 +4,9 @@ public class Tiles : MonoBehaviour
 {
 
     [SerializeField]
-    private Color Base, Offset, hightlight;
+    public Color Base, Offset, hightlight;
     [SerializeField]
-    private SpriteRenderer rend;
+    public SpriteRenderer rend;
 
     private Color iscolor;
     public Color playerhere;
@@ -28,7 +28,11 @@ public class Tiles : MonoBehaviour
     {
         rend.color = Base;
     }
-    
+    public void TurnOff()
+    {
+        rend.color = Offset;
+        Base = Offset;
+    }
 
     void OnMouseUp()
     {
