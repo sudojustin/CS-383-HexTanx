@@ -34,7 +34,7 @@ public class PlayerMovement : MonoBehaviour
                 transform.position = targetPosition; // Snap to target to avoid floating-point issues
                 isMoving = false; // Stop moving
                 playerTankComponent.SetTankLocation(targetPosition); // Update PlayerTank's location
-                SoundManager.Instance.StopMovementSound(); // Stop the movement sound
+                //SoundManager.Instance.StopMovementSound(); // Stop the movement sound
                 Debug.Log("Tank reached target: " + transform.position);
             }
         }
@@ -50,7 +50,7 @@ public class PlayerMovement : MonoBehaviour
                 if (targetPosition != transform.position) // Only move if the target is different
                 {
                     isMoving = true; // Start moving
-                    SoundManager.Instance.PlayerMoveSound(); // Play movement sound
+                    //SoundManager.Instance.PlayerMoveSound(); // Play movement sound
                     Debug.Log("Tank moving to " + targetPosition);
                     Debug.Log("Mouse position " + mouseWorldPos);
                     FindObjectOfType<BattleSystem>().PlayerActionTaken();

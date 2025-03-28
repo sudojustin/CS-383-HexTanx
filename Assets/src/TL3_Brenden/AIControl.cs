@@ -4,6 +4,10 @@ public class AIControl : MonoBehaviour
 {
     private TankType tank;
     private PlaceTile placeTileScript;
+    private PlayerTank playerTank;
+    [SerializeField]
+    private GameObject projectilePrefab;
+    private AudioClip shootSoundOverride;
 
     public void Start()
     {
@@ -19,6 +23,13 @@ public class AIControl : MonoBehaviour
         {
             Debug.LogError("AIControl: No PlaceTile found in the scene!");
         }
+
+        playerTank = FindObjectOfType<PlayerTank>();
+        if (playerTank == null)
+        {
+            Debug.Log("AICONTROL: No PlayerTank found in the scene!");
+        }
+
     }
 
 
@@ -40,15 +51,31 @@ public class AIControl : MonoBehaviour
 
     private void ShootAtPlayer()
     {
-        if (tank.ShotHitsPlayer())
-        {
-            Debug.Log(gameObject.name + " shot hit the player!");
-            // Implement damage logic for player
-        }
-        else
-        {
-            Debug.Log(gameObject.name + " shot missed!");
-        }
+         Debug.Log("MakeDecision was shootatplayer");
+         if(playerTank == null)
+         {
+             Debug.Log("player tank in AIControl:ShootAtPlayer is null");
+             return;
+         }
+         Vector3 targetPosition = playerTank.GetTankLocation();
+         GameObject bullet = Instantiate(projectilePrefab, transform.position, Quaternion.identity);
+         Projectile projectileScript = bullet.GetComponent<Projectile>();
+         Debug.Log("Vector3, bullet gamebobject");
+
+         if(projectileScript != null)
+         {
+             projectileScript.SetTarget(targetPosition);
+         }
+
+         if (tank.ShotHitsPlayer())
+         {
+             Debug.Log(gameObject.name + " shot hit the player!");
+             // Implement damage logic for player
+         }
+         else
+         {
+             Debug.Log(gameObject.name + " shot missed!");
+         }
     }
 
     public void MoveToNewLocation()

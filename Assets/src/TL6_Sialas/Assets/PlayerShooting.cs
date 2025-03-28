@@ -39,11 +39,11 @@ public class PlayerShooting : MonoBehaviour
         // Play shoot sound via SoundManager
         if (shootSoundOverride != null)
         {
-            SoundManager.Instance.Play(shootSoundOverride); // Use override if assigned
+            //SoundManager.Instance.Play(shootSoundOverride); // Use override if assigned
         }
         else
         {
-            SoundManager.Instance.ShootSound(); // Use default from SoundManager
+            //SoundManager.Instance.ShootSound(); // Use default from SoundManager
         }
         Debug.Log("Shoot sound triggered via SoundManager");
 
