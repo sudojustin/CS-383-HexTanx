@@ -8,6 +8,7 @@ public class PlayerMovement : MonoBehaviour
     private PlaceTile placeTile;
 
     private Vector3 targetPosition; // The tile position to move towards
+    private Vector2Int currentGridPos; // Current position in grid coordinates (x, y)
     private bool isMoving = false;  // Flag to track if the tank is currently moving
     [SerializeField] private float moveSpeed = 5f; // Speed of the tank movement (adjust in Inspector)
 
@@ -18,6 +19,9 @@ public class PlayerMovement : MonoBehaviour
         playerTankComponent = playerTank.GetComponent<PlayerTank>();
         placeTile = FindObjectOfType<PlaceTile>();
         targetPosition = transform.position; // Initialize target to current position
+
+        // Initialize current grid position
+        currentGridPos = WorldToGridPosition(transform.position);
     }
 
     void Update()
@@ -34,30 +38,105 @@ public class PlayerMovement : MonoBehaviour
                 transform.position = targetPosition; // Snap to target to avoid floating-point issues
                 isMoving = false; // Stop moving
                 playerTankComponent.SetTankLocation(targetPosition); // Update PlayerTank's location
-                //SoundManager.Instance.StopMovementSound(); // Stop the movement sound
+                SoundManager.Instance.StopMovementSound(); // Stop the movement sound
                 Debug.Log("Tank reached target: " + transform.position);
+
+                // Update current grid position
+                currentGridPos = WorldToGridPosition(targetPosition);
             }
         }
 
         // Left-click to initiate movement
         if (Input.GetMouseButtonDown(0) && !isMoving) // Only allow new movement if not currently moving
         {
-            if (playerTankComponent.UseActionPoint()) // Check and deduct action point
+            if (playerTankComponent.GetActionPoints() <= 0)
             {
-                Vector3 mouseWorldPos = mainCamera.ScreenToWorldPoint(Input.mousePosition);
-                mouseWorldPos.z = -1;
-                targetPosition = FindNearestTile(mouseWorldPos);
-                if (targetPosition != transform.position) // Only move if the target is different
-                {
-                    isMoving = true; // Start moving
-                    //SoundManager.Instance.PlayerMoveSound(); // Play movement sound
-                    Debug.Log("Tank moving to " + targetPosition);
-                    Debug.Log("Mouse position " + mouseWorldPos);
-                    FindObjectOfType<BattleSystem>().PlayerActionTaken();
+                Debug.Log("No action points remaining!");
+                return;
+            }
 
+            Vector3 mouseWorldPos = mainCamera.ScreenToWorldPoint(Input.mousePosition);
+            mouseWorldPos.z = -1;
+            Vector3 potentialTarget = FindNearestTile(mouseWorldPos);
+
+            // Check if the target tile is within range (one tile away in hex grid)
+            Vector2Int targetGridPos = WorldToGridPosition(potentialTarget);
+            if (IsWithinRange(currentGridPos, targetGridPos))
+            {
+                if (playerTankComponent.UseActionPoint()) // Check and deduct action point
+                {
+                    targetPosition = potentialTarget;
+                    if (targetPosition != transform.position) // Only move if the target is different
+                    {
+                        isMoving = true; // Start moving
+                        SoundManager.Instance.PlayerMoveSound(); // Play movement sound
+                        Debug.Log("Tank moving to " + targetPosition);
+                        Debug.Log("Mouse position " + mouseWorldPos);
+                        FindObjectOfType<BattleSystem>().PlayerActionTaken();
+                    }
+                }
+            }
+            else
+            {
+                Debug.Log("Target tile is out of range (must be one tile away in hex grid)!");
+            }
+        }
+    }
+
+    private bool IsWithinRange(Vector2Int currentPos, Vector2Int targetPos)
+    {
+        // For a hex grid with odd-row offset (odd rows shifted right)
+        int dx = targetPos.x - currentPos.x;
+        int dy = targetPos.y - currentPos.y;
+
+        if (currentPos.y % 2 == 0) // Even row
+        {
+            bool isAdjacent = (dx == 0 && dy == -1) || // Up
+                              (dx == 0 && dy == 1) ||  // Down
+                              (dx == -1 && dy == -1) || // Left-Up
+                              (dx == -1 && dy == 1) ||  // Left-Down
+                              (dx == -1 && dy == 0) ||  // Left
+                              (dx == 1 && dy == 0);     // Right
+            return isAdjacent;
+        }
+        else // Odd row
+        {
+            bool isAdjacent = (dx == 0 && dy == -1) || // Up
+                              (dx == 0 && dy == 1) ||  // Down
+                              (dx == -1 && dy == 0) || // Left
+                              (dx == 1 && dy == 0) ||  // Right
+                              (dx == 1 && dy == -1) || // Right-Up
+                              (dx == 1 && dy == 1);    // Right-Down
+            return isAdjacent;
+        }
+    }
+
+    private Vector2Int WorldToGridPosition(Vector3 worldPos)
+    {
+        if (placeTile == null || placeTile.Grid == null)
+        {
+            Debug.LogError("PlaceTile or Grid not available");
+            return Vector2Int.zero;
+        }
+
+        // Find the closest grid position
+        Vector2Int gridPos = Vector2Int.zero;
+        float minDistance = float.MaxValue;
+
+        for (int x = 0; x < placeTile.Grid.GetLength(0); x++)
+        {
+            for (int y = 0; y < placeTile.Grid.GetLength(1); y++)
+            {
+                float distance = Vector3.Distance(worldPos, placeTile.Grid[x, y]);
+                if (distance < minDistance)
+                {
+                    minDistance = distance;
+                    gridPos = new Vector2Int(x, y);
                 }
             }
         }
+
+        return gridPos;
     }
 
     public Vector3 FindNearestTile(Vector3 position)
