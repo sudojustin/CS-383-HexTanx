@@ -50,11 +50,14 @@ public class Terrains : Tiles
             }
         }
         //check is player has already been on this tile and if they havent they take damage.
-        if(isactive == true && playertankOBJ.transform.position.x == this.transform.position.x && playertankOBJ.transform.position.y == this.transform.position.y)
+        if(playertankOBJ != null && playertc != null)
         {
-            takeDamage();
-            isactive = false;
-            TurnOff();//Visually show what fire tiles are deactivated.
+            if(isactive == true && playertankOBJ.transform.position.x == this.transform.position.x && playertankOBJ.transform.position.y == this.transform.position.y)
+            {
+                takeDamage();
+                isactive = false;
+                TurnOff();//Visually show what fire tiles are deactivated.
+            }
         }
             
     }
