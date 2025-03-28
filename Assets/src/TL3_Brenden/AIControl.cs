@@ -58,24 +58,31 @@ public class AIControl : MonoBehaviour
              return;
          }
          Vector3 targetPosition = playerTank.GetTankLocation();
-         GameObject bullet = Instantiate(projectilePrefab, transform.position, Quaternion.identity);
-         Projectile projectileScript = bullet.GetComponent<Projectile>();
+         Vector3 direction = (targetPosition - transform.position).normalized;
+         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+         Quaternion rotation = Quaternion.Euler(0, 0, angle);
+         GameObject bullet = Instantiate(projectilePrefab, transform.position, rotation);
+         EnemyProjectile projectileScript = bullet.GetComponent<EnemyProjectile>();
          Debug.Log("Vector3, bullet gamebobject");
-
-         if(projectileScript != null)
-         {
-             projectileScript.SetTarget(targetPosition);
-         }
 
          if (tank.ShotHitsPlayer())
          {
              Debug.Log(gameObject.name + " shot hit the player!");
-             // Implement damage logic for player
-         }
-         else
-         {
-             Debug.Log(gameObject.name + " shot missed!");
-         }
+            // Implement damage logic for player
+            if (projectileScript != null)
+            {
+                projectileScript.SetTarget(targetPosition);
+            }
+        }
+        else
+        {
+            Debug.Log(gameObject.name + " shot missed!");
+            targetPosition.x = targetPosition.x - 1.0f;
+            if (projectileScript != null)
+            {
+                projectileScript.SetTarget(targetPosition);
+            }
+        }
     }
 
     public void MoveToNewLocation()
@@ -89,6 +96,7 @@ public class AIControl : MonoBehaviour
         else
         {
             Debug.Log(gameObject.name + " tried to move out of bounds, staying in place." + newLocation);
+            MoveToNewLocation();
         }
     }
 
@@ -96,8 +104,8 @@ public class AIControl : MonoBehaviour
     {
         float hexHeight = Mathf.Sqrt(3) / 2f;
         Vector3[] possibleMoves = {
-            new Vector3(tank.tankLocation.x + 1f, tank.tankLocation.y, -1), //East
-            new Vector3(tank.tankLocation.x - 1f, tank.tankLocation.y, -1), //West
+            new Vector3(tank.tankLocation.x + 1.0f, tank.tankLocation.y, -1), //East
+            new Vector3(tank.tankLocation.x - 1.0f, tank.tankLocation.y, -1), //West
             new Vector3(tank.tankLocation.x + 0.5f, tank.tankLocation.y + hexHeight, -1), // NorthEast
             new Vector3(tank.tankLocation.x - 0.5f, tank.tankLocation.y + hexHeight, -1), //NorthWest
             new Vector3(tank.tankLocation.x + 0.5f, tank.tankLocation.y - hexHeight, -1), //SouthEast
@@ -109,7 +117,7 @@ public class AIControl : MonoBehaviour
     private bool IsWithinMapBounds(Vector3 position)
     {
         float hexHeight = Mathf.Sqrt(3) / 2f;
-        if (position.x > 0f && position.x <= placeTileScript.width && position.y >= 0f && position.y < (placeTileScript.height - hexHeight))
+        if (position.x > 0f && position.x <= placeTileScript.width && position.y >= 0.00f && position.y < (placeTileScript.height - hexHeight- 0.3f))
         {
             return true;
         }
