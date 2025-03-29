@@ -148,6 +148,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 126926d6c830e88469a621519f750300, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  UICanvas: {fileID: 6034622026054409950, guid: ec7e9dc6fae8eb246a722ece7c0221f9, type: 3}
   healthBarPrefab: {fileID: 2852465966097601132, guid: 08ea1cfd34d0ba441859bfe230bf7218, type: 3}
 --- !u!4 &51977850
 Transform:
