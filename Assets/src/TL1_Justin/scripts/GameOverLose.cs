@@ -2,15 +2,31 @@ using UnityEngine;
 
 public class GameOverLose : MonoBehaviour
 {
+    public GameObject GameOverLoseScreen;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
     }
 
-    // Update is called once per frame
-    void Update()
+    public void RestartButton()
     {
-        
+        // Restart button has been pressed, initialize first game level
+        // FIXME: load Malik's first scene
+        Debug.Log("Restart button pressed");
+        // UnityEngine.SceneManagement.SceneManager.LoadScene("GameLevel1");
+        UnityEngine.SceneManagement.SceneManager.LoadScene("Assets/src/TL2_Malik/Assets/Scenes/SampleScene.unity");
+    }
+
+    public void MainMenuButton()
+    {
+        Debug.Log("Main menu button pressed");
+        UnityEngine.SceneManagement.SceneManager.LoadScene("Assets/src/TL1_Justin/scenes/MainMenu.unity");
+    }
+
+    public void QuitButton()
+    {
+        Debug.Log("Quit button pressed");
+        Application.Quit();
     }
 }
