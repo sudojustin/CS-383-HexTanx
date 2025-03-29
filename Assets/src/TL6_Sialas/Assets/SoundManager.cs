@@ -80,18 +80,23 @@ public class SoundManager : MonoBehaviour
         switch (sceneName)
         {
             case "mainmenu":
+                Debug.Log("Attempting to play Menu music.");
                 MenuMusic();
                 break;
             case "samplescene":
+                Debug.Log("Attempting to play Battle music.");
                 BattleMusic();
                 break;
             case "pausescene":
+                Debug.Log("Attempting to play Pause music.");
                 PauseMusic();
                 break;
             case "winscene":
+                Debug.Log("Attempting to play Win music.");
                 WinMusic();
                 break;
             case "losescene":
+                Debug.Log("Attempting to play Lose music.");
                 LoseMusic();
                 break;
             default:
@@ -145,9 +150,11 @@ public class SoundManager : MonoBehaviour
     {
         if (clip != null)
         {
+            musicSource.Stop(); // Stop any currently playing music
             musicSource.clip = clip;
             musicSource.volume = musicVolume;
             musicSource.Play();
+            Debug.Log($"Playing music: {clip.name}, isPlaying={musicSource.isPlaying}");
         }
         else
         {

@@ -64,6 +64,15 @@ public class PauseManager : MonoBehaviour
             playerMovement.enabled = true;
             playerShooting.enabled = true;
         }
+        // Resume battle music
+        if (SoundManager.Instance != null)
+        {
+            SoundManager.Instance.BattleMusic();
+        }
+        else
+        {
+            Debug.LogError("SoundManager.Instance is null in ResumeGame!");
+        }
     }
 
     public void PauseGame()
@@ -78,6 +87,15 @@ public class PauseManager : MonoBehaviour
             Debug.Log("Player movement and shooting are disabled");
             playerMovement.enabled = false;
             playerShooting.enabled = false;
+        }
+        // Play pause music
+        if (SoundManager.Instance != null)
+        {
+            SoundManager.Instance.PauseMusic();
+        }
+        else
+        {
+            Debug.LogError("SoundManager.Instance is null in PauseGame!");
         }
     }
 
