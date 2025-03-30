@@ -5,6 +5,7 @@ public abstract class TankType : MonoBehaviour
     public int health;              //Store tanks health
     public Vector3 tankLocation;    //Store tanksLocation
     public int damage;
+    public int enemyActionPoints;
 
     private int decisionToMoveOrShoot;  // 0 = Move, 1 = Shoot
     private int moveDirectionIndex;     // Randomized movement direction
@@ -28,5 +29,18 @@ public abstract class TankType : MonoBehaviour
         tankLocation = newLocation;
         transform.position = newLocation;
     }
-    
+    public void ResetActionPoints()
+    {
+        enemyActionPoints = GetInitialActionPoints();
+        Debug.Log("Enemy action points reset to: " + enemyActionPoints);
+    }
+
+    private int GetInitialActionPoints()
+    {
+        if (this is Level1Tank) return 2;
+        if (this is Level2Tank) return 3;
+        if (this is Level3Tank) return 4;
+        return 1; // Default fallback
+    }
+
 }

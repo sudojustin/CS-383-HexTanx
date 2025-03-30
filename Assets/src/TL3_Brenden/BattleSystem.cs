@@ -13,6 +13,7 @@ public class BattleSystem : MonoBehaviour
 
     private PlayerTank playerTank;
     private AIControl aiControl;
+    private int actionPointHolder;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -67,10 +68,12 @@ public class BattleSystem : MonoBehaviour
 
     public void PlayerActionTaken()
     {
+        enemyTank = GameObject.FindWithTag("EnemyTank");
+        TankType enemyTankType = enemyTank.GetComponent<TankType>();
         if (state != BattleState.PLAYERTURN) return; // Ensure it's still the player's turn
         Debug.Log("PlayerActionTaken() called. Remaining Action Points: " + playerTank.GetActionPoints());
 
-        if (playerTank.GetActionPoints() <= 0)
+        if (playerTank.GetActionPoints() <= 0 || enemyTankType.health <= 0)
         {
             Debug.Log("Player out of action points, ending turn...");
             EndPlayerTurn();
@@ -104,8 +107,25 @@ public class BattleSystem : MonoBehaviour
             EndEnemyTurn();
             return;
         }
-        aiControl.MakeDecision();
-        Invoke("EndEnemyTurn", 1.0f); // Delay before ending the enemy's turn
+        enemyTankType.ResetActionPoints();
+        StartCoroutine(EnemyTurnRoutine(enemyTankType));
+    }
+
+    IEnumerator EnemyTurnRoutine(TankType enemyTankType)
+    {
+        Debug.Log($"Enemy tank starts with {enemyTankType.enemyActionPoints} action points.");
+
+        while (enemyTankType.enemyActionPoints > 0)
+        {
+            aiControl.MakeDecision(); // AI makes one decision per iteration
+            enemyTankType.enemyActionPoints--; // Deduct action point
+            Debug.Log($"Enemy tank action taken. Remaining action points: {enemyTankType.enemyActionPoints}");
+
+            yield return new WaitForSeconds(1.0f); // Delay between actions for pacing
+        }
+
+        Debug.Log("Enemy tank out of action points. Ending turn.");
+        EndEnemyTurn();
     }
     void EndEnemyTurn()
     {
@@ -117,11 +137,13 @@ public class BattleSystem : MonoBehaviour
     {
         state = BattleState.WON;
         Debug.Log("Game Won");
+        UnityEngine.SceneManagement.SceneManager.LoadScene("Assets/Scenes/GameOverWin.unity");
     }
     void GameLost()
     {
         state = BattleState.LOST;
         Debug.Log("Game Lost");
+        UnityEngine.SceneManagement.SceneManager.LoadScene("Assets/Scenes/GameOverLose.unity");
     }
 
 }
