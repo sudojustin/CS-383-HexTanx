@@ -1,13 +1,18 @@
 using UnityEngine;
+using System.Collections;
+using System.Collections.Generic;
 
 public class AIControl : MonoBehaviour
 {
     private TankType tank;
     private PlaceTile placeTileScript;
     private PlayerTank playerTank;
+    private bool isMoving = false;
+
     [SerializeField]
     private GameObject projectilePrefab;
     private AudioClip shootSoundOverride;
+    private float moveSpeed = 4.0f;
 
     public void Start()
     {
@@ -31,8 +36,6 @@ public class AIControl : MonoBehaviour
         }
 
     }
-
-
     public void MakeDecision()
     {
         if (tank == null) return;
@@ -58,16 +61,16 @@ public class AIControl : MonoBehaviour
              return;
          }
          Vector3 targetPosition = playerTank.GetTankLocation();
-         Vector3 direction = (targetPosition - transform.position).normalized;
-         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-         Quaternion rotation = Quaternion.Euler(0, 0, angle);
-         GameObject bullet = Instantiate(projectilePrefab, transform.position, rotation);
-         EnemyProjectile projectileScript = bullet.GetComponent<EnemyProjectile>();
          Debug.Log("Vector3, bullet gamebobject");
 
          if (tank.ShotHitsPlayer())
          {
-             Debug.Log(gameObject.name + " shot hit the player!");
+            Vector3 direction = (targetPosition - transform.position).normalized;
+            float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+            Quaternion rotation = Quaternion.Euler(0, 0, angle);
+            GameObject bullet = Instantiate(projectilePrefab, transform.position, rotation);
+            EnemyProjectile projectileScript = bullet.GetComponent<EnemyProjectile>();
+            Debug.Log(gameObject.name + " shot hit the player!");
             // Implement damage logic for player
             if (projectileScript != null)
             {
@@ -76,28 +79,53 @@ public class AIControl : MonoBehaviour
         }
         else
         {
-            Debug.Log(gameObject.name + " shot missed!");
             targetPosition.x = targetPosition.x - 1.0f;
+            Vector3 direction = (targetPosition - transform.position).normalized;
+            float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+            Quaternion rotation = Quaternion.Euler(0, 0, angle);
+            GameObject bullet = Instantiate(projectilePrefab, transform.position, rotation);
+            EnemyProjectile projectileScript = bullet.GetComponent<EnemyProjectile>();
+            projectileScript.damage = 0;
+            Debug.Log(gameObject.name + " shot missed!");
             if (projectileScript != null)
             {
                 projectileScript.SetTarget(targetPosition);
             }
         }
     }
-
     public void MoveToNewLocation()
     {
         Vector3 newLocation = GetRandomAdjacentHex();
-        if (IsWithinMapBounds(newLocation)) // Check if the new location is within the grid bounds
+        if (IsWithinMapBounds(newLocation))
         {
-            tank.UpdateTankLocation(newLocation);
-            Debug.Log(gameObject.name + " moved to " + newLocation);
+            StartCoroutine(MoveSmoothly(newLocation));
+            Debug.Log(gameObject.name + " moving to " + newLocation);
         }
         else
         {
-            Debug.Log(gameObject.name + " tried to move out of bounds, staying in place." + newLocation);
+            Debug.Log(gameObject.name + " attempted to move out of bounds, retrying.");
             MoveToNewLocation();
         }
+    }
+
+    private IEnumerator MoveSmoothly(Vector3 destination)
+    {
+        isMoving = true;
+        Vector3 startPosition = transform.position;
+        float elapsedTime = 0f;
+        float duration = Vector3.Distance(startPosition, destination) / moveSpeed; // Adjust speed
+
+        while (elapsedTime < duration)
+        {
+            transform.position = Vector3.Lerp(startPosition, destination, elapsedTime / duration);
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+
+        transform.position = destination; // Snap to final position
+        tank.UpdateTankLocation(destination);
+        isMoving = false;
+        Debug.Log(gameObject.name + " reached destination: " + destination);
     }
 
     private Vector3 GetRandomAdjacentHex()
