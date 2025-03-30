@@ -30,7 +30,7 @@ public class HealthPackSpawnBoundaryTest1
         itemManager = GameObject.FindObjectOfType<ItemManager>();
         Assert.NotNull(itemManager, "ItemManager not found in the scene");
 
-        itemManager.spawnedHealthPacks.Clear();
+        itemManager.spawnedItems.Clear();
 
         placeTileScript = GameObject.FindObjectOfType<PlaceTile>();
         Assert.NotNull(placeTileScript, "PlaceTile not found in the scene");
@@ -47,10 +47,10 @@ public class HealthPackSpawnBoundaryTest1
         yield return itemManager.StartCoroutine(itemManager.WaitForGridAndSpawnHealthPack());
 
         // Ensure at least one health pack was spawned
-        Assert.IsTrue(itemManager.spawnedHealthPacks.Count > 0, "No health packs spawned.");
+        Assert.IsTrue(itemManager.spawnedItems.Count > 0, "No health packs spawned.");
 
         // Get the last spawned health pack
-        GameObject spawnedHealthPack = itemManager.spawnedHealthPacks[0];
+        GameObject spawnedHealthPack = itemManager.spawnedItems[0];
         Assert.NotNull(spawnedHealthPack, "Health pack was not spawned");
 
         if (spawnedHealthPack != null)

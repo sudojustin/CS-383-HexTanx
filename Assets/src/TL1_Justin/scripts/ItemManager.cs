@@ -8,9 +8,9 @@ public class ItemManager : MonoBehaviour
     // private ItemManager itemManager;
     private static ItemManager instance;
     public GameObject healthPack;
-    public List<GameObject> spawnedHealthPacks = new List<GameObject>();
+    public List<GameObject> spawnedItems = new List<GameObject>();
 
-    private bool isSpawningHealthPack = false; // Prevent multiple coroutines
+    private bool isSpawningItem = false; // Prevent multiple coroutines
  
     // playerTank.gameObject.tag = "PlayerTank";
 
@@ -22,6 +22,7 @@ public class ItemManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        CheckItemPickup();
     }
 
     void Awake()
@@ -44,37 +45,60 @@ public class ItemManager : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void CheckItemPickup()
     {
-        Debug.Log("Collision detected with: " + collision.gameObject.name);
-
-        if (collision.GetComponent<Projectile>() != null)
+        PlayerTank playerTank = FindObjectOfType<PlayerTank>();
+        if (playerTank == null) return;
+        
+        Vector3 playerPosition = playerTank.transform.position;
+        
+        // Check each item
+        for (int i = spawnedItems.Count - 1; i >= 0; i--)
         {
-            Debug.Log("Projectile collided with item");
-
-            PlayerTank playerTank = FindObjectOfType<PlayerTank>();
-
-            if (playerTank != null)
+            if (spawnedItems[i] == null) 
             {
-                Debug.Log("Player health before health pack: " + playerTank.GetHealth());
-                playerTank.SetHealth(100);
-                Debug.Log("Player health after health pack: " + playerTank.GetHealth());
-                Debug.Log("Player health set to 100");
+                spawnedItems.RemoveAt(i);
+                continue;
             }
-            else
+            
+            Vector3 itemPosition = spawnedItems[i].transform.position;
+            
+            // Check if they're on the same tile using a small threshold
+            // Only compare X and Y coordinates, ignoring Z
+            float distanceXY = Vector2.Distance(
+                new Vector2(playerPosition.x, playerPosition.y),
+                new Vector2(itemPosition.x, itemPosition.y)
+            );
+            
+            if (distanceXY < 0.5f) // Adjust threshold as needed
             {
-
-                Debug.Log("No PlayerTank found in scene");
+                GameObject currentItem = spawnedItems[i];
+                string itemType = currentItem.name;
+                
+                Debug.Log($"Player picked up item: {itemType}");
+                
+                // Apply effects based on item type
+                if (itemType.Contains("HealthPack"))
+                {
+                    Debug.Log("Player health before health pack: " + playerTank.GetHealth());
+                    playerTank.SetHealth(100);
+                    Debug.Log("Player health after health pack: " + playerTank.GetHealth());
+                }
+                // Add more item types here as needed
+                // else if (itemType.Contains("PowerUp")) { ... }
+                // else if (itemType.Contains("Ammo")) { ... }
+                
+                // Destroy and remove from list
+                Destroy(currentItem);
+                spawnedItems.RemoveAt(i);
             }
-
-            Destroy(gameObject);
         }
     }
 
     public IEnumerator WaitForGridAndSpawnHealthPack()
     {
-        if (isSpawningHealthPack) yield break; // Stop if already running
-        isSpawningHealthPack = true;           // Mark as running
+        if (isSpawningItem) yield break; // Stop if already running
+        isSpawningItem = true;           // Mark as running
 
         while (placeTileScript.Grid == null || placeTileScript.Grid.GetLength(0) == 0)
         {
@@ -100,12 +124,11 @@ public class ItemManager : MonoBehaviour
 
         Debug.Log("HealthPack reference: " + (healthPack != null ? "Assigned" : "NULL"));
 
-        // Instantiate(healthPack, healthPackPos, Quaternion.identity);
         GameObject spawnedHealthPack = Instantiate(healthPack, healthPackPos, Quaternion.identity);
         Debug.Log("Health pack instantiated at: " + spawnedHealthPack.transform.position);
 
-        spawnedHealthPacks.Add(spawnedHealthPack);
+        spawnedItems.Add(spawnedHealthPack);
 
-        isSpawningHealthPack = false; // Reset flag after completion
+        isSpawningItem = false; // Reset flag after completion
     }
 }
