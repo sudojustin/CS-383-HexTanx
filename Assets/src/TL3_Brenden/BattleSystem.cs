@@ -68,12 +68,10 @@ public class BattleSystem : MonoBehaviour
 
     public void PlayerActionTaken()
     {
-        enemyTank = GameObject.FindWithTag("EnemyTank");
-        TankType enemyTankType = enemyTank.GetComponent<TankType>();
         if (state != BattleState.PLAYERTURN) return; // Ensure it's still the player's turn
         Debug.Log("PlayerActionTaken() called. Remaining Action Points: " + playerTank.GetActionPoints());
 
-        if (playerTank.GetActionPoints() <= 0 || enemyTankType.health <= 0)
+        if (playerTank.GetActionPoints() <= 0)
         {
             Debug.Log("Player out of action points, ending turn...");
             EndPlayerTurn();
@@ -121,7 +119,7 @@ public class BattleSystem : MonoBehaviour
             enemyTankType.enemyActionPoints--; // Deduct action point
             Debug.Log($"Enemy tank action taken. Remaining action points: {enemyTankType.enemyActionPoints}");
 
-            yield return new WaitForSeconds(1.0f); // Delay between actions for pacing
+            yield return new WaitForSeconds(1.5f); // Delay between actions for pacing
         }
 
         Debug.Log("Enemy tank out of action points. Ending turn.");
