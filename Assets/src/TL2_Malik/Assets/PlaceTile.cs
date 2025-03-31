@@ -18,6 +18,7 @@ public class PlaceTile : MonoBehaviour
     public GameObject Tile;
     public GameObject Terrain1;
     public GameObject Terrain2;
+    public GameObject Terrain3;
     public Vector3[,] Grid;
 
     //private GameObject playertank;
@@ -52,7 +53,7 @@ public class PlaceTile : MonoBehaviour
             for(int y = 0; y < height; ++y)
             {
                 isTerrain = Random.Range(1,3);
-                choseTerrain = Random.Range(1,3);
+                choseTerrain = Random.Range(1,4);
                 xpos = x * hexwidth;
                 ypos = y * hexHeight * 1.0f;
             
@@ -66,6 +67,11 @@ public class PlaceTile : MonoBehaviour
                     {
                         Grid[x, y] = new Vector3(xpos+=hexwidth/2f, ypos, 0);
                         Instantiate(Terrain2,Grid[x, y],Quaternion.identity);
+                    }
+                    else if(choseTerrain == 2)
+                    {
+                        Grid[x, y] = new Vector3(xpos+=hexwidth/2f, ypos, 0);
+                        Instantiate(Terrain3,Grid[x, y],Quaternion.identity);
                     }
                     else
                     {

@@ -67,7 +67,11 @@ public class BattleSystem : MonoBehaviour
     }
 
     public void PlayerActionTaken()
-    {
+    {       
+        if(playerTank.GetHealth() <= 0)
+        {
+            Invoke("GameLost", 1.0f);
+        }
         if (state != BattleState.PLAYERTURN) return; // Ensure it's still the player's turn
         Debug.Log("PlayerActionTaken() called. Remaining Action Points: " + playerTank.GetActionPoints());
 
@@ -76,6 +80,7 @@ public class BattleSystem : MonoBehaviour
             Debug.Log("Player out of action points, ending turn...");
             EndPlayerTurn();
         }
+
     }
 
     void EndPlayerTurn()
@@ -112,9 +117,13 @@ public class BattleSystem : MonoBehaviour
     IEnumerator EnemyTurnRoutine(TankType enemyTankType)
     {
         Debug.Log($"Enemy tank starts with {enemyTankType.enemyActionPoints} action points.");
-
+        playerTank = FindObjectOfType<PlayerTank>();
         while (enemyTankType.enemyActionPoints > 0)
         {
+            if(playerTank.GetHealth() <= 0)
+            {
+                EndEnemyTurn();
+            }
             aiControl.MakeDecision(); // AI makes one decision per iteration
             enemyTankType.enemyActionPoints--; // Deduct action point
             Debug.Log($"Enemy tank action taken. Remaining action points: {enemyTankType.enemyActionPoints}");
