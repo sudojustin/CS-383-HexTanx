@@ -9,6 +9,7 @@ public class ItemManager : MonoBehaviour
     private static ItemManager instance;
     public GameObject healthPack;
     public GameObject flag;
+    public GameObject armor;
     public List<GameObject> spawnedItems = new List<GameObject>();
 
     private bool isSpawningItem = false; // Prevent multiple coroutines
@@ -44,6 +45,7 @@ public class ItemManager : MonoBehaviour
             Debug.Log("PlaceTile script found in awake");
             StartCoroutine(WaitForGridAndSpawnHealthPack());
             StartCoroutine(WaitForGridAndSpawnFlag());
+            StartCoroutine(WaitForGridAndSpawnArmor());
         }
     }
 
@@ -101,6 +103,11 @@ public class ItemManager : MonoBehaviour
                     {
                         Debug.LogError("BattleSystem not found, cannot trigger game win condition");
                     }
+                }
+                else if (itemType.Contains("Armor"))
+                {
+                    Debug.Log("Player picked up armor!");
+                    // Armor effect will be implemented later
                 }
                 // Add more item types here as needed
                 // else if (itemType.Contains("PowerUp")) { ... }
@@ -167,6 +174,35 @@ public class ItemManager : MonoBehaviour
 
         GameObject spawnedFlag = Instantiate(flag, flagPos, Quaternion.identity);
         spawnedItems.Add(spawnedFlag);
+
+        isSpawningItem = false; // Reset flag after completion
+    }
+    
+    public IEnumerator WaitForGridAndSpawnArmor()
+    {
+        // Wait for any other item spawning to complete
+        while (isSpawningItem)
+        {
+            yield return new WaitForSeconds(0.1f);
+        }
+
+        isSpawningItem = true;           // Mark as running
+
+        while (placeTileScript.Grid == null || placeTileScript.Grid.GetLength(0) == 0)
+        {
+            yield return new WaitForSeconds(0.1f); // Check every 0.1 seconds
+        }
+
+        int width = placeTileScript.width;
+        int height = placeTileScript.height;
+
+        int randX = Random.Range(0, width);
+        int randY = Random.Range(0, height);
+        Vector3 armorPos = placeTileScript.Grid[randX, randY];
+        armorPos.z = -1f; // Ensure armor appears above the tiles
+
+        GameObject spawnedArmor = Instantiate(armor, armorPos, Quaternion.identity);
+        spawnedItems.Add(spawnedArmor);
 
         isSpawningItem = false; // Reset flag after completion
     }
