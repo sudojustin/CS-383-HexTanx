@@ -95,7 +95,7 @@ public class SoundManager : MonoBehaviour
                 Debug.Log("Attempting to play Win music.");
                 WinMusic();
                 break;
-            case "losescene":
+            case "gameoverlose":
                 Debug.Log("Attempting to play Lose music.");
                 LoseMusic();
                 break;
