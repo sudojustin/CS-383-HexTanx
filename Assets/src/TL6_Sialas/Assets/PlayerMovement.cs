@@ -26,6 +26,11 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
+        if (playerTankComponent.GetActionPoints() <= 0)
+        {
+            FindObjectOfType<BattleSystem>().PlayerActionTaken();
+            return;
+        }
         // Handle movement towards the target position
         if (isMoving)
         {
