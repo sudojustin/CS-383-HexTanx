@@ -89,7 +89,18 @@ public class ItemManager : MonoBehaviour
                 else if (itemType.Contains("Flag"))
                 {
                     Debug.Log("Player picked up the flag!");
-                    // Add flag-specific logic here
+                    
+                    // Find the BattleSystem and call GameWon
+                    BattleSystem battleSystem = FindObjectOfType<BattleSystem>();
+                    if (battleSystem != null)
+                    {
+                        Debug.Log("BattleSystem found, calling GameWon");
+                        battleSystem.SendMessage("GameWon");
+                    }
+                    else
+                    {
+                        Debug.LogError("BattleSystem not found, cannot trigger game win condition");
+                    }
                 }
                 // Add more item types here as needed
                 // else if (itemType.Contains("PowerUp")) { ... }
