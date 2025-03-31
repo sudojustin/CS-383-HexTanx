@@ -23,6 +23,10 @@ public class EnemyProjectile : MonoBehaviour
             Destroy(gameObject);
         }
     }
+    public void SetDamage(int damageValue)
+    {
+        damage = damageValue;
+    }
 
     void OnTriggerEnter2D(Collider2D other)
     {

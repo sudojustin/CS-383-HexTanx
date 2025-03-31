@@ -42,5 +42,8 @@ public abstract class TankType : MonoBehaviour
         if (this is Level3Tank) return 4;
         return 1; // Default fallback
     }
-
+    public int GetDamage()
+    {
+        return damage;
+    }
 }
