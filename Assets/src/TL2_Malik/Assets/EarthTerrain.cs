@@ -13,19 +13,26 @@ public class EarthTerrain : Tiles
     // Update is called once per frame
     void Update()
     {
-        getProjectile();
+        if(Bullet == null)
+        {
+           getProjectile();
+           return; 
+        }
+        
         if(Bullet != null)
         {
-            if(Vector3.Distance(Bullet.transform.position, this.transform.position) < 1f)
+            if(Vector3.Distance(Bullet.transform.position, this.transform.position) < 1.1f)
             {
+                Debug.Log("Destorying Bullet!");
                 Destroy(Bullet);
+                Bullet = null;
             }
         }
     }
 
     private void getProjectile()
     {
-        Bullet = GameObject.Find("Projectile");
+        Bullet = GameObject.FindGameObjectWithTag("Projectile");
         if(Bullet != null)
         {
             Debug.Log("Projectile found!");

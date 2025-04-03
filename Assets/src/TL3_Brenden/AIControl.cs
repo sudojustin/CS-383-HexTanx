@@ -140,8 +140,36 @@ public class AIControl : MonoBehaviour
             new Vector3(tank.tankLocation.x + 0.5f, tank.tankLocation.y - hexHeight, -1), //SouthEast
             new Vector3(tank.tankLocation.x - 0.5f, tank.tankLocation.y - hexHeight, -1), //SouthWest
         };
+        List<Vector3> validMoves = new List<Vector3>();
+
+        foreach (Vector3 move in possibleMoves)
+        {
+            if (IsWithinMapBounds(move) && !IsEarthTerrain(move))
+            {
+                validMoves.Add(move);
+            }
+        }
+
+        if (validMoves.Count > 0)
+        {
+            return validMoves[Random.Range(0, validMoves.Count)];
+        }
 
         return possibleMoves[Random.Range(0, possibleMoves.Length)];
+    }
+    private bool IsEarthTerrain(Vector3 position)
+    {
+        Collider2D tileCollider = Physics2D.OverlapPoint(position);
+        if (tileCollider != null)
+        {
+            EarthTerrain terrain = tileCollider.GetComponent<EarthTerrain>();
+            if (terrain != null)
+            {
+                Debug.Log(gameObject.name + " avoiding Earth Terrain at: " + position);
+                return true;
+            }
+        }
+        return false;
     }
     private bool IsWithinMapBounds(Vector3 position)
     {

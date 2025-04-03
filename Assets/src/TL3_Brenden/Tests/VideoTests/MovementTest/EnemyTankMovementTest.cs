@@ -36,7 +36,7 @@ public class EnemyTankMovementTest
         while (a != 10000)
         {
             aiControl.MoveToNewLocation();
-            yield return new WaitForSeconds(.2f); // Wait for potential movement
+            yield return new WaitForSeconds(0.7f); // Wait for potential movement
             a++;
             if (a == 11)
             {
