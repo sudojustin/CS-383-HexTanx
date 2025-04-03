@@ -7,6 +7,8 @@ TagManager:
   - EnemyTank
   - Tile
   - Terrain
+  - PlayerTank
+  - Projectile
   layers:
   - Default
   - TransparentFX

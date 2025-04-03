@@ -76,6 +76,10 @@ public class Terrains : Tiles
                 TurnOff();
             }
         }
+        else
+        {
+            Debug.LogError("!!!---No Enemy Tank Component---!!!");
+        }
         
             
     }
