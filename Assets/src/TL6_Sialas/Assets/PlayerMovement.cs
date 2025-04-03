@@ -26,11 +26,6 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
-        if (playerTankComponent.GetActionPoints() <= 0)
-        {
-            FindObjectOfType<BattleSystem>().PlayerActionTaken();
-            return;
-        }
         // Handle movement towards the target position
         if (isMoving)
         {
@@ -50,7 +45,12 @@ public class PlayerMovement : MonoBehaviour
                 currentGridPos = WorldToGridPosition(targetPosition);
             }
         }
-
+        
+        if (playerTankComponent.GetActionPoints() <= 0)
+        {
+            FindObjectOfType<BattleSystem>().PlayerActionTaken();
+            return;
+        }
         // Left-click to initiate movement
         if (Input.GetMouseButtonDown(0) && !isMoving) // Only allow new movement if not currently moving
         {
