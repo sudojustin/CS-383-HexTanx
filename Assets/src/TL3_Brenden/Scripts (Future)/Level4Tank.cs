@@ -7,6 +7,6 @@ public class Level4Tank : TankType
         enemyActionPoints = 5;
         damage = 30;
         health = 300;  // Set health specific to Level 4 Tank
-       // Debug.Log("Level 3 Tank Spawned with " + health + " HP");
+       // Debug.Log("Level 4 Tank Spawned with " + health + " HP");
     }
 }

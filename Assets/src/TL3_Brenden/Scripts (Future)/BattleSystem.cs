@@ -106,7 +106,7 @@ public class BattleSystem : MonoBehaviour
         if (enemyTank == null)
         {
             Debug.Log("No enemy tank found. Ending enemy turn.");
-            Invoke("StartPlayerTurn", 1.0f);
+            Invoke("GameWon", 1.0f);
             return;
         }
         aiControl = enemyTank.GetComponent<AIControl>();
