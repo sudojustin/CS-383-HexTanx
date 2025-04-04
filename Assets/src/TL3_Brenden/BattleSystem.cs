@@ -56,13 +56,21 @@ public class BattleSystem : MonoBehaviour
     void StartPlayerTurn()
     {
         playerTank = FindObjectOfType<PlayerTank>(); // Find player tank
+        ..enemyTank = GameObject.FindWithTag("EnemyTank");
 
         if (playerTank == null)
         {
             Debug.LogError("PlayerTank not found!");
             Invoke("GameLost", 1.0f);
         }
+        /*if (enemyTank == null)
+        {
+            playerTank.SetActionPoints(500);
+        }*/
+        //else
+        //{
         playerTank.SetActionPoints(3); // Reset action points for new turn
+        //}
         Debug.Log("Player Turn Started! Action Points: " + playerTank.GetActionPoints());
     }
 
@@ -83,7 +91,7 @@ public class BattleSystem : MonoBehaviour
 
     }
 
-    void EndPlayerTurn()
+    public void EndPlayerTurn()
     {
         Debug.Log("Player turn ended!");
         state = BattleState.ENEMYTURN;
@@ -98,7 +106,7 @@ public class BattleSystem : MonoBehaviour
         if (enemyTank == null)
         {
             Debug.Log("No enemy tank found. Ending enemy turn.");
-            Invoke("GameWon", 1.0f);
+            Invoke("StartPlayerTurn", 1.0f);
             return;
         }
         aiControl = enemyTank.GetComponent<AIControl>();
