@@ -12,7 +12,7 @@ public class AIControl : MonoBehaviour
     [SerializeField]
     private GameObject projectilePrefab;
     private AudioClip shootSoundOverride;
-    private float moveSpeed = 4.0f;
+    private float moveSpeed = 1.5f;
 
     public void Start()
     {
