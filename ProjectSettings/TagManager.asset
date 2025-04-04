@@ -9,6 +9,7 @@ TagManager:
   - Terrain
   - PlayerTank
   - Projectile
+  - EarthTile
   layers:
   - Default
   - TransparentFX
