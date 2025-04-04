@@ -56,7 +56,7 @@ public class BattleSystem : MonoBehaviour
     void StartPlayerTurn()
     {
         playerTank = FindObjectOfType<PlayerTank>(); // Find player tank
-        ..enemyTank = GameObject.FindWithTag("EnemyTank");
+        //enemyTank = GameObject.FindWithTag("EnemyTank");
 
         if (playerTank == null)
         {
