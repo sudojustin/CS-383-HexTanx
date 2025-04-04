@@ -68,7 +68,7 @@ public class Terrains : Tiles
         }
         if(enemytc != null)
         {
-            if(isactive == true && enemyTank.transform.position.x == this.transform.position.x && enemyTank.transform.position.y == this.transform.position.y)
+            if(isactive == true && Vector3.Distance(enemyTank.transform.position, this.transform.position)<1.1f)
             {
                 //Debug.LogError("Tank in fire!!!");
                 enemyTakeDamage();
