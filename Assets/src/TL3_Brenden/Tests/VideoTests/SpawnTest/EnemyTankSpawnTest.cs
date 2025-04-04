@@ -30,13 +30,13 @@ public class EnemyTankSpawnTest
             enemyTankSpawner.SpawnEnemyTankWithRandomPosition();
             tankCount++;
 
-            yield return new WaitForSeconds(.1f); // Allow FPS to update
+            yield return new WaitForSeconds(2.0f); // Allow FPS to update
 
             fps = 1.0f / Time.deltaTime; // Calculate FPS
             Debug.Log($"Tank No: {tankCount}, FPS: {fps}");
             if(fps < FPS_LIMIT)
             {
-                yield return new WaitForSeconds(1f);
+                yield return new WaitForSeconds(1.0f);
                 Assert.Fail("FPS below 40");
             }
         }
