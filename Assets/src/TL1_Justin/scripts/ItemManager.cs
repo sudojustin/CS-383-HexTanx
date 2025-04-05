@@ -31,8 +31,6 @@ public class ItemManager : MonoBehaviour
     {
         if (instance != null && instance != this)
         {
-            Debug.Log("Duplicate ItemManager found. Destroying extra instance");
-            // Destroy(gameObject);
             return;
         }
         instance = this;
