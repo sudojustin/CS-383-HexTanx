@@ -38,8 +38,6 @@ public class EnemyTankSpawner : MonoBehaviour
         int width = placeTileScript.width;
         int height = placeTileScript.height;
 
-        /* int randX = Random.Range(0, width);
-         int randY = Random.Range((0 + (height / 2) + (height / 3)), height);*/
         Vector3 enemyPos; //= placeTileScript.Grid[randX, randY];
         enemyPos.z = -1f; // Ensure the enemy appears above the tiles
         bool validPosition = false;
@@ -55,7 +53,7 @@ public class EnemyTankSpawner : MonoBehaviour
             if (tileCollider != null)
             {
                 Tiles tile = tileCollider.GetComponent<Tiles>();
-                if (tile != null && !(tile is TerrainIce || tile is Terrains || tile is EarthTerrain))
+                if (tile != null && !(/*tile is TerrainIce || tile is Terrains ||*/ tile is EarthTerrain))
                 {
                     validPosition = true; // Found a valid tile
                     enemyPos.z = -1f; // Ensure the enemy appears above the tiles
@@ -63,9 +61,6 @@ public class EnemyTankSpawner : MonoBehaviour
                 }
             }
         }
-
-
-       // SpawnEnemyTank(enemyPos);
     }
 
     public void SpawnEnemyTank(Vector3 spawnLocation)
@@ -75,7 +70,7 @@ public class EnemyTankSpawner : MonoBehaviour
             Debug.LogError("EnemyTankSpawner: No TankManager assigned!");
             return;
         } // Prevent errors if TankManager is missing
-        GameObject tankPrefab = tankManager.GetRandomTank();
+        GameObject tankPrefab = tankManager.GetTankForCurrentScene();
         if (tankPrefab == null)
         {
             Debug.LogError("EnemyTankSpawner: No tank prefab returned from TankManager!");

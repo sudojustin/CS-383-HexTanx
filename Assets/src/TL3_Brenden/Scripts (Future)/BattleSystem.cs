@@ -56,13 +56,21 @@ public class BattleSystem : MonoBehaviour
     void StartPlayerTurn()
     {
         playerTank = FindObjectOfType<PlayerTank>(); // Find player tank
+        //enemyTank = GameObject.FindWithTag("EnemyTank");
 
         if (playerTank == null)
         {
             Debug.LogError("PlayerTank not found!");
             Invoke("GameLost", 1.0f);
         }
+        /*if (enemyTank == null)
+        {
+            playerTank.SetActionPoints(500);
+        }*/
+        //else
+        //{
         playerTank.SetActionPoints(3); // Reset action points for new turn
+        //}
         Debug.Log("Player Turn Started! Action Points: " + playerTank.GetActionPoints());
     }
 
@@ -83,7 +91,7 @@ public class BattleSystem : MonoBehaviour
 
     }
 
-    void EndPlayerTurn()
+    public void EndPlayerTurn()
     {
         Debug.Log("Player turn ended!");
         state = BattleState.ENEMYTURN;
@@ -98,7 +106,7 @@ public class BattleSystem : MonoBehaviour
         if (enemyTank == null)
         {
             Debug.Log("No enemy tank found. Ending enemy turn.");
-            Invoke("GameWon", 1.0f);
+            Invoke("DecideScene", 1.0f);
             return;
         }
         aiControl = enemyTank.GetComponent<AIControl>();
@@ -152,5 +160,29 @@ public class BattleSystem : MonoBehaviour
         Debug.Log("Game Lost");
         UnityEngine.SceneManagement.SceneManager.LoadScene("Assets/Scenes/GameOverLose.unity");
     }
-
+    void DecideScene()
+    {
+        string currentSceneName = SceneManager.GetActiveScene().name;
+        Debug.Log("DecideScene");
+        if(currentSceneName == "SampleScene")
+        {
+            Debug.Log("Loading Level2");
+            UnityEngine.SceneManagement.SceneManager.LoadScene("Assets/Scenes/Level2.unity");
+        }else if(currentSceneName == "Level2")
+        {
+            Debug.Log("Loading Level3");
+            UnityEngine.SceneManagement.SceneManager.LoadScene("Assets/Scenes/Level3.unity");
+        }
+        else if(currentSceneName == "Level3")
+        {
+            Debug.Log("Loading Level4");
+            UnityEngine.SceneManagement.SceneManager.LoadScene("Assets/Scenes/Level4.unity");
+        }
+        else if (currentSceneName == "Level4")
+        {
+            Debug.Log("Loading GameWin");
+            state = BattleState.WON;
+            UnityEngine.SceneManagement.SceneManager.LoadScene("Assets/Scenes/GameOverWin.unity");
+        }
+    }
 }
