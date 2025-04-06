@@ -1,7 +1,46 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-// No extra import needed since ItemFactory and ItemType are in the global namespace
+
+// HealthPackEffect class that doesn't inherit from MonoBehaviour
+public class HealthPackEffect
+{
+    // Virtual method that will be overridden
+    public virtual int GetHealAmount()
+    {
+        return 25; // Default heal amount
+    }
+}
+
+// BC mode version with different healing amount
+public class BCHealthPackEffect : HealthPackEffect
+{
+    // Override to provide different healing amount
+    public override int GetHealAmount()
+    {
+        return 100; // BC mode heal amount
+    }
+}
+
+// Factory to create the appropriate effect based on BC mode
+public static class HealthPackEffectFactory
+{
+    public static HealthPackEffect CreateEffect()
+    {
+        // Check if BC mode is enabled
+        bool bcModeEnabled = PlayerPrefs.GetInt("BCMode", 0) == 1;
+        
+        // Return the appropriate effect based on BC mode
+        if (bcModeEnabled)
+        {
+            return new BCHealthPackEffect();
+        }
+        else
+        {
+            return new HealthPackEffect();
+        }
+    }
+}
 
 public class ItemManager : MonoBehaviour
 {
@@ -39,7 +78,7 @@ public class ItemManager : MonoBehaviour
         if (placeTileScript != null)
         {
             Debug.Log("PlaceTile script found in awake");
-            // Start spawning using ItemType enum
+            // Start spawning items
             StartCoroutine(WaitForGridAndSpawnItem(ItemType.HealthPack));
             StartCoroutine(WaitForGridAndSpawnItem(ItemType.Flag));
             StartCoroutine(WaitForGridAndSpawnItem(ItemType.Armor));
@@ -84,7 +123,16 @@ public class ItemManager : MonoBehaviour
                 if (itemTag == "HealthPack") // Use tags for simpler checking
                 {
                     Debug.Log("Player health before health pack: " + playerTank.GetHealth());
-                    playerTank.SetHealth(100); 
+                    
+                    // Create the appropriate health pack effect based on BC mode
+                    HealthPackEffect healthEffect = HealthPackEffectFactory.CreateEffect();
+                    int healAmount = healthEffect.GetHealAmount();
+                    
+                    // Apply the healing
+                    int currentHealth = playerTank.GetHealth();
+                    playerTank.SetHealth(currentHealth + healAmount);
+                    
+                    Debug.Log($"BC Mode: {PlayerPrefs.GetInt("BCMode", 0) == 1}, Healed for: {healAmount}");
                     Debug.Log("Player health after health pack: " + playerTank.GetHealth());
                 }
                 else if (itemTag == "Flag") // Use tags
@@ -146,7 +194,7 @@ public class ItemManager : MonoBehaviour
             int randY;
 
             // Determine spawn range based on item type
-            if (itemTypeToSpawn == ItemType.Flag) // Use ItemType enum
+            if (itemTypeToSpawn == ItemType.Flag)
             {
                 // Spawn flag in the top 1/6th (adjust Y range)
                 randX = Random.Range(0, width);
