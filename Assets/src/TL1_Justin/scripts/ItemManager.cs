@@ -1,15 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+// No extra import needed since ItemFactory and ItemType are in the global namespace
 
 public class ItemManager : MonoBehaviour
 {
     private PlaceTile placeTileScript;
-    // private ItemManager itemManager;
+    private ItemFactory itemFactory; // Reference to the factory
     private static ItemManager instance;
-    public GameObject healthPack;
-    public GameObject flag;
-    public GameObject armor;
     public List<GameObject> spawnedItems = new List<GameObject>();
 
     private bool isSpawningItem = false; // Prevent multiple coroutines
@@ -30,13 +28,21 @@ public class ItemManager : MonoBehaviour
 
         Debug.Log("Awake() called. Instance ID: " + gameObject.GetInstanceID());
         placeTileScript = FindFirstObjectByType<PlaceTile>();
+        itemFactory = FindFirstObjectByType<ItemFactory>(); // Find the factory
+
+        if (itemFactory == null)
+        {
+            Debug.LogError("ItemFactory not found in the scene!");
+            return; // Cannot proceed without the factory
+        }
 
         if (placeTileScript != null)
         {
             Debug.Log("PlaceTile script found in awake");
-            StartCoroutine(WaitForGridAndSpawnItem(healthPack));
-            StartCoroutine(WaitForGridAndSpawnItem(flag));
-            StartCoroutine(WaitForGridAndSpawnItem(armor));
+            // Start spawning using ItemType enum
+            StartCoroutine(WaitForGridAndSpawnItem(ItemType.HealthPack));
+            StartCoroutine(WaitForGridAndSpawnItem(ItemType.Flag));
+            StartCoroutine(WaitForGridAndSpawnItem(ItemType.Armor));
         }
     }
 
@@ -68,34 +74,36 @@ public class ItemManager : MonoBehaviour
             if (distanceXY < 0.5f) // Adjust threshold as needed
             {
                 GameObject currentItem = spawnedItems[i];
-                string itemType = currentItem.name;
+                // Determine item type based on name or tag (factory doesn't change pickup logic yet)
+                // Consider adding an Item component to prefabs to store their type
+                string itemTag = currentItem.tag; // Assuming you use tags, or parse name
                 
-                Debug.Log($"Player picked up item: {itemType}");
+                Debug.Log($"Player picked up item with tag: {itemTag}"); // Changed log to use tag
                 
-                // Apply effects based on item type
-                if (itemType.Contains("HealthPack"))
+                // Apply effects based on tag or a component
+                if (itemTag == "HealthPack") // Use tags for simpler checking
                 {
                     Debug.Log("Player health before health pack: " + playerTank.GetHealth());
-                    playerTank.SetHealth(100);
+                    playerTank.SetHealth(100); 
                     Debug.Log("Player health after health pack: " + playerTank.GetHealth());
                 }
-                else if (itemType.Contains("Flag"))
+                else if (itemTag == "Flag") // Use tags
                 {
                     Debug.Log("Player picked up the flag!");
                     
-                    // Find the BattleSystem and call GameWon
+                    // Find the BattleSystem and call DecideScene
                     BattleSystem battleSystem = FindObjectOfType<BattleSystem>();
                     if (battleSystem != null)
                     {
-                        Debug.Log("BattleSystem found, calling GameWon");
-                        battleSystem.SendMessage("GameWon");
+                        Debug.Log("BattleSystem found, calling DecideScene");
+                        battleSystem.SendMessage("DecideScene");
                     }
                     else
                     {
-                        Debug.LogError("BattleSystem not found, cannot trigger game win condition");
+                        Debug.LogError("BattleSystem not found, cannot trigger game scene condition");
                     }
                 }
-                else if (itemType.Contains("Armor"))
+                else if (itemTag == "Armor") // Use tags
                 {
                     Debug.Log("Player picked up armor!");
                     // Armor effect will be implemented later
@@ -111,7 +119,7 @@ public class ItemManager : MonoBehaviour
         }
     }
 
-    public IEnumerator WaitForGridAndSpawnItem(GameObject itemPrefab)
+    public IEnumerator WaitForGridAndSpawnItem(ItemType itemTypeToSpawn)
     {
         // Wait for any other item spawning to complete
         while (isSpawningItem)
@@ -138,7 +146,7 @@ public class ItemManager : MonoBehaviour
             int randY;
 
             // Determine spawn range based on item type
-            if (itemPrefab == flag)
+            if (itemTypeToSpawn == ItemType.Flag) // Use ItemType enum
             {
                 // Spawn flag in the top 1/6th (adjust Y range)
                 randX = Random.Range(0, width);
@@ -192,9 +200,14 @@ public class ItemManager : MonoBehaviour
         }
         // This point is reached only when validPosition is true
 
-        // Instantiate the item at the validated position
-        GameObject spawnedItem = Instantiate(itemPrefab, itemPos, Quaternion.identity);
-        spawnedItems.Add(spawnedItem);
+        // Use the factory to create the item
+        GameObject spawnedItem = itemFactory.CreateItem(itemTypeToSpawn, itemPos);
+
+        if (spawnedItem != null)
+        {
+            spawnedItems.Add(spawnedItem);
+        }
+        // Else: Log error already handled in factory
 
         isSpawningItem = false; // Reset flag after completion
     }

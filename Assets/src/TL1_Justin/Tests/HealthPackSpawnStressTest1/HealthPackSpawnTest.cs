@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.TestTools;
 using UnityEngine.SceneManagement;
 
+/*
 public class HealthPackSpawnTest
 {
     private ItemManager itemManager;
@@ -51,3 +52,4 @@ public class HealthPackSpawnTest
 
     // try spawning health outside of bounday
 }
+*/

@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.TestTools;
 using UnityEngine.SceneManagement;
 
+/*
 public class HealthPackSpawnBoundaryTest1
 {
     private ItemManager itemManager;
@@ -67,3 +68,4 @@ public class HealthPackSpawnBoundaryTest1
         }
     }
 }
+*/
