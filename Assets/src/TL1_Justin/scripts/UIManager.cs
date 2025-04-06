@@ -5,6 +5,7 @@ using UnityEngine.UI;
 public class UIManager : MonoBehaviour
 {
     public GameObject UICanvas;
+    public Texture2D logoTexture; // Add public reference for the logo
     private PlayerTank player;
     private TankType enemyTank;
     private int lastActionPoints = -1;
@@ -150,6 +151,19 @@ public class UIManager : MonoBehaviour
             int actionPoints = player.GetActionPoints();
             GUI.Box(new Rect(10, 60, 240, 40), "", boxStyle);
             GUI.Label(new Rect(20, 60, 230, 40), "Action Points: " + actionPoints, style);
+        }
+        
+        // Draw logo in the bottom left corner
+        if (logoTexture != null)
+        {
+            float logoWidth = 180f;
+            float logoHeight = 120f;
+            float padding = 15f;
+            GUI.DrawTexture(
+                new Rect(padding, Screen.height - logoHeight - padding, logoWidth, logoHeight),
+                logoTexture,
+                ScaleMode.ScaleToFit
+            );
         }
         
         // Draw enemy health bar above the enemy tank
