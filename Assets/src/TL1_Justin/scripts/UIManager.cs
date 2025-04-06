@@ -8,11 +8,17 @@ public class UIManager : MonoBehaviour
     private TankType enemyTank;
     private int lastActionPoints = -1;
     private int lastEnemyHealth = -1;
+    private Texture2D uiBackgroundTexture;
 
     void Start()
     {
         // Instantiate the UI Canvas from the prefab
         GameObject UICanvasInstance = Instantiate(UICanvas, transform);
+        
+        // Create solid background texture
+        uiBackgroundTexture = new Texture2D(1, 1);
+        uiBackgroundTexture.SetPixel(0, 0, new Color(0.25f, 0.25f, 0.27f, 1f)); // Darker gunmetal color
+        uiBackgroundTexture.Apply();
         
         // Try to find player and enemy
         FindTanks();
@@ -73,19 +79,20 @@ public class UIManager : MonoBehaviour
         // Create style for UI elements
         GUIStyle style = new GUIStyle(GUI.skin.label);
         style.fontSize = 24;
-        style.normal.textColor = Color.white;
+        style.normal.textColor = new Color(0.8f, 0.4f, 0.2f); // Rusty orange color
         style.alignment = TextAnchor.MiddleLeft;
         style.fontStyle = FontStyle.Bold;
         
-        // Background color for UI elements
-        GUI.backgroundColor = new Color(0, 0, 0, 0.7f);
+        // Create box style with solid background
+        GUIStyle boxStyle = new GUIStyle(GUI.skin.box);
+        boxStyle.normal.background = uiBackgroundTexture;
         
         // Player health in top left (above action points)
         if (player != null)
         {
             int playerHealth = player.GetHealth();
-            // Draw background box for player health
-            GUI.Box(new Rect(10, 10, 240, 40), "");
+            // Draw solid background box for player health
+            GUI.Box(new Rect(10, 10, 240, 40), "", boxStyle);
             // Draw health text
             GUI.Label(new Rect(20, 10, 230, 40), "Health: " + playerHealth, style);
             
@@ -118,8 +125,7 @@ public class UIManager : MonoBehaviour
         if (player != null)
         {
             int actionPoints = player.GetActionPoints();
-            GUI.backgroundColor = new Color(0, 0, 0, 0.7f);
-            GUI.Box(new Rect(10, 60, 240, 40), "");
+            GUI.Box(new Rect(10, 60, 240, 40), "", boxStyle);
             GUI.Label(new Rect(20, 60, 230, 40), "Action Points: " + actionPoints, style);
         }
         
@@ -127,8 +133,7 @@ public class UIManager : MonoBehaviour
         if (enemyTank != null)
         {
             int health = enemyTank.health;
-            GUI.backgroundColor = new Color(0, 0, 0, 0.7f);
-            GUI.Box(new Rect(Screen.width - 220, 10, 210, 40), "");
+            GUI.Box(new Rect(Screen.width - 220, 10, 210, 40), "", boxStyle);
             GUI.Label(new Rect(Screen.width - 210, 10, 200, 40), "Enemy HP: " + health, style);
         }
     }
