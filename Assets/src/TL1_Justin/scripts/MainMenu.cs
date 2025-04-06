@@ -17,7 +17,7 @@ public class MainMenu : MonoBehaviour
         // FIXME: load Malik's first scene
         Debug.Log("Play button pressed");
         // UnityEngine.SceneManagement.SceneManager.LoadScene("GameLevel1");
-        UnityEngine.SceneManagement.SceneManager.LoadScene("Assets/src/TL2_Malik/Assets/Scenes/SampleScene.unity");
+        UnityEngine.SceneManagement.SceneManager.LoadScene("Assets/Scenes/Level1.unity");
     }
 
     public void QuitButton()
