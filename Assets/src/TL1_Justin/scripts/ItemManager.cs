@@ -14,13 +14,6 @@ public class ItemManager : MonoBehaviour
 
     private bool isSpawningItem = false; // Prevent multiple coroutines
  
-    // playerTank.gameObject.tag = "PlayerTank";
-
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-    }
-
     // Update is called once per frame
     void Update()
     {
@@ -136,11 +129,70 @@ public class ItemManager : MonoBehaviour
         int width = placeTileScript.width;
         int height = placeTileScript.height;
 
-        int randX = Random.Range(0, width);
-        int randY = Random.Range(0, height);
-        Vector3 itemPos = placeTileScript.Grid[randX, randY];
-        itemPos.z = -1f; // Ensure item appears above the tiles
+        Vector3 itemPos = Vector3.zero; // Initialize to satisfy compiler
+        bool validPosition = false;
 
+        while (!validPosition) // Loop until a valid (non-mountain) position is found
+        {
+            int randX;
+            int randY;
+
+            // Determine spawn range based on item type
+            if (itemPrefab == flag)
+            {
+                // Spawn flag in the top 1/6th (adjust Y range)
+                randX = Random.Range(0, width);
+                // Use height * 5 / 6 to target the top sixth of the map
+                randY = Random.Range(height * 5 / 6, height); 
+            }
+            else
+            {
+                // Spawn other items anywhere
+                randX = Random.Range(0, width);
+                randY = Random.Range(0, height);
+            }
+
+            // Ensure randX and randY are within valid grid bounds before accessing Grid
+            if (randX >= 0 && randX < width && randY >= 0 && randY < height)
+            {
+                itemPos = placeTileScript.Grid[randX, randY];
+                itemPos.z = -1f; // Ensure item appears above the tiles
+
+                // Check if the selected tile is EarthTerrain (mountain)
+                Collider2D tileCollider = Physics2D.OverlapPoint(itemPos);
+                if (tileCollider != null)
+                {
+                    // Check if the collider's GameObject has the EarthTerrain component
+                    if (tileCollider.GetComponent<EarthTerrain>() == null) 
+                    {
+                        // It's NOT EarthTerrain, so this position is valid
+                        validPosition = true; 
+                    }
+                    // else: It is EarthTerrain, loop continues to find a new position
+                }
+                else
+                {
+                    // If no collider is found at the grid position, assume it's valid 
+                    // (e.g., empty space or standard tile without specific terrain script)
+                    validPosition = true; 
+                }
+            }
+            else
+            {
+                 // Log error if somehow coordinates are out of bounds (shouldn't happen with Random.Range)
+                 Debug.LogError($"Generated invalid coordinates ({randX}, {randY}) for grid size ({width}, {height}). Retrying...");
+            }
+
+            if (!validPosition)
+            {
+                 // Optional: Wait a frame before retrying if needed, e.g., yield return null;
+                 // This prevents potential hangs if finding a valid spot takes many tries.
+                 yield return null; 
+            }
+        }
+        // This point is reached only when validPosition is true
+
+        // Instantiate the item at the validated position
         GameObject spawnedItem = Instantiate(itemPrefab, itemPos, Quaternion.identity);
         spawnedItems.Add(spawnedItem);
 

@@ -18,7 +18,8 @@ public class MainMenu : MonoBehaviour
         Debug.Log("Play button pressed");
         // UnityEngine.SceneManagement.SceneManager.LoadScene("GameLevel1");
         // Assets/Scenes/Level1.unity
-        UnityEngine.SceneManagement.SceneManager.LoadScene("Assets/src/TL2_Malik/Assets/Scenes/SampleScene.unity");
+        // UnityEngine.SceneManagement.SceneManager.LoadScene("Assets/src/TL2_Malik/Assets/Scenes/SampleScene.unity");
+        UnityEngine.SceneManagement.SceneManager.LoadScene("Assets/Scenes/Level1.unity");
     }
 
     public void QuitButton()
