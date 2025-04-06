@@ -16,6 +16,13 @@ public class MainMenu : MonoBehaviour
         UnityEngine.SceneManagement.SceneManager.LoadScene("Assets/Scenes/Level1.unity");
     }
 
+    public void HelpButton()
+    {
+        // Help button has been pressed, show help menu
+        Debug.Log("Help button pressed");
+        UnityEngine.SceneManagement.SceneManager.LoadScene("HelpMenu");
+    }
+
     public void QuitButton()
     {
         // Debug.Log("Quit button pressed");
