@@ -38,11 +38,11 @@ public class Projectile : MonoBehaviour
                 // Play explosion sound via SoundManager
                 if (explosionSoundOverride != null)
                 {
-                    SoundManager.Instance.Play(explosionSoundOverride); // Use override if assigned
+                    SoundManager.GetInstance().Play(explosionSoundOverride); // Use override if assigned
                 }
                 else
                 {
-                    SoundManager.Instance.ExplodeSound(); // Use default from SoundManager
+                    SoundManager.GetInstance().ExplodeSound(); // Use default from SoundManager
                 }
                 Debug.Log("Explosion sound triggered via SoundManager at position: " + transform.position);
 
