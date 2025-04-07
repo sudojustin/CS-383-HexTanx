@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 491525734310119011}
   m_Layer: 0
   m_Name: HealthPack
-  m_TagString: Untagged
+  m_TagString: HealthPack
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -147,3 +147,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b32001ff194bbe047b14a23290e3e2e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  healthPack: {fileID: 0}
+  flag: {fileID: 0}
+  armor: {fileID: 0}
+  spawnedItems: []

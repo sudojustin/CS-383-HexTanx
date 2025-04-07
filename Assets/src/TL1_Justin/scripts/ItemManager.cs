@@ -2,25 +2,55 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// HealthPackEffect class that doesn't inherit from MonoBehaviour
+public class HealthPackEffect
+{
+    // Virtual method that will be overridden
+    public virtual int GetHealAmount()
+    {
+        return 25; // Default heal amount
+    }
+}
+
+// BC mode version with different healing amount
+public class BCHealthPackEffect : HealthPackEffect
+{
+    // Override to provide different healing amount
+    public override int GetHealAmount()
+    {
+        return 100; // BC mode heal amount
+    }
+}
+
+// Factory to create the appropriate effect based on BC mode
+public static class HealthPackEffectFactory
+{
+    public static HealthPackEffect CreateEffect()
+    {
+        // Check if BC mode is enabled
+        bool bcModeEnabled = PlayerPrefs.GetInt("BCMode", 0) == 1;
+        
+        // Return the appropriate effect based on BC mode
+        if (bcModeEnabled)
+        {
+            return new BCHealthPackEffect();
+        }
+        else
+        {
+            return new HealthPackEffect();
+        }
+    }
+}
+
 public class ItemManager : MonoBehaviour
 {
     private PlaceTile placeTileScript;
-    // private ItemManager itemManager;
+    private ItemFactory itemFactory; // Reference to the factory
     private static ItemManager instance;
-    public GameObject healthPack;
-    public GameObject flag;
-    public GameObject armor;
     public List<GameObject> spawnedItems = new List<GameObject>();
 
     private bool isSpawningItem = false; // Prevent multiple coroutines
  
-    // playerTank.gameObject.tag = "PlayerTank";
-
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-    }
-
     // Update is called once per frame
     void Update()
     {
@@ -37,13 +67,21 @@ public class ItemManager : MonoBehaviour
 
         Debug.Log("Awake() called. Instance ID: " + gameObject.GetInstanceID());
         placeTileScript = FindFirstObjectByType<PlaceTile>();
+        itemFactory = FindFirstObjectByType<ItemFactory>(); // Find the factory
+
+        if (itemFactory == null)
+        {
+            Debug.LogError("ItemFactory not found in the scene!");
+            return; // Cannot proceed without the factory
+        }
 
         if (placeTileScript != null)
         {
             Debug.Log("PlaceTile script found in awake");
-            StartCoroutine(WaitForGridAndSpawnHealthPack());
-            StartCoroutine(WaitForGridAndSpawnFlag());
-            StartCoroutine(WaitForGridAndSpawnArmor());
+            // Start spawning items
+            StartCoroutine(WaitForGridAndSpawnItem(ItemType.HealthPack));
+            StartCoroutine(WaitForGridAndSpawnItem(ItemType.Flag));
+            StartCoroutine(WaitForGridAndSpawnItem(ItemType.Armor));
         }
     }
 
@@ -75,34 +113,45 @@ public class ItemManager : MonoBehaviour
             if (distanceXY < 0.5f) // Adjust threshold as needed
             {
                 GameObject currentItem = spawnedItems[i];
-                string itemType = currentItem.name;
+                // Determine item type based on name or tag (factory doesn't change pickup logic yet)
+                // Consider adding an Item component to prefabs to store their type
+                string itemTag = currentItem.tag; // Assuming you use tags, or parse name
                 
-                Debug.Log($"Player picked up item: {itemType}");
+                Debug.Log($"Player picked up item with tag: {itemTag}"); // Changed log to use tag
                 
-                // Apply effects based on item type
-                if (itemType.Contains("HealthPack"))
+                // Apply effects based on tag or a component
+                if (itemTag == "HealthPack") // Use tags for simpler checking
                 {
                     Debug.Log("Player health before health pack: " + playerTank.GetHealth());
-                    playerTank.SetHealth(100);
+                    
+                    // Create the appropriate health pack effect based on BC mode
+                    HealthPackEffect healthEffect = HealthPackEffectFactory.CreateEffect();
+                    int healAmount = healthEffect.GetHealAmount();
+                    
+                    // Apply the healing
+                    int currentHealth = playerTank.GetHealth();
+                    playerTank.SetHealth(currentHealth + healAmount);
+                    
+                    Debug.Log($"BC Mode: {PlayerPrefs.GetInt("BCMode", 0) == 1}, Healed for: {healAmount}");
                     Debug.Log("Player health after health pack: " + playerTank.GetHealth());
                 }
-                else if (itemType.Contains("Flag"))
+                else if (itemTag == "Flag") // Use tags
                 {
                     Debug.Log("Player picked up the flag!");
                     
-                    // Find the BattleSystem and call GameWon
+                    // Find the BattleSystem and call DecideScene
                     BattleSystem battleSystem = FindObjectOfType<BattleSystem>();
                     if (battleSystem != null)
                     {
-                        Debug.Log("BattleSystem found, calling GameWon");
-                        battleSystem.SendMessage("GameWon");
+                        Debug.Log("BattleSystem found, calling DecideScene");
+                        battleSystem.SendMessage("DecideScene");
                     }
                     else
                     {
-                        Debug.LogError("BattleSystem not found, cannot trigger game win condition");
+                        Debug.LogError("BattleSystem not found, cannot trigger game scene condition");
                     }
                 }
-                else if (itemType.Contains("Armor"))
+                else if (itemTag == "Armor") // Use tags
                 {
                     Debug.Log("Player picked up armor!");
                     // Armor effect will be implemented later
@@ -118,7 +167,7 @@ public class ItemManager : MonoBehaviour
         }
     }
 
-    public IEnumerator WaitForGridAndSpawnHealthPack()
+    public IEnumerator WaitForGridAndSpawnItem(ItemType itemTypeToSpawn)
     {
         // Wait for any other item spawning to complete
         while (isSpawningItem)
@@ -136,71 +185,77 @@ public class ItemManager : MonoBehaviour
         int width = placeTileScript.width;
         int height = placeTileScript.height;
 
-        int randX = Random.Range(0, width);
-        int randY = Random.Range(0, height);
-        Vector3 healthPackPos = placeTileScript.Grid[randX, randY];
-        healthPackPos.z = -1f; // Ensure health pack appears above the tiles
+        Vector3 itemPos = Vector3.zero; // Initialize to satisfy compiler
+        bool validPosition = false;
 
-        GameObject spawnedHealthPack = Instantiate(healthPack, healthPackPos, Quaternion.identity);
-        spawnedItems.Add(spawnedHealthPack);
-
-        isSpawningItem = false; // Reset flag after completion
-    }
-
-    public IEnumerator WaitForGridAndSpawnFlag()
-    {
-        // Wait for any other item spawning to complete
-        while (isSpawningItem)
+        while (!validPosition) // Loop until a valid (non-mountain) position is found
         {
-            yield return new WaitForSeconds(0.1f);
+            int randX;
+            int randY;
+
+            // Determine spawn range based on item type
+            if (itemTypeToSpawn == ItemType.Flag)
+            {
+                // Spawn flag in the top 1/6th (adjust Y range)
+                randX = Random.Range(0, width);
+                // Use height * 5 / 6 to target the top sixth of the map
+                randY = Random.Range(height * 5 / 6, height); 
+            }
+            else
+            {
+                // Spawn other items anywhere
+                randX = Random.Range(0, width);
+                randY = Random.Range(0, height);
+            }
+
+            // Ensure randX and randY are within valid grid bounds before accessing Grid
+            if (randX >= 0 && randX < width && randY >= 0 && randY < height)
+            {
+                itemPos = placeTileScript.Grid[randX, randY];
+                itemPos.z = -1f; // Ensure item appears above the tiles
+
+                // Check if the selected tile is EarthTerrain (mountain)
+                Collider2D tileCollider = Physics2D.OverlapPoint(itemPos);
+                if (tileCollider != null)
+                {
+                    // Check if the collider's GameObject has the EarthTerrain component
+                    if (tileCollider.GetComponent<EarthTerrain>() == null) 
+                    {
+                        // It's NOT EarthTerrain, so this position is valid
+                        validPosition = true; 
+                    }
+                    // else: It is EarthTerrain, loop continues to find a new position
+                }
+                else
+                {
+                    // If no collider is found at the grid position, assume it's valid 
+                    // (e.g., empty space or standard tile without specific terrain script)
+                    validPosition = true; 
+                }
+            }
+            else
+            {
+                 // Log error if somehow coordinates are out of bounds (shouldn't happen with Random.Range)
+                 Debug.LogError($"Generated invalid coordinates ({randX}, {randY}) for grid size ({width}, {height}). Retrying...");
+            }
+
+            if (!validPosition)
+            {
+                 // Optional: Wait a frame before retrying if needed, e.g., yield return null;
+                 // This prevents potential hangs if finding a valid spot takes many tries.
+                 yield return null; 
+            }
         }
+        // This point is reached only when validPosition is true
 
-        isSpawningItem = true;           // Mark as running
+        // Use the factory to create the item
+        GameObject spawnedItem = itemFactory.CreateItem(itemTypeToSpawn, itemPos);
 
-        while (placeTileScript.Grid == null || placeTileScript.Grid.GetLength(0) == 0)
+        if (spawnedItem != null)
         {
-            yield return new WaitForSeconds(0.1f); // Check every 0.1 seconds
+            spawnedItems.Add(spawnedItem);
         }
-
-        int width = placeTileScript.width;
-        int height = placeTileScript.height;
-
-        int randX = Random.Range(0, width);
-        int randY = Random.Range(0, height);
-        Vector3 flagPos = placeTileScript.Grid[randX, randY];
-        flagPos.z = -1f; // Ensure flag appears above the tiles
-
-        GameObject spawnedFlag = Instantiate(flag, flagPos, Quaternion.identity);
-        spawnedItems.Add(spawnedFlag);
-
-        isSpawningItem = false; // Reset flag after completion
-    }
-    
-    public IEnumerator WaitForGridAndSpawnArmor()
-    {
-        // Wait for any other item spawning to complete
-        while (isSpawningItem)
-        {
-            yield return new WaitForSeconds(0.1f);
-        }
-
-        isSpawningItem = true;           // Mark as running
-
-        while (placeTileScript.Grid == null || placeTileScript.Grid.GetLength(0) == 0)
-        {
-            yield return new WaitForSeconds(0.1f); // Check every 0.1 seconds
-        }
-
-        int width = placeTileScript.width;
-        int height = placeTileScript.height;
-
-        int randX = Random.Range(0, width);
-        int randY = Random.Range(0, height);
-        Vector3 armorPos = placeTileScript.Grid[randX, randY];
-        armorPos.z = -1f; // Ensure armor appears above the tiles
-
-        GameObject spawnedArmor = Instantiate(armor, armorPos, Quaternion.identity);
-        spawnedItems.Add(spawnedArmor);
+        // Else: Log error already handled in factory
 
         isSpawningItem = false; // Reset flag after completion
     }

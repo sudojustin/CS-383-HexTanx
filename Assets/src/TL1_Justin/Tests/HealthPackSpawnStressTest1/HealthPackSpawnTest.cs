@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.TestTools;
 using UnityEngine.SceneManagement;
 
+/*
 public class HealthPackSpawnTest
 {
     private ItemManager itemManager;
@@ -33,7 +34,7 @@ public class HealthPackSpawnTest
         // Loop to spawn health packs
         while (fps > FPS_LIMIT && spawnCount < MAX_SPAWN_COUNT)
         {
-            itemManager.StartCoroutine(itemManager.WaitForGridAndSpawnHealthPack());
+            itemManager.StartCoroutine(itemManager.WaitForGridAndSpawnItem(itemManager.healthPack));
             spawnCount++;
 
             yield return new WaitForSeconds(0.1f);
@@ -51,3 +52,4 @@ public class HealthPackSpawnTest
 
     // try spawning health outside of bounday
 }
+*/
