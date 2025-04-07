@@ -149,6 +149,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   UICanvas: {fileID: 6034622026054409950, guid: ec7e9dc6fae8eb246a722ece7c0221f9, type: 3}
+  logoTexture: {fileID: 0}
 --- !u!4 &51977850
 Transform:
   m_ObjectHideFlags: 0
@@ -773,9 +774,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b32001ff194bbe047b14a23290e3e2e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  healthPack: {fileID: 3847540538026537556, guid: cc8d7b08bf09b9b45845ca5e7440993e, type: 3}
-  flag: {fileID: 3847540538026537556, guid: 92bf06fa689edbb4e8fe4486190d90d4, type: 3}
-  armor: {fileID: 3847540538026537556, guid: 695faaae9445ca8418bd85805dca5717, type: 3}
   spawnedItems: []
 --- !u!4 &1267710195
 Transform:
@@ -787,6 +785,53 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 9.108853, y: 2.0407863, z: -0.053412806}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1476425124
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1476425126}
+  - component: {fileID: 1476425125}
+  m_Layer: 0
+  m_Name: ItemFactory
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1476425125
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1476425124}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 023fc3fbcefaabb469651971caa5bf83, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healthPackPrefab: {fileID: 3847540538026537556, guid: cc8d7b08bf09b9b45845ca5e7440993e, type: 3}
+  flagPrefab: {fileID: 3847540538026537556, guid: 92bf06fa689edbb4e8fe4486190d90d4, type: 3}
+  armorPrefab: {fileID: 3847540538026537556, guid: 695faaae9445ca8418bd85805dca5717, type: 3}
+--- !u!4 &1476425126
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1476425124}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 685.82434, y: 365.74557, z: -3.4807198}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -999,6 +1044,7 @@ SceneRoots:
   - {fileID: 944515838}
   - {fileID: 111463947}
   - {fileID: 957404755}
+  - {fileID: 1476425126}
   - {fileID: 1267710195}
   - {fileID: 842686177}
   - {fileID: 51977850}
