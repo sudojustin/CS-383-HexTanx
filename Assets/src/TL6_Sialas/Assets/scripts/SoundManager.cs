@@ -83,7 +83,19 @@ public class SoundManager : MonoBehaviour
                 Debug.Log("Attempting to play Menu music.");
                 MenuMusic();
                 break;
-            case "samplescene":
+            case "level1":
+                Debug.Log("Attempting to play Battle music.");
+                BattleMusic();
+                break;
+            case "level2":
+                Debug.Log("Attempting to play Battle music.");
+                BattleMusic();
+                break;
+            case "level3":
+                Debug.Log("Attempting to play Battle music.");
+                BattleMusic();
+                break;
+            case "level4":
                 Debug.Log("Attempting to play Battle music.");
                 BattleMusic();
                 break;
