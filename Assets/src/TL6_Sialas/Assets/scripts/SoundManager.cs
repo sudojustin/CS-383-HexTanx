@@ -21,6 +21,8 @@ public class SoundManager : MonoBehaviour
     [SerializeField] private AudioClip hurtClip;
     [SerializeField] private AudioClip explodeClip;
     [SerializeField] private AudioClip pickupClip;
+    [SerializeField] private AudioClip healthPickupClip;
+    [SerializeField] private AudioClip flagPickupClip;
     [SerializeField] private AudioClip playerMoveClip;
     [SerializeField] private AudioClip playerDeathClip;
     [SerializeField] private AudioClip enemyMoveClip;
@@ -238,6 +240,32 @@ public class SoundManager : MonoBehaviour
         else
         {
             Debug.LogWarning("PickupClip is null in PickupSound!");
+        }
+    }
+
+    public void healthPickupSound()
+    {
+        if (healthPickupClip != null)
+        {
+            Debug.Log($"Playing health pickup sound: {healthPickupClip.name}, volume={effectsVolume}, isPlaying={pickupSource.isPlaying}");
+            pickupSource.PlayOneShot(healthPickupClip, effectsVolume);
+        }
+        else
+        {
+            Debug.LogWarning("healthPickupClip is null in PickupSound!");
+        }
+    }
+
+    public void flagPickupSound()
+    {
+        if (flagPickupClip != null)
+        {
+            Debug.Log($"Playing flag pickup sound: {flagPickupClip.name}, volume={effectsVolume}, isPlaying={pickupSource.isPlaying}");
+            pickupSource.PlayOneShot(flagPickupClip, effectsVolume);
+        }
+        else
+        {
+            Debug.LogWarning("flagPickupClip is null in PickupSound!");
         }
     }
 
