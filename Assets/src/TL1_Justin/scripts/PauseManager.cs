@@ -114,9 +114,9 @@ public class PauseManager : MonoBehaviour
         }
 
         // Resume battle music
-        if (SoundManager.Instance != null)
+        if (SoundManager.GetInstance() != null)
         {
-            SoundManager.Instance.BattleMusic();
+            SoundManager.GetInstance().BattleMusic();
         }
         else
         {
@@ -151,9 +151,9 @@ public class PauseManager : MonoBehaviour
         }
         
         // Play pause music
-        if (SoundManager.Instance != null)
+        if (SoundManager.GetInstance() != null)
         {
-            SoundManager.Instance.PauseMusic();
+            SoundManager.GetInstance().PauseMusic();
         }
         else
         {

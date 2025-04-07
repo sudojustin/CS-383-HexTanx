@@ -133,9 +133,9 @@ public class ItemManager : MonoBehaviour
                     playerTank.SetHealth(currentHealth + healAmount);
 
                     // play pick up sound effect
-                    if (SoundManager.Instance != null)
+                    if (SoundManager.GetInstance() != null)
                     {
-                        SoundManager.Instance.PickupSound();
+                        SoundManager.GetInstance().PickupSound();
                         Debug.Log("Played pickup sound.");
                     }
                     else
@@ -150,9 +150,9 @@ public class ItemManager : MonoBehaviour
                 {
                     Debug.Log("Player picked up the flag!");
 
-                    if (SoundManager.Instance != null)
+                    if (SoundManager.GetInstance() != null)
                     {
-                        SoundManager.Instance.flagPickupSound();
+                        SoundManager.GetInstance().flagPickupSound();
                         Debug.Log("Played flag pickup sound.");
                     }
                     else
@@ -176,9 +176,9 @@ public class ItemManager : MonoBehaviour
                 {
                     Debug.Log("Player picked up armor!");
                     // play pick up sound effect
-                    if (SoundManager.Instance != null)
+                    if (SoundManager.GetInstance() != null)
                     {
-                        SoundManager.Instance.healthPickupSound();
+                        SoundManager.GetInstance().healthPickupSound();
                         Debug.Log("Played healthpickup sound.");
                     }
                     else
