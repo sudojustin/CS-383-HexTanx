@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 491525734310119011}
   m_Layer: 0
   m_Name: Flag
-  m_TagString: Untagged
+  m_TagString: Flag
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -126,8 +126,8 @@ BoxCollider2D:
   m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 25.6, y: 14.4}
+    pivot: {x: 0.5040648, y: 0.48620752}
+    oldSize: {x: 11.02, y: 7.6700006}
     newSize: {x: 9.88, y: 7.21}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -149,4 +149,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   healthPack: {fileID: 0}
   flag: {fileID: 0}
+  armor: {fileID: 0}
   spawnedItems: []

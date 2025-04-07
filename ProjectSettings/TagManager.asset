@@ -10,6 +10,9 @@ TagManager:
   - PlayerTank
   - Projectile
   - EarthTile
+  - Armor
+  - Flag
+  - HealthPack
   layers:
   - Default
   - TransparentFX

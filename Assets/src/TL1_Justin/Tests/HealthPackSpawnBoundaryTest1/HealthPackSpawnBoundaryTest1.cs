@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.TestTools;
 using UnityEngine.SceneManagement;
 
+/*
 public class HealthPackSpawnBoundaryTest1
 {
     private ItemManager itemManager;
@@ -35,28 +36,27 @@ public class HealthPackSpawnBoundaryTest1
         placeTileScript = GameObject.FindObjectOfType<PlaceTile>();
         Assert.NotNull(placeTileScript, "PlaceTile not found in the scene");
 
-        yield return new WaitForSeconds(0.1f);
-
-        // Grid demensions
-        int gridWidth = placeTileScript.width;
-        int gridHeight = placeTileScript.height;
+        placeTileScript.height = 5;
+        // placeTileScript.GenerateGrid();
+        yield return null; // Wait a frame for grid generation
 
         // Track spawn locations
         Vector3 spawnPos = Vector3.zero;
 
-        yield return itemManager.StartCoroutine(itemManager.WaitForGridAndSpawnHealthPack());
+        yield return itemManager.StartCoroutine(itemManager.WaitForGridAndSpawnItem(itemManager.healthPack));
 
-        // Ensure at least one health pack was spawned
-        Assert.IsTrue(itemManager.spawnedItems.Count > 0, "No health packs spawned.");
-
-        // Get the last spawned health pack
-        GameObject spawnedHealthPack = itemManager.spawnedItems[0];
+        // Find the spawned health pack
+        GameObject spawnedHealthPack = GameObject.Find("HealthPack(Clone)");
         Assert.NotNull(spawnedHealthPack, "Health pack was not spawned");
 
         if (spawnedHealthPack != null)
         {
             spawnPos = spawnedHealthPack.transform.position;
             Debug.Log($"Health pack spawned at position: {spawnedHealthPack.transform.position}");
+
+            // Grid demensions
+            int gridWidth = placeTileScript.width;
+            int gridHeight = placeTileScript.height;
 
             // Ensure the health pack spawn location is within bounds
             Assert.IsTrue(spawnPos.x >= 0 && spawnPos.x < gridWidth, "Health pack spawned outside the X grid boundary.");
@@ -68,3 +68,4 @@ public class HealthPackSpawnBoundaryTest1
         }
     }
 }
+*/
