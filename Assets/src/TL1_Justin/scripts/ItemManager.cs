@@ -159,7 +159,18 @@ public class ItemManager : MonoBehaviour
                 // Add more item types here as needed
                 // else if (itemType.Contains("PowerUp")) { ... }
                 // else if (itemType.Contains("Ammo")) { ... }
-                
+
+                // play pick up sound effect
+                if (SoundManager.Instance != null)
+                {
+                    SoundManager.Instance.PickupSound();
+                    Debug.Log("Played pickup sound.");
+                }
+                else
+                {
+                    Debug.LogError("SoundManager.Instance is null! Cannot play pickup sound.");
+                }
+
                 // Destroy and remove from list
                 Destroy(currentItem);
                 spawnedItems.RemoveAt(i);
