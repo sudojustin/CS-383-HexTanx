@@ -1,19 +1,24 @@
 using UnityEngine;
 
-public class PlayerTank : MonoBehaviour
-{
-    private int health = 100;       // Default health
-    private int ammoCount = 50;     // Default ammo
-    private int armorCount = 30;    // Default armor
-    private Vector3 tankLocation;   // Position of the tank
-    private int actionPoints = 3;   // Default action points (e.g., 3 per turn)
 
+
+public abstract class Ptank : MonoBehaviour
+{
+
+    public int ammoCount;     // Default ammo
+    public int armorCount;
+    public int health;  
+    public int actionPoints;   // Default action points (e.g., 3 per turn)
+    // Default armor
+    private Vector3 tankLocation;   // Position of the tank
+
+    public abstract void Initialize();
     void Start()
     {
+        Initialize();
         tankLocation = transform.position;
     }
 
-    // Getters
     public int GetHealth()
     {
         return health;
@@ -29,10 +34,6 @@ public class PlayerTank : MonoBehaviour
         return armorCount;
     }
 
-    public Vector3 GetTankLocation()
-    {
-        return tankLocation;
-    }
 
     public int GetActionPoints()
     {
@@ -63,12 +64,6 @@ public class PlayerTank : MonoBehaviour
         }
     }
 
-    public void SetTankLocation(Vector3 newLocation)
-    {
-        tankLocation = newLocation;
-        transform.position = newLocation;
-        Debug.Log("Tank location set to " + newLocation);
-    }
 
     public void SetActionPoints(int newPoints)
     {
@@ -90,4 +85,20 @@ public class PlayerTank : MonoBehaviour
         Debug.Log("No action points remaining!");
         return false;
     }
+
+    // Getters
+
+    public Vector3 GetTankLocation()
+    {
+        return tankLocation;
+    }
+
+    public void SetTankLocation(Vector3 newLocation)
+    {
+        tankLocation = newLocation;
+        transform.position = newLocation;
+        Debug.Log("Tank location set to " + newLocation);
+    }
+
+   
 }

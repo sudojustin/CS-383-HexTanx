@@ -148,8 +148,8 @@ GameObject:
   - component: {fileID: 3509147260249908698}
   - component: {fileID: 397278526723350906}
   - component: {fileID: 3593697870073829176}
-  - component: {fileID: 3574757111887726175}
   - component: {fileID: 1063511390161003214}
+  - component: {fileID: 2820174194316213131}
   m_Layer: 0
   m_Name: PlayerTank
   m_TagString: PlayerTank
@@ -287,18 +287,6 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!114 &3574757111887726175
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6663526132452910008}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 77d62c925ed4cfe4da4a3b9e3395db7a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!82 &1063511390161003214
 AudioSource:
   m_ObjectHideFlags: 0
@@ -396,3 +384,19 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &2820174194316213131
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6663526132452910008}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b8a7d8a20d12d24b95d7f9c45ff458a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ammoCount: 0
+  armorCount: 0
+  health: 0
+  actionPoints: 0
