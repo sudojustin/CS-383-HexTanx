@@ -164,7 +164,7 @@ public class BattleSystem : MonoBehaviour
     {
         string currentSceneName = SceneManager.GetActiveScene().name;
         Debug.Log("DecideScene");
-        if(currentSceneName == "SampleScene")
+        if(currentSceneName == "Level1")
         {
             Debug.Log("Loading Level2");
             UnityEngine.SceneManagement.SceneManager.LoadScene("Assets/Scenes/Level2.unity");
