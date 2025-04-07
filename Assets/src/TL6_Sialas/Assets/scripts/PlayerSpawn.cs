@@ -36,6 +36,15 @@ public class PlayerTankSpawner : MonoBehaviour
         int spawnY = 1;         
         Vector3 playerPos = placeTileScript.Grid[spawnX, spawnY];
         playerPos.z = -1f;
+
+        if (IsEarthTerrain(playerPos))
+        {
+            Debug.LogWarning($"Fixed spawn position ({spawnX}, {spawnY}) is an EarthTerrain tile!.");
+            // Fall back to random spawn if fixed position is invalid
+            SpawnPlayerTankWithRandomPosition(); 
+            return;
+        }
+
         Debug.Log($"Calling SpawnPlayerTank() at {playerPos}");
         SpawnPlayerTank(playerPos);
     }
@@ -84,5 +93,20 @@ public class PlayerTankSpawner : MonoBehaviour
         {
             Debug.LogWarning("Player tank spawned but lacks PlayerMovement component");
         }
+    }
+
+    private bool IsEarthTerrain(Vector3 position)
+    {
+        Collider2D tileCollider = Physics2D.OverlapPoint(position);
+        if (tileCollider != null)
+        {
+            EarthTerrain terrain = tileCollider.GetComponent<EarthTerrain>();
+            if (terrain != null)
+            {
+                Debug.Log("PlayerTankSpawner: Avoiding Earth Terrain at: " + position);
+                return true;
+            }
+        }
+        return false;
     }
 }
