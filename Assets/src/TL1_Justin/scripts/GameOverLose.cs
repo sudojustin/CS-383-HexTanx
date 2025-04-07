@@ -80,7 +80,7 @@ public class GameOverLose : MonoBehaviour
             Debug.Log("Started webcam. Is playing: " + webcamTexture.isPlaying);
             
             // Capture the image after a short delay
-            Invoke("CaptureImage", 2.0f);
+            Invoke("CaptureImage", 1.0f);
         }
         else
         {
@@ -146,13 +146,13 @@ public class GameOverLose : MonoBehaviour
     {
         // Restart button has been pressed, initialize first game level
         Debug.Log("Restart button pressed");
-        UnityEngine.SceneManagement.SceneManager.LoadScene("Assets/src/TL2_Malik/Assets/Scenes/SampleScene.unity");
+        UnityEngine.SceneManagement.SceneManager.LoadScene("Level1");
     }
 
     public void MainMenuButton()
     {
         Debug.Log("Main menu button pressed");
-        UnityEngine.SceneManagement.SceneManager.LoadScene("Assets/src/TL1_Justin/scenes/MainMenu.unity");
+        UnityEngine.SceneManagement.SceneManager.LoadScene("MainMenu");
     }
 
     public void QuitButton()

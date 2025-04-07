@@ -38,7 +38,7 @@ public class PlayerMovement : MonoBehaviour
                 transform.position = targetPosition; // Snap to target to avoid floating-point issues
                 isMoving = false; // Stop moving
                 playerTankComponent.SetTankLocation(targetPosition); // Update PlayerTank's location
-                SoundManager.Instance.StopMovementSound(); // Stop the movement sound
+                SoundManager.GetInstance().StopMovementSound(); // Stop the movement sound
                 Debug.Log("Tank reached target: " + transform.position);
 
                 // Update current grid position
@@ -68,13 +68,19 @@ public class PlayerMovement : MonoBehaviour
             Vector2Int targetGridPos = WorldToGridPosition(potentialTarget);
             if (IsWithinRange(currentGridPos, targetGridPos))
             {
+                // Check if the target tile is an EarthTerrain tile
+                if (IsEarthTerrain(potentialTarget))
+                {
+                    Debug.Log("Cannot move to target tile: it is an EarthTerrain (mountain) tile!");
+                    return; // Prevent movement to EarthTerrain tiles
+                }
                 if (playerTankComponent.UseActionPoint()) // Check and deduct action point
                 {
                     targetPosition = potentialTarget;
                     if (targetPosition != transform.position) // Only move if the target is different
                     {
                         isMoving = true; // Start moving
-                        SoundManager.Instance.PlayerMoveSound(); // Play movement sound
+                        SoundManager.GetInstance().PlayerMoveSound(); // Play movement sound
                         Debug.Log("Tank moving to " + targetPosition);
                         Debug.Log("Mouse position " + mouseWorldPos);
                         FindObjectOfType<BattleSystem>().PlayerActionTaken();
@@ -116,6 +122,20 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+    private bool IsEarthTerrain(Vector3 position)
+    {
+        Collider2D tileCollider = Physics2D.OverlapPoint(position);
+        if (tileCollider != null)
+        {
+            EarthTerrain terrain = tileCollider.GetComponent<EarthTerrain>();
+            if (terrain != null)
+            {
+                Debug.Log(gameObject.name + " avoiding Earth Terrain at: " + position);
+                return true;
+            }
+        }
+        return false;
+    }
     private Vector2Int WorldToGridPosition(Vector3 worldPos)
     {
         if (placeTile == null || placeTile.Grid == null)

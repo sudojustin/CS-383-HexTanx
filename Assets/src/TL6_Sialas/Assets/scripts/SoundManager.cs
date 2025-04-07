@@ -31,27 +31,51 @@ public class SoundManager : MonoBehaviour
     // Music clips
     [SerializeField] private AudioClip menuMusicClip;
     [SerializeField] private AudioClip battleMusicClip;
+    [SerializeField] private AudioClip finalBattleMusicClip;
     [SerializeField] private AudioClip pauseMusicClip;
     [SerializeField] private AudioClip winMusicClip;
     [SerializeField] private AudioClip loseMusicClip;
 
-    // Singleton instance
-    public static SoundManager Instance = null;
+    // Singleton instance (private static)
+    private static SoundManager instance = null;
+
+    // Public static method to access the instance (replaces direct access to Instance)
+    public static SoundManager GetInstance()
+    {
+        if (instance == null)
+        {
+            // Lazy initialization: Find or create the SoundManager instance
+            instance = FindObjectOfType<SoundManager>();
+            if (instance == null)
+            {
+                // Create a new GameObject and attach SoundManager if it doesn't exist
+                GameObject soundManagerObj = new GameObject("SoundManager");
+                instance = soundManagerObj.AddComponent<SoundManager>();
+                Debug.Log("SoundManager instance created via lazy initialization.");
+            }
+
+            // Ensure the instance persists across scenes
+            DontDestroyOnLoad(instance.gameObject);
+        }
+        return instance;
+    }
 
     private void Awake()
     {
-        // Singleton setup
-        if (Instance == null)
+        // Ensure only one instance exists
+        if (instance != null && instance != this)
         {
-            Instance = this;
-        }
-        else if (Instance != this)
-        {
+            Debug.LogWarning($"A duplicate SoundManager instance was created in scene {SceneManager.GetActiveScene().name}. Destroying the duplicate.");
             Destroy(gameObject);
             return;
         }
 
-        DontDestroyOnLoad(gameObject);
+        // If this is the first instance, set it as the singleton instance
+        if (instance == null)
+        {
+            instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
 
         // Ensure AudioSources are assigned
         if (effectsSource == null)
@@ -89,6 +113,8 @@ public class SoundManager : MonoBehaviour
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
+        StopAllSoundEffects();
+
         string sceneName = scene.name.ToLower();
         Debug.Log($"Scene loaded: {sceneName}. Playing corresponding music.");
 
@@ -112,7 +138,7 @@ public class SoundManager : MonoBehaviour
                 break;
             case "level4":
                 Debug.Log("Attempting to play Battle music.");
-                BattleMusic();
+                finalBattleMusic();
                 break;
             case "pausescene":
                 Debug.Log("Attempting to play Pause music.");
@@ -130,6 +156,16 @@ public class SoundManager : MonoBehaviour
                 Debug.LogWarning($"No music defined for scene '{sceneName}'. Defaulting to Menu music.");
                 MenuMusic();
                 break;
+        }
+    }
+
+    // Stop all sound effects (but not music) when a scene changes
+    private void StopAllSoundEffects()
+    {
+        if (effectsSource.isPlaying)
+        {
+            effectsSource.Stop();
+            Debug.Log("Stopped effectsSource sounds on scene change.");
         }
     }
 
@@ -314,6 +350,11 @@ public class SoundManager : MonoBehaviour
     public void BattleMusic()
     {
         PlayMusic(battleMusicClip);
+    }
+
+    public void finalBattleMusic()
+    {
+        PlayMusic(finalBattleMusicClip);
     }
 
     public void PauseMusic()

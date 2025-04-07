@@ -14,16 +14,14 @@ public class GameOverWin : MonoBehaviour
     public void RestartButton()
     {
         // Restart button has been pressed, initialize first game level
-        // FIXME: load Malik's first scene
         Debug.Log("Restart button pressed");
-        // UnityEngine.SceneManagement.SceneManager.LoadScene("GameLevel1");
-        UnityEngine.SceneManagement.SceneManager.LoadScene("Assets/src/TL2_Malik/Assets/Scenes/SampleScene.unity");
+        UnityEngine.SceneManagement.SceneManager.LoadScene("Level1");
     }
 
     public void MainMenuButton()
     {
         Debug.Log("Main menu button pressed");
-        UnityEngine.SceneManagement.SceneManager.LoadScene("Assets/src/TL1_Justin/scenes/MainMenu.unity");
+        UnityEngine.SceneManagement.SceneManager.LoadScene("MainMenu");
     }
 
     public void QuitButton()
