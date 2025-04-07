@@ -6,6 +6,7 @@ public class SoundManager : MonoBehaviour
     // Audio players components
     [SerializeField] private AudioSource effectsSource;
     [SerializeField] private AudioSource musicSource;
+    [SerializeField] private AudioSource pickupSource; // New AudioSource for pickup sound
 
     // Volume control
     [SerializeField] private float effectsVolume = 1f;
@@ -20,6 +21,8 @@ public class SoundManager : MonoBehaviour
     [SerializeField] private AudioClip hurtClip;
     [SerializeField] private AudioClip explodeClip;
     [SerializeField] private AudioClip pickupClip;
+    [SerializeField] private AudioClip healthPickupClip;
+    [SerializeField] private AudioClip flagPickupClip;
     [SerializeField] private AudioClip playerMoveClip;
     [SerializeField] private AudioClip playerDeathClip;
     [SerializeField] private AudioClip enemyMoveClip;
@@ -54,22 +57,34 @@ public class SoundManager : MonoBehaviour
         if (effectsSource == null)
         {
             effectsSource = gameObject.AddComponent<AudioSource>();
+            Debug.Log("EffectsSource was null - added new AudioSource.");
         }
         if (musicSource == null)
         {
             musicSource = gameObject.AddComponent<AudioSource>();
             musicSource.loop = true;
+            Debug.Log("MusicSource was null - added new AudioSource with looping enabled.");
+        }
+        if (pickupSource == null)
+        {
+            pickupSource = gameObject.AddComponent<AudioSource>();
+            pickupSource.playOnAwake = false;
+            pickupSource.loop = false;
+            pickupSource.volume = effectsVolume;
+            Debug.Log("PickupSource was null - added new AudioSource.");
         }
     }
 
     private void OnEnable()
     {
         SceneManager.sceneLoaded += OnSceneLoaded;
+        Debug.Log("SoundManager subscribed to sceneLoaded event.");
     }
 
     private void OnDisable()
     {
         SceneManager.sceneLoaded -= OnSceneLoaded;
+        Debug.Log("SoundManager unsubscribed from sceneLoaded event.");
     }
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
@@ -135,6 +150,7 @@ public class SoundManager : MonoBehaviour
         effectsVolume = Mathf.Clamp01(volume);
         Debug.Log($"Effects volume set to {effectsVolume}");
         effectsSource.volume = effectsVolume;
+        pickupSource.volume = effectsVolume; // Update pickupSource volume
     }
 
     public void SetMusicVolume(float volume)
@@ -149,6 +165,7 @@ public class SoundManager : MonoBehaviour
     {
         if (clip != null)
         {
+            Debug.Log($"Playing sound effect: {clip.name}, volume={effectsVolume}, isPlaying={effectsSource.isPlaying}");
             effectsSource.PlayOneShot(clip, effectsVolume);
         }
         else
@@ -195,6 +212,7 @@ public class SoundManager : MonoBehaviour
             effectsSource.volume = effectsVolume;
             effectsSource.loop = false; // No looping for movement sound
             effectsSource.Play();
+            Debug.Log($"Playing movement sound: {clip.name}, isPlaying={effectsSource.isPlaying}");
         }
         else
         {
@@ -208,6 +226,46 @@ public class SoundManager : MonoBehaviour
         {
             effectsSource.Stop();
             Debug.Log("Movement sound stopped.");
+        }
+    }
+
+    // Play the pickup sound using a dedicated AudioSource
+    public void PickupSound()
+    {
+        if (pickupClip != null)
+        {
+            Debug.Log($"Playing pickup sound: {pickupClip.name}, volume={effectsVolume}, isPlaying={pickupSource.isPlaying}");
+            pickupSource.PlayOneShot(pickupClip, effectsVolume);
+        }
+        else
+        {
+            Debug.LogWarning("PickupClip is null in PickupSound!");
+        }
+    }
+
+    public void healthPickupSound()
+    {
+        if (healthPickupClip != null)
+        {
+            Debug.Log($"Playing health pickup sound: {healthPickupClip.name}, volume={effectsVolume}, isPlaying={pickupSource.isPlaying}");
+            pickupSource.PlayOneShot(healthPickupClip, effectsVolume);
+        }
+        else
+        {
+            Debug.LogWarning("healthPickupClip is null in PickupSound!");
+        }
+    }
+
+    public void flagPickupSound()
+    {
+        if (flagPickupClip != null)
+        {
+            Debug.Log($"Playing flag pickup sound: {flagPickupClip.name}, volume={effectsVolume}, isPlaying={pickupSource.isPlaying}");
+            pickupSource.PlayOneShot(flagPickupClip, effectsVolume);
+        }
+        else
+        {
+            Debug.LogWarning("flagPickupClip is null in PickupSound!");
         }
     }
 
@@ -225,11 +283,6 @@ public class SoundManager : MonoBehaviour
     public void ExplodeSound()
     {
         Play(explodeClip);
-    }
-
-    public void PickupSound()
-    {
-        Play(pickupClip);
     }
 
     public void PlayerMoveSound()

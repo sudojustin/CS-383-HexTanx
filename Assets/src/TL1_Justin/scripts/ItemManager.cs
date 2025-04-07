@@ -131,14 +131,35 @@ public class ItemManager : MonoBehaviour
                     // Apply the healing
                     int currentHealth = playerTank.GetHealth();
                     playerTank.SetHealth(currentHealth + healAmount);
-                    
+
+                    // play pick up sound effect
+                    if (SoundManager.Instance != null)
+                    {
+                        SoundManager.Instance.PickupSound();
+                        Debug.Log("Played pickup sound.");
+                    }
+                    else
+                    {
+                        Debug.LogError("SoundManager.Instance is null! Cannot play pickup sound.");
+                    }
+
                     Debug.Log($"BC Mode: {PlayerPrefs.GetInt("BCMode", 0) == 1}, Healed for: {healAmount}");
                     Debug.Log("Player health after health pack: " + playerTank.GetHealth());
                 }
                 else if (itemTag == "Flag") // Use tags
                 {
                     Debug.Log("Player picked up the flag!");
-                    
+
+                    if (SoundManager.Instance != null)
+                    {
+                        SoundManager.Instance.flagPickupSound();
+                        Debug.Log("Played flag pickup sound.");
+                    }
+                    else
+                    {
+                        Debug.LogError("SoundManager.Instance is null! Cannot play flag pickup sound.");
+                    }
+
                     // Find the BattleSystem and call DecideScene
                     BattleSystem battleSystem = FindObjectOfType<BattleSystem>();
                     if (battleSystem != null)
@@ -154,12 +175,24 @@ public class ItemManager : MonoBehaviour
                 else if (itemTag == "Armor") // Use tags
                 {
                     Debug.Log("Player picked up armor!");
+                    // play pick up sound effect
+                    if (SoundManager.Instance != null)
+                    {
+                        SoundManager.Instance.healthPickupSound();
+                        Debug.Log("Played healthpickup sound.");
+                    }
+                    else
+                    {
+                        Debug.LogError("SoundManager.Instance is null! Cannot play healthpickup sound.");
+                    }
                     // Armor effect will be implemented later
                 }
                 // Add more item types here as needed
                 // else if (itemType.Contains("PowerUp")) { ... }
                 // else if (itemType.Contains("Ammo")) { ... }
+
                 
+
                 // Destroy and remove from list
                 Destroy(currentItem);
                 spawnedItems.RemoveAt(i);
