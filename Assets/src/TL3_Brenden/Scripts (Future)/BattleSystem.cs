@@ -23,13 +23,13 @@ public class BattleSystem : MonoBehaviour
 
     void SetupBattle()
     {
-        Debug.Log("SetupBattle started.");
+        //Debug.Log("SetupBattle started.");
 
         PlayerTankSpawner playerSpawner = FindObjectOfType<PlayerTankSpawner>();
-        Debug.Log(playerSpawner != null ? "PlayerTankSpawner found!" : "PlayerTankSpawner NOT found!");
+        //Debug.Log(playerSpawner != null ? "PlayerTankSpawner found!" : "PlayerTankSpawner NOT found!");
         if (playerSpawner != null)
         {
-            Debug.Log("PlayerTankSpawner found.");
+            //Debug.Log("PlayerTankSpawner found.");
             playerSpawner.SpawnPlayerTankWithPosition();
         }
         else
@@ -40,7 +40,7 @@ public class BattleSystem : MonoBehaviour
         EnemyTankSpawner enemySpawner = FindObjectOfType<EnemyTankSpawner>();
         if (enemySpawner != null)
         {
-            Debug.Log("EnemyTankSpawner found.");
+            //Debug.Log("EnemyTankSpawner found.");
             enemySpawner.SpawnEnemyTankWithRandomPosition();
         }
         else
@@ -48,7 +48,7 @@ public class BattleSystem : MonoBehaviour
             Debug.LogError("BattleSystem: EnemyTankSpawner not found in the scene!");
         }
 
-        Debug.Log("SetupBattle completed.");
+        //Debug.Log("SetupBattle completed.");
         state = BattleState.PLAYERTURN;
         StartPlayerTurn();
     }
@@ -60,18 +60,11 @@ public class BattleSystem : MonoBehaviour
 
         if (playerTank == null)
         {
-            Debug.LogError("PlayerTank not found!");
+            //Debug.LogError("PlayerTank not found!");
             Invoke("GameLost", 1.0f);
         }
-        /*if (enemyTank == null)
-        {
-            playerTank.SetActionPoints(500);
-        }*/
-        //else
-        //{
         playerTank.SetActionPoints(3); // Reset action points for new turn
-        //}
-        Debug.Log("Player Turn Started! Action Points: " + playerTank.GetActionPoints());
+        //Debug.Log("Player Turn Started! Action Points: " + playerTank.GetActionPoints());
     }
 
     public void PlayerActionTaken()
@@ -81,11 +74,11 @@ public class BattleSystem : MonoBehaviour
             Invoke("GameLost", 1.0f);
         }
         if (state != BattleState.PLAYERTURN) return; // Ensure it's still the player's turn
-        Debug.Log("PlayerActionTaken() called. Remaining Action Points: " + playerTank.GetActionPoints());
+        //Debug.Log("PlayerActionTaken() called. Remaining Action Points: " + playerTank.GetActionPoints());
 
         if (playerTank.GetActionPoints() <= 0)
         {
-            Debug.Log("Player out of action points, ending turn...");
+            //Debug.Log("Player out of action points, ending turn...");
             EndPlayerTurn();
         }
 
@@ -93,19 +86,19 @@ public class BattleSystem : MonoBehaviour
 
     public void EndPlayerTurn()
     {
-        Debug.Log("Player turn ended!");
+        //Debug.Log("Player turn ended!");
         state = BattleState.ENEMYTURN;
         Invoke("StartEnemyTurn", 2.5f); // Delay enemy turn start
     }
 
     void StartEnemyTurn()
     {
-        Debug.Log("Enemy turn started!");
+        //Debug.Log("Enemy turn started!");
         // Handle enemy AI behavior here
         enemyTank = GameObject.FindWithTag("EnemyTank");
         if (enemyTank == null)
         {
-            Debug.Log("No enemy tank found. Ending enemy turn.");
+            //Debug.Log("No enemy tank found. Ending enemy turn.");
             Invoke("DecideScene", 1.0f);
             return;
         }
@@ -114,7 +107,7 @@ public class BattleSystem : MonoBehaviour
 
         if (enemyTankType != null && enemyTankType.health <= 0)
         {
-            Debug.Log("Enemy tank is destroyed. Ending enemy turn.");
+            //Debug.Log("Enemy tank is destroyed. Ending enemy turn.");
             EndEnemyTurn();
             return;
         }
@@ -124,7 +117,7 @@ public class BattleSystem : MonoBehaviour
 
     IEnumerator EnemyTurnRoutine(TankType enemyTankType)
     {
-        Debug.Log($"Enemy tank starts with {enemyTankType.enemyActionPoints} action points.");
+        //Debug.Log($"Enemy tank starts with {enemyTankType.enemyActionPoints} action points.");
         playerTank = FindObjectOfType<PlayerTank>();
         while (enemyTankType.enemyActionPoints > 0)
         {
@@ -134,53 +127,53 @@ public class BattleSystem : MonoBehaviour
             }
             aiControl.MakeDecision(); // AI makes one decision per iteration
             enemyTankType.enemyActionPoints--; // Deduct action point
-            Debug.Log($"Enemy tank action taken. Remaining action points: {enemyTankType.enemyActionPoints}");
+            //Debug.Log($"Enemy tank action taken. Remaining action points: {enemyTankType.enemyActionPoints}");
 
             yield return new WaitForSeconds(1.5f); // Delay between actions for pacing
         }
 
-        Debug.Log("Enemy tank out of action points. Ending turn.");
+        //Debug.Log("Enemy tank out of action points. Ending turn.");
         EndEnemyTurn();
     }
     void EndEnemyTurn()
     {
-        Debug.Log("Enemy turn ended!");
+        //Debug.Log("Enemy turn ended!");
         state = BattleState.PLAYERTURN; // Switch back to player's turn
         StartPlayerTurn(); // Start the player's turn
     }
     void GameWon()
     {
         state = BattleState.WON;
-        Debug.Log("Game Won");
+        //Debug.Log("Game Won");
         UnityEngine.SceneManagement.SceneManager.LoadScene("Assets/Scenes/GameOverWin.unity");
     }
     void GameLost()
     {
         state = BattleState.LOST;
-        Debug.Log("Game Lost");
+        //Debug.Log("Game Lost");
         UnityEngine.SceneManagement.SceneManager.LoadScene("Assets/Scenes/GameOverLose.unity");
     }
     void DecideScene()
     {
         string currentSceneName = SceneManager.GetActiveScene().name;
-        Debug.Log("DecideScene");
+        //Debug.Log("DecideScene");
         if(currentSceneName == "Level1")
         {
-            Debug.Log("Loading Level2");
+            //Debug.Log("Loading Level2");
             UnityEngine.SceneManagement.SceneManager.LoadScene("Assets/Scenes/Level2.unity");
         }else if(currentSceneName == "Level2")
         {
-            Debug.Log("Loading Level3");
+            //Debug.Log("Loading Level3");
             UnityEngine.SceneManagement.SceneManager.LoadScene("Assets/Scenes/Level3.unity");
         }
         else if(currentSceneName == "Level3")
         {
-            Debug.Log("Loading Level4");
+            //Debug.Log("Loading Level4");
             UnityEngine.SceneManagement.SceneManager.LoadScene("Assets/Scenes/Level4.unity");
         }
         else if (currentSceneName == "Level4")
         {
-            Debug.Log("Loading GameWin");
+            //Debug.Log("Loading GameWin");
             state = BattleState.WON;
             UnityEngine.SceneManagement.SceneManager.LoadScene("Assets/Scenes/GameOverWin.unity");
         }
