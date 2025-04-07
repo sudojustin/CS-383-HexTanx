@@ -167,11 +167,6 @@ public class SoundManager : MonoBehaviour
             effectsSource.Stop();
             Debug.Log("Stopped effectsSource sounds on scene change.");
         }
-        if (pickupSource.isPlaying)
-        {
-            pickupSource.Stop();
-            Debug.Log("Stopped pickupSource sounds on scene change.");
-        }
     }
 
     // Volume getters
