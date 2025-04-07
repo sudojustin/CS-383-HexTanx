@@ -14,7 +14,7 @@ public class TankManager : MonoBehaviour
 
         switch (currentSceneName)
         {
-            case "SampeScene":
+            case "Level1":
                 return level1TankPrefab;
             case "Level2":
                 return level2TankPrefab;
@@ -23,7 +23,7 @@ public class TankManager : MonoBehaviour
             case "Level4":
                 return level4TankPrefab;
             default:
-                Debug.LogWarning("TankManager: Unknown scene name, defaulting to Level1 tank.");
+                //Debug.LogWarning("TankManager: Unknown scene name, defaulting to Level1 tank.");
                 return level1TankPrefab;
         }
     }

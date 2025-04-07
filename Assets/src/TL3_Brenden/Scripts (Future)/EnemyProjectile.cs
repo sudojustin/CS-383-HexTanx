@@ -35,21 +35,21 @@ public class EnemyProjectile : MonoBehaviour
         if (playerTank != null)
         {
             playerTank.SetHealth(playerTank.GetHealth() - damage);
-            Debug.Log("Player tank hit! Remaining HP: " + playerTank.GetHealth());
+            //Debug.Log("Player tank hit! Remaining HP: " + playerTank.GetHealth());
 
             if (playerTank.GetHealth() <= 0)
             {
                 if (explosionSound != null)
                 {
                     AudioSource.PlayClipAtPoint(explosionSound, transform.position);
-                    Debug.Log("Explosion sound triggered at position: " + transform.position);
+                    //Debug.Log("Explosion sound triggered at position: " + transform.position);
                 }
                 else
                 {
-                    Debug.LogWarning("Explosion sound not played: AudioClip missing!");
+                    //Debug.LogWarning("Explosion sound not played: AudioClip missing!");
                 }
                 Destroy(playerTank.gameObject);
-                Debug.Log("Player tank destroyed!");
+                //Debug.Log("Player tank destroyed!");
             }
             Destroy(gameObject);
         }

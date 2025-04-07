@@ -1,26 +1,29 @@
 using UnityEngine;
+using System.Collections;
+using System.Collections.Generic;
 
-public class DamageScriptBC
+public class DamageEffect
 {
-    protected float damage = 100f;
+    protected int baseDamage;
 
-    public virtual float getDamage()
+    public DamageEffect(int baseDamage)
     {
-        return damage;
+        this.baseDamage = baseDamage;
     }
 
-    public virtual void setDamage(float damage)
+    public virtual int GetDamage()
     {
-        Debug.Log("setDamage called in super class");
-        damage = .1f;
-   }
+        return baseDamage;
+    }
 }
 
-public class DamageScriptData : DamageScriptBC
+public class BCEnemyDamage : DamageEffect
 {
-    public override void setDamage(float damage)
+    public BCEnemyDamage(int baseDamage) : base(baseDamage) { }
+
+    public override int GetDamage()
     {
-        Debug.Log("setHealth called in subclass");
-        base.setDamage(damage);
+        //Debug.Log("BC MODE DAMAGE ENEMY ENABLED?");
+        return 1;       //BC mode damage
     }
 }
