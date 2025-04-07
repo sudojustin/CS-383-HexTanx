@@ -32,7 +32,7 @@ public abstract class TankType : MonoBehaviour
     public void ResetActionPoints()
     {
         enemyActionPoints = GetInitialActionPoints();
-        Debug.Log("Enemy action points reset to: " + enemyActionPoints);
+        //Debug.Log("Enemy action points reset to: " + enemyActionPoints);
     }
 
     private int GetInitialActionPoints()
