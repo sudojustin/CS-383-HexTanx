@@ -19,20 +19,20 @@ public class AIControl : MonoBehaviour
         tank = GetComponent<TankType>();
         if (tank == null)
         {
-            Debug.LogError("AIControl: No TankType found on " + gameObject.name);
+            //Debug.LogError("AIControl: No TankType found on " + gameObject.name);
             InvokeRepeating(nameof(MakeDecision), 1.0f, 2.0f);
         }
         // Get a reference to the PlaceTile script
         placeTileScript = FindObjectOfType<PlaceTile>();
         if (placeTileScript == null)
         {
-            Debug.LogError("AIControl: No PlaceTile found in the scene!");
+            //Debug.LogError("AIControl: No PlaceTile found in the scene!");
         }
 
         playerTank = FindObjectOfType<PlayerTank>();
         if (playerTank == null)
         {
-            Debug.Log("AICONTROL: No PlayerTank found in the scene!");
+            //Debug.Log("AICONTROL: No PlayerTank found in the scene!");
         }
 
     }
@@ -54,14 +54,14 @@ public class AIControl : MonoBehaviour
 
     private void ShootAtPlayer()
     {
-         Debug.Log("MakeDecision was shootatplayer");
+         //Debug.Log("MakeDecision was shootatplayer");
          if(playerTank == null)
          {
-             Debug.Log("player tank in AIControl:ShootAtPlayer is null");
+             //Debug.Log("player tank in AIControl:ShootAtPlayer is null");
              return;
          }
          Vector3 targetPosition = playerTank.GetTankLocation();
-         Debug.Log("Vector3, bullet gamebobject");
+         //Debug.Log("Vector3, bullet gamebobject");
 
          if (tank.ShotHitsPlayer())
          {
@@ -70,7 +70,7 @@ public class AIControl : MonoBehaviour
             Quaternion rotation = Quaternion.Euler(0, 0, angle);
             GameObject bullet = Instantiate(projectilePrefab, transform.position, rotation);
             EnemyProjectile projectileScript = bullet.GetComponent<EnemyProjectile>();
-            Debug.Log(gameObject.name + " shot hit the player!");
+            //Debug.Log(gameObject.name + " shot hit the player!");
             // Implement damage logic for player
             if (projectileScript != null)
             {
@@ -87,7 +87,7 @@ public class AIControl : MonoBehaviour
             GameObject bullet = Instantiate(projectilePrefab, transform.position, rotation);
             EnemyProjectile projectileScript = bullet.GetComponent<EnemyProjectile>();
             projectileScript.damage = 0;
-            Debug.Log(gameObject.name + " shot missed!");
+            //Debug.Log(gameObject.name + " shot missed!");
             if (projectileScript != null)
             {
                 projectileScript.SetTarget(targetPosition);
@@ -100,11 +100,11 @@ public class AIControl : MonoBehaviour
         if (IsWithinMapBounds(newLocation))
         {
             StartCoroutine(MoveSmoothly(newLocation));
-            Debug.Log(gameObject.name + " moving to " + newLocation);
+            //Debug.Log(gameObject.name + " moving to " + newLocation);
         }
         else
         {
-            Debug.Log(gameObject.name + " attempted to move out of bounds, retrying.");
+            //Debug.Log(gameObject.name + " attempted to move out of bounds, retrying.");
             MoveToNewLocation();
         }
     }
@@ -126,7 +126,7 @@ public class AIControl : MonoBehaviour
         transform.position = destination; // Snap to final position
         tank.UpdateTankLocation(destination);
         isMoving = false;
-        Debug.Log(gameObject.name + " reached destination: " + destination);
+        //Debug.Log(gameObject.name + " reached destination: " + destination);
     }
 
     private Vector3 GetRandomAdjacentHex()
@@ -165,7 +165,7 @@ public class AIControl : MonoBehaviour
             EarthTerrain terrain = tileCollider.GetComponent<EarthTerrain>();
             if (terrain != null)
             {
-                Debug.Log(gameObject.name + " avoiding Earth Terrain at: " + position);
+                //Debug.Log(gameObject.name + " avoiding Earth Terrain at: " + position);
                 return true;
             }
         }
