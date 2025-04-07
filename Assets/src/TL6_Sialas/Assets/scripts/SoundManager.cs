@@ -89,6 +89,8 @@ public class SoundManager : MonoBehaviour
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
+        StopAllSoundEffects();
+
         string sceneName = scene.name.ToLower();
         Debug.Log($"Scene loaded: {sceneName}. Playing corresponding music.");
 
@@ -130,6 +132,16 @@ public class SoundManager : MonoBehaviour
                 Debug.LogWarning($"No music defined for scene '{sceneName}'. Defaulting to Menu music.");
                 MenuMusic();
                 break;
+        }
+    }
+
+    // Stops sound effects
+    private void StopAllSoundEffects()
+    {
+        if (effectsSource.isPlaying)
+        {
+            effectsSource.Stop();
+            Debug.Log("Stopped effectsSource sounds on scene change.");
         }
     }
 
