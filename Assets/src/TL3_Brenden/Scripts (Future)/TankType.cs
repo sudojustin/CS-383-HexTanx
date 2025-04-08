@@ -1,5 +1,16 @@
 using UnityEngine;
 
+
+/*
+ * 
+ * TankType and the subsequent Level1Tank, Level2Tank, Level3Tank, and Level4Tank use the Strategy pattern.
+ * 
+ * The Strategy pattern lets you indirectly alter the object’s behavior at runtime by associating it with
+ * different sub-objects which can perform specific sub-tasks in different ways.
+ * 
+ * 
+ */
+
 public abstract class TankType : MonoBehaviour
 {
     public int health;              //Store tanks health
