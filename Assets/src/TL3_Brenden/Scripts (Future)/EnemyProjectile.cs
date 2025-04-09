@@ -35,7 +35,7 @@ public class EnemyProjectile : MonoBehaviour
         if (playerTank != null)
         {
             playerTank.SetHealth(playerTank.GetHealth() - damage);
-            //Debug.Log("Player tank hit! Remaining HP: " + playerTank.GetHealth());
+            Debug.Log("Player tank hit! Remaining HP: " + playerTank.GetHealth());
 
             if (playerTank.GetHealth() <= 0)
             {
