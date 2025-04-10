@@ -68,6 +68,7 @@ public class ItemManager : MonoBehaviour
     // Flag to prevent multiple item spawning coroutines from running simultaneously
     private bool isSpawningItem = false;
  
+    // Update is called once per frame
     // Checks for item pickups by the player
     void Update()
     {
@@ -86,6 +87,9 @@ public class ItemManager : MonoBehaviour
         }
         instance = this;
 
+        // Log the instance ID for debugging purposes
+        Debug.Log("Awake() called. Instance ID: " + gameObject.GetInstanceID());
+        
         // Find the PlaceTile script in the scene
         placeTileScript = FindFirstObjectByType<PlaceTile>();
         
@@ -102,6 +106,7 @@ public class ItemManager : MonoBehaviour
         // Check if PlaceTile script was found
         if (placeTileScript != null)
         {
+            Debug.Log("PlaceTile script found in awake");
             // Start spawning different types of items
             StartCoroutine(WaitForGridAndSpawnItem(ItemType.HealthPack));
             StartCoroutine(WaitForGridAndSpawnItem(ItemType.Flag));
@@ -379,4 +384,47 @@ public class ItemManager : MonoBehaviour
  * 2. Manage different variations of the same type of object
  * 3. Centralize creation logic to make the code more maintainable
  * 4. Support game modes or settings that require different object behaviors
+ */
+
+/*
+ * DYNAMIC BINDING EXAMPLE
+ * 
+ * This code demonstrates dynamic binding (polymorphism) through the HealthPackEffect class hierarchy:
+ * 
+ * Super Class: HealthPackEffect
+ * - Contains a virtual method GetHealAmount() that returns 25
+ * 
+ * Sub Class: BCHealthPackEffect
+ * - Inherits from HealthPackEffect
+ * - Overrides GetHealAmount() to return 100
+ * 
+ * Virtual Function: GetHealAmount()
+ * 
+ * Dynamic Binding Example:
+ * 
+ * // Static type is HealthPackEffect (the base class)
+ * // Dynamic type is also HealthPackEffect
+ * HealthPackEffect effect1 = new HealthPackEffect();
+ * int healAmount1 = effect1.GetHealAmount(); // Returns 25
+ * 
+ * // Static type is HealthPackEffect (the base class)
+ * // Dynamic type is BCHealthPackEffect (the derived class)
+ * HealthPackEffect effect2 = new BCHealthPackEffect();
+ * int healAmount2 = effect2.GetHealAmount(); // Returns 100
+ * 
+ * What method gets called now?
+ * When you have HealthPackEffect effect2 = new BCHealthPackEffect();:
+ * - The static type is HealthPackEffect (what the compiler sees)
+ * - The dynamic type is BCHealthPackEffect (the actual object type at runtime)
+ * - When effect2.GetHealAmount() is called, the BCHealthPackEffect version is called (returns 100)
+ * - This is dynamic binding because the method call is resolved at runtime based on the actual object type
+ * 
+ * Change the dynamic type:
+ * If you change the dynamic type to HealthPackEffect:
+ * HealthPackEffect effect3 = new HealthPackEffect();
+ * int healAmount3 = effect3.GetHealAmount(); // Returns 25
+ * Now the HealthPackEffect version of GetHealAmount() is called (returns 25).
+ * 
+ * This is a classic example of polymorphism in object-oriented programming, where the same method call 
+ * can behave differently based on the actual type of the object at runtime.
  */

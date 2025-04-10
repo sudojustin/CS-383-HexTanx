@@ -198,7 +198,6 @@ public class UIManager : MonoBehaviour
         float barWidth = 60f; // Screen pixels
         float barHeight = 8f; // Screen pixels
         float borderSize = 1f; // Border size in pixels
-        float iconSize = 12f; // Tank icon size
         float padding = 4f;  // Space between health bar and icon
         
         // Ensure the health bar is visible when the enemy is on screen
@@ -248,36 +247,6 @@ public class UIManager : MonoBehaviour
                             barWidth * healthPercent, 
                             barHeight),
                     healthBarTexture);
-                
-                // Draw tank icon next to health bar
-                GUI.color = new Color(0.6f, 0.6f, 0.6f); // Metallic gray for tank icon
-                GUI.DrawTexture(
-                    new Rect(screenPos.x - barWidth/2 - iconSize - padding, 
-                            Screen.height - screenPos.y - iconSize - 19, // Align vertically with health bar
-                            iconSize, 
-                            iconSize),
-                    tankIconTexture);
-                
-                // Draw simple tank silhouette on top of the icon
-                if (tankTypeName == "Level1Tank") {
-                    // Simple Level 1 tank silhouette
-                    GUI.color = new Color(0.3f, 0.3f, 0.3f);
-                    // Tank body
-                    GUI.DrawTexture(
-                        new Rect(screenPos.x - barWidth/2 - iconSize - padding + 2f, 
-                                Screen.height - screenPos.y - iconSize - 19 + 4f,
-                                iconSize - 4f, 
-                                iconSize - 6f),
-                        Texture2D.whiteTexture);
-                    // Tank turret
-                    GUI.color = new Color(0.2f, 0.2f, 0.2f);
-                    GUI.DrawTexture(
-                        new Rect(screenPos.x - barWidth/2 - iconSize - padding + 3f, 
-                                Screen.height - screenPos.y - iconSize - 19 + 2f,
-                                iconSize - 6f, 
-                                3f),
-                        Texture2D.whiteTexture);
-                }
             }
         }
     }
