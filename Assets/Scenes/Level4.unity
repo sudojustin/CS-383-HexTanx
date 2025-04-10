@@ -149,7 +149,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   UICanvas: {fileID: 6034622026054409950, guid: ec7e9dc6fae8eb246a722ece7c0221f9, type: 3}
-  logoTexture: {fileID: 0}
+  logoTexture: {fileID: 2800000, guid: a539eb9b7c33d324caa334dc7861a181, type: 3}
 --- !u!4 &51977850
 Transform:
   m_ObjectHideFlags: 0
