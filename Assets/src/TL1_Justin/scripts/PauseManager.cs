@@ -13,7 +13,6 @@ public class PauseManager : MonoBehaviour
     public PlayerShooting playerShooting;
     private bool rightClickBlocked = false;
     
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         isPaused = false;
@@ -37,7 +36,6 @@ public class PauseManager : MonoBehaviour
         quitButton.onClick.AddListener(QuitGame);
     }
 
-    // Update is called once per frame
     void Update()
     {
         // Block any mouse inputs during pause except for UI clicks
@@ -94,8 +92,6 @@ public class PauseManager : MonoBehaviour
 
     public void ResumeGame()
     {
-        Debug.Log("Resume button pressed");
-
         // Clean up any projectiles that might have been queued while paused
         CleanupProjectiles();
 
@@ -137,7 +133,6 @@ public class PauseManager : MonoBehaviour
 
     public void PauseGame()
     {
-        Debug.Log("Pause button pressed");
         // Pause time scale FIRST to prevent any additional shots during pause
         Time.timeScale = 0f;
         pauseMenuInstance.SetActive(true);
@@ -216,15 +211,12 @@ public class PauseManager : MonoBehaviour
 
     public void MainMenu()
     {
-        Debug.Log("Main menu button pressed");
-        // UnityEngine.SceneManagement.SceneManager.LoadScene("GameLevel1");
         Time.timeScale = 1.0f;
-        UnityEngine.SceneManagement.SceneManager.LoadScene("Assets/src/TL1_Justin/scenes/MainMenu.unity");
+        UnityEngine.SceneManagement.SceneManager.LoadScene("MainMenu");
     }
 
     public void QuitGame()
     {
-        Debug.Log("Quit button pressed");
         Application.Quit();
     }
 

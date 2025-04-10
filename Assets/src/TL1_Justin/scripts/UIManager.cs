@@ -1,6 +1,5 @@
 using UnityEngine;
 using UnityEngine.UI;
-// TankType is defined in Assets/src/TL3_Brenden/Scripts (Future)/TankType.cs without a namespace
 
 public class UIManager : MonoBehaviour
 {
