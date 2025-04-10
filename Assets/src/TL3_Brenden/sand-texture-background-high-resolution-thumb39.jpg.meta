@@ -134,7 +134,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      sand-texture-background-high-resolution-thumb39_0: 4790681839840204706
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

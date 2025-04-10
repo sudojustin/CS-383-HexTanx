@@ -5,7 +5,6 @@ public class BCMode : MonoBehaviour
 {
     [SerializeField] private Toggle toggle;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         if (toggle == null)
@@ -26,20 +25,11 @@ public class BCMode : MonoBehaviour
 
         // Add the listener
         toggle.onValueChanged.AddListener(OnToggleValueChanged);
-
-        Debug.Log("Initial BC mode state: " + savedState);
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 
     public void OnToggleValueChanged(bool isOn)
     {
         PlayerPrefs.SetInt("BCMode", isOn ? 1 : 0);
         PlayerPrefs.Save();
-        Debug.Log("BC Mode changed to: " + isOn);
     }
 }
