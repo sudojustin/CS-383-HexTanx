@@ -16,10 +16,10 @@ Allows the Tank to get hit by player projectiles.
 5. AI Control Script
 Manages the movement, and shooting algorithms for the enemy tank. 
 ## Setup Instructions
-Drag the Slime prefab into the scene.
+Drag the tank prefab into the scene.
 Ensure the all the relavent scripts are assigned to the prefab to control movement, or attributes.
 Assign an Animator Controller with relevant animations to the Animator component.
-Test the Slime in play mode to confirm behavior and animations.
+Test the tank in play mode to confirm behavior and animations.
 ## Requirements
 Unity 6000.0.34f1 or later
 ### Author 
