@@ -12,9 +12,9 @@ Displays the Level 4 Tank sprite.
 Customize the Sprite Renderer component to change the Tank's appearance.
 Ensure that the sorting layer and order in layer are set appropriately to display correctly in your game's environment.
 3. Animator
-Controls the Tamks idle animation.
+Controls the Tanks idle animation.
 Attach an Animator Controller with states and transitions for each animation.
-Adjust the Animator's parameters to trigger animations through the Slime script (e.g., isMoving, isAttacking, isDead).
+Adjust the Animator's parameters to trigger animations.
 4. Polygon Collider 2D 2D
 Allows the Tank to get hit by player projectiles.
 5. AI Control Script
