@@ -7,7 +7,7 @@ public class PlayerTank : Ptank
         PlayerHealth heal = PlayerHealthFactory.setInitialHealth();
         health = heal.getInitialHealth();
         ammoCount = 30;     // Default ammo
-        armorCount = 100;
+        armorCount = 0;
         actionPoints = 3;   // Default action points (e.g., 3 per turn)
     }
 
