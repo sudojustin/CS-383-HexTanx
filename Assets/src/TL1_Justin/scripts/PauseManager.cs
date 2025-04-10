@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
 using System.Linq;
+using UnityEngine.SceneManagement;
 
 public class PauseManager : MonoBehaviour
 {
@@ -112,7 +113,14 @@ public class PauseManager : MonoBehaviour
         // Resume battle music
         if (SoundManager.GetInstance() != null)
         {
-            SoundManager.GetInstance().BattleMusic();
+            if (SceneManager.GetActiveScene().name == "Level4")
+            {
+                SoundManager.GetInstance().finalBattleMusic();
+            }
+            else
+            {
+                SoundManager.GetInstance().BattleMusic();
+            }
         }
         else
         {
