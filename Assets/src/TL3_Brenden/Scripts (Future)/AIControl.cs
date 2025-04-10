@@ -52,7 +52,7 @@ public class AIControl : MonoBehaviour
         }
     }
 
-    private void ShootAtPlayer()
+    public void ShootAtPlayer()
     {
          //Debug.Log("MakeDecision was shootatplayer");
          if(playerTank == null)

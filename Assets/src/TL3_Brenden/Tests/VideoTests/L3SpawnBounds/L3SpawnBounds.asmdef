@@ -1,5 +1,5 @@
 {
-    "name": "SpawnBounds",
+    "name": "BrendenL3SpawnBounds",
     "rootNamespace": "",
     "references": [
         "UnityEngine.TestRunner",
