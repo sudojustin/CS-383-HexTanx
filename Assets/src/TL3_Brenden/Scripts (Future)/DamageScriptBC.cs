@@ -21,9 +21,10 @@ public class BCEnemyDamage : DamageEffect
 {
     public BCEnemyDamage(int baseDamage) : base(baseDamage) { }
 
-    public override int GetDamage()
+    //public override int GetDamage()
+    public int GetDamage()
     {
-        //Debug.Log("BC MODE DAMAGE ENEMY ENABLED?");
+        //Debug.Log("BC MODE DAMAGE ENEMY ENABLED");
         return 1;       //BC mode damage
     }
 }
