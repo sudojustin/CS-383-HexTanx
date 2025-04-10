@@ -12,7 +12,7 @@ public class SpawnBoundsTest
     [OneTimeSetUp]
     public void LoadScene()
     {
-        SceneManager.LoadScene("SampleScene");
+        SceneManager.LoadScene("Level4");
     }
 
     [UnityTest]
@@ -59,7 +59,7 @@ public class SpawnBoundsTest
                             tankPosition.y >= minY && tankPosition.y <= maxY;
         yield return new WaitForSeconds(2f);
         Assert.IsTrue(withinBounds, $"Tank spawned out of bounds at {tankPosition}");
-        if(withinBounds)
+        if (withinBounds)
         {
             Assert.Pass("Tank Spawned in Bounds");
         }

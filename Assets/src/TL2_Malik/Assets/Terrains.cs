@@ -78,7 +78,6 @@ public class Terrains : Tiles
         }
         else
         {
-            Debug.LogError("!!!---No Enemy Tank Component---!!!");
         }
         
             
@@ -107,12 +106,12 @@ public class Terrains : Tiles
 
             if (playertc == null)
             {
-                Debug.LogError("PlayerTank component not found on PlayerTank object.");
+                Debug.Log/*Error*/("PlayerTank component not found on PlayerTank object.");
             }
         }
         else
         {
-            Debug.LogError("PlayerTank object not found.");
+            Debug.Log/*Error*/("PlayerTank object not found.");
         }
     }
     private void getEnemy()
