@@ -144,7 +144,7 @@ public class SoundManager : MonoBehaviour
                 Debug.Log("Attempting to play Pause music.");
                 PauseMusic();
                 break;
-            case "winscene":
+            case "gameoverwin":
                 Debug.Log("Attempting to play Win music.");
                 WinMusic();
                 break;
