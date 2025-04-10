@@ -12,6 +12,9 @@ public abstract class Ptank : MonoBehaviour
     // Default armor
     private Vector3 tankLocation;   // Position of the tank
 
+    private bool hasArmorShield = false; // Tracks if the player has an active armor shield
+    private const float armorDamageReduction = 0.5f; // 50% damage reduction for the next shot
+
     public abstract void Initialize();
     void Start()
     {
@@ -64,6 +67,49 @@ public abstract class Ptank : MonoBehaviour
         }
     }
 
+    public void ActivateArmorShield()
+    {
+        hasArmorShield = true;
+        Debug.Log("Armor shield activated! Next shot damage will be reduced by 50%.");
+    }
+
+    public void TakeDamage(int damage)
+    {
+        int finalDamage = damage;
+
+        // Check if the armor shield is active
+        if (hasArmorShield)
+        {
+            finalDamage = Mathf.RoundToInt(damage * armorDamageReduction); 
+            hasArmorShield = false; 
+            Debug.Log($"Armor shield consumed! Damage reduced from {damage} to {finalDamage}.");
+        }
+        else
+        {
+            Debug.Log($"No armor shield active. Taking full damage: {damage}.");
+        }
+
+        // Apply the final damage
+        health -= finalDamage;
+        if (health < 0)
+        {
+            health = 0;
+        }
+        Debug.Log($"Player tank took {finalDamage} damage. Health remaining: {health}");
+
+        // Check if the tank is destroyed
+        if (health <= 0)
+        {
+            Debug.Log("Player tank destroyed!");
+ 
+        }
+    }
+
+    // Optional: Method to check if the shield is active (for debugging or UI purposes)
+    public bool HasArmorShield()
+    {
+        return hasArmorShield;
+    }
 
     public void SetActionPoints(int newPoints)
     {

@@ -220,7 +220,9 @@ public class ItemManager : MonoBehaviour
                 {
                     // Handle armor pickup
                     Debug.Log("Player picked up armor!");
-                    
+
+                    playerTank.ActivateArmorShield();
+
                     // Play armor pickup sound if SoundManager is available
                     if (SoundManager.GetInstance() != null)
                     {
