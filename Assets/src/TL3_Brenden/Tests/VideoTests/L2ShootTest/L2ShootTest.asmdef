@@ -1,5 +1,5 @@
 {
-    "name": "BrendenSpawnTest",
+    "name": "BrendenL2ShootTest",
     "rootNamespace": "",
     "references": [
         "UnityEngine.TestRunner",

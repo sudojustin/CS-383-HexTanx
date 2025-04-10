@@ -1,5 +1,5 @@
 {
-    "name": "MovementTest",
+    "name": "BrendenL4SpawnBounds",
     "rootNamespace": "",
     "references": [
         "UnityEngine.TestRunner",
