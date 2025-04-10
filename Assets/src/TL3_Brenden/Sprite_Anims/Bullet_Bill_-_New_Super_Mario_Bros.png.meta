@@ -134,7 +134,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Bullet_Bill_-_New_Super_Mario_Bros_0: -6837508229662927789
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -8,7 +8,6 @@ public class BackgroundScalar : MonoBehaviour
     RectTransform rt;
     float ratio;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         backgroundImage = GetComponent<Image>();
@@ -16,7 +15,6 @@ public class BackgroundScalar : MonoBehaviour
         ratio = backgroundImage.sprite.bounds.size.x / backgroundImage.sprite.bounds.size.y;
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (!rt) 
