@@ -30,7 +30,7 @@ public class BattleSystem : MonoBehaviour
         if (playerSpawner != null)
         {
             //Debug.Log("PlayerTankSpawner found.");
-            playerSpawner.SpawnPlayerTankWithPosition();
+            playerSpawner.SpawnPlayerTankWithRandomPosition();
         }
         else
         {
