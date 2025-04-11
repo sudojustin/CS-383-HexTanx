@@ -34,7 +34,15 @@ public class Terrains : Tiles
     void Start()
     {
         isactive = true;
-        Damage = new TerrainDamage();
+        if (PlayerPrefs.GetInt("BCMode", 0) == 1)
+        {
+            Damage = new TerrainDamageBC();
+        }
+        else
+        {
+            Damage = new TerrainDamage();
+        }
+        
         InvokeRepeating("getPlayer", 8f, 10f);  // Periodically check for player
         InvokeRepeating("getEnemy", 8f, 10f);
     }
@@ -96,6 +104,7 @@ public class Terrains : Tiles
     {
         enemytc.health -= Damage.getDamage();
     }
+    
     private void getPlayer()
     {
         playertankOBJ = GameObject.Find("PlayerTank");
@@ -106,14 +115,15 @@ public class Terrains : Tiles
 
             if (playertc == null)
             {
-                Debug.Log/*Error*/("PlayerTank component not found on PlayerTank object.");
+                Debug.Log("PlayerTank component not found on PlayerTank object.");
             }
         }
         else
         {
-            Debug.Log/*Error*/("PlayerTank object not found.");
+            Debug.Log("PlayerTank object not found.");
         }
     }
+    
     private void getEnemy()
     {
         enemyTank = GameObject.FindWithTag("EnemyTank"); // Assuming enemy tank has the "EnemyTank" tag
@@ -122,25 +132,12 @@ public class Terrains : Tiles
         {
             // Try to get the TankType component (base class)
             enemytc = enemyTank.GetComponent<TankType>();
-            /*
-            if (enemytc != null)
-            {
-                // Successfully found the enemy tank, now you can access its properties
-                Debug.Log("Enemy tank found: " + enemytc.GetType().Name);
-            }
-            else
-            {
-                Debug.LogError("TankType component not found on the enemy tank.");
-            }
-            */
+           
         }
-        /*
-        else
-        {
-            Debug.LogError("Enemy tank not found in the scene.");
-        }
-        */
+       
     }
+    
+    
 }
        
     

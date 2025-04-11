@@ -2,7 +2,12 @@ using UnityEngine;
 
 public class Tiles : MonoBehaviour
 {
-
+    /*
+    private PlayerTank playertc;
+    private TankType enemytc;
+    private GameObject playertankOBJ;
+    private GameObject enemyTank;
+    */
     [SerializeField]
     public Color Base, Offset, hightlight;
     [SerializeField]
