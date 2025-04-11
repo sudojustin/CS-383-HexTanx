@@ -76,7 +76,7 @@ public class AIControl : MonoBehaviour
             {
                 int damage = tank.GetDamage();
                 playerTank.TakeDamage(damage); // Use the new TakeDamage method
-                //projectileScript.SetDamage(damage);
+                //projectileScript.SetDamage(damage); // old method
                 projectileScript.SetTarget(targetPosition);
             }
         }
