@@ -75,14 +75,14 @@ public class AIControl : MonoBehaviour
             if (projectileScript != null)
             {
                 int damage = tank.GetDamage();
-                playerTank.TakeDamage(damage); // Use the new TakeDamage method
-                //projectileScript.SetDamage(damage); // old method
+                projectileScript.SetDamage(damage);
                 projectileScript.SetTarget(targetPosition);
             }
         }
         else
         {
-            targetPosition.x = targetPosition.x - 1.0f;
+            targetPosition.x = targetPosition.x - 1.5f;
+            targetPosition.y = targetPosition.y + 2.0f;
             Vector3 direction = (targetPosition - transform.position).normalized;
             float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
             Quaternion rotation = Quaternion.Euler(0, 0, angle);
