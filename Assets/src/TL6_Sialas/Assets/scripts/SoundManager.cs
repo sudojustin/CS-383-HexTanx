@@ -197,7 +197,7 @@ public class SoundManager : MonoBehaviour
     {
         if (clip != null)
         {
-            Debug.Log($"Playing sound effect: {clip.name}, volume={effectsVolume}, isPlaying={effectsSource.isPlaying}");
+            //Debug.Log($"Playing sound effect: {clip.name}, volume={effectsVolume}, isPlaying={effectsSource.isPlaying}");
             effectsSource.PlayOneShot(clip, effectsVolume);
         }
         else
@@ -215,7 +215,7 @@ public class SoundManager : MonoBehaviour
             musicSource.clip = clip;
             musicSource.volume = musicVolume;
             musicSource.Play();
-            Debug.Log($"Playing music: {clip.name}, isPlaying={musicSource.isPlaying}");
+            //Debug.Log($"Playing music: {clip.name}, isPlaying={musicSource.isPlaying}");
         }
         else
         {
@@ -244,7 +244,7 @@ public class SoundManager : MonoBehaviour
             effectsSource.volume = effectsVolume;
             effectsSource.loop = false; // No looping for movement sound
             effectsSource.Play();
-            Debug.Log($"Playing movement sound: {clip.name}, isPlaying={effectsSource.isPlaying}");
+            //Debug.Log($"Playing movement sound: {clip.name}, isPlaying={effectsSource.isPlaying}");
         }
         else
         {
@@ -257,7 +257,7 @@ public class SoundManager : MonoBehaviour
         if (effectsSource.isPlaying)
         {
             effectsSource.Stop();
-            Debug.Log("Movement sound stopped.");
+            //Debug.Log("Movement sound stopped.");
         }
     }
 
@@ -266,7 +266,7 @@ public class SoundManager : MonoBehaviour
     {
         if (pickupClip != null)
         {
-            Debug.Log($"Playing pickup sound: {pickupClip.name}, volume={effectsVolume}, isPlaying={pickupSource.isPlaying}");
+            //Debug.Log($"Playing pickup sound: {pickupClip.name}, volume={effectsVolume}, isPlaying={pickupSource.isPlaying}");
             pickupSource.PlayOneShot(pickupClip, effectsVolume);
         }
         else
@@ -279,7 +279,7 @@ public class SoundManager : MonoBehaviour
     {
         if (healthPickupClip != null)
         {
-            Debug.Log($"Playing health pickup sound: {healthPickupClip.name}, volume={effectsVolume}, isPlaying={pickupSource.isPlaying}");
+            //Debug.Log($"Playing health pickup sound: {healthPickupClip.name}, volume={effectsVolume}, isPlaying={pickupSource.isPlaying}");
             pickupSource.PlayOneShot(healthPickupClip, effectsVolume);
         }
         else
@@ -292,7 +292,7 @@ public class SoundManager : MonoBehaviour
     {
         if (flagPickupClip != null)
         {
-            Debug.Log($"Playing flag pickup sound: {flagPickupClip.name}, volume={effectsVolume}, isPlaying={pickupSource.isPlaying}");
+            //Debug.Log($"Playing flag pickup sound: {flagPickupClip.name}, volume={effectsVolume}, isPlaying={pickupSource.isPlaying}");
             pickupSource.PlayOneShot(flagPickupClip, effectsVolume);
         }
         else

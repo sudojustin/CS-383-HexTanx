@@ -1,5 +1,5 @@
 {
-    "name": "playerMovementTestBoundarySialas",
+    "name": "SialasSpawnTestStress",
     "rootNamespace": "",
     "references": [
         "UnityEngine.TestRunner",

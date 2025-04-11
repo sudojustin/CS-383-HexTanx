@@ -45,7 +45,7 @@ public class PlayerTankSpawner : MonoBehaviour
             return;
         }
 
-        Debug.Log($"Calling SpawnPlayerTank() at {playerPos}");
+        //Debug.Log($"Calling SpawnPlayerTank() at {playerPos}");
         SpawnPlayerTank(playerPos);
     }
 
@@ -72,14 +72,14 @@ public class PlayerTankSpawner : MonoBehaviour
 
     public void SpawnPlayerTank(Vector3 spawnLocation)
     {
-        Debug.Log("SpawnPlayerTank() called!");
+        //Debug.Log("SpawnPlayerTank() called!");
         if (playerTankPrefab == null)
         {
             Debug.LogError("PlayerTankSpawner: No player tank prefab assigned!");
             return;
         }
 
-        Debug.Log("Spawning player tank at: " + spawnLocation); 
+        //Debug.Log("Spawning player tank at: " + spawnLocation); 
 
         GameObject spawnedTank = Instantiate(playerTankPrefab, spawnLocation, Quaternion.identity);
         spawnedTank.name = "PlayerTank"; 

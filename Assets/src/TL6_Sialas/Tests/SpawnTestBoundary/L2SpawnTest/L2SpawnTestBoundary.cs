@@ -13,11 +13,11 @@ public class playerSpawnTest
     [OneTimeSetUp]
     public void LoadScene()
     {
-        SceneManager.LoadScene("SampleScene");
+        SceneManager.LoadScene("Level2");
     }
 
     [UnityTest]
-    public IEnumerator SpawnTanksInsideBoundary()
+    public IEnumerator SpawnTanksInsideBoundaryL2()
     {
         playerTankSpawner = GameObject.FindObjectOfType<PlayerTankSpawner>();
         Assert.NotNull(playerTankSpawner, "playerTankSpawner not found in scene!");
@@ -30,7 +30,7 @@ public class playerSpawnTest
         playerTank = GameObject.FindObjectOfType<PlayerTank>();
         Assert.NotNull(placeTile, "PlaceTile not found in scene!");
 
-        yield return new WaitForSeconds(0.1f); // Allow FPS to update
+        yield return new WaitForSeconds(2.0f); // Allow FPS to update
 
         Vector3 spawnPosition = playerTank.transform.position;
         Debug.Log($"Tank spawned at: {spawnPosition}");
