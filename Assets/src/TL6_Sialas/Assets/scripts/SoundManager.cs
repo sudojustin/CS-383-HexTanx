@@ -12,10 +12,6 @@ public class SoundManager : MonoBehaviour
     [SerializeField] private float effectsVolume = 1f;
     [SerializeField] private float musicVolume = 1f;
 
-    // Random pitch adjustment range
-    [SerializeField] private float lowPitchRange = 0.95f;
-    [SerializeField] private float highPitchRange = 1.05f;
-
     // Sound effect clips
     [SerializeField] private AudioClip shootClip;
     [SerializeField] private AudioClip hurtClip;
@@ -37,7 +33,7 @@ public class SoundManager : MonoBehaviour
     [SerializeField] private AudioClip loseMusicClip;
 
     // Singleton instance (private static)
-    private static SoundManager instance = null;
+    private static SoundManager instance;
 
     // Public static method to access the instance (replaces direct access to Instance)
     public static SoundManager GetInstance()
@@ -233,7 +229,7 @@ public class SoundManager : MonoBehaviour
         if (clips == null || clips.Length == 0) return;
 
         int randomIndex = Random.Range(0, clips.Length);
-        float randomPitch = Random.Range(lowPitchRange, highPitchRange);
+        float randomPitch = 1.0f;
 
         effectsSource.pitch = randomPitch;
         Play(clips[randomIndex]);
