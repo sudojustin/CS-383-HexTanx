@@ -91,6 +91,4 @@ This system relies on the following external components:
 
 ---
 
-## 📁 Folder Structure Suggestion
-
 
