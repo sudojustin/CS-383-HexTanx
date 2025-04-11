@@ -35,8 +35,12 @@ public class Tiles : MonoBehaviour
     }
     public void TurnOff()
     {
-        rend.color = Offset;
-        Base = Offset;
+        if(rend != null)
+        {
+           rend.color = Offset;
+            Base = Offset; 
+        }
+        
     }
 
     void OnMouseUp()

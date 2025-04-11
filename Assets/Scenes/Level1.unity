@@ -866,6 +866,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25a41b0e228cc164f8c130e4a19548a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  runOnStart: 1
   hexHeight: 0.8660254
   heightspacing: 0.9
   width: 5
@@ -874,8 +875,8 @@ MonoBehaviour:
   xpos: 0
   offset: 0.5
   offset2: 0.6
-  min: 8
-  max: 8
+  min: 3
+  max: 3
   Tile: {fileID: 3187486204259752003, guid: 218c447d144faae4596758fb1a1b7fea, type: 3}
   Terrain1: {fileID: 3591277320102712311, guid: 72ca29d6cca473a49bb60cf2fabf75bd, type: 3}
   Terrain2: {fileID: 823776615930616340, guid: 0886b4cdd3ebfc5449ec78d0087bbf46, type: 3}

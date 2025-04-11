@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class PlaceTile : MonoBehaviour
 {
+    //for testing
+    public bool runOnStart = true;
     //random number to chose between the diffrent tile
     private int choseTerrain = 0; 
     //random number to chose if its a normal tile 
@@ -58,11 +60,16 @@ public class PlaceTile : MonoBehaviour
         width = Random.Range(min,max);
         Grid = null;
         //make grid
-        MakeMap(width, height);
+        if(runOnStart)
+        {
+            MakeMap(width, height);
+        }
+        
     }
     //function to make the grid. 
     public void MakeMap(int width, int height)
     {  
+        Grid = new Vector3[width, height];
         if (Grid == null)
         {
             Grid = new Vector3[width, height];
