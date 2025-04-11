@@ -1,5 +1,5 @@
 {
-    "name": "SpawnTestStressSialas",
+    "name": "SialasL4PlayerShootingTest",
     "rootNamespace": "",
     "references": [
         "UnityEngine.TestRunner",

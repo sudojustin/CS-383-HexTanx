@@ -58,7 +58,7 @@ public class EarthTerrain : Tiles
             if(!Bullets.Contains(bullet))
             {
                 Bullets.Add(bullet);
-                Debug.Log("Projectile found!");
+                //Debug.Log("Projectile found!");
             }
         }
         
