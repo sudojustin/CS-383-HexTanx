@@ -162,4 +162,23 @@ public class PlayerShooting : MonoBehaviour
             return Vector3.zero; 
         }
     }
+    public void ShootAtEnemy()
+    {
+        GameObject enemyTank = GameObject.FindWithTag("EnemyTank");
+        if (enemyTank == null)
+        {
+            Debug.LogWarning("Enemy tank not found in the scene!");
+            return;
+        }
+
+        Vector3 enemyPosition = enemyTank.transform.position;
+        //if (targetTilePos == Vector3.zero)
+        //{
+        //    Debug.LogWarning("Enemy position is not over a valid tile - shot cancelled.");
+        //    return;
+        //}
+
+        Shoot(enemyPosition);
+        Debug.Log("Shot fired toward enemy at tile center: " + enemyPosition);
+    }
 }

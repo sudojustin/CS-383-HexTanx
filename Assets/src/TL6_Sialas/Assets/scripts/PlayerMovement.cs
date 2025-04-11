@@ -26,31 +26,31 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
+        PlayerMove();
+    }
+
+    public void PlayerMove()
+    {
         // Handle movement towards the target position
         if (isMoving)
         {
-            // Move towards the target position at moveSpeed
-            transform.position = Vector3.MoveTowards(transform.position, targetPosition, moveSpeed * Time.deltaTime);
-
-            // Check if the tank has reached the target
-            if (Vector3.Distance(transform.position, targetPosition) < 0.1f)
-            {
-                transform.position = targetPosition; // Snap to target to avoid floating-point issues
-                isMoving = false; // Stop moving
-                playerTankComponent.SetTankLocation(targetPosition); // Update PlayerTank's location
-                SoundManager.GetInstance().StopMovementSound(); // Stop the movement sound
-                Debug.Log("Tank reached target: " + transform.position);
-
-                // Update current grid position
-                currentGridPos = WorldToGridPosition(targetPosition);
-            }
+            MoveToTarget();
         }
-        
+
+        // Check if the player has action points
         if (playerTankComponent.GetActionPoints() <= 0)
         {
             FindObjectOfType<BattleSystem>().PlayerActionTaken();
             return;
         }
+
+        // Handle click and move logic
+        HandleClickAndMove();
+    }
+
+    // New function to handle all click-and-move logic
+    private void HandleClickAndMove()
+    {
         // Left-click to initiate movement
         if (Input.GetMouseButtonDown(0) && !isMoving) // Only allow new movement if not currently moving
         {
@@ -81,8 +81,8 @@ public class PlayerMovement : MonoBehaviour
                     {
                         isMoving = true; // Start moving
                         SoundManager.GetInstance().PlayerMoveSound(); // Play movement sound
-                        Debug.Log("Tank moving to " + targetPosition);
-                        Debug.Log("Mouse position " + mouseWorldPos);
+                        //Debug.Log("Tank moving to " + targetPosition);
+                        //Debug.Log("Mouse position " + mouseWorldPos);
                         FindObjectOfType<BattleSystem>().PlayerActionTaken();
                     }
                 }
@@ -94,7 +94,39 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    private bool IsWithinRange(Vector2Int currentPos, Vector2Int targetPos)
+    // public method to allow tests to initiate movement directly
+    public void SetTargetAndMove(Vector3 newTargetPosition)
+    {
+        targetPosition = newTargetPosition;
+        if (targetPosition != transform.position) // Only move if the target is different
+        {
+            isMoving = true; // Start moving
+            SoundManager.GetInstance().PlayerMoveSound(); // Play movement sound
+            FindObjectOfType<BattleSystem>().PlayerActionTaken();
+        }
+    }
+
+    // Function to handle the actual movement functionality
+    private void MoveToTarget()
+    {
+        // Move towards the target position at moveSpeed
+        transform.position = Vector3.MoveTowards(transform.position, targetPosition, moveSpeed * Time.deltaTime);
+
+        // Check if the tank has reached the target
+        if (Vector3.Distance(transform.position, targetPosition) < 0.1f)
+        {
+            transform.position = targetPosition; // Snap to target to avoid floating-point issues
+            isMoving = false; // Stop moving
+            playerTankComponent.SetTankLocation(targetPosition); // Update PlayerTank's location
+            SoundManager.GetInstance().StopMovementSound(); // Stop the movement sound
+            //Debug.Log("Tank reached target: " + transform.position);
+
+            // Update current grid position
+            currentGridPos = WorldToGridPosition(targetPosition);
+        }
+    }
+
+    public bool IsWithinRange(Vector2Int currentPos, Vector2Int targetPos)
     {
         // For a hex grid with odd-row offset (odd rows shifted right)
         int dx = targetPos.x - currentPos.x;
@@ -122,7 +154,7 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    private bool IsEarthTerrain(Vector3 position)
+    public bool IsEarthTerrain(Vector3 position)
     {
         Collider2D tileCollider = Physics2D.OverlapPoint(position);
         if (tileCollider != null)
@@ -136,7 +168,8 @@ public class PlayerMovement : MonoBehaviour
         }
         return false;
     }
-    private Vector2Int WorldToGridPosition(Vector3 worldPos)
+
+    public Vector2Int WorldToGridPosition(Vector3 worldPos)
     {
         if (placeTile == null || placeTile.Grid == null)
         {

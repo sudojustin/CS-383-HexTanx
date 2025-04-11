@@ -40,16 +40,16 @@ public class PlayerTankSpawner : MonoBehaviour
         if (IsEarthTerrain(playerPos))
         {
             Debug.LogWarning($"Fixed spawn position ({spawnX}, {spawnY}) is an EarthTerrain tile!.");
-            // Fall back to random spawn if fixed position is invalid
-            SpawnPlayerTankWithRandomPosition(); 
+            // Spawn at random if earth tile
+            SpawnPlayerTankWithRandomPosition();
             return;
         }
 
-        Debug.Log($"Calling SpawnPlayerTank() at {playerPos}");
+    
         SpawnPlayerTank(playerPos);
     }
 
-    public void SpawnPlayerTankWithRandomPosition() // New method for test only
+    public void SpawnPlayerTankWithRandomPosition()
     {
         if (placeTileScript == null) placeTileScript = FindObjectOfType<PlaceTile>();
 
@@ -62,24 +62,40 @@ public class PlayerTankSpawner : MonoBehaviour
         int width = placeTileScript.width;
         int height = placeTileScript.height;
 
-        // Spawn at a random position within grid bounds
-        int spawnX = Random.Range(0, width); // 0 to width-1
-        int spawnY = Random.Range(0, height); // 0 to height-1
-        Vector3 playerPos = placeTileScript.Grid[spawnX, spawnY];
-        playerPos.z = -1f;
-        SpawnPlayerTank(playerPos);
+        Vector3 playerPos;
+        bool validPosition = false;
+
+        while (!validPosition)
+        {
+           
+            int randX = Random.Range(0, width);
+            int randY = Random.Range(0, (height / 3));
+            playerPos = placeTileScript.Grid[randX, randY];
+            playerPos.z = -1f;
+
+            // Check if the tile is not a mountain 
+            if (!IsEarthTerrain(playerPos))
+            {
+                validPosition = true;
+                Debug.Log($"Found valid non-mountain tile at ({randX}, {randY})");
+                SpawnPlayerTank(playerPos);
+            }
+            
+        }
     }
+
+
 
     public void SpawnPlayerTank(Vector3 spawnLocation)
     {
-        Debug.Log("SpawnPlayerTank() called!");
+        //Debug.Log("SpawnPlayerTank() called!");
         if (playerTankPrefab == null)
         {
             Debug.LogError("PlayerTankSpawner: No player tank prefab assigned!");
             return;
         }
 
-        Debug.Log("Spawning player tank at: " + spawnLocation); 
+        //Debug.Log("Spawning player tank at: " + spawnLocation); 
 
         GameObject spawnedTank = Instantiate(playerTankPrefab, spawnLocation, Quaternion.identity);
         spawnedTank.name = "PlayerTank"; 
