@@ -13,7 +13,7 @@ public class playerSpawnTest
     [OneTimeSetUp]
     public void LoadScene()
     {
-        SceneManager.LoadScene("SampleScene");
+        SceneManager.LoadScene("Level1");
     }
 
     [UnityTest]

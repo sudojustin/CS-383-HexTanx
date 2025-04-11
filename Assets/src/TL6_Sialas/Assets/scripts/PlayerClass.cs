@@ -143,7 +143,7 @@ public abstract class Ptank : MonoBehaviour
     {
         tankLocation = newLocation;
         transform.position = newLocation;
-        Debug.Log("Tank location set to " + newLocation);
+        //Debug.Log("Tank location set to " + newLocation);
     }
 
    
