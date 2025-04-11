@@ -1707,8 +1707,6 @@ MonoBehaviour:
   pickupSource: {fileID: 879474854}
   effectsVolume: 1
   musicVolume: 1
-  lowPitchRange: 0.95
-  highPitchRange: 1.05
   shootClip: {fileID: 8300000, guid: ccc9f98f936239543b641504ccbe69b3, type: 3}
   hurtClip: {fileID: 0}
   explodeClip: {fileID: 8300000, guid: 31356047f04d8674aae9ad9d8632bf2f, type: 3}
@@ -1723,7 +1721,7 @@ MonoBehaviour:
   battleMusicClip: {fileID: 8300000, guid: 98a6386ec8337794aba5192894e0bb4a, type: 3}
   finalBattleMusicClip: {fileID: 8300000, guid: b71c87e4ffa7d4848b44f36eee70316a, type: 3}
   pauseMusicClip: {fileID: 8300000, guid: f8d5eddf3e97f064db9fe6a7fd9c441e, type: 3}
-  winMusicClip: {fileID: 8300000, guid: d35a182961a6ef54da5a26fd15ae140c, type: 3}
+  winMusicClip: {fileID: 8300000, guid: 70c952827a8a4734880e6d18e94d76d9, type: 3}
   loseMusicClip: {fileID: 8300000, guid: a0c885cc6b5fa86439a694f7fa2a53eb, type: 3}
 --- !u!4 &879474853
 Transform:
