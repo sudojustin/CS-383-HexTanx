@@ -5,7 +5,7 @@ public class Projectile : MonoBehaviour
     private Vector3 targetPosition;
     public float speed = 5f;
     public int damage = 10;
-    [SerializeField] private AudioClip explosionSoundOverride; // Optional override
+    [SerializeField] private AudioClip explosionSoundOverride;
 
     public void SetTarget(Vector3 target)
     {
@@ -38,11 +38,11 @@ public class Projectile : MonoBehaviour
                 // Play explosion sound via SoundManager
                 if (explosionSoundOverride != null)
                 {
-                    SoundManager.GetInstance().Play(explosionSoundOverride); // Use override if assigned
+                    SoundManager.GetInstance().Play(explosionSoundOverride); 
                 }
                 else
                 {
-                    SoundManager.GetInstance().ExplodeSound(); // Use default from SoundManager
+                    SoundManager.GetInstance().ExplodeSound(); 
                 }
                 Debug.Log("Explosion sound triggered via SoundManager at position: " + transform.position);
 

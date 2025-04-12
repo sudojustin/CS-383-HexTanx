@@ -94,7 +94,7 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    // public method to allow tests to initiate movement directly
+    // allow tests to initiate movement directly
     public void SetTargetAndMove(Vector3 newTargetPosition)
     {
         targetPosition = newTargetPosition;
@@ -106,16 +106,16 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    // Function to handle the actual movement functionality
+    // Function to handle the movement 
     private void MoveToTarget()
     {
-        // Move towards the target position at moveSpeed
+        // Move towards the target position 
         transform.position = Vector3.MoveTowards(transform.position, targetPosition, moveSpeed * Time.deltaTime);
 
         // Check if the tank has reached the target
         if (Vector3.Distance(transform.position, targetPosition) < 0.1f)
         {
-            transform.position = targetPosition; // Snap to target to avoid floating-point issues
+            transform.position = targetPosition; 
             isMoving = false; // Stop moving
             playerTankComponent.SetTankLocation(targetPosition); // Update PlayerTank's location
             SoundManager.GetInstance().StopMovementSound(); // Stop the movement sound
@@ -128,7 +128,7 @@ public class PlayerMovement : MonoBehaviour
 
     public bool IsWithinRange(Vector2Int currentPos, Vector2Int targetPos)
     {
-        // For a hex grid with odd-row offset (odd rows shifted right)
+        
         int dx = targetPos.x - currentPos.x;
         int dy = targetPos.y - currentPos.y;
 
