@@ -38,6 +38,6 @@ public class MainMenuPlayButtonTest
         yield return new WaitForSeconds(1f);
 
         // Check if the correct game scene has been loaded
-        Assert.AreEqual("Assets/src/TL2_Malik/Assets/Scenes/SampleScene.unity", SceneManager.GetActiveScene().path, "Scene did not change correctly");
+        Assert.AreEqual("Assets/Scenes/Level1.unity", SceneManager.GetActiveScene().path, "Scene did not change correctly");
     }
 }
