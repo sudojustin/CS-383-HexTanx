@@ -3,9 +3,9 @@ using UnityEngine;
 public class PlayerShooting : MonoBehaviour
 {
     [SerializeField] private GameObject projectilePrefab;
-    [SerializeField] private AudioClip shootSoundOverride; // Optional override for shoot sound
-    [SerializeField] private float angleOffset = 0f; // Adjust in Inspector to fix barrel alignment
-    [SerializeField] private Transform barrelTip; // Reference to the BarrelTip Transform
+    [SerializeField] private AudioClip shootSoundOverride; 
+    [SerializeField] private float angleOffset = 0f; 
+    [SerializeField] private Transform barrelTip; 
     private Camera mainCamera;
     private PlayerTank playerTank;
     private PlaceTile placeTile;
@@ -13,7 +13,7 @@ public class PlayerShooting : MonoBehaviour
     void Start()
     {
         mainCamera = Camera.main;
-        // Get PlayerTank from the parent GameObject
+        // Get PlayerTank from the GameObject
         playerTank = GetComponentInParent<PlayerTank>();
         if (playerTank == null)
         {
@@ -46,7 +46,7 @@ public class PlayerShooting : MonoBehaviour
         Vector3 direction = mouseWorldPos - transform.position;
         direction.z = 0; // Ignore Z for 2D rotation
 
-        // Calculate the angle in degrees
+        // Calculate the angle
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg + angleOffset;
 
         // Rotate the turret to face the mouse
@@ -89,14 +89,14 @@ public class PlayerShooting : MonoBehaviour
 
     void Shoot(Vector3 targetPosition)
     {
-        // Play shoot sound via SoundManager
+        // Play shoot sound 
         if (shootSoundOverride != null)
         {
-            SoundManager.GetInstance().Play(shootSoundOverride); // Use override if assigned
+            SoundManager.GetInstance().Play(shootSoundOverride); 
         }
         else
         {
-            SoundManager.GetInstance().ShootSound(); // Use default from SoundManager
+            SoundManager.GetInstance().ShootSound(); 
         }
         Debug.Log("Shoot sound triggered via SoundManager");
 

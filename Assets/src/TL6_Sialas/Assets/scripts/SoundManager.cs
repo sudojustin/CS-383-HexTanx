@@ -6,7 +6,7 @@ public class SoundManager : MonoBehaviour
     // Audio players components
     [SerializeField] private AudioSource effectsSource;
     [SerializeField] private AudioSource musicSource;
-    [SerializeField] private AudioSource pickupSource; // New AudioSource for pickup sound
+    [SerializeField] private AudioSource pickupSource; 
 
     // Volume control
     [SerializeField] private float effectsVolume = 1f;
@@ -182,7 +182,7 @@ public class SoundManager : MonoBehaviour
         effectsVolume = Mathf.Clamp01(volume);
         Debug.Log($"Effects volume set to {effectsVolume}");
         effectsSource.volume = effectsVolume;
-        pickupSource.volume = effectsVolume; // Update pickupSource volume
+        pickupSource.volume = effectsVolume; 
     }
 
     public void SetMusicVolume(float volume)
@@ -242,7 +242,7 @@ public class SoundManager : MonoBehaviour
         {
             effectsSource.clip = clip;
             effectsSource.volume = effectsVolume;
-            effectsSource.loop = false; // No looping for movement sound
+            effectsSource.loop = false; 
             effectsSource.Play();
             //Debug.Log($"Playing movement sound: {clip.name}, isPlaying={effectsSource.isPlaying}");
         }
@@ -261,7 +261,7 @@ public class SoundManager : MonoBehaviour
         }
     }
 
-    // Play the pickup sound using a dedicated AudioSource
+    // Play the pickup sound 
     public void PickupSound()
     {
         if (pickupClip != null)
