@@ -4,7 +4,8 @@
 
 **Version:** 1.0
 
-**Video Demo:** [Shield Prefab Demo](./ShieldPrefab.mp4) (MP4 format)
+**Video Demo Part 1:** [Shield Pickup](./armor-pickup.mp4) (MP4 format)
+**Video Demo Part 2:** [Shield Debug Log](./armor-debug.mp4) (MP4 format)
 
 **Description:**
 This prefab represents a basic Shield item in Unity. It increases the amount
