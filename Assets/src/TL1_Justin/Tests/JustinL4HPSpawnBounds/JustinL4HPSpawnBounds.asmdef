@@ -1,5 +1,5 @@
 {
-    "name": "HealthPackSpawnBoundaryTest",
+    "name": "JustinL4HPSpawnBounds",
     "rootNamespace": "",
     "references": [
         "UnityEngine.TestRunner",

@@ -1,5 +1,5 @@
 {
-    "name": "HealthPackSpawnStressTest1",
+    "name": "JustinL3HPSpawnBounds",
     "rootNamespace": "",
     "references": [
         "UnityEngine.TestRunner",

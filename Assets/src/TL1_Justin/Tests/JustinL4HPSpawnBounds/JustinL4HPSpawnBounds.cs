@@ -4,46 +4,39 @@ using UnityEngine;
 using UnityEngine.TestTools;
 using UnityEngine.SceneManagement;
 
-/*
-public class HealthPackSpawnBoundaryTest1
+public class JustinL4HPSpawnBounds
 {
     private ItemManager itemManager;
-    private PlaceTile placeTileScript;
 
     [OneTimeSetUp]
     public void LoadScene()
     {
-        SceneManager.LoadScene("SampleScene");
+        SceneManager.LoadScene("Level4");
     }
 
-    // A Test behaves as an ordinary method
-    // [Test]
-    // public void HealthPackSpawnBoundaryTest1SimplePasses()
-    // {
-    //     // Use the Assert class to test conditions
-    // }
-
-    // A UnityTest behaves like a coroutine in Play Mode. In Edit Mode you can use
-    // `yield return null;` to skip a frame.
+    // Test to ensure health packs spawn within map boundaries
     [UnityTest]
-    public IEnumerator HealthPackSpawnBoundaryTest1WithEnumeratorPasses()
+    public IEnumerator HealthPackSpawnWithinBoundaries()
     {
+        // Find the ItemManager in the scene
         itemManager = GameObject.FindObjectOfType<ItemManager>();
         Assert.NotNull(itemManager, "ItemManager not found in the scene");
 
+        // Clear any existing spawned items
         itemManager.spawnedItems.Clear();
 
-        placeTileScript = GameObject.FindObjectOfType<PlaceTile>();
+        // Find the PlaceTile script to get grid dimensions
+        PlaceTile placeTileScript = GameObject.FindObjectOfType<PlaceTile>();
         Assert.NotNull(placeTileScript, "PlaceTile not found in the scene");
 
-        placeTileScript.height = 5;
-        // placeTileScript.GenerateGrid();
-        yield return null; // Wait a frame for grid generation
+        // Wait for grid to be initialized
+        yield return new WaitUntil(() => placeTileScript.Grid != null && placeTileScript.Grid.GetLength(0) > 0);
 
         // Track spawn locations
         Vector3 spawnPos = Vector3.zero;
 
-        yield return itemManager.StartCoroutine(itemManager.WaitForGridAndSpawnItem(itemManager.healthPack));
+        // Spawn a health pack
+        yield return itemManager.StartCoroutine(itemManager.WaitForGridAndSpawnItem(ItemType.HealthPack));
 
         // Find the spawned health pack
         GameObject spawnedHealthPack = GameObject.Find("HealthPack(Clone)");
@@ -54,7 +47,7 @@ public class HealthPackSpawnBoundaryTest1
             spawnPos = spawnedHealthPack.transform.position;
             Debug.Log($"Health pack spawned at position: {spawnedHealthPack.transform.position}");
 
-            // Grid demensions
+            // Get grid dimensions
             int gridWidth = placeTileScript.width;
             int gridHeight = placeTileScript.height;
 
@@ -68,4 +61,4 @@ public class HealthPackSpawnBoundaryTest1
         }
     }
 }
-*/
+
