@@ -2,12 +2,57 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/*
+ * DYNAMIC BINDING EXAMPLE
+ * 
+ * This code demonstrates dynamic binding (polymorphism) through the HealthPackEffect class hierarchy:
+ * 
+ * Super Class: HealthPackEffect
+ * - Contains a virtual method GetHealAmount() that returns 25
+ * 
+ * Sub Class: BCHealthPackEffect
+ * - Inherits from HealthPackEffect
+ * - Overrides GetHealAmount() to return 100
+ * 
+ * Virtual Function: GetHealAmount()
+ * 
+ * Dynamic Binding Example:
+ * 
+ * // Static type is HealthPackEffect (the base class)
+ * // Dynamic type is also HealthPackEffect
+ * HealthPackEffect effect1 = new HealthPackEffect();
+ * int healAmount1 = effect1.GetHealAmount(); // Returns 25
+ * 
+ * // Static type is HealthPackEffect (the base class)
+ * // Dynamic type is BCHealthPackEffect (the derived class)
+ * HealthPackEffect effect2 = new BCHealthPackEffect();
+ * int healAmount2 = effect2.GetHealAmount(); // Returns 100
+ * 
+ * What method gets called now?
+ * When you have HealthPackEffect effect2 = new BCHealthPackEffect();:
+ * - The static type is HealthPackEffect (what the compiler sees)
+ * - The dynamic type is BCHealthPackEffect (the actual object type at runtime)
+ * - When effect2.GetHealAmount() is called, the BCHealthPackEffect version is called (returns 100)
+ * - This is dynamic binding because the method call is resolved at runtime based on the actual object type
+ * 
+ * Change the dynamic type:
+ * If you change the dynamic type to HealthPackEffect:
+ * HealthPackEffect effect3 = new HealthPackEffect();
+ * int healAmount3 = effect3.GetHealAmount(); // Returns 25
+ * Now the HealthPackEffect version of GetHealAmount() is called (returns 25).
+ * 
+ * This is an example of polymorphism in object-oriented programming, where the same method call 
+ * can behave differently based on the actual type of the object at runtime.
+ */
+
 // HealthPackEffect class that doesn't inherit from MonoBehaviour
 // This class defines the base behavior for health pack healing effects
 public class HealthPackEffect
 {
     // Virtual method that will be overridden by derived classes
     // Returns the amount of health restored when a health pack is collected
+    // This is a dynamically bound method - the actual implementation called
+    // depends on the runtime type of the object, not the compile-time type
     public virtual int GetHealAmount()
     {
         return 25; // Default heal amount for normal mode
@@ -19,15 +64,25 @@ public class HealthPackEffect
 public class BCHealthPackEffect : HealthPackEffect
 {
     // Override to provide different healing amount for BC mode
-    // BC mode likely stands for "Battle Challenge" or similar game mode
+    // This overrides the virtual method from the parent class
+    // When called on a BCHealthPackEffect object, this version will be used
     public override int GetHealAmount()
     {
-        return 100; // BC mode heal amount - significantly higher than normal mode
+        return 100; // BC mode heal amount
     }
 }
 
-// Factory to create the appropriate effect based on BC mode
-// This static class follows the Factory pattern to create the right health pack effect
+/*
+ * FACTORY PATTERN EXPLANATION
+ * 
+ * This is a Static Factory implementation.
+ * It's a static class with a static method CreateEffect() that returns a HealthPackEffect.
+ * It creates different types of health pack effects based "BC mode".
+ * It follows the Factory pattern by encapsulating the creation logic for different effect types.
+ * 
+ * The main difference between this and ItemFactory is that this is a static factory
+ * while ItemFactory is an instance-based factory (MonoBehaviour).
+ */
 public static class HealthPackEffectFactory
 {
     // Creates and returns the appropriate HealthPackEffect based on game settings
@@ -40,6 +95,9 @@ public static class HealthPackEffectFactory
         // Return the appropriate effect based on BC mode setting
         if (bcModeEnabled)
         {
+            // Creating a BCHealthPackEffect but returning it as a HealthPackEffect
+            // This demonstrates polymorphism - the static type is HealthPackEffect
+            // but the dynamic type is BCHealthPackEffect
             return new BCHealthPackEffect(); // Return BC mode effect with higher healing
         }
         else
@@ -68,7 +126,6 @@ public class ItemManager : MonoBehaviour
     // Flag to prevent multiple item spawning coroutines from running simultaneously
     private bool isSpawningItem = false;
  
-    // Update is called once per frame
     // Checks for item pickups by the player
     void Update()
     {
@@ -87,9 +144,6 @@ public class ItemManager : MonoBehaviour
         }
         instance = this;
 
-        // Log the instance ID for debugging purposes
-        Debug.Log("Awake() called. Instance ID: " + gameObject.GetInstanceID());
-        
         // Find the PlaceTile script in the scene
         placeTileScript = FindFirstObjectByType<PlaceTile>();
         
@@ -233,9 +287,6 @@ public class ItemManager : MonoBehaviour
                     {
                         Debug.LogError("SoundManager.Instance is null! Cannot play healthpickup sound.");
                     }
-                    
-                    // Armor effect will be implemented later
-                    // Currently just plays a sound and logs the pickup
                 }
                 // Add more item types here as needed
                 // else if (itemType.Contains("PowerUp")) { ... }
@@ -310,7 +361,6 @@ public class ItemManager : MonoBehaviour
                 if (tileCollider != null)
                 {
                     // Check if the collider has an EarthTerrain component
-                    // EarthTerrain likely represents mountains or impassable terrain
                     if (tileCollider.GetComponent<EarthTerrain>() == null) 
                     {
                         // Position is valid if it's not EarthTerrain
@@ -352,81 +402,3 @@ public class ItemManager : MonoBehaviour
         isSpawningItem = false;
     }
 }
-
-/*
- * FACTORY PATTERN EXPLANATION
- * 
- * This codebase implements two different factory patterns:
- * 
- * 1. ItemFactory (in ItemFactory.cs)
- *    - This is a Concrete Factory implementation of the Factory Method pattern
- *    - It's a MonoBehaviour class that creates different types of game objects (items) based on an enum parameter
- *    - The factory method is CreateItem(ItemType type, Vector3 position) which returns a GameObject
- *    - It centralizes the creation logic for different item types (HealthPack, Flag, Armor)
- *    - The factory handles the instantiation, tagging, and setup of each item type
- * 
- * 2. HealthPackEffectFactory (in this file)
- *    - This is a Static Factory implementation
- *    - It's a static class with a static method CreateEffect() that returns a HealthPackEffect
- *    - It creates different types of health pack effects based on a game setting (BC mode)
- *    - It follows the Factory pattern by encapsulating the creation logic for different effect types
- * 
- * Both factories demonstrate key principles of the Factory pattern:
- * - They encapsulate object creation logic
- * - They provide a single point of control for creating objects
- * - They allow for easy extension (adding new item types or effect types)
- * - They hide the implementation details of how objects are created
- * 
- * The main difference between them is that ItemFactory is an instance-based factory (MonoBehaviour) 
- * while HealthPackEffectFactory is a static factory. Both approaches are valid implementations 
- * of the Factory pattern, just used in different contexts.
- * 
- * In game development, factories are commonly used to:
- * 1. Create game objects with specific behaviors
- * 2. Manage different variations of the same type of object
- * 3. Centralize creation logic to make the code more maintainable
- * 4. Support game modes or settings that require different object behaviors
- */
-
-/*
- * DYNAMIC BINDING EXAMPLE
- * 
- * This code demonstrates dynamic binding (polymorphism) through the HealthPackEffect class hierarchy:
- * 
- * Super Class: HealthPackEffect
- * - Contains a virtual method GetHealAmount() that returns 25
- * 
- * Sub Class: BCHealthPackEffect
- * - Inherits from HealthPackEffect
- * - Overrides GetHealAmount() to return 100
- * 
- * Virtual Function: GetHealAmount()
- * 
- * Dynamic Binding Example:
- * 
- * // Static type is HealthPackEffect (the base class)
- * // Dynamic type is also HealthPackEffect
- * HealthPackEffect effect1 = new HealthPackEffect();
- * int healAmount1 = effect1.GetHealAmount(); // Returns 25
- * 
- * // Static type is HealthPackEffect (the base class)
- * // Dynamic type is BCHealthPackEffect (the derived class)
- * HealthPackEffect effect2 = new BCHealthPackEffect();
- * int healAmount2 = effect2.GetHealAmount(); // Returns 100
- * 
- * What method gets called now?
- * When you have HealthPackEffect effect2 = new BCHealthPackEffect();:
- * - The static type is HealthPackEffect (what the compiler sees)
- * - The dynamic type is BCHealthPackEffect (the actual object type at runtime)
- * - When effect2.GetHealAmount() is called, the BCHealthPackEffect version is called (returns 100)
- * - This is dynamic binding because the method call is resolved at runtime based on the actual object type
- * 
- * Change the dynamic type:
- * If you change the dynamic type to HealthPackEffect:
- * HealthPackEffect effect3 = new HealthPackEffect();
- * int healAmount3 = effect3.GetHealAmount(); // Returns 25
- * Now the HealthPackEffect version of GetHealAmount() is called (returns 25).
- * 
- * This is a classic example of polymorphism in object-oriented programming, where the same method call 
- * can behave differently based on the actual type of the object at runtime.
- */

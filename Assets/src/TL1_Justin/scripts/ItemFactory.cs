@@ -7,14 +7,33 @@ public enum ItemType
     HealthPack,
     Flag,
     Armor
-    // Add other item types here later
+    // TODO: Add other item types here later
 }
 
-// Factory class responsible for creating different types of game items.
-// This follows the Factory design pattern to centralize item creation logic.
+/*
+ * FACTORY PATTERN EXPLANATION
+ * 
+ * This is a Concrete Factory implementation of the Factory Method pattern.
+ * It's a MonoBehaviour class that creates different types of game objects (items) based on an enum parameter.
+ * The factory method is CreateItem(ItemType type, Vector3 position) which returns a GameObject.
+ * It centralizes the creation logic for different item types (HealthPack, Flag, Armor).
+ * The factory handles the instantiation, tagging, and setup of each item type.
+ * 
+ * This factory demonstrates key principles of the Factory pattern:
+ * - It encapsulates object creation logic
+ * - It provides a single point of control for creating objects
+ * - It allows for easy extension (adding new item types)
+ * - It hides the implementation details of how objects are created
+ * 
+ * Note for me:
+ * In game development, factories are commonly used to:
+ * 1. Create game objects with specific behaviors
+ * 2. Manage different variations of the same type of object
+ * 3. Centralize creation logic to make the code more maintainable
+ * 4. Support game modes or settings that require different object behaviors
+ */
 public class ItemFactory : MonoBehaviour
 {
-    // These prefabs must be assigned in the Unity Inspector
     // Each prefab represents the visual and physical representation of an item type
     public GameObject healthPackPrefab;
     public GameObject flagPrefab;
@@ -40,7 +59,7 @@ public class ItemFactory : MonoBehaviour
             case ItemType.Armor:
                 prefabToSpawn = armorPrefab;
                 break;
-            // Add cases for other item types here
+            // TODO: Add cases for other item types here
             default:
                 Debug.LogError($"Item type '{type}' not recognized by the factory.");
                 return null; // Return null if type is unknown
@@ -58,12 +77,12 @@ public class ItemFactory : MonoBehaviour
         GameObject newItem = Instantiate(prefabToSpawn, position, Quaternion.identity);
 
         // Set the appropriate tag on the item for pickup detection
-        // These tags must be defined in Unity's Tag Manager
         switch (type)
         {
             case ItemType.HealthPack: newItem.tag = "HealthPack"; break;
             case ItemType.Flag:       newItem.tag = "Flag"; break;
             case ItemType.Armor:      newItem.tag = "Armor"; break;
+            // TODO: Add cases for other item types here
         }
 
         return newItem;

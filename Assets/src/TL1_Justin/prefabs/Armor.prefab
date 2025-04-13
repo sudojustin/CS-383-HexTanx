@@ -28,7 +28,7 @@ Transform:
   m_GameObject: {fileID: 3847540538026537556}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.87, y: 4.82, z: 0}
+  m_LocalPosition: {x: 0.672, y: 4.429, z: 0}
   m_LocalScale: {x: 0.05, y: 0.05, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -147,7 +147,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b32001ff194bbe047b14a23290e3e2e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  healthPack: {fileID: 0}
-  flag: {fileID: 0}
-  armor: {fileID: 0}
   spawnedItems: []

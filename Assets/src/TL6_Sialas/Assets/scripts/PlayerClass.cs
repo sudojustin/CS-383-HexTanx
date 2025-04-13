@@ -105,7 +105,7 @@ public abstract class Ptank : MonoBehaviour
         }
     }
 
-    // Optional: Method to check if the shield is active (for debugging or UI purposes)
+
     public bool HasArmorShield()
     {
         return hasArmorShield;
