@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: bc03ca73361c5554193c2db0f2e26d9d
+guid: 7c4cd2fa6cba7794cb1a873bc218483f
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 2833086813582222866
-    second: win-tank_0
+      213: 8371722035941755999
+    second: EggTankNoBG - Copy_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,13 +100,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: win-tank_0
+      name: EggTankNoBG - Copy_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 2646
-        height: 1771
+        x: 10
+        y: 9
+        width: 547
+        height: 683
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 21669655275215720800000000000000
-      internalID: 2833086813582222866
+      spriteID: f5c4e9e16d45e2470800000000000000
+      internalID: 8371722035941755999
       vertices: []
       indices: 
       edges: []
@@ -134,8 +134,7 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable:
-      win-tank_0: 2833086813582222866
+    nameFileIdTable: {}
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
