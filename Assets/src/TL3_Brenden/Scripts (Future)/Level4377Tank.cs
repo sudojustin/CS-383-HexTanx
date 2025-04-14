@@ -6,7 +6,7 @@ public class Level4377Tank : TankType
 {
     public override void Initialize()
     {
-        enemyActionPoints = 1;
+        enemyActionPoints = 6;
         health = 666;
         Debug.Log("Level 4377 Tank Spawned with " + health + " HP");
         damage = findDamageVal(6);

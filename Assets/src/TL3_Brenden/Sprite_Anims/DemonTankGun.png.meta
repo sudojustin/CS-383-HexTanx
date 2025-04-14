@@ -134,7 +134,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      DemonTankGun_0: 6898977551451890924
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

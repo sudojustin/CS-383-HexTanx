@@ -134,7 +134,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      DemonTankHull_0: -1232370805891455822
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
