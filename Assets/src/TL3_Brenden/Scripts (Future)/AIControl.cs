@@ -101,6 +101,7 @@ public class AIControl : MonoBehaviour
         Vector3 newLocation = GetRandomAdjacentHex();
         if (IsWithinMapBounds(newLocation))
         {
+            SoundManager.GetInstance().EnemyMoveSound();
             StartCoroutine(MoveSmoothly(newLocation));
             //Debug.Log(gameObject.name + " moving to " + newLocation);
         }
@@ -128,6 +129,7 @@ public class AIControl : MonoBehaviour
         transform.position = destination; // Snap to final position
         tank.UpdateTankLocation(destination);
         isMoving = false;
+        SoundManager.GetInstance().StopMovementSound();
         //Debug.Log(gameObject.name + " reached destination: " + destination);
     }
 
