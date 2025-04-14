@@ -20,9 +20,8 @@ public class SoundManager : MonoBehaviour
     [SerializeField] private AudioClip healthPickupClip;
     [SerializeField] private AudioClip flagPickupClip;
     [SerializeField] private AudioClip playerMoveClip;
-    [SerializeField] private AudioClip playerDeathClip;
     [SerializeField] private AudioClip enemyMoveClip;
-    [SerializeField] private AudioClip enemyDeathClip;
+    [SerializeField] private AudioClip buttonClip;
 
     // Music clips
     [SerializeField] private AudioClip menuMusicClip;
@@ -306,7 +305,10 @@ public class SoundManager : MonoBehaviour
     {
         Play(shootClip);
     }
-
+    public void buttonSound()
+    {
+        Play(buttonClip);
+    }
     public void HurtSound()
     {
         Play(hurtClip);
@@ -322,19 +324,9 @@ public class SoundManager : MonoBehaviour
         PlayMovementSound(playerMoveClip);
     }
 
-    public void PlayerDeathSound()
-    {
-        Play(playerDeathClip);
-    }
-
     public void EnemyMoveSound()
     {
         PlayMovementSound(enemyMoveClip);
-    }
-
-    public void EnemyDeathSound()
-    {
-        Play(enemyDeathClip);
     }
 
     // Music methods
