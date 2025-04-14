@@ -44,7 +44,7 @@ public class Projectile : MonoBehaviour
                 {
                     SoundManager.GetInstance().ExplodeSound(); 
                 }
-                Debug.Log("Explosion sound triggered via SoundManager at position: " + transform.position);
+                //Debug.Log("Explosion sound triggered via SoundManager at position: " + transform.position);
 
                 Destroy(enemyTank.gameObject);
                 Destroy(gameObject);  // No delay needed
