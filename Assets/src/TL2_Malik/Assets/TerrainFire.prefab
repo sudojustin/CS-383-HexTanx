@@ -148,7 +148,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Base: {r: 0.8862746, g: 0, b: 0, a: 1}
-  Offset: {r: 0.2578616, g: 0.25542894, b: 0.25542894, a: 1}
+  Offset: {r: 0.6509434, g: 0.6509434, b: 0.6509434, a: 1}
   hightlight: {r: 0.9685534, g: 0.45381904, b: 0.45381904, a: 1}
   rend: {fileID: 5971121349773992636}
   playerhere: {r: 0, g: 0, b: 0, a: 0}

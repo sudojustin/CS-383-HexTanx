@@ -61,9 +61,9 @@ public class AIControl : MonoBehaviour
              return;
          }
          Vector3 targetPosition = playerTank.GetTankLocation();
-         //Debug.Log("Vector3, bullet gamebobject");
-
-         if (tank.ShotHitsPlayer())
+        //Debug.Log("Vector3, bullet gamebobject");
+        SoundManager.GetInstance().ShootSound();
+        if (tank.ShotHitsPlayer())
          {
             Vector3 direction = (targetPosition - transform.position).normalized;
             float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
@@ -101,6 +101,7 @@ public class AIControl : MonoBehaviour
         Vector3 newLocation = GetRandomAdjacentHex();
         if (IsWithinMapBounds(newLocation))
         {
+            SoundManager.GetInstance().EnemyMoveSound();
             StartCoroutine(MoveSmoothly(newLocation));
             //Debug.Log(gameObject.name + " moving to " + newLocation);
         }
@@ -128,6 +129,7 @@ public class AIControl : MonoBehaviour
         transform.position = destination; // Snap to final position
         tank.UpdateTankLocation(destination);
         isMoving = false;
+        SoundManager.GetInstance().StopMovementSound();
         //Debug.Log(gameObject.name + " reached destination: " + destination);
     }
 

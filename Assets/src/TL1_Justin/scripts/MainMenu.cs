@@ -13,6 +13,7 @@ public class MainMenu : MonoBehaviour
         // UnityEngine.SceneManagement.SceneManager.LoadScene("GameLevel1");
         // Assets/Scenes/Level1.unity
         // UnityEngine.SceneManagement.SceneManager.LoadScene("Assets/src/TL2_Malik/Assets/Scenes/SampleScene.unity");
+        SoundManager.GetInstance().buttonSound();
         UnityEngine.SceneManagement.SceneManager.LoadScene("Assets/Scenes/Level1.unity");
     }
 
@@ -20,12 +21,14 @@ public class MainMenu : MonoBehaviour
     {
         // Help button has been pressed, show help menu
         Debug.Log("Help button pressed");
+        SoundManager.GetInstance().buttonSound();
         UnityEngine.SceneManagement.SceneManager.LoadScene("HelpMenu");
     }
 
     public void QuitButton()
     {
         // Debug.Log("Quit button pressed");
+        SoundManager.GetInstance().buttonSound();
         Application.Quit();
     }
 }

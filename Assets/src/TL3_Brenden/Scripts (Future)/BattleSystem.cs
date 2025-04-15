@@ -121,10 +121,6 @@ public class BattleSystem : MonoBehaviour
         playerTank = FindObjectOfType<PlayerTank>();
         while (enemyTankType.enemyActionPoints > 0)
         {
-            if(playerTank.GetHealth() <= 0)
-            {
-                EndEnemyTurn();
-            }
             aiControl.MakeDecision(); // AI makes one decision per iteration
             enemyTankType.enemyActionPoints--; // Deduct action point
             //Debug.Log($"Enemy tank action taken. Remaining action points: {enemyTankType.enemyActionPoints}");

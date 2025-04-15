@@ -8,11 +8,13 @@ public class HelpMenu : MonoBehaviour
 
     public void BackButton()
     {
+        SoundManager.GetInstance().buttonSound();
         UnityEngine.SceneManagement.SceneManager.LoadScene("MainMenu");
     }
 
     public void QuitButton()
     {
+        SoundManager.GetInstance().buttonSound();
         Application.Quit();
     }
 }

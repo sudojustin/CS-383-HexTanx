@@ -5,7 +5,7 @@ public class EnemyProjectile : MonoBehaviour
     private Vector3 targetPosition;
     public float speed = 5f;
     public int damage = 10;
-    [SerializeField] private AudioClip explosionSound;
+    [SerializeField] private AudioClip explosionSoundOverride;
 
     public void SetTarget(Vector3 target)
     {
@@ -39,14 +39,14 @@ public class EnemyProjectile : MonoBehaviour
 
             if (playerTank.GetHealth() <= 0)
             {
-                if (explosionSound != null)
+                if (explosionSoundOverride != null)
                 {
-                    AudioSource.PlayClipAtPoint(explosionSound, transform.position);
+                    SoundManager.GetInstance().Play(explosionSoundOverride);
                     //Debug.Log("Explosion sound triggered at position: " + transform.position);
                 }
                 else
                 {
-                    //Debug.LogWarning("Explosion sound not played: AudioClip missing!");
+                    SoundManager.GetInstance().ExplodeSound();
                 }
                 Destroy(playerTank.gameObject);
                 //Debug.Log("Player tank destroyed!");
