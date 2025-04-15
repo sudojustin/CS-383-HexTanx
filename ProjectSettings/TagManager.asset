@@ -3,7 +3,16 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 3
-  tags: []
+  tags:
+  - EnemyTank
+  - Tile
+  - Terrain
+  - PlayerTank
+  - Projectile
+  - EarthTile
+  - Armor
+  - Flag
+  - HealthPack
   layers:
   - Default
   - TransparentFX
