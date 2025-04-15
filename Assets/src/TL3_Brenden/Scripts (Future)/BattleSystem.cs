@@ -153,21 +153,52 @@ public class BattleSystem : MonoBehaviour
     {
         string currentSceneName = SceneManager.GetActiveScene().name;
         //Debug.Log("DecideScene");
-        if(currentSceneName == "Level1")
+        if (currentSceneName == "Level1")
         {
             //Debug.Log("Loading Level2");
             UnityEngine.SceneManagement.SceneManager.LoadScene("Assets/Scenes/Level2.unity");
-        }else if(currentSceneName == "Level2")
+        }
+        else if (currentSceneName == "Level2")
         {
             //Debug.Log("Loading Level3");
             UnityEngine.SceneManagement.SceneManager.LoadScene("Assets/Scenes/Level3.unity");
         }
-        else if(currentSceneName == "Level3")
+        else if (currentSceneName == "Level3")
         {
             //Debug.Log("Loading Level4");
             UnityEngine.SceneManagement.SceneManager.LoadScene("Assets/Scenes/Level4.unity");
         }
         else if (currentSceneName == "Level4")
+        {
+            //Debug.Log("Loading Level5");
+            UnityEngine.SceneManagement.SceneManager.LoadScene("Assets/Scenes/Level5.unity");
+        }
+        else if (currentSceneName == "Level5")
+        {
+            //Debug.Log("Loading Level6");
+            UnityEngine.SceneManagement.SceneManager.LoadScene("Assets/Scenes/Level6.unity");
+        }
+        else if (currentSceneName == "Level6")
+        {
+            //Debug.Log("Loading Level7");
+            UnityEngine.SceneManagement.SceneManager.LoadScene("Assets/Scenes/Level7.unity");
+        }
+        else if (currentSceneName == "Level7")
+        {
+            //Debug.Log("Loading Level8");
+            UnityEngine.SceneManagement.SceneManager.LoadScene("Assets/Scenes/Level8.unity");
+        }
+        else if (currentSceneName == "Level8")
+        {
+            //Debug.Log("Loading Level9");
+            UnityEngine.SceneManagement.SceneManager.LoadScene("Assets/Scenes/Level9.unity");
+        }
+        else if (currentSceneName == "Level9")
+        {
+            //Debug.Log("Loading Level10");
+            UnityEngine.SceneManagement.SceneManager.LoadScene("Assets/Scenes/Level10.unity");
+        }
+        else if (currentSceneName == "Level10")
         {
             //Debug.Log("Loading GameWin");
             state = BattleState.WON;
