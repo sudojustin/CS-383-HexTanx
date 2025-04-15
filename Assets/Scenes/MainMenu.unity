@@ -1715,7 +1715,7 @@ MonoBehaviour:
   healthPickupClip: {fileID: 8300000, guid: 705da86ed2ab4524b8a69ac27aa179fa, type: 3}
   flagPickupClip: {fileID: 8300000, guid: 8ebabccd33f07b645a32061a33718f55, type: 3}
   playerMoveClip: {fileID: 8300000, guid: 4afde902b8823b14bbd212a57d85d211, type: 3}
-  enemyMoveClip: {fileID: 8300000, guid: 4afde902b8823b14bbd212a57d85d211, type: 3}
+  enemyMoveClip: {fileID: 8300000, guid: c1c06c4c162cf634a9bbb2ca64015c4a, type: 3}
   bossEnemyMoveClip: {fileID: 8300000, guid: 316fc2e33a5c64944a0d724f2992f733, type: 3}
   buttonClip: {fileID: 8300000, guid: 72cc2b90da8b11f42b66689e60161404, type: 3}
   menuMusicClip: {fileID: 8300000, guid: 5ee0e9a6c906cb04ab702c8f3ca59bac, type: 3}

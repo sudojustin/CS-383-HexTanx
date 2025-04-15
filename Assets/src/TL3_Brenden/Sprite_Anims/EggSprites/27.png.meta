@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 748e46f9d7e5b1b468c37ea0e1c86bb4
+guid: 6cf98ca8346038046b424a777cbfdd56
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 5821714567277610581
-    second: EggTankNoBG_0
+      213: -5622901713081898559
+    second: 27_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -96,17 +96,30 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: EggTankNoBG_0
+      name: 27_0
       rect:
         serializedVersion: 2
-        x: 33
-        y: 83
-        width: 441
-        height: 412
+        x: 7
+        y: 6
+        width: 17
+        height: 21
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 5568c4edd82eac050800000000000000
-      internalID: 5821714567277610581
+      spriteID: 1c961d0fea077f1b0800000000000000
+      internalID: -5622901713081898559
       vertices: []
       indices: 
       edges: []
@@ -135,7 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      EggTankNoBG_0: 5821714567277610581
+      27_0: -5622901713081898559
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
