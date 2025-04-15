@@ -27,6 +27,7 @@ public class SoundManager : MonoBehaviour
     [SerializeField] private AudioClip menuMusicClip;
     [SerializeField] private AudioClip battleMusicClip;
     [SerializeField] private AudioClip finalBattleMusicClip;
+    [SerializeField] private AudioClip hellMusicClip;
     [SerializeField] private AudioClip pauseMusicClip;
     [SerializeField] private AudioClip winMusicClip;
     [SerializeField] private AudioClip loseMusicClip;
@@ -134,6 +135,10 @@ public class SoundManager : MonoBehaviour
             case "level4":
                 Debug.Log("Attempting to play Battle music.");
                 finalBattleMusic();
+                break;
+            case "level666":
+                Debug.Log("Attempting to play Hell music.");
+                hellMusic();
                 break;
             case "pausescene":
                 Debug.Log("Attempting to play Pause music.");
@@ -343,6 +348,11 @@ public class SoundManager : MonoBehaviour
     public void finalBattleMusic()
     {
         PlayMusic(finalBattleMusicClip);
+    }
+
+    public void hellMusic()
+    {
+        PlayMusic(hellMusicClip);
     }
 
     public void PauseMusic()
