@@ -14,6 +14,7 @@ public class SoundManager : MonoBehaviour
 
     // Sound effect clips
     [SerializeField] private AudioClip shootClip;
+    [SerializeField] private AudioClip bossShootClip;
     [SerializeField] private AudioClip hurtClip;
     [SerializeField] private AudioClip explodeClip;
     [SerializeField] private AudioClip pickupClip;
@@ -21,12 +22,14 @@ public class SoundManager : MonoBehaviour
     [SerializeField] private AudioClip flagPickupClip;
     [SerializeField] private AudioClip playerMoveClip;
     [SerializeField] private AudioClip enemyMoveClip;
+    [SerializeField] private AudioClip bossEnemyMoveClip;
     [SerializeField] private AudioClip buttonClip;
 
     // Music clips
     [SerializeField] private AudioClip menuMusicClip;
     [SerializeField] private AudioClip battleMusicClip;
     [SerializeField] private AudioClip finalBattleMusicClip;
+    [SerializeField] private AudioClip hellMusicClip;
     [SerializeField] private AudioClip pauseMusicClip;
     [SerializeField] private AudioClip winMusicClip;
     [SerializeField] private AudioClip loseMusicClip;
@@ -134,6 +137,10 @@ public class SoundManager : MonoBehaviour
             case "level4":
                 Debug.Log("Attempting to play Battle music.");
                 finalBattleMusic();
+                break;
+            case "level666":
+                Debug.Log("Attempting to play Hell music.");
+                hellMusic();
                 break;
             case "pausescene":
                 Debug.Log("Attempting to play Pause music.");
@@ -305,6 +312,11 @@ public class SoundManager : MonoBehaviour
     {
         Play(shootClip);
     }
+
+    public void enemyBossShootSound()
+    {
+        Play(bossShootClip);
+    }
     public void buttonSound()
     {
         Play(buttonClip);
@@ -329,6 +341,11 @@ public class SoundManager : MonoBehaviour
         PlayMovementSound(enemyMoveClip);
     }
 
+    public void bossEnemyMoveSound()
+    {
+        PlayMovementSound(bossEnemyMoveClip);
+    }
+   
     // Music methods
     public void MenuMusic()
     {
@@ -343,6 +360,11 @@ public class SoundManager : MonoBehaviour
     public void finalBattleMusic()
     {
         PlayMusic(finalBattleMusicClip);
+    }
+
+    public void hellMusic()
+    {
+        PlayMusic(hellMusicClip);
     }
 
     public void PauseMusic()
