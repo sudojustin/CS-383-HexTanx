@@ -62,7 +62,14 @@ public class AIControl : MonoBehaviour
          }
          Vector3 targetPosition = playerTank.GetTankLocation();
         //Debug.Log("Vector3, bullet gamebobject");
-        SoundManager.GetInstance().ShootSound();
+        if (tank is Level4Tank)
+        {
+            SoundManager.GetInstance().enemyBossShootSound();
+        }
+        else
+        {
+            SoundManager.GetInstance().ShootSound();
+        }
         if (tank.ShotHitsPlayer())
          {
             Vector3 direction = (targetPosition - transform.position).normalized;
@@ -101,7 +108,14 @@ public class AIControl : MonoBehaviour
         Vector3 newLocation = GetRandomAdjacentHex();
         if (IsWithinMapBounds(newLocation))
         {
-            SoundManager.GetInstance().EnemyMoveSound();
+            if (tank is Level4Tank)
+            {
+                SoundManager.GetInstance().bossEnemyMoveSound();
+            }
+            else
+            {
+                SoundManager.GetInstance().EnemyMoveSound();
+            }
             StartCoroutine(MoveSmoothly(newLocation));
             //Debug.Log(gameObject.name + " moving to " + newLocation);
         }
