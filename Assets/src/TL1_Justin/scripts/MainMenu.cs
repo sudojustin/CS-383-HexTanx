@@ -6,6 +6,18 @@ public class MainMenu : MonoBehaviour
 {
     public GameObject MainMenuScreen;
 
+    public void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.H))
+        {
+            UnityEngine.SceneManagement.SceneManager.LoadScene("Assets/Scenes/Level666.unity");
+        }
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            UnityEngine.SceneManagement.SceneManager.LoadScene("Assets/Scenes/EasterLevel.unity");
+        }
+    }
+
     public void PlayButton()
     {
         // Play button has been pressed, initialize first game level

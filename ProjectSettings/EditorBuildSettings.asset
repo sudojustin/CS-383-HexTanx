@@ -29,6 +29,15 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/GameOverLose.unity
     guid: 12540d706249b1d4495644eefd6bd24e
+  - enabled: 1
+    path: Assets/Scenes/LevelSelector.unity
+    guid: be17896994a030049a1f8f3e4930c560
+  - enabled: 1
+    path: Assets/Scenes/Level666.unity
+    guid: 880238f6965d5a84788d104d358f1a74
+  - enabled: 1
+    path: Assets/Scenes/EasterLevel.unity
+    guid: 1d655cefad3f5f8458049f5c64c3d8ed
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
   m_UseUCBPForAssetBundles: 0
