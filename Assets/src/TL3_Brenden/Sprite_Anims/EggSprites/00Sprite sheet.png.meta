@@ -183,6 +183,19 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
@@ -859,7 +872,37 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      00Sprite sheet_0: 5935768434741739956
+      00Sprite sheet_1: 1710125924151630665
+      00Sprite sheet_10: -274283597990675131
+      00Sprite sheet_11: -8827349188323889585
+      00Sprite sheet_12: 2618661381886578292
+      00Sprite sheet_13: 1151592300923750242
+      00Sprite sheet_14: -1119736262390706484
+      00Sprite sheet_15: 6906634462212967741
+      00Sprite sheet_16: -1321000026774327085
+      00Sprite sheet_17: 6138943734548165785
+      00Sprite sheet_18: -7023006348775955507
+      00Sprite sheet_19: -886690301132887129
+      00Sprite sheet_2: 9218889229497195667
+      00Sprite sheet_20: 722330687734458225
+      00Sprite sheet_21: -5903525113550604120
+      00Sprite sheet_22: -2417345713859949153
+      00Sprite sheet_23: -3374074044375575868
+      00Sprite sheet_24: -7182372885308402935
+      00Sprite sheet_25: 5992176446631370229
+      00Sprite sheet_26: 3312720137817347555
+      00Sprite sheet_27: -1911694636925892042
+      00Sprite sheet_28: 8493135801678161458
+      00Sprite sheet_29: -306469656834406498
+      00Sprite sheet_3: 8513153903566458576
+      00Sprite sheet_4: -7266404631128093916
+      00Sprite sheet_5: 8744721446909340213
+      00Sprite sheet_6: -1825646687796282053
+      00Sprite sheet_7: -2459607048316746427
+      00Sprite sheet_8: -8570807430787962369
+      00Sprite sheet_9: 489007394770354273
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
