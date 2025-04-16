@@ -1,0 +1,3 @@
+C:\CS383\HexTanx\CS-383-HexTanx-Fork\Library\Bee\Android\Prj\IL2CPP\Gradle\unityLibrary\src\main\cpp\CMakeLists.txt
+C:\CS383\HexTanx\CS-383-HexTanx-Fork\Library\Bee\Android\Prj\IL2CPP\Gradle\unityLibrary\src\main\cpp\FramePacing\CMakeLists.txt
+C:\CS383\HexTanx\CS-383-HexTanx-Fork\Library\Bee\Android\Prj\IL2CPP\Gradle\unityLibrary\src\main\cpp\GameActivity\CMakeLists.txt
