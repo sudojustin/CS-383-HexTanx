@@ -20,7 +20,7 @@ public class AIControl : MonoBehaviour
         if (tank == null)
         {
             //Debug.LogError("AIControl: No TankType found on " + gameObject.name);
-            InvokeRepeating(nameof(MakeDecision), 1.0f, 2.0f);
+            //InvokeRepeating(nameof(MakeDecision), 1.0f, 2.0f); old way
         }
         // Get a reference to the PlaceTile script
         placeTileScript = FindObjectOfType<PlaceTile>();
