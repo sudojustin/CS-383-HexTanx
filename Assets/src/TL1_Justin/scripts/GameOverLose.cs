@@ -152,6 +152,12 @@ public class GameOverLose : MonoBehaviour
         UnityEngine.SceneManagement.SceneManager.LoadScene("MainMenu");
     }
 
+    public void HellButton()
+    {
+        SoundManager.GetInstance().buttonSound();
+        UnityEngine.SceneManagement.SceneManager.LoadScene("Level666");
+    }
+
     public void QuitButton()
     {
         SoundManager.GetInstance().buttonSound();
