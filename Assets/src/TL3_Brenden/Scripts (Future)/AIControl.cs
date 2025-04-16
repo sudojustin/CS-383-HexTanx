@@ -162,7 +162,7 @@ public class AIControl : MonoBehaviour
 
         foreach (Vector3 move in possibleMoves)
         {
-            if (IsWithinMapBounds(move) && !IsEarthTerrain(move))
+            if (IsWithinMapBounds(move) && !IsEarthTerrain(move) && !IsOccupied(move))
             {
                 validMoves.Add(move);
             }
@@ -175,6 +175,20 @@ public class AIControl : MonoBehaviour
 
         return possibleMoves[Random.Range(0, possibleMoves.Length)];
     }
+
+    private bool IsOccupied(Vector3 position)
+    {
+        Collider2D[] colliders = Physics2D.OverlapCircleAll(position, 0.1f);
+        foreach (Collider2D col in colliders)
+        {
+            if (col.GetComponent<AIControl>() != null || col.GetComponent<PlayerTank>() != null)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
     private bool IsEarthTerrain(Vector3 position)
     {
         Collider2D tileCollider = Physics2D.OverlapPoint(position);
