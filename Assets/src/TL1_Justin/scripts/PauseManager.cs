@@ -212,11 +212,13 @@ public class PauseManager : MonoBehaviour
     public void MainMenu()
     {
         Time.timeScale = 1.0f;
+        SoundManager.GetInstance().buttonSound();
         UnityEngine.SceneManagement.SceneManager.LoadScene("MainMenu");
     }
 
     public void QuitGame()
     {
+        SoundManager.GetInstance().buttonSound();
         Application.Quit();
     }
 

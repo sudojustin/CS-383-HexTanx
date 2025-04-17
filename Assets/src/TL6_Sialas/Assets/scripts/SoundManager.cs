@@ -6,7 +6,7 @@ public class SoundManager : MonoBehaviour
     // Audio players components
     [SerializeField] private AudioSource effectsSource;
     [SerializeField] private AudioSource musicSource;
-    [SerializeField] private AudioSource pickupSource; // New AudioSource for pickup sound
+    [SerializeField] private AudioSource pickupSource; 
 
     // Volume control
     [SerializeField] private float effectsVolume = 1f;
@@ -14,20 +14,22 @@ public class SoundManager : MonoBehaviour
 
     // Sound effect clips
     [SerializeField] private AudioClip shootClip;
+    [SerializeField] private AudioClip bossShootClip;
     [SerializeField] private AudioClip hurtClip;
     [SerializeField] private AudioClip explodeClip;
     [SerializeField] private AudioClip pickupClip;
     [SerializeField] private AudioClip healthPickupClip;
     [SerializeField] private AudioClip flagPickupClip;
     [SerializeField] private AudioClip playerMoveClip;
-    [SerializeField] private AudioClip playerDeathClip;
     [SerializeField] private AudioClip enemyMoveClip;
-    [SerializeField] private AudioClip enemyDeathClip;
+    [SerializeField] private AudioClip bossEnemyMoveClip;
+    [SerializeField] private AudioClip buttonClip;
 
     // Music clips
     [SerializeField] private AudioClip menuMusicClip;
     [SerializeField] private AudioClip battleMusicClip;
     [SerializeField] private AudioClip finalBattleMusicClip;
+    [SerializeField] private AudioClip hellMusicClip;
     [SerializeField] private AudioClip pauseMusicClip;
     [SerializeField] private AudioClip winMusicClip;
     [SerializeField] private AudioClip loseMusicClip;
@@ -136,6 +138,10 @@ public class SoundManager : MonoBehaviour
                 Debug.Log("Attempting to play Battle music.");
                 finalBattleMusic();
                 break;
+            case "level666":
+                Debug.Log("Attempting to play Hell music.");
+                hellMusic();
+                break;
             case "pausescene":
                 Debug.Log("Attempting to play Pause music.");
                 PauseMusic();
@@ -182,7 +188,7 @@ public class SoundManager : MonoBehaviour
         effectsVolume = Mathf.Clamp01(volume);
         Debug.Log($"Effects volume set to {effectsVolume}");
         effectsSource.volume = effectsVolume;
-        pickupSource.volume = effectsVolume; // Update pickupSource volume
+        pickupSource.volume = effectsVolume; 
     }
 
     public void SetMusicVolume(float volume)
@@ -242,7 +248,7 @@ public class SoundManager : MonoBehaviour
         {
             effectsSource.clip = clip;
             effectsSource.volume = effectsVolume;
-            effectsSource.loop = false; // No looping for movement sound
+            effectsSource.loop = false; 
             effectsSource.Play();
             //Debug.Log($"Playing movement sound: {clip.name}, isPlaying={effectsSource.isPlaying}");
         }
@@ -261,7 +267,7 @@ public class SoundManager : MonoBehaviour
         }
     }
 
-    // Play the pickup sound using a dedicated AudioSource
+    // Play the pickup sound 
     public void PickupSound()
     {
         if (pickupClip != null)
@@ -307,6 +313,14 @@ public class SoundManager : MonoBehaviour
         Play(shootClip);
     }
 
+    public void enemyBossShootSound()
+    {
+        Play(bossShootClip);
+    }
+    public void buttonSound()
+    {
+        Play(buttonClip);
+    }
     public void HurtSound()
     {
         Play(hurtClip);
@@ -322,21 +336,16 @@ public class SoundManager : MonoBehaviour
         PlayMovementSound(playerMoveClip);
     }
 
-    public void PlayerDeathSound()
-    {
-        Play(playerDeathClip);
-    }
-
     public void EnemyMoveSound()
     {
         PlayMovementSound(enemyMoveClip);
     }
 
-    public void EnemyDeathSound()
+    public void bossEnemyMoveSound()
     {
-        Play(enemyDeathClip);
+        PlayMovementSound(bossEnemyMoveClip);
     }
-
+   
     // Music methods
     public void MenuMusic()
     {
@@ -351,6 +360,11 @@ public class SoundManager : MonoBehaviour
     public void finalBattleMusic()
     {
         PlayMusic(finalBattleMusicClip);
+    }
+
+    public void hellMusic()
+    {
+        PlayMusic(hellMusicClip);
     }
 
     public void PauseMusic()

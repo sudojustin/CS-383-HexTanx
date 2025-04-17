@@ -142,16 +142,19 @@ public class GameOverLose : MonoBehaviour
 
     public void RestartButton()
     {
+        SoundManager.GetInstance().buttonSound();
         UnityEngine.SceneManagement.SceneManager.LoadScene("Level1");
     }
 
     public void MainMenuButton()
     {
+        SoundManager.GetInstance().buttonSound();
         UnityEngine.SceneManagement.SceneManager.LoadScene("MainMenu");
     }
 
     public void QuitButton()
     {
+        SoundManager.GetInstance().buttonSound();
         Application.Quit();
     }
 }

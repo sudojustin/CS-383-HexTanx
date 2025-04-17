@@ -97,10 +97,19 @@ public class Terrains : Tiles
     {
 
         playerHealthshown = playertc.GetHealth();
-        if(playertankOBJ.transform.position.x == this.transform.position.x && playertankOBJ.transform.position.y == this.transform.position.y)
+        if (playertankOBJ.transform.position.x == this.transform.position.x && playertankOBJ.transform.position.y == this.transform.position.y)
         {
-            playertc.SetHealth(playerHealthshown-Damage.getDamage());
-            playerHealthshown = playertc.GetHealth(); 
+            playertc.SetHealth(playerHealthshown - Damage.getDamage());
+            playerHealthshown = playertc.GetHealth();
+            if (playertc.GetHealth() <= 0)
+            {
+
+
+                SoundManager.GetInstance().ExplodeSound();
+                //Destroy(playertc.gameObject);
+                //BattleSystem.EndPlayerTurn();
+
+            }
         }
     }
     //function to damage the enemy
