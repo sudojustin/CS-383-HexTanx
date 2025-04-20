@@ -52,7 +52,7 @@ public class PlayerShooting : MonoBehaviour
 
         // Calculate the direction from the turret to the mouse
         Vector3 direction = mouseWorldPos - transform.position;
-        direction.z = 0; // Ignore Z for 2D rotation
+        direction.z = 0; 
 
         // Calculate the angle
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg + angleOffset;
