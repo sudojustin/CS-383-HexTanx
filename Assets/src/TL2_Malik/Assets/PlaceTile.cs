@@ -57,7 +57,7 @@ public class PlaceTile : MonoBehaviour
         //set grid height
         height = Random.Range(min,max);
         //set grid width
-        width = Random.Range(min,max);
+        width = Random.Range(min, max);
         Grid = null;
         //make grid
         if(runOnStart)

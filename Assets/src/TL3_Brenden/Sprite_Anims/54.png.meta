@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 9e6ff6c3d6e52e8478fd410d94c4002b
+guid: 5568bf3c2a8c0744abea0aaa5c6bba88
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -1232370805891455822
-    second: DemonTankHull_0
+      213: 3301111849194120939
+    second: 54_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,13 +100,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: DemonTankHull_0
+      name: 54_0
       rect:
         serializedVersion: 2
-        x: 5
-        y: 66
-        width: 429
-        height: 609
+        x: 0
+        y: 0
+        width: 231
+        height: 132
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 2b4274b084db5eee0800000000000000
-      internalID: -1232370805891455822
+      spriteID: be66c0f9cb7efcd20800000000000000
+      internalID: 3301111849194120939
       vertices: []
       indices: 
       edges: []
@@ -134,8 +134,7 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable:
-      DemonTankHull_0: -1232370805891455822
+    nameFileIdTable: {}
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
