@@ -21,19 +21,26 @@ public class TerrainDamage: TerrainDamageBC
 
 public class Terrains : Tiles
 {
+    //check if tile has already been stepped on
     private bool isactive = true;
-    
+    //refrence to the player
     private GameObject playertankOBJ;
+    //refrence to enemy tank
     private GameObject enemyTank;
+    //players current health
     private int playerHealthshown;
+    //enemies current health
     private int enemyHealthShown;
-    //private int damage = 10;
+    //Dynamiclly binded damage value
     private TerrainDamageBC Damage;
+    //refrence to player tank componet 
     private PlayerTank playertc;
+    //refrence to enemy tank componet
     private TankType enemytc;
     void Start()
     {
         isactive = true;
+        //chose virtural or override based on BC toggle on main menu
         if (PlayerPrefs.GetInt("BCMode", 0) == 1)
         {
             Damage = new TerrainDamageBC();
@@ -42,12 +49,13 @@ public class Terrains : Tiles
         {
             Damage = new TerrainDamage();
         }
-        
-        InvokeRepeating("getPlayer", 8f, 10f);  // Periodically check for player
+        // Periodically check for player and enemy
+        InvokeRepeating("getPlayer", 8f, 10f);  
         InvokeRepeating("getEnemy", 8f, 10f);
     }
     void Update()
     {
+        //null gaurds
         if(enemytc == null)
         {
             getEnemy();
@@ -78,18 +86,13 @@ public class Terrains : Tiles
         {
             if(isactive == true && Vector3.Distance(enemyTank.transform.position, this.transform.position)<1.1f)
             {
-                //Debug.LogError("Tank in fire!!!");
                 enemyTakeDamage();
                 isactive = false;
                 TurnOff();
             }
-        }
-        else
-        {
-        }
-        
-            
+        }    
     }
+    //function to damage the player
     void takeDamage()
     {
 
@@ -109,11 +112,12 @@ public class Terrains : Tiles
             }
         }
     }
+    //function to damage the enemy
     void enemyTakeDamage()
     {
         enemytc.health -= Damage.getDamage();
     }
-    
+    //funtion to get player object and componet refrences
     private void getPlayer()
     {
         playertankOBJ = GameObject.Find("PlayerTank");
@@ -132,10 +136,10 @@ public class Terrains : Tiles
             Debug.Log("PlayerTank object not found.");
         }
     }
-    
+    //funtion to get enemy object and componet refrences
     private void getEnemy()
     {
-        enemyTank = GameObject.FindWithTag("EnemyTank"); // Assuming enemy tank has the "EnemyTank" tag
+        enemyTank = GameObject.FindWithTag("EnemyTank"); 
     
         if (enemyTank != null)
         {

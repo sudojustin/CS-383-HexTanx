@@ -7,7 +7,7 @@ public class TankManager : MonoBehaviour
     public GameObject level2TankPrefab;
     public GameObject level3TankPrefab;
     public GameObject level4TankPrefab;
-    public GameObject level4377TankPrefab;
+    public GameObject level666TankPrefab;
     public GameObject levelEasterTankPrefab;
     public GameObject level5TankPrefab;
     public GameObject level6TankPrefab;
@@ -31,7 +31,7 @@ public class TankManager : MonoBehaviour
             case "Level4":
                 return level4TankPrefab;
             case "Level666":
-                return level4377TankPrefab;
+                return level666TankPrefab;
             case "EasterLevel":
                 return levelEasterTankPrefab;
             case "Level5":
