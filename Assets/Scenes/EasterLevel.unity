@@ -934,6 +934,7 @@ MonoBehaviour:
   armorPrefab: {fileID: 3847540538026537556, guid: 695faaae9445ca8418bd85805dca5717, type: 3}
   missilePrefab: {fileID: 6770410816448842570, guid: 79592184049cfe840ab984042e4df8cc, type: 3}
   gasolinePrefab: {fileID: 4092747988097983325, guid: c6c49528d3a2f814287522b7a6dcde87, type: 3}
+  biblePrefab: {fileID: 6829935331782430149, guid: 119be0d8f881c53408dfb29bb5f4699e, type: 3}
 --- !u!4 &1476425126
 Transform:
   m_ObjectHideFlags: 0

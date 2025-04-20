@@ -15,6 +15,7 @@ TagManager:
   - HealthPack
   - missile
   - gasoline
+  - bible
   layers:
   - Default
   - TransparentFX

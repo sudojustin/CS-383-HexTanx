@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement; // Add this for SceneManager access
 
 /*
  * DYNAMIC BINDING EXAMPLE
@@ -163,7 +164,20 @@ public class ItemManager : MonoBehaviour
             Debug.Log("PlaceTile script found in awake");
             // Start spawning different types of items
             StartCoroutine(WaitForGridAndSpawnItem(ItemType.HealthPack));
-            StartCoroutine(WaitForGridAndSpawnItem(ItemType.Flag));
+            
+            // Check current scene to determine if we should spawn Flag or Bible
+            string currentScene = SceneManager.GetActiveScene().name;
+            if (currentScene == "EasterLevel")
+            {
+                // In Easter level, spawn Bible instead of Flag
+                StartCoroutine(WaitForGridAndSpawnItem(ItemType.Bible));
+            }
+            else
+            {
+                // In regular levels, spawn the Flag
+                StartCoroutine(WaitForGridAndSpawnItem(ItemType.Flag));
+            }
+            
             StartCoroutine(WaitForGridAndSpawnItem(ItemType.Armor));
             StartCoroutine(WaitForGridAndSpawnItem(ItemType.Missile));
             StartCoroutine(WaitForGridAndSpawnItem(ItemType.Gasoline));
@@ -272,6 +286,34 @@ public class ItemManager : MonoBehaviour
                         Debug.LogError("BattleSystem not found, cannot trigger game scene condition");
                     }
                 }
+                else if (itemTag == "bible")
+                {
+                    // Handle bible pickup - same as flag (win the level)
+                    Debug.Log("Player picked up the bible!");
+
+                    // Play flag pickup sound if SoundManager is available
+                    if (SoundManager.GetInstance() != null)
+                    {
+                        SoundManager.GetInstance().flagPickupSound();
+                        Debug.Log("Played flag pickup sound for bible pickup.");
+                    }
+                    else
+                    {
+                        Debug.LogError("SoundManager.Instance is null! Cannot play flag pickup sound.");
+                    }
+
+                    // Find the BattleSystem and trigger scene change (same win condition as flag)
+                    BattleSystem battleSystem = FindObjectOfType<BattleSystem>();
+                    if (battleSystem != null)
+                    {
+                        Debug.Log("BattleSystem found, calling DecideScene");
+                        battleSystem.SendMessage("DecideScene");
+                    }
+                    else
+                    {
+                        Debug.LogError("BattleSystem not found, cannot trigger game scene condition");
+                    }
+                }
                 else if (itemTag == "Armor")
                 {
                     // Handle armor pickup
@@ -349,10 +391,10 @@ public class ItemManager : MonoBehaviour
             int randY;
 
             // Determine spawn range based on item type
-            if (itemTypeToSpawn == ItemType.Flag)
+            if (itemTypeToSpawn == ItemType.Flag || itemTypeToSpawn == ItemType.Bible)
             {
-                // Spawn flag in the top 1/6th of the map
-                // This ensures flags appear in a specific area
+                // Spawn flag/bible in the top 1/6th of the map
+                // This ensures flags/bibles appear in a specific area
                 randX = Random.Range(0, width);
                 randY = Random.Range(height * 5 / 6, height);
             }
