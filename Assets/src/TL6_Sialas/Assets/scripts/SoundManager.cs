@@ -31,6 +31,7 @@ public class SoundManager : MonoBehaviour
     [SerializeField] private AudioClip finalBattleMusicClip;
     [SerializeField] private AudioClip hellMusicClip;
     [SerializeField] private AudioClip technoMusicClip;
+    [SerializeField] private AudioClip animeMusicClip;
     [SerializeField] private AudioClip pauseMusicClip;
     [SerializeField] private AudioClip winMusicClip;
     [SerializeField] private AudioClip loseMusicClip;
@@ -136,9 +137,22 @@ public class SoundManager : MonoBehaviour
                 BattleMusic();
                 break;
             case "level4":
-                Debug.Log("Attempting to play Battle music.");
+                Debug.Log("Attempting to play final Battle music.");
                 finalBattleMusic();
                 break;
+            case "level5":
+                Debug.Log("Attempting to play Anime music.");
+                animeMusic();
+                break;
+            case "level6":
+                break;
+            case "level7":
+                break;
+            case "level8":
+                break;
+            case "level9":
+                break;
+
             case "level10":
                 technoMusic();
                 Debug.Log("Attempting to play TronLevel music.");
@@ -376,6 +390,11 @@ public class SoundManager : MonoBehaviour
     public void technoMusic()
     {
         PlayMusic(technoMusicClip);
+    }
+
+    public void animeMusic()
+    {
+        PlayMusic(animeMusicClip);
     }
 
     public void PauseMusic()
