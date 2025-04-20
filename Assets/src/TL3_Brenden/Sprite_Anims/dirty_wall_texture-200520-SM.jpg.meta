@@ -134,7 +134,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      dirty_wall_texture-200520-SM_0: 5375554661144562162
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

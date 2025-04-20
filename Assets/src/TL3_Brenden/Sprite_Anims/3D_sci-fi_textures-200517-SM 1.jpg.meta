@@ -134,7 +134,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      3D_sci-fi_textures-200517-SM 1_0: -198911612631034020
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
