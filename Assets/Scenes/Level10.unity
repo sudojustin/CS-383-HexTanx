@@ -198,13 +198,13 @@ MonoBehaviour:
   level2TankPrefab: {fileID: 6808895572007798491, guid: 6ab6a65d8554c6c46bd7e5561bbb503d, type: 3}
   level3TankPrefab: {fileID: 6808895572007798491, guid: fda721ab421f4054d98ff0c5cb91110a, type: 3}
   level4TankPrefab: {fileID: 4113097080045537129, guid: 2e9d334c5c762f046be0906901138856, type: 3}
-  level4377TankPrefab: {fileID: 2350017020766486858, guid: 7e8036b71ffd06c408c848e7b253de1c, type: 3}
+  level666TankPrefab: {fileID: 2350017020766486858, guid: 7e8036b71ffd06c408c848e7b253de1c, type: 3}
   levelEasterTankPrefab: {fileID: 828717156048577208, guid: a3048a77260e1d54b9c2827fc0d0318e, type: 3}
   level5TankPrefab: {fileID: 6808895572007798491, guid: a2c61bdade7ac504eb439c0bcddbbf46, type: 3}
   level6TankPrefab: {fileID: 6808895572007798491, guid: a2c61bdade7ac504eb439c0bcddbbf46, type: 3}
-  level7TankPrefab: {fileID: 6808895572007798491, guid: a2c61bdade7ac504eb439c0bcddbbf46, type: 3}
-  level8TankPrefab: {fileID: 6808895572007798491, guid: a2c61bdade7ac504eb439c0bcddbbf46, type: 3}
-  level9TankPrefab: {fileID: 6808895572007798491, guid: a2c61bdade7ac504eb439c0bcddbbf46, type: 3}
+  level7TankPrefab: {fileID: 5853255753955477684, guid: 124c90c5edb42704aa9883264b8e116d, type: 3}
+  level8TankPrefab: {fileID: 5853255753955477684, guid: 124c90c5edb42704aa9883264b8e116d, type: 3}
+  level9TankPrefab: {fileID: 5853255753955477684, guid: 124c90c5edb42704aa9883264b8e116d, type: 3}
   level10TankPrefab: {fileID: 7789581672265989065, guid: e2c86d833eafc7340b86a07155497017, type: 3}
 --- !u!4 &111463947
 Transform:
@@ -691,6 +691,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 45de1eb49818a584b8c68a8286577ad0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  numberOfEnemiesToSpawn: 0
 --- !u!4 &944515838
 Transform:
   m_ObjectHideFlags: 0
