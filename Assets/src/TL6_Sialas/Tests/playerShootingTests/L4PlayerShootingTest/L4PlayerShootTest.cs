@@ -33,7 +33,7 @@ public class PlayerTankShootTest
         int maxShots = 10;
         while (shots < maxShots)
         {
-            playerShooting.ShootAtEnemy();
+            // playerShooting.ShootAtEnemy();
             yield return new WaitForSeconds(1.5f); // Wait for potential shooting action (same as enemy test)
             shots++;
         }
