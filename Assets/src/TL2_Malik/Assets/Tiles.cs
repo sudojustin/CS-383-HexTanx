@@ -27,7 +27,7 @@ public class Tiles : MonoBehaviour
 
     void OnMouseEnter()
     {
-        rend.color = hightlight;
+       // rend.color = hightlight;
     }
     void OnMouseExit()
     {
