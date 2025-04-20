@@ -9,7 +9,8 @@ public enum ItemType
     Armor,
     Missile,
     Gasoline,
-    Bible
+    Bible,
+    EasterEgg
     // TODO: Add other item types here later
 }
 
@@ -44,6 +45,7 @@ public class ItemFactory : MonoBehaviour
     public GameObject missilePrefab;
     public GameObject gasolinePrefab;
     public GameObject biblePrefab;
+    public GameObject easterEggPrefab;
 
     // Creates and returns a new item of the specified type at the given position.
     // <param name="type">The type of item to create (from ItemType enum)</param>
@@ -74,6 +76,9 @@ public class ItemFactory : MonoBehaviour
             case ItemType.Bible:
                 prefabToSpawn = biblePrefab;
                 break;
+            case ItemType.EasterEgg:
+                prefabToSpawn = easterEggPrefab;
+                break;
             // TODO: Add cases for other item types here
             default:
                 Debug.LogError($"Item type '{type}' not recognized by the factory.");
@@ -100,6 +105,7 @@ public class ItemFactory : MonoBehaviour
             case ItemType.Missile:    newItem.tag = "missile"; break;
             case ItemType.Gasoline:   newItem.tag = "gasoline"; break;
             case ItemType.Bible:      newItem.tag = "bible"; break;
+            case ItemType.EasterEgg:  newItem.tag = "easter-egg"; break;
             // TODO: Add cases for other item types here
         }
 

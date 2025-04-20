@@ -16,6 +16,7 @@ TagManager:
   - missile
   - gasoline
   - bible
+  - easter-egg
   layers:
   - Default
   - TransparentFX

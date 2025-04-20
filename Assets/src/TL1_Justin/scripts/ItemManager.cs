@@ -162,12 +162,14 @@ public class ItemManager : MonoBehaviour
         if (placeTileScript != null)
         {
             Debug.Log("PlaceTile script found in awake");
+            // Get current scene name
+            string currentScene = SceneManager.GetActiveScene().name;
+            
             // Start spawning different types of items
             StartCoroutine(WaitForGridAndSpawnItem(ItemType.HealthPack));
             
             // Check current scene to determine if we should spawn Flag or Bible
-            string currentScene = SceneManager.GetActiveScene().name;
-            if (currentScene == "EasterLevel")
+            if (currentScene == "EasterLevel" || currentScene == "Level666")
             {
                 // In Easter level, spawn Bible instead of Flag
                 StartCoroutine(WaitForGridAndSpawnItem(ItemType.Bible));
@@ -176,6 +178,12 @@ public class ItemManager : MonoBehaviour
             {
                 // In regular levels, spawn the Flag
                 StartCoroutine(WaitForGridAndSpawnItem(ItemType.Flag));
+            }
+            
+            // Spawn Easter Egg only on Level5
+            if (currentScene == "Level5")
+            {
+                StartCoroutine(WaitForGridAndSpawnItem(ItemType.EasterEgg));
             }
             
             StartCoroutine(WaitForGridAndSpawnItem(ItemType.Armor));
@@ -313,6 +321,26 @@ public class ItemManager : MonoBehaviour
                     {
                         Debug.LogError("BattleSystem not found, cannot trigger game scene condition");
                     }
+                }
+                else if (itemTag == "easter-egg")
+                {
+                    // Handle Easter Egg pickup - load EasterLevel scene
+                    Debug.Log("Player found the Easter Egg!");
+
+                    // Play pickup sound if SoundManager is available
+                    if (SoundManager.GetInstance() != null)
+                    {
+                        SoundManager.GetInstance().PickupSound();
+                        Debug.Log("Played pickup sound for Easter Egg.");
+                    }
+                    else
+                    {
+                        Debug.LogError("SoundManager.Instance is null! Cannot play pickup sound.");
+                    }
+
+                    // Load the EasterLevel scene
+                    Debug.Log("Loading EasterLevel scene...");
+                    SceneManager.LoadScene("EasterLevel");
                 }
                 else if (itemTag == "Armor")
                 {
