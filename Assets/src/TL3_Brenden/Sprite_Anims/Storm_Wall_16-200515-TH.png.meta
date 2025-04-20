@@ -134,7 +134,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Storm_Wall_16-200515-TH_0: 3460291270086454783
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
