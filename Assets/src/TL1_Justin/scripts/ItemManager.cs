@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement; // Add this for SceneManager access
 
 /*
  * DYNAMIC BINDING EXAMPLE
@@ -161,10 +162,33 @@ public class ItemManager : MonoBehaviour
         if (placeTileScript != null)
         {
             Debug.Log("PlaceTile script found in awake");
+            // Get current scene name
+            string currentScene = SceneManager.GetActiveScene().name;
+            
             // Start spawning different types of items
             StartCoroutine(WaitForGridAndSpawnItem(ItemType.HealthPack));
-            StartCoroutine(WaitForGridAndSpawnItem(ItemType.Flag));
+            
+            // Check current scene to determine if we should spawn Flag or Bible
+            if (currentScene == "EasterLevel" || currentScene == "Level666")
+            {
+                // In Easter level, spawn Bible instead of Flag
+                StartCoroutine(WaitForGridAndSpawnItem(ItemType.Bible));
+            }
+            else
+            {
+                // In regular levels, spawn the Flag
+                StartCoroutine(WaitForGridAndSpawnItem(ItemType.Flag));
+            }
+            
+            // Spawn Easter Egg only on Level5
+            if (currentScene == "Level5")
+            {
+                StartCoroutine(WaitForGridAndSpawnItem(ItemType.EasterEgg));
+            }
+            
             StartCoroutine(WaitForGridAndSpawnItem(ItemType.Armor));
+            StartCoroutine(WaitForGridAndSpawnItem(ItemType.Missile));
+            StartCoroutine(WaitForGridAndSpawnItem(ItemType.Gasoline));
         }
     }
 
@@ -270,6 +294,54 @@ public class ItemManager : MonoBehaviour
                         Debug.LogError("BattleSystem not found, cannot trigger game scene condition");
                     }
                 }
+                else if (itemTag == "bible")
+                {
+                    // Handle bible pickup - same as flag (win the level)
+                    Debug.Log("Player picked up the bible!");
+
+                    // Play flag pickup sound if SoundManager is available
+                    if (SoundManager.GetInstance() != null)
+                    {
+                        SoundManager.GetInstance().flagPickupSound();
+                        Debug.Log("Played flag pickup sound for bible pickup.");
+                    }
+                    else
+                    {
+                        Debug.LogError("SoundManager.Instance is null! Cannot play flag pickup sound.");
+                    }
+
+                    // Find the BattleSystem and trigger scene change (same win condition as flag)
+                    BattleSystem battleSystem = FindObjectOfType<BattleSystem>();
+                    if (battleSystem != null)
+                    {
+                        Debug.Log("BattleSystem found, calling DecideScene");
+                        battleSystem.SendMessage("DecideScene");
+                    }
+                    else
+                    {
+                        Debug.LogError("BattleSystem not found, cannot trigger game scene condition");
+                    }
+                }
+                else if (itemTag == "easter-egg")
+                {
+                    // Handle Easter Egg pickup - load EasterLevel scene
+                    Debug.Log("Player found the Easter Egg!");
+
+                    // Play pickup sound if SoundManager is available
+                    if (SoundManager.GetInstance() != null)
+                    {
+                        SoundManager.GetInstance().PickupSound();
+                        Debug.Log("Played pickup sound for Easter Egg.");
+                    }
+                    else
+                    {
+                        Debug.LogError("SoundManager.Instance is null! Cannot play pickup sound.");
+                    }
+
+                    // Load the EasterLevel scene
+                    Debug.Log("Loading EasterLevel scene...");
+                    SceneManager.LoadScene("EasterLevel");
+                }
                 else if (itemTag == "Armor")
                 {
                     // Handle armor pickup
@@ -287,6 +359,18 @@ public class ItemManager : MonoBehaviour
                     {
                         Debug.LogError("SoundManager.Instance is null! Cannot play healthpickup sound.");
                     }
+                }
+                else if (itemTag == "Missile")
+                {
+                    // Handle missile pickup
+                    Debug.Log("Player picked up missile!");
+                    
+                }
+                else if (itemTag == "Gasoline")
+                {
+                    // Handle gasoline pickup
+                    Debug.Log("Player picked up gasoline!");
+                    
                 }
                 // Add more item types here as needed
                 // else if (itemType.Contains("PowerUp")) { ... }
@@ -335,10 +419,10 @@ public class ItemManager : MonoBehaviour
             int randY;
 
             // Determine spawn range based on item type
-            if (itemTypeToSpawn == ItemType.Flag)
+            if (itemTypeToSpawn == ItemType.Flag || itemTypeToSpawn == ItemType.Bible)
             {
-                // Spawn flag in the top 1/6th of the map
-                // This ensures flags appear in a specific area
+                // Spawn flag/bible in the top 1/6th of the map
+                // This ensures flags/bibles appear in a specific area
                 randX = Random.Range(0, width);
                 randY = Random.Range(height * 5 / 6, height);
             }
@@ -394,6 +478,11 @@ public class ItemManager : MonoBehaviour
         // If item was successfully created, add it to the tracking list
         if (spawnedItem != null)
         {
+            if (itemTypeToSpawn == ItemType.Missile)
+            {
+                spawnedItem.transform.Rotate(0, 0, -45f);
+            }
+            
             spawnedItems.Add(spawnedItem);
         }
         // If creation failed, error is already logged by the factory
