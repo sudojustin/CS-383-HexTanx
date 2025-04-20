@@ -219,9 +219,17 @@ public class UIManager : MonoBehaviour
         string tankTypeName = enemyTank.GetType().Name;
         
         if (tankTypeName == "Level1Tank") maxHealth = 50f;
-        else if (tankTypeName == "Level2Tank") maxHealth = 75f;
-        else if (tankTypeName == "Level3Tank") maxHealth = 100f; 
-        else if (tankTypeName == "Level4Tank") maxHealth = 125f;
+        else if (tankTypeName == "Level2Tank") maxHealth = 100f;
+        else if (tankTypeName == "Level3Tank") maxHealth = 150f; 
+        else if (tankTypeName == "Level4Tank") maxHealth = 300f;
+        else if (tankTypeName == "Level5Tank") maxHealth = 300f;
+        else if (tankTypeName == "Level6Tank") maxHealth = 300f;
+        else if (tankTypeName == "Level7Tank") maxHealth = 300f;
+        else if (tankTypeName == "Level8Tank") maxHealth = 300f;
+        else if (tankTypeName == "Level9Tank1") maxHealth = 300f;
+        else if (tankTypeName == "Level10Tank1") maxHealth = 300f;
+        else if (tankTypeName == "Level666Tank") maxHealth = 666f;
+        else if (tankTypeName == "LevelEasterTank") maxHealth = 366f;
         
         // Calculate health percentage based on actual max health
         float healthPercent = Mathf.Clamp01((float)enemyTank.health / maxHealth);
