@@ -1,13 +1,10 @@
 fileFormatVersion: 2
-guid: 7c6f4f72bd9443c4b9e58e74e6a42c0f
+guid: 9a260be658a436f428975d2236edc2de
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -7003852636280111396
-    second: Track_4_A_0
-  - first:
-      213: -7250280950069021485
-    second: Track_4_A_1
+      213: -4602636185977835535
+    second: Hull_01_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -99,52 +96,17 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 4
-    buildTarget: Android
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Track_4_A_0
+      name: Hull_01_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 129
-        width: 42
-        height: 117
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: cde3753a2215dce90800000000000000
-      internalID: -7003852636280111396
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Track_4_A_1
-      rect:
-        serializedVersion: 2
-        x: 0
+        x: 44
         y: 0
-        width: 42
-        height: 117
+        width: 168
+        height: 248
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -153,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 3d4ba59b3e3d16b90800000000000000
-      internalID: -7250280950069021485
+      spriteID: 1ffae6056c62020c0800000000000000
+      internalID: -4602636185977835535
       vertices: []
       indices: 
       edges: []
@@ -172,9 +134,7 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable:
-      Track_4_A_0: -7003852636280111396
-      Track_4_A_1: -7250280950069021485
+    nameFileIdTable: {}
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

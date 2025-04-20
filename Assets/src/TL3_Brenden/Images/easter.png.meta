@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 1784f81bb4d378340858e030e99911df
+guid: ae64ed75b8b27d241aee4c695ce53cb1
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 3460291270086454783
-    second: Storm_Wall_16-200515-TH_0
+      213: 1275046305023158204
+    second: c48cc4d2-e8ae-4cc8-8aec-6cb8bb606e72 (1)_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,13 +100,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Storm_Wall_16-200515-TH_0
+      name: c48cc4d2-e8ae-4cc8-8aec-6cb8bb606e72 (1)_0
       rect:
         serializedVersion: 2
-        x: 16
-        y: 0
-        width: 101
-        height: 96
+        x: 200
+        y: 127
+        width: 624
+        height: 757
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: ffd63e4a39c650030800000000000000
-      internalID: 3460291270086454783
+      spriteID: cb76413ebdfd1b110800000000000000
+      internalID: 1275046305023158204
       vertices: []
       indices: 
       edges: []
@@ -135,7 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Storm_Wall_16-200515-TH_0: 3460291270086454783
+      c48cc4d2-e8ae-4cc8-8aec-6cb8bb606e72 (1)_0: 1275046305023158204
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
