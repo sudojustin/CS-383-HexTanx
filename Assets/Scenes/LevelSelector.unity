@@ -202,9 +202,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 576388033}
-        m_TargetAssemblyTypeName: MainMenu, AssemblyDef
-        m_MethodName: HelpButton
+      - m_Target: {fileID: 576388034}
+        m_TargetAssemblyTypeName: LevelSelector, AssemblyDef
+        m_MethodName: Level3Button
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -607,7 +607,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 576388033}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: MainMenu, Assembly-CSharp
         m_MethodName: PlayButton
         m_Mode: 1
@@ -876,9 +876,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 576388033}
-        m_TargetAssemblyTypeName: MainMenu, Assembly-CSharp
-        m_MethodName: QuitButton
+      - m_Target: {fileID: 576388034}
+        m_TargetAssemblyTypeName: LevelSelector, AssemblyDef
+        m_MethodName: BackButton
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -962,7 +962,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 1722.6666, y: 969}
+  m_SizeDelta: {x: 1427.5555, y: 803}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &564648617
 MonoBehaviour:
@@ -1026,9 +1026,9 @@ GameObject:
   - component: {fileID: 576388031}
   - component: {fileID: 576388030}
   - component: {fileID: 576388029}
-  - component: {fileID: 576388033}
+  - component: {fileID: 576388034}
   m_Layer: 5
-  m_Name: MainMenuCanvas
+  m_Name: LevelSelectorCanvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1118,7 +1118,7 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
---- !u!114 &576388033
+--- !u!114 &576388034
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1127,10 +1127,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 576388028}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3121f91398cae7540b4779158b02a9f0, type: 3}
+  m_Script: {fileID: 11500000, guid: 722811541ac37ca4d811fa6a9d32a5bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MainMenuScreen: {fileID: 1989443569}
+  LevelSelectorScreen: {fileID: 1989443569}
 --- !u!1 &620761817
 GameObject:
   m_ObjectHideFlags: 0
@@ -1636,6 +1636,7 @@ MonoBehaviour:
   effectsVolume: 1
   musicVolume: 1
   shootClip: {fileID: 8300000, guid: ccc9f98f936239543b641504ccbe69b3, type: 3}
+  bossShootClip: {fileID: 0}
   hurtClip: {fileID: 0}
   explodeClip: {fileID: 8300000, guid: 31356047f04d8674aae9ad9d8632bf2f, type: 3}
   pickupClip: {fileID: 8300000, guid: 3ec5a07565395444fade487d5b055724, type: 3}
@@ -1643,10 +1644,13 @@ MonoBehaviour:
   flagPickupClip: {fileID: 8300000, guid: 8ebabccd33f07b645a32061a33718f55, type: 3}
   playerMoveClip: {fileID: 8300000, guid: 4afde902b8823b14bbd212a57d85d211, type: 3}
   enemyMoveClip: {fileID: 8300000, guid: 4afde902b8823b14bbd212a57d85d211, type: 3}
+  bossEnemyMoveClip: {fileID: 0}
   buttonClip: {fileID: 8300000, guid: 72cc2b90da8b11f42b66689e60161404, type: 3}
   menuMusicClip: {fileID: 8300000, guid: 5ee0e9a6c906cb04ab702c8f3ca59bac, type: 3}
   battleMusicClip: {fileID: 8300000, guid: 98a6386ec8337794aba5192894e0bb4a, type: 3}
   finalBattleMusicClip: {fileID: 8300000, guid: b71c87e4ffa7d4848b44f36eee70316a, type: 3}
+  hellMusicClip: {fileID: 0}
+  technoMusicClip: {fileID: 0}
   pauseMusicClip: {fileID: 8300000, guid: f8d5eddf3e97f064db9fe6a7fd9c441e, type: 3}
   winMusicClip: {fileID: 8300000, guid: 70c952827a8a4734880e6d18e94d76d9, type: 3}
   loseMusicClip: {fileID: 8300000, guid: a0c885cc6b5fa86439a694f7fa2a53eb, type: 3}
@@ -1845,9 +1849,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 576388033}
-        m_TargetAssemblyTypeName: MainMenu, Assembly-CSharp
-        m_MethodName: PlayButton
+      - m_Target: {fileID: 576388034}
+        m_TargetAssemblyTypeName: LevelSelector, AssemblyDef
+        m_MethodName: Level7Button
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1978,9 +1982,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 576388033}
-        m_TargetAssemblyTypeName: MainMenu, AssemblyDef
-        m_MethodName: HelpButton
+      - m_Target: {fileID: 576388034}
+        m_TargetAssemblyTypeName: LevelSelector, AssemblyDef
+        m_MethodName: Level1Button
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2111,9 +2115,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 576388033}
-        m_TargetAssemblyTypeName: MainMenu, Assembly-CSharp
-        m_MethodName: PlayButton
+      - m_Target: {fileID: 576388034}
+        m_TargetAssemblyTypeName: LevelSelector, AssemblyDef
+        m_MethodName: Level6Button
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2244,9 +2248,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 576388033}
-        m_TargetAssemblyTypeName: MainMenu, Assembly-CSharp
-        m_MethodName: PlayButton
+      - m_Target: {fileID: 576388034}
+        m_TargetAssemblyTypeName: LevelSelector, AssemblyDef
+        m_MethodName: Level5Button
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2377,9 +2381,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 576388033}
-        m_TargetAssemblyTypeName: MainMenu, Assembly-CSharp
-        m_MethodName: PlayButton
+      - m_Target: {fileID: 576388034}
+        m_TargetAssemblyTypeName: LevelSelector, AssemblyDef
+        m_MethodName: Level10Button
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2510,9 +2514,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 576388033}
-        m_TargetAssemblyTypeName: MainMenu, AssemblyDef
-        m_MethodName: HelpButton
+      - m_Target: {fileID: 576388034}
+        m_TargetAssemblyTypeName: LevelSelector, AssemblyDef
+        m_MethodName: Level2Button
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2643,9 +2647,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 576388033}
-        m_TargetAssemblyTypeName: MainMenu, Assembly-CSharp
-        m_MethodName: PlayButton
+      - m_Target: {fileID: 576388034}
+        m_TargetAssemblyTypeName: LevelSelector, AssemblyDef
+        m_MethodName: Level4Button
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3671,9 +3675,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 576388033}
-        m_TargetAssemblyTypeName: MainMenu, Assembly-CSharp
-        m_MethodName: PlayButton
+      - m_Target: {fileID: 576388034}
+        m_TargetAssemblyTypeName: LevelSelector, AssemblyDef
+        m_MethodName: Level9Button
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3940,9 +3944,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 576388033}
-        m_TargetAssemblyTypeName: MainMenu, Assembly-CSharp
-        m_MethodName: PlayButton
+      - m_Target: {fileID: 576388034}
+        m_TargetAssemblyTypeName: LevelSelector, AssemblyDef
+        m_MethodName: Level8Button
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4000,7 +4004,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1989443570}
   m_Layer: 5
-  m_Name: MainMenu
+  m_Name: LevelSelector
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
