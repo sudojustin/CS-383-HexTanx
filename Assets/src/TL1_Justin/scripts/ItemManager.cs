@@ -166,6 +166,7 @@ public class ItemManager : MonoBehaviour
             StartCoroutine(WaitForGridAndSpawnItem(ItemType.Flag));
             StartCoroutine(WaitForGridAndSpawnItem(ItemType.Armor));
             StartCoroutine(WaitForGridAndSpawnItem(ItemType.Missile));
+            StartCoroutine(WaitForGridAndSpawnItem(ItemType.Gasoline));
         }
     }
 
@@ -293,6 +294,12 @@ public class ItemManager : MonoBehaviour
                 {
                     // Handle missile pickup
                     Debug.Log("Player picked up missile!");
+                    
+                }
+                else if (itemTag == "Gasoline")
+                {
+                    // Handle gasoline pickup
+                    Debug.Log("Player picked up gasoline!");
                     
                 }
                 // Add more item types here as needed

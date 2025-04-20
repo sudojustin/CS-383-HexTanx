@@ -7,7 +7,8 @@ public enum ItemType
     HealthPack,
     Flag,
     Armor,
-    Missile
+    Missile,
+    Gasoline
     // TODO: Add other item types here later
 }
 
@@ -40,6 +41,7 @@ public class ItemFactory : MonoBehaviour
     public GameObject flagPrefab;
     public GameObject armorPrefab;
     public GameObject missilePrefab;
+    public GameObject gasolinePrefab;
 
     // Creates and returns a new item of the specified type at the given position.
     // <param name="type">The type of item to create (from ItemType enum)</param>
@@ -63,6 +65,9 @@ public class ItemFactory : MonoBehaviour
                 break;
             case ItemType.Missile:
                 prefabToSpawn = missilePrefab;
+                break;
+            case ItemType.Gasoline:
+                prefabToSpawn = gasolinePrefab;
                 break;
             // TODO: Add cases for other item types here
             default:
@@ -88,6 +93,7 @@ public class ItemFactory : MonoBehaviour
             case ItemType.Flag:       newItem.tag = "Flag"; break;
             case ItemType.Armor:      newItem.tag = "Armor"; break;
             case ItemType.Missile:    newItem.tag = "missile"; break;
+            case ItemType.Gasoline:   newItem.tag = "gasoline"; break;
             // TODO: Add cases for other item types here
         }
 
