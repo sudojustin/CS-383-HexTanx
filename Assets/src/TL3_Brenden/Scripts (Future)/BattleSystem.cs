@@ -323,12 +323,24 @@ public class BattleSystem : MonoBehaviour
     void GameWon()
     {
         state = BattleState.WON;
+        string currentLevel = SceneManager.GetActiveScene().name;
+
+        /*if(currentLevel == "Level666")
+        {
+            string returnLevel = PlayerPrefs.GetString("LostFromLevel", "Level1");
+            SceneManager.LoadScene(returnLevel);
+        }*/
         SceneManager.LoadScene("Assets/Scenes/GameOverWin.unity");
     }
 
     void GameLost()
     {
         state = BattleState.LOST;
+
+        string currentLevel = SceneManager.GetActiveScene().name;
+        PlayerPrefs.SetString("LostFromLevel", currentLevel);
+        PlayerPrefs.Save();
+
         SceneManager.LoadScene("Assets/Scenes/GameOverLose.unity");
     }
 
@@ -336,6 +348,11 @@ public class BattleSystem : MonoBehaviour
     {
         string currentSceneName = SceneManager.GetActiveScene().name;
 
+        if (currentSceneName == "Level666")
+        {
+            string returnLevel = PlayerPrefs.GetString("LostFromLevel", "Level1");
+            SceneManager.LoadScene(returnLevel);
+        }
         switch (currentSceneName)
         {
             case "Level1": SceneManager.LoadScene("Assets/Scenes/Level2.unity"); break;
