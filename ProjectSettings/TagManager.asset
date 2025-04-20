@@ -13,6 +13,7 @@ TagManager:
   - Armor
   - Flag
   - HealthPack
+  - missile
   layers:
   - Default
   - TransparentFX

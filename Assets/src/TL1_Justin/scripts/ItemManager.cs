@@ -165,6 +165,7 @@ public class ItemManager : MonoBehaviour
             StartCoroutine(WaitForGridAndSpawnItem(ItemType.HealthPack));
             StartCoroutine(WaitForGridAndSpawnItem(ItemType.Flag));
             StartCoroutine(WaitForGridAndSpawnItem(ItemType.Armor));
+            StartCoroutine(WaitForGridAndSpawnItem(ItemType.Missile));
         }
     }
 
@@ -288,6 +289,12 @@ public class ItemManager : MonoBehaviour
                         Debug.LogError("SoundManager.Instance is null! Cannot play healthpickup sound.");
                     }
                 }
+                else if (itemTag == "Missile")
+                {
+                    // Handle missile pickup
+                    Debug.Log("Player picked up missile!");
+                    
+                }
                 // Add more item types here as needed
                 // else if (itemType.Contains("PowerUp")) { ... }
                 // else if (itemType.Contains("Ammo")) { ... }
@@ -394,6 +401,11 @@ public class ItemManager : MonoBehaviour
         // If item was successfully created, add it to the tracking list
         if (spawnedItem != null)
         {
+            if (itemTypeToSpawn == ItemType.Missile)
+            {
+                spawnedItem.transform.Rotate(0, 0, -45f);
+            }
+            
             spawnedItems.Add(spawnedItem);
         }
         // If creation failed, error is already logged by the factory
