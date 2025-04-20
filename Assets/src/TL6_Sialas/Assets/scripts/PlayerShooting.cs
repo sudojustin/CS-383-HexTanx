@@ -9,6 +9,7 @@ public class PlayerShooting : MonoBehaviour
     private Camera mainCamera;
     private PlayerTank playerTank;
     private PlaceTile placeTile;
+    private PlayerModeManager modeManager;
 
     void Start()
     {
@@ -25,6 +26,12 @@ public class PlayerShooting : MonoBehaviour
         {
             Debug.LogError("PlaceTile not found in scene!");
         }
+
+        modeManager = FindObjectOfType<PlayerModeManager>();
+        if (modeManager == null)
+        {
+            Debug.LogError("PlayerModeManager not found in scene!");
+        }
         // Find the BarrelTip child
         if (barrelTip == null)
         {
@@ -35,6 +42,7 @@ public class PlayerShooting : MonoBehaviour
             }
         }
     }
+
 
     void Update()
     {
@@ -53,36 +61,39 @@ public class PlayerShooting : MonoBehaviour
         transform.rotation = Quaternion.Euler(0, 0, angle);
 
         // Right-click to shoot
-        if (Input.GetMouseButtonDown(1))
+        if (modeManager.GetCurrentMode() == PlayerModeManager.PlayerMode.Shoot)
         {
-            // Check if there are enough action points and ammo before proceeding
-            if (playerTank.GetActionPoints() <= 0)
+            if (Input.GetMouseButtonDown(0))
             {
-                Debug.Log("No action points remaining!");
-                return;
-            }
-            if (playerTank.GetAmmoCount() <= 0)
-            {
-                Debug.Log("No ammo remaining!");
-                return;
-            }
-
-            // Get the nearest tile to the mouse position
-            Vector3 targetTilePos = FindNearestTile(mouseWorldPos);
-            if (targetTilePos != Vector3.zero) // Check if a valid tile was found
-            {
-                // Deduct action point only if a valid tile is found
-                if (playerTank.UseActionPoint())
+                // Check if there are enough action points and ammo before proceeding
+                if (playerTank.GetActionPoints() <= 0)
                 {
-                    Shoot(targetTilePos);
-                    playerTank.SetAmmoCount(playerTank.GetAmmoCount() - 1);  // Deduct ammo
-                    Debug.Log("Shot fired toward tile center: " + targetTilePos);
-                    FindObjectOfType<BattleSystem>().PlayerActionTaken();
+                    Debug.Log("No action points remaining!");
+                    return;
                 }
-            }
-            else
-            {
-                Debug.Log("Mouse position is not over a valid tile - shot cancelled.");
+                if (playerTank.GetAmmoCount() <= 0)
+                {
+                    Debug.Log("No ammo remaining!");
+                    return;
+                }
+
+                // Get the nearest tile to the mouse position
+                Vector3 targetTilePos = FindNearestTile(mouseWorldPos);
+                if (targetTilePos != Vector3.zero) // Check if a valid tile was found
+                {
+                    // Deduct action point only if a valid tile is found
+                    if (playerTank.UseActionPoint())
+                    {
+                        Shoot(targetTilePos);
+                        playerTank.SetAmmoCount(playerTank.GetAmmoCount() - 1);  // Deduct ammo
+                        Debug.Log("Shot fired toward tile center: " + targetTilePos);
+                        FindObjectOfType<BattleSystem>().PlayerActionTaken();
+                    }
+                }
+                else
+                {
+                    Debug.Log("Mouse position is not over a valid tile - shot cancelled.");
+                }
             }
         }
     }
@@ -182,3 +193,147 @@ public class PlayerShooting : MonoBehaviour
         Debug.Log("Shot fired toward enemy at tile center: " + enemyPosition);
     }
 }
+
+
+
+//using UnityEngine;
+
+//public class PlayerShooting : MonoBehaviour
+//{
+//    [SerializeField] private GameObject projectilePrefab;
+//    [SerializeField] private AudioClip shootSoundOverride;
+//    [SerializeField] private float angleOffset = 0f;
+//    [SerializeField] private Transform barrelTip;
+//    private Camera mainCamera;
+//    private PlayerTank playerTank;
+//    private PlaceTile placeTile;
+//    private PlayerModeManager modeManager;
+
+//    void Start()
+//    {
+//        mainCamera = Camera.main;
+//        playerTank = GetComponentInParent<PlayerTank>();
+//        if (playerTank == null)
+//        {
+//            Debug.LogError("PlayerTank component not found in parent!");
+//        }
+//        placeTile = FindObjectOfType<PlaceTile>();
+//        if (placeTile == null)
+//        {
+//            Debug.LogError("PlaceTile not found in scene!");
+//        }
+//        modeManager = FindObjectOfType<PlayerModeManager>();
+//        if (modeManager == null)
+//        {
+//            Debug.LogError("PlayerModeManager not found in scene!");
+//        }
+//        if (barrelTip == null)
+//        {
+//            barrelTip = transform.Find("BarrelTip");
+//            if (barrelTip == null)
+//            {
+//                Debug.LogError("BarrelTip not found! Please add a BarrelTip child to the Turret.");
+//            }
+//        }
+//    }
+
+//    void Update()
+//    {
+//        // Rotate the turret to face the mouse
+//        Vector3 mouseWorldPos = mainCamera.ScreenToWorldPoint(Input.mousePosition);
+//        mouseWorldPos.z = 0;
+
+//        Vector3 direction = mouseWorldPos - transform.position;
+//        direction.z = 0;
+
+//        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg + angleOffset;
+//        transform.rotation = Quaternion.Euler(0, 0, angle);
+
+//        // Left-click to shoot (only in Shoot Mode)
+//        if (modeManager.GetCurrentMode() == PlayerModeManager.PlayerMode.Shoot)
+//        {
+//            if (Input.GetMouseButtonDown(0))
+//            {
+//                Vector3 targetTilePos = FindNearestTile(mouseWorldPos);
+//                if (targetTilePos != Vector3.zero)
+//                {
+//                    Shoot(targetTilePos);
+//                    Debug.Log("Shot fired toward tile center: " + targetTilePos);
+//                    FindObjectOfType<BattleSystem>().PlayerActionTaken();
+//                }
+//                else
+//                {
+//                    Debug.Log("Mouse position is not over a valid tile - shot cancelled.");
+//                }
+//            }
+//        }
+//    }
+
+//    void Shoot(Vector3 targetPosition)
+//    {
+//        if (shootSoundOverride != null)
+//        {
+//            SoundManager.GetInstance().Play(shootSoundOverride);
+//        }
+//        else
+//        {
+//            SoundManager.GetInstance().ShootSound();
+//        }
+//        Debug.Log("Shoot sound triggered via SoundManager");
+
+//        if (barrelTip != null)
+//        {
+//            GameObject bullet = Instantiate(projectilePrefab, barrelTip.position, transform.rotation);
+//            Projectile projectileScript = bullet.GetComponent<Projectile>();
+//            if (projectileScript != null)
+//            {
+//                projectileScript.SetTarget(targetPosition);
+//            }
+//        }
+//        else
+//        {
+//            Debug.LogWarning("BarrelTip is null - spawning projectile at turret position instead.");
+//            GameObject bullet = Instantiate(projectilePrefab, transform.position, transform.rotation);
+//            Projectile projectileScript = bullet.GetComponent<Projectile>();
+//            if (projectileScript != null)
+//            {
+//                projectileScript.SetTarget(targetPosition);
+//            }
+//        }
+//    }
+
+//    private Vector3 FindNearestTile(Vector3 position)
+//    {
+//        if (placeTile == null || placeTile.Grid == null)
+//        {
+//            Debug.LogError("PlaceTile or Grid not available");
+//            return Vector3.zero;
+//        }
+
+//        Vector3 nearestPos = placeTile.Grid[0, 0];
+//        float minDistance = Vector3.Distance(position, nearestPos);
+
+//        for (int x = 0; x < placeTile.Grid.GetLength(0); x++)
+//        {
+//            for (int y = 0; y < placeTile.Grid.GetLength(1); y++)
+//            {
+//                float distance = Vector3.Distance(position, placeTile.Grid[x, y]);
+//                if (distance < minDistance)
+//                {
+//                    minDistance = distance;
+//                    nearestPos = placeTile.Grid[x, y];
+//                }
+//            }
+//        }
+
+//        float maxTileDistance = 0.5f;
+//        if (minDistance <= maxTileDistance)
+//        {
+//            return new Vector3(nearestPos.x, nearestPos.y, -1);
+//        }
+//        else
+//        {
+//            return Vector3.zero;
+//        }
+//    }
+//}
