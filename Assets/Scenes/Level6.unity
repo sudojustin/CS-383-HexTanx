@@ -201,7 +201,7 @@ MonoBehaviour:
   level666TankPrefab: {fileID: 0}
   levelEasterTankPrefab: {fileID: 828717156048577208, guid: a3048a77260e1d54b9c2827fc0d0318e, type: 3}
   level5TankPrefab: {fileID: 6808895572007798491, guid: a2c61bdade7ac504eb439c0bcddbbf46, type: 3}
-  level6TankPrefab: {fileID: 6808895572007798491, guid: a2c61bdade7ac504eb439c0bcddbbf46, type: 3}
+  level6TankPrefab: {fileID: 3397550733788121487, guid: 2f7dbe4c211b21a4dac83e52a2627ac2, type: 3}
   level7TankPrefab: {fileID: 5853255753955477684, guid: 124c90c5edb42704aa9883264b8e116d, type: 3}
   level8TankPrefab: {fileID: 5853255753955477684, guid: 124c90c5edb42704aa9883264b8e116d, type: 3}
   level9TankPrefab: {fileID: 5853255753955477684, guid: 124c90c5edb42704aa9883264b8e116d, type: 3}
@@ -831,6 +831,8 @@ MonoBehaviour:
   healthPackPrefab: {fileID: 3847540538026537556, guid: cc8d7b08bf09b9b45845ca5e7440993e, type: 3}
   flagPrefab: {fileID: 3847540538026537556, guid: 92bf06fa689edbb4e8fe4486190d90d4, type: 3}
   armorPrefab: {fileID: 3847540538026537556, guid: 695faaae9445ca8418bd85805dca5717, type: 3}
+  missilePrefab: {fileID: 6770410816448842570, guid: 79592184049cfe840ab984042e4df8cc, type: 3}
+  gasolinePrefab: {fileID: 4092747988097983325, guid: c6c49528d3a2f814287522b7a6dcde87, type: 3}
 --- !u!4 &1476425126
 Transform:
   m_ObjectHideFlags: 0

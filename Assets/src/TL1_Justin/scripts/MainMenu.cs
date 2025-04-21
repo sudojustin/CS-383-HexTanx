@@ -6,6 +6,13 @@ public class MainMenu : MonoBehaviour
 {
     public GameObject MainMenuScreen;
 
+    public void Start()
+    {
+        string currentLevel = UnityEngine.SceneManagement.SceneManager.GetActiveScene().name;
+        PlayerPrefs.SetString("LostFromLevel", currentLevel);
+        PlayerPrefs.Save();
+    }
+
     public void Update()
     {
         if (Input.GetKeyDown(KeyCode.H))

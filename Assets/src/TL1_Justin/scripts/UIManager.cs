@@ -1,18 +1,26 @@
 using UnityEngine;
 using UnityEngine.UI;
+using System.Collections.Generic;
 
 public class UIManager : MonoBehaviour
 {
     public GameObject UICanvas;
-    public Texture2D logoTexture; // Add public reference for the logo
+    public Texture2D logoTexture;
     private PlayerTank player;
-    private TankType enemyTank;
+    private List<TankType> enemyTanks = new List<TankType>();
     private int lastActionPoints = -1;
     private int lastEnemyHealth = -1;
     private Texture2D uiBackgroundTexture;
     private Texture2D healthBarTexture;
     private Texture2D healthBarBackgroundTexture;
     private Texture2D tankIconTexture;
+    
+    // Turn notification variables
+    private bool isPlayerTurn = true;
+    private bool turnJustChanged = false;
+    private float turnNotificationDuration = 2.5f;
+    private float turnNotificationTimer = 0f;
+    private string turnNotificationMessage = "";
 
     // Health bar visual properties
     private float healthBarWidth = 0.5f;    // World space width
@@ -24,12 +32,10 @@ public class UIManager : MonoBehaviour
         // Instantiate the UI Canvas from the prefab
         GameObject UICanvasInstance = Instantiate(UICanvas, transform);
         
-        // Create solid background texture
         uiBackgroundTexture = new Texture2D(1, 1);
         uiBackgroundTexture.SetPixel(0, 0, new Color(0.25f, 0.25f, 0.27f, 1f)); // Darker gunmetal color
         uiBackgroundTexture.Apply();
         
-        // Create health bar textures
         healthBarTexture = new Texture2D(1, 1);
         healthBarTexture.SetPixel(0, 0, Color.red); // Red health bar
         healthBarTexture.Apply();
@@ -62,19 +68,26 @@ public class UIManager : MonoBehaviour
             player = playerObject.GetComponent<PlayerTank>();
         }
         
-        // Find enemy tank
-        GameObject enemyObject = GameObject.FindWithTag("EnemyTank");
+        // Clear the previous list
+        enemyTanks.Clear();
         
-        if (enemyObject != null)
+        // Find all enemy tanks
+        GameObject[] enemyObjects = GameObject.FindGameObjectsWithTag("EnemyTank");
+        
+        foreach (GameObject enemyObject in enemyObjects)
         {
-            enemyTank = enemyObject.GetComponent<TankType>();
+            TankType enemyTank = enemyObject.GetComponent<TankType>();
+            if (enemyTank != null)
+            {
+                enemyTanks.Add(enemyTank);
+            }
         }
     }
 
     void Update()
     {
         // If we don't have references, try to find them again
-        if (player == null || enemyTank == null)
+        if (player == null || enemyTanks.Count == 0)
         {
             FindTanks();
             return;
@@ -89,10 +102,40 @@ public class UIManager : MonoBehaviour
             lastActionPoints = playerActionPoints;
         }
         
-        // Track enemy health changes
-        if (enemyTank != null && enemyTank.health != lastEnemyHealth)
+        // No need to track a single enemy health since we have multiple
+        
+        CheckTurnState();
+        
+        if (turnJustChanged)
         {
-            lastEnemyHealth = enemyTank.health;
+            turnNotificationTimer = turnNotificationDuration;
+            turnJustChanged = false;
+        }
+        
+        if (turnNotificationTimer > 0)
+        {
+            turnNotificationTimer -= Time.deltaTime;
+        }
+    }
+    
+    // Check if turn state has changed
+    private void CheckTurnState()
+    {
+        bool currentIsPlayerTurn = player.GetActionPoints() > 0;
+        
+        if (currentIsPlayerTurn != isPlayerTurn)
+        {
+            isPlayerTurn = currentIsPlayerTurn;
+            turnJustChanged = true;
+            
+            if (isPlayerTurn)
+            {
+                turnNotificationMessage = "PLAYER TURN";
+            }
+            else
+            {
+                turnNotificationMessage = "ENEMY TURN";
+            }
         }
     }
 
@@ -165,88 +208,136 @@ public class UIManager : MonoBehaviour
             );
         }
         
-        // Draw enemy health bar above the enemy tank
         DrawEnemyHealthBar();
+        DrawTurnNotificationBanner();
     }
     
-    // Draw health bar directly above enemy tank in world space
     void DrawEnemyHealthBar()
     {
-        if (enemyTank == null) return;
-        
-        // Get the enemy's position in world space
-        Vector3 enemyPosition = enemyTank.transform.position;
-        
-        // Convert enemy position to screen space
-        Vector3 screenPos = Camera.main.WorldToScreenPoint(enemyPosition);
-        
-        // Determine max health based on enemy tank's type name
-        float maxHealth = 100f;
-        string tankTypeName = enemyTank.GetType().Name;
-        
-        // TankType hierarchy from codebase search results
-        if (tankTypeName == "Level1Tank") maxHealth = 50f;
-        else if (tankTypeName == "Level2Tank") maxHealth = 75f;
-        else if (tankTypeName == "Level3Tank") maxHealth = 100f; 
-        else if (tankTypeName == "Level4Tank") maxHealth = 125f;
-        
-        // Calculate health percentage based on actual max health
-        float healthPercent = Mathf.Clamp01((float)enemyTank.health / maxHealth);
-        
-        // Health bar position (above the tank)
-        float barWidth = 60f; // Screen pixels
-        float barHeight = 8f; // Screen pixels
-        float borderSize = 1f; // Border size in pixels
-        float padding = 4f;  // Space between health bar and icon
-        
-        // Ensure the health bar is visible when the enemy is on screen
-        if (screenPos.z > 0 && 
-            screenPos.x > 0 && screenPos.x < Screen.width &&
-            screenPos.y > 0 && screenPos.y < Screen.height)
+        // Draw health bars for all enemy tanks
+        foreach (TankType enemyTank in enemyTanks)
         {
-            // Determine if we should flash the health bar (when health is low)
-            bool shouldFlash = healthPercent <= 0.3f;
-            bool flashOn = !shouldFlash || (shouldFlash && Mathf.PingPong(Time.time * 2.5f, 1f) > 0.5f);
+            if (enemyTank == null) continue;
             
-            // Apply flashing effect - hide the bar entirely when flashing off
-            if (flashOn)
+            Vector3 enemyPosition = enemyTank.transform.position;
+            Vector3 screenPos = Camera.main.WorldToScreenPoint(enemyPosition);
+            
+            float maxHealth = 100f;
+            string tankTypeName = enemyTank.GetType().Name;
+            
+            if (tankTypeName == "Level1Tank") maxHealth = 50f;
+            else if (tankTypeName == "Level2Tank") maxHealth = 100f;
+            else if (tankTypeName == "Level3Tank") maxHealth = 150f; 
+            else if (tankTypeName == "Level4Tank") maxHealth = 300f;
+            else if (tankTypeName == "Level5Tank") maxHealth = 300f;
+            else if (tankTypeName == "Level6Tank") maxHealth = 300f;
+            else if (tankTypeName == "Level7Tank") maxHealth = 300f;
+            else if (tankTypeName == "Level8Tank") maxHealth = 300f;
+            else if (tankTypeName == "Level9Tank1") maxHealth = 300f;
+            else if (tankTypeName == "Level10Tank1") maxHealth = 300f;
+            else if (tankTypeName == "Level666Tank") maxHealth = 666f;
+            else if (tankTypeName == "LevelEasterTank") maxHealth = 366f;
+            
+            // Calculate health percentage based on actual max health
+            float healthPercent = Mathf.Clamp01((float)enemyTank.health / maxHealth);
+            
+            // Health bar position (above the tank)
+            float barWidth = 60f; // Screen pixels
+            float barHeight = 8f; // Screen pixels
+            float borderSize = 1f; // Border size in pixels
+            float padding = 4f;  // Space between health bar and icon
+            
+            if (screenPos.z > 0 && 
+                screenPos.x > 0 && screenPos.x < Screen.width &&
+                screenPos.y > 0 && screenPos.y < Screen.height)
             {
-                // Draw black border
-                GUI.color = Color.black;
-                GUI.DrawTexture(
-                    new Rect(screenPos.x - barWidth/2 - borderSize, 
-                            Screen.height - screenPos.y - barHeight - 25 - borderSize, 
-                            barWidth + borderSize*2, 
-                            barHeight + borderSize*2),
-                    healthBarBackgroundTexture);
+                bool shouldFlash = healthPercent <= 0.3f;
+                bool flashOn = !shouldFlash || (shouldFlash && Mathf.PingPong(Time.time * 2.5f, 1f) > 0.5f);
                 
-                // Draw health bar background (dark gray)
-                GUI.color = new Color(0.2f, 0.2f, 0.2f);
-                GUI.DrawTexture(
-                    new Rect(screenPos.x - barWidth/2, 
-                            Screen.height - screenPos.y - barHeight - 25, 
-                            barWidth, 
-                            barHeight),
-                    healthBarBackgroundTexture);
-                
-                // Calculate health color - rusty orange-red theme
-                Color healthColor;
-                if (healthPercent > 0.6f)
-                    healthColor = new Color(0.8f, 0.4f, 0.2f);  // Rusty orange (high health)
-                else if (healthPercent > 0.3f)
-                    healthColor = new Color(0.7f, 0.3f, 0.1f);  // Darker rust (medium health)
-                else
-                    healthColor = new Color(0.6f, 0.1f, 0.1f);  // Dark red rust (low health)
-                
-                // Draw health bar foreground (colored by health)
-                GUI.color = healthColor;
-                GUI.DrawTexture(
-                    new Rect(screenPos.x - barWidth/2, 
-                            Screen.height - screenPos.y - barHeight - 25,
-                            barWidth * healthPercent, 
-                            barHeight),
-                    healthBarTexture);
+                if (flashOn)
+                {
+                    GUI.color = Color.black;
+                    GUI.DrawTexture(
+                        new Rect(screenPos.x - barWidth/2 - borderSize, 
+                                Screen.height - screenPos.y - barHeight - 25 - borderSize, 
+                                barWidth + borderSize*2, 
+                                barHeight + borderSize*2),
+                        healthBarBackgroundTexture);
+                    
+                    GUI.color = new Color(0.2f, 0.2f, 0.2f);
+                    GUI.DrawTexture(
+                        new Rect(screenPos.x - barWidth/2, 
+                                Screen.height - screenPos.y - barHeight - 25, 
+                                barWidth, 
+                                barHeight),
+                        healthBarBackgroundTexture);
+
+                    Color healthColor;
+                    if (healthPercent > 0.6f)
+                        healthColor = new Color(0.8f, 0.4f, 0.2f);  // Rusty orange (high health)
+                    else if (healthPercent > 0.3f)
+                        healthColor = new Color(0.7f, 0.3f, 0.1f);  // Darker rust (medium health)
+                    else
+                        healthColor = new Color(0.6f, 0.1f, 0.1f);  // Dark red rust (low health)
+                    
+                    GUI.color = healthColor;
+                    GUI.DrawTexture(
+                        new Rect(screenPos.x - barWidth/2, 
+                                Screen.height - screenPos.y - barHeight - 25,
+                                barWidth * healthPercent, 
+                                barHeight),
+                        healthBarTexture);
+                }
             }
         }
+    }
+    
+    void DrawTurnNotificationBanner()
+    {
+        if (turnNotificationTimer <= 0) return;
+        
+        float bannerHeight = 60f;
+        float bannerAlpha = Mathf.Min(1f, turnNotificationTimer / 0.5f);
+        if (turnNotificationTimer < 0.5f)
+        {
+            bannerAlpha = turnNotificationTimer / 0.5f;
+        }
+        
+        float bannerY = 0f;
+        if (turnNotificationTimer > (turnNotificationDuration - 0.5f))
+        {
+            float slideProgress = (turnNotificationDuration - turnNotificationTimer) / 0.5f;
+            bannerY = Mathf.Lerp(-bannerHeight, 0f, slideProgress);
+        }
+        else if (turnNotificationTimer < 0.5f)
+        {
+            float slideProgress = turnNotificationTimer / 0.5f;
+            bannerY = Mathf.Lerp(0f, -bannerHeight, 1f - slideProgress);
+        }
+        
+        GUIStyle bannerBoxStyle = new GUIStyle(GUI.skin.box);
+        bannerBoxStyle.normal.background = uiBackgroundTexture;
+        
+        GUIStyle bannerTextStyle = new GUIStyle(GUI.skin.label);
+        bannerTextStyle.fontSize = 32;
+        bannerTextStyle.alignment = TextAnchor.MiddleCenter;
+        bannerTextStyle.fontStyle = FontStyle.Bold;
+        
+        if (isPlayerTurn)
+        {
+            // Rusty orange for player turn
+            bannerTextStyle.normal.textColor = new Color(0.8f, 0.4f, 0.2f, bannerAlpha);
+        }
+        else
+        {
+            // Dark red rust for enemy turn
+            bannerTextStyle.normal.textColor = new Color(0.6f, 0.1f, 0.1f, bannerAlpha);
+        }
+        
+        Color originalColor = GUI.color;
+        GUI.color = new Color(1f, 1f, 1f, bannerAlpha * 0.8f);
+        GUI.Box(new Rect(0, bannerY, Screen.width, bannerHeight), "", bannerBoxStyle);
+        GUI.color = originalColor;
+        GUI.Label(new Rect(0, bannerY, Screen.width, bannerHeight), turnNotificationMessage, bannerTextStyle);
     }
 }

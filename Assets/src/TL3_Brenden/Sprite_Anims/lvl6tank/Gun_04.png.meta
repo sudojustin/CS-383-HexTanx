@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 6d7c1de9717910643a560856fd6d32da
+guid: 12a4dab7647657443888a5c5709436c3
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 6898977551451890924
-    second: DemonTankGun_0
+      213: 1303003683583847679
+    second: Gun_04_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -96,30 +96,17 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 4
-    buildTarget: Android
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: DemonTankGun_0
+      name: Gun_04_0
       rect:
         serializedVersion: 2
-        x: 14
-        y: 15
-        width: 274
-        height: 426
+        x: 0
+        y: 0
+        width: 94
+        height: 191
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -128,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: ce42fabd7871ebf50800000000000000
-      internalID: 6898977551451890924
+      spriteID: ffc6a0552f2351210800000000000000
+      internalID: 1303003683583847679
       vertices: []
       indices: 
       edges: []
@@ -148,7 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      DemonTankGun_0: 6898977551451890924
+      Gun_04_0: 1303003683583847679
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
