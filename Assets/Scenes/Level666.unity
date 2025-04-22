@@ -993,7 +993,7 @@ MonoBehaviour:
   max: 8
   Tile: {fileID: 3187486204259752003, guid: fb509e204ee3c384d804c94889eeb1d6, type: 3}
   Terrain1: {fileID: 3591277320102712311, guid: 72ca29d6cca473a49bb60cf2fabf75bd, type: 3}
-  Terrain2: {fileID: 823776615930616340, guid: 0886b4cdd3ebfc5449ec78d0087bbf46, type: 3}
+  Terrain2: {fileID: 823776615930616340, guid: 4f3c76b8a7b6e3c4c82b2f707fbeb9e0, type: 3}
   Terrain3: {fileID: 6058086397388559358, guid: 6a205ce5ee0eaca4abec3fd00800e90d, type: 3}
   cam: {fileID: 519420031}
 --- !u!4 &1796920186
