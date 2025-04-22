@@ -262,7 +262,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 4329668998957390498, guid: 79c3c9f671f7d2843afd7522302750f2, type: 3}
+  m_Sprite: {fileID: 1846843145208790672, guid: fbed194dd6550d746943b77643475b53, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -934,6 +934,8 @@ MonoBehaviour:
   armorPrefab: {fileID: 3847540538026537556, guid: 695faaae9445ca8418bd85805dca5717, type: 3}
   missilePrefab: {fileID: 6770410816448842570, guid: 79592184049cfe840ab984042e4df8cc, type: 3}
   gasolinePrefab: {fileID: 4092747988097983325, guid: c6c49528d3a2f814287522b7a6dcde87, type: 3}
+  biblePrefab: {fileID: 0}
+  easterEggPrefab: {fileID: 0}
 --- !u!4 &1476425126
 Transform:
   m_ObjectHideFlags: 0
