@@ -32,7 +32,7 @@ public class TankManager : MonoBehaviour
                 return level4TankPrefab;
             case "Level666":
                 return level666TankPrefab;
-            case "EasterLevel":
+            case "LevelEaster":
                 return levelEasterTankPrefab;
             case "Level5":
                 return level5TankPrefab;

@@ -1985,6 +1985,8 @@ MonoBehaviour:
   pickupClip: {fileID: 8300000, guid: 3ec5a07565395444fade487d5b055724, type: 3}
   healthPickupClip: {fileID: 8300000, guid: 705da86ed2ab4524b8a69ac27aa179fa, type: 3}
   flagPickupClip: {fileID: 8300000, guid: 8ebabccd33f07b645a32061a33718f55, type: 3}
+  oilPickupClip: {fileID: 8300000, guid: 21fcf37b4f08f4f4287b4f767e21e50b, type: 3}
+  biblePickupClip: {fileID: 8300000, guid: 39e559fa7ac14f241b865ae5ce7048ae, type: 3}
   playerMoveClip: {fileID: 8300000, guid: 4afde902b8823b14bbd212a57d85d211, type: 3}
   enemyMoveClip: {fileID: 8300000, guid: 4afde902b8823b14bbd212a57d85d211, type: 3}
   bossEnemyMoveClip: {fileID: 8300000, guid: 316fc2e33a5c64944a0d724f2992f733, type: 3}

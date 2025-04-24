@@ -23,6 +23,7 @@ public class SoundManager : MonoBehaviour
     [SerializeField] private AudioClip healthPickupClip;
     [SerializeField] private AudioClip flagPickupClip;
     [SerializeField] private AudioClip oilPickupClip;
+    [SerializeField] private AudioClip biblePickupClip;
     [SerializeField] private AudioClip playerMoveClip;
     [SerializeField] private AudioClip enemyMoveClip;
     [SerializeField] private AudioClip bossEnemyMoveClip;
@@ -349,6 +350,19 @@ public class SoundManager : MonoBehaviour
         else
         {
             Debug.LogWarning("oilPickupClip is null in PickupSound!");
+        }
+    }
+
+    public void biblePickupSound()
+    {
+        if (biblePickupClip != null)
+        {
+            //Debug.Log($"Playing flag pickup sound: {flagPickupClip.name}, volume={effectsVolume}, isPlaying={pickupSource.isPlaying}");
+            pickupSource.PlayOneShot(biblePickupClip, effectsVolume);
+        }
+        else
+        {
+            Debug.LogWarning("biblePickupClip is null in PickupSound!");
         }
     }
 

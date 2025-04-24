@@ -169,7 +169,7 @@ public class ItemManager : MonoBehaviour
             StartCoroutine(WaitForGridAndSpawnItem(ItemType.HealthPack));
             
             // Check current scene to determine if we should spawn Flag or Bible
-            if (currentScene == "EasterLevel" || currentScene == "Level666")
+            if (currentScene == "LevelEaster" || currentScene == "Level666")
             {
                 // In Easter level, spawn Bible instead of Flag
                 StartCoroutine(WaitForGridAndSpawnItem(ItemType.Bible));
@@ -302,7 +302,7 @@ public class ItemManager : MonoBehaviour
                     // Play flag pickup sound if SoundManager is available
                     if (SoundManager.GetInstance() != null)
                     {
-                        SoundManager.GetInstance().flagPickupSound();
+                        SoundManager.GetInstance().biblePickupSound();
                         Debug.Log("Played flag pickup sound for bible pickup.");
                     }
                     else
@@ -340,7 +340,7 @@ public class ItemManager : MonoBehaviour
 
                     // Load the EasterLevel scene
                     Debug.Log("Loading EasterLevel scene...");
-                    SceneManager.LoadScene("EasterLevel");
+                    SceneManager.LoadScene("LevelEaster");
                 }
                 else if (itemTag == "Armor")
                 {

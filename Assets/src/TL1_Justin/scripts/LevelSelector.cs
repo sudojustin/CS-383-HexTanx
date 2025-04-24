@@ -81,6 +81,6 @@ public class LevelSelector : MonoBehaviour
     public void LevelEasterButton()
     {
         SoundManager.GetInstance().buttonSound();
-        UnityEngine.SceneManagement.SceneManager.LoadScene("EasterLevel");
+        UnityEngine.SceneManagement.SceneManager.LoadScene("LevelEaster");
     }
 }
