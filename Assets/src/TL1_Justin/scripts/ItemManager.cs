@@ -367,11 +367,20 @@ public class ItemManager : MonoBehaviour
                     Debug.Log("Player picked up missile!");
                     
                 }
-                else if (itemTag == "Gasoline")
+                else if (itemTag == "gasoline")
                 {
                     // Handle gasoline pickup
                     Debug.Log("Player picked up gasoline!");
-                    
+                    if (SoundManager.GetInstance() != null)
+                    {
+                        SoundManager.GetInstance().oilPickupSound();
+                        Debug.Log("Played oilpickup sound.");
+                    }
+                    else
+                    {
+                        Debug.LogError("SoundManager.Instance is null! Cannot play healthpickup sound.");
+                    }
+
                 }
                 // Add more item types here as needed
                 // else if (itemType.Contains("PowerUp")) { ... }

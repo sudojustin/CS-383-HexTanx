@@ -1977,6 +1977,7 @@ MonoBehaviour:
   effectsVolume: 1
   musicVolume: 1
   shootClip: {fileID: 8300000, guid: ccc9f98f936239543b641504ccbe69b3, type: 3}
+  missileClip: {fileID: 8300000, guid: 781c1a2b5b04d0148818875ee2a126fb, type: 3}
   bossShootClip: {fileID: 8300000, guid: bd3d13cfbe7694c489ae48e44aef3a28, type: 3}
   tronShootClip: {fileID: 8300000, guid: 04d946d48eb35464daad3d553bacd1bd, type: 3}
   hurtClip: {fileID: 0}

@@ -14,6 +14,7 @@ public class SoundManager : MonoBehaviour
 
     // Sound effect clips
     [SerializeField] private AudioClip shootClip;
+    [SerializeField] private AudioClip missileClip;
     [SerializeField] private AudioClip bossShootClip;
     [SerializeField] private AudioClip tronShootClip;
     [SerializeField] private AudioClip hurtClip;
@@ -21,6 +22,7 @@ public class SoundManager : MonoBehaviour
     [SerializeField] private AudioClip pickupClip;
     [SerializeField] private AudioClip healthPickupClip;
     [SerializeField] private AudioClip flagPickupClip;
+    [SerializeField] private AudioClip oilPickupClip;
     [SerializeField] private AudioClip playerMoveClip;
     [SerializeField] private AudioClip enemyMoveClip;
     [SerializeField] private AudioClip bossEnemyMoveClip;
@@ -337,10 +339,28 @@ public class SoundManager : MonoBehaviour
         }
     }
 
+    public void oilPickupSound()
+    {
+        if(oilPickupClip != null)
+        {
+            //Debug.Log($"Playing flag pickup sound: {flagPickupClip.name}, volume={effectsVolume}, isPlaying={pickupSource.isPlaying}");
+            pickupSource.PlayOneShot(oilPickupClip, effectsVolume);
+        }
+        else
+        {
+            Debug.LogWarning("oilPickupClip is null in PickupSound!");
+        }
+    }
+
     // Sound effect methods
     public void ShootSound()
     {
         Play(shootClip);
+    }
+
+    public void missileSound()
+    {
+        Play(missileClip);
     }
 
     public void enemyBossShootSound()
