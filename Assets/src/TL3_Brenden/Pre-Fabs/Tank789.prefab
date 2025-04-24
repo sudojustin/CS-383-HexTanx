@@ -122,6 +122,7 @@ GameObject:
   - component: {fileID: 6961149645129649847}
   - component: {fileID: 6799339542701246752}
   - component: {fileID: -3147730274692474485}
+  - component: {fileID: 4021905352168019616}
   m_Layer: 0
   m_Name: Tank789
   m_TagString: EnemyTank
@@ -231,6 +232,59 @@ MonoBehaviour:
   tankLocation: {x: 0, y: 0, z: 0}
   damage: 0
   enemyActionPoints: 0
+--- !u!60 &4021905352168019616
+PolygonCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5853255753955477684}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1.34, y: 2.4}
+    newSize: {x: 1, y: 1}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Points:
+    m_Paths:
+    - - {x: -0.65999997, y: 1.1999999}
+      - {x: -0.66999996, y: 1.13}
+      - {x: -0.66999996, y: -1.1999999}
+      - {x: 0.66999996, y: -1.1999999}
+      - {x: 0.66999996, y: 1.14}
+      - {x: 0.61, y: 1.1999999}
+  m_UseDelaunayMesh: 0
 --- !u!1 &5914107634966909663
 GameObject:
   m_ObjectHideFlags: 0
