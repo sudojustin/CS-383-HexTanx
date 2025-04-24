@@ -133,7 +133,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   projectilePrefab: {fileID: 5096755278267770118, guid: fa59b1c497cc9ef4ca4c4b6d92ed3e24, type: 3}
+  missileProjectilePrefab: {fileID: 5096755278267770118, guid: 236f98b2810496d4f886ddfdd31db6b9, type: 3}
   shootSoundOverride: {fileID: 0}
+  missileShootSoundOverride: {fileID: 0}
   angleOffset: 0
   barrelTip: {fileID: 0}
 --- !u!1 &6663526132452910008

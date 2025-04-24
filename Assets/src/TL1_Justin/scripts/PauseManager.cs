@@ -117,6 +117,18 @@ public class PauseManager : MonoBehaviour
             {
                 SoundManager.GetInstance().finalBattleMusic();
             }
+            else if (SceneManager.GetActiveScene().name == "Level5")
+            {
+                SoundManager.GetInstance().animeMusic();
+            }
+            else if (SceneManager.GetActiveScene().name == "Level10")
+            {
+                SoundManager.GetInstance().technoMusic();
+            }
+            else if (SceneManager.GetActiveScene().name == "Level666")
+            {
+                SoundManager.GetInstance().hellMusic();
+            }
             else
             {
                 SoundManager.GetInstance().BattleMusic();

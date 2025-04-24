@@ -2,10 +2,12 @@ using UnityEngine;
 
 public class PlayerShooting : MonoBehaviour
 {
-    [SerializeField] private GameObject projectilePrefab;
-    [SerializeField] private AudioClip shootSoundOverride; 
-    [SerializeField] private float angleOffset = 0f; 
-    [SerializeField] private Transform barrelTip; 
+    [SerializeField] private GameObject projectilePrefab; // Normal tank shell prefab
+    [SerializeField] private GameObject missileProjectilePrefab; // New missile projectile prefab
+    [SerializeField] private AudioClip shootSoundOverride;
+    [SerializeField] private AudioClip missileShootSoundOverride; // Optional: Different sound for missile
+    [SerializeField] private float angleOffset = 0f;
+    [SerializeField] private Transform barrelTip;
     private Camera mainCamera;
     private PlayerTank playerTank;
     private PlaceTile placeTile;
@@ -14,13 +16,11 @@ public class PlayerShooting : MonoBehaviour
     void Start()
     {
         mainCamera = Camera.main;
-        // Get PlayerTank from the GameObject
         playerTank = GetComponentInParent<PlayerTank>();
         if (playerTank == null)
         {
             Debug.LogError("PlayerTank component not found in parent!");
         }
-        // Get PlaceTile for grid access
         placeTile = FindObjectOfType<PlaceTile>();
         if (placeTile == null)
         {
@@ -32,7 +32,6 @@ public class PlayerShooting : MonoBehaviour
         {
             Debug.LogError("PlayerModeManager not found in scene!");
         }
-        // Find the BarrelTip child
         if (barrelTip == null)
         {
             barrelTip = transform.Find("BarrelTip");
@@ -43,29 +42,23 @@ public class PlayerShooting : MonoBehaviour
         }
     }
 
-
     void Update()
     {
         // Rotate the turret to face the mouse
         Vector3 mouseWorldPos = mainCamera.ScreenToWorldPoint(Input.mousePosition);
-        mouseWorldPos.z = 0; // Ensure Z matches the turret's Z (2D game)
+        mouseWorldPos.z = 0;
 
-        // Calculate the direction from the turret to the mouse
         Vector3 direction = mouseWorldPos - transform.position;
-        direction.z = 0; 
+        direction.z = 0;
 
-        // Calculate the angle
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg + angleOffset;
-
-        // Rotate the turret to face the mouse
         transform.rotation = Quaternion.Euler(0, 0, angle);
 
-        // Right-click to shoot
+        // Left-click to shoot (only in Shoot Mode)
         if (modeManager.GetCurrentMode() == PlayerModeManager.PlayerMode.Shoot)
         {
             if (Input.GetMouseButtonDown(0))
             {
-                // Check if there are enough action points and ammo before proceeding
                 if (playerTank.GetActionPoints() <= 0)
                 {
                     Debug.Log("No action points remaining!");
@@ -77,15 +70,13 @@ public class PlayerShooting : MonoBehaviour
                     return;
                 }
 
-                // Get the nearest tile to the mouse position
                 Vector3 targetTilePos = FindNearestTile(mouseWorldPos);
-                if (targetTilePos != Vector3.zero) // Check if a valid tile was found
+                if (targetTilePos != Vector3.zero)
                 {
-                    // Deduct action point only if a valid tile is found
                     if (playerTank.UseActionPoint())
                     {
                         Shoot(targetTilePos);
-                        playerTank.SetAmmoCount(playerTank.GetAmmoCount() - 1);  // Deduct ammo
+                        playerTank.SetAmmoCount(playerTank.GetAmmoCount() - 1);
                         Debug.Log("Shot fired toward tile center: " + targetTilePos);
                         FindObjectOfType<BattleSystem>().PlayerActionTaken();
                     }
@@ -100,37 +91,96 @@ public class PlayerShooting : MonoBehaviour
 
     void Shoot(Vector3 targetPosition)
     {
-        // Play shoot sound 
-        if (shootSoundOverride != null)
+        // Determine if we should use the missile or normal projectile
+        bool useMissile = playerTank.HasMissile();
+        Debug.Log($"Has Missile: {useMissile}");
+
+        GameObject prefabToUse = useMissile ? missileProjectilePrefab : projectilePrefab;
+        Debug.Log($"Prefab to use: {(prefabToUse != null ? prefabToUse.name : "null")}");
+
+        AudioClip soundToPlay = useMissile ? missileShootSoundOverride : shootSoundOverride;
+
+        if (soundToPlay != null)
         {
-            SoundManager.GetInstance().Play(shootSoundOverride); 
+            SoundManager.GetInstance().Play(soundToPlay);
         }
         else
         {
-            SoundManager.GetInstance().ShootSound(); 
+            SoundManager.GetInstance().ShootSound();
         }
         Debug.Log("Shoot sound triggered via SoundManager");
 
-        // Instantiate projectile at barrel tip position and turret rotation
         if (barrelTip != null)
         {
-            GameObject bullet = Instantiate(projectilePrefab, barrelTip.position, transform.rotation);
+            GameObject bullet = Instantiate(prefabToUse, barrelTip.position, transform.rotation);
+            Debug.Log($"Instantiated bullet: {bullet.name}");
 
-            // Move projectile toward target
-            Projectile projectileScript = bullet.GetComponent<Projectile>();
-            if (projectileScript != null)
+            if (useMissile)
             {
-                projectileScript.SetTarget(targetPosition);
+                MissileProjectile missileScript = bullet.GetComponent<MissileProjectile>();
+                Debug.Log($"Missile script found: {missileScript != null}");
+                if (missileScript != null)
+                {
+                    missileScript.SetTarget(targetPosition);
+                    Debug.Log($"Missile damage: {missileScript.damage}");
+                    playerTank.ActivateMissile(false); // Consume the missile (now matches the signature)
+                    Debug.Log("Missile consumed after firing");
+                }
+                else
+                {
+                    Debug.LogWarning("MissileProjectile component not found on instantiated bullet!");
+                }
+            }
+            else
+            {
+                Projectile projectileScript = bullet.GetComponent<Projectile>();
+                Debug.Log($"Projectile script found: {projectileScript != null}");
+                if (projectileScript != null)
+                {
+                    projectileScript.SetTarget(targetPosition);
+                    Debug.Log($"Projectile damage: {projectileScript.damage}");
+                }
+                else
+                {
+                    Debug.LogWarning("Projectile component not found on instantiated bullet!");
+                }
             }
         }
         else
         {
             Debug.LogWarning("BarrelTip is null - spawning projectile at turret position instead.");
-            GameObject bullet = Instantiate(projectilePrefab, transform.position, transform.rotation);
-            Projectile projectileScript = bullet.GetComponent<Projectile>();
-            if (projectileScript != null)
+            GameObject bullet = Instantiate(prefabToUse, transform.position, transform.rotation);
+            Debug.Log($"Instantiated bullet: {bullet.name}");
+
+            if (useMissile)
             {
-                projectileScript.SetTarget(targetPosition);
+                MissileProjectile missileScript = bullet.GetComponent<MissileProjectile>();
+                Debug.Log($"Missile script found: {missileScript != null}");
+                if (missileScript != null)
+                {
+                    missileScript.SetTarget(targetPosition);
+                    Debug.Log($"Missile damage: {missileScript.damage}");
+                    playerTank.ActivateMissile(false); // Consume the missile
+                    Debug.Log("Missile consumed after firing");
+                }
+                else
+                {
+                    Debug.LogWarning("MissileProjectile component not found on instantiated bullet!");
+                }
+            }
+            else
+            {
+                Projectile projectileScript = bullet.GetComponent<Projectile>();
+                Debug.Log($"Projectile script found: {projectileScript != null}");
+                if (projectileScript != null)
+                {
+                    projectileScript.SetTarget(targetPosition);
+                    Debug.Log($"Projectile damage: {projectileScript.damage}");
+                }
+                else
+                {
+                    Debug.LogWarning("Projectile component not found on instantiated bullet!");
+                }
             }
         }
     }
@@ -140,10 +190,9 @@ public class PlayerShooting : MonoBehaviour
         if (placeTile == null || placeTile.Grid == null)
         {
             Debug.LogError("PlaceTile or Grid not available");
-            return Vector3.zero; // Return invalid position if grid isn’t available
+            return Vector3.zero;
         }
 
-        // Find the nearest tile to the mouse position
         Vector3 nearestPos = placeTile.Grid[0, 0];
         float minDistance = Vector3.Distance(position, nearestPos);
 
@@ -160,19 +209,17 @@ public class PlayerShooting : MonoBehaviour
             }
         }
 
-        // Check if the mouse is over a valid tile (e.g., within a certain distance threshold)
-        float maxTileDistance = 0.5f; 
+        float maxTileDistance = 0.5f;
         if (minDistance <= maxTileDistance)
         {
-            // Return the tile center
-            return new Vector3(nearestPos.x, nearestPos.y, -1); 
+            return new Vector3(nearestPos.x, nearestPos.y, -1);
         }
         else
         {
-            // Return invalid position if mouse isn’t over a tile
-            return Vector3.zero; 
+            return Vector3.zero;
         }
     }
+
     public void ShootAtEnemy()
     {
         GameObject enemyTank = GameObject.FindWithTag("EnemyTank");
@@ -183,157 +230,7 @@ public class PlayerShooting : MonoBehaviour
         }
 
         Vector3 enemyPosition = enemyTank.transform.position;
-        //if (targetTilePos == Vector3.zero)
-        //{
-        //    Debug.LogWarning("Enemy position is not over a valid tile - shot cancelled.");
-        //    return;
-        //}
-
         Shoot(enemyPosition);
         Debug.Log("Shot fired toward enemy at tile center: " + enemyPosition);
     }
 }
-
-
-
-//using UnityEngine;
-
-//public class PlayerShooting : MonoBehaviour
-//{
-//    [SerializeField] private GameObject projectilePrefab;
-//    [SerializeField] private AudioClip shootSoundOverride;
-//    [SerializeField] private float angleOffset = 0f;
-//    [SerializeField] private Transform barrelTip;
-//    private Camera mainCamera;
-//    private PlayerTank playerTank;
-//    private PlaceTile placeTile;
-//    private PlayerModeManager modeManager;
-
-//    void Start()
-//    {
-//        mainCamera = Camera.main;
-//        playerTank = GetComponentInParent<PlayerTank>();
-//        if (playerTank == null)
-//        {
-//            Debug.LogError("PlayerTank component not found in parent!");
-//        }
-//        placeTile = FindObjectOfType<PlaceTile>();
-//        if (placeTile == null)
-//        {
-//            Debug.LogError("PlaceTile not found in scene!");
-//        }
-//        modeManager = FindObjectOfType<PlayerModeManager>();
-//        if (modeManager == null)
-//        {
-//            Debug.LogError("PlayerModeManager not found in scene!");
-//        }
-//        if (barrelTip == null)
-//        {
-//            barrelTip = transform.Find("BarrelTip");
-//            if (barrelTip == null)
-//            {
-//                Debug.LogError("BarrelTip not found! Please add a BarrelTip child to the Turret.");
-//            }
-//        }
-//    }
-
-//    void Update()
-//    {
-//        // Rotate the turret to face the mouse
-//        Vector3 mouseWorldPos = mainCamera.ScreenToWorldPoint(Input.mousePosition);
-//        mouseWorldPos.z = 0;
-
-//        Vector3 direction = mouseWorldPos - transform.position;
-//        direction.z = 0;
-
-//        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg + angleOffset;
-//        transform.rotation = Quaternion.Euler(0, 0, angle);
-
-//        // Left-click to shoot (only in Shoot Mode)
-//        if (modeManager.GetCurrentMode() == PlayerModeManager.PlayerMode.Shoot)
-//        {
-//            if (Input.GetMouseButtonDown(0))
-//            {
-//                Vector3 targetTilePos = FindNearestTile(mouseWorldPos);
-//                if (targetTilePos != Vector3.zero)
-//                {
-//                    Shoot(targetTilePos);
-//                    Debug.Log("Shot fired toward tile center: " + targetTilePos);
-//                    FindObjectOfType<BattleSystem>().PlayerActionTaken();
-//                }
-//                else
-//                {
-//                    Debug.Log("Mouse position is not over a valid tile - shot cancelled.");
-//                }
-//            }
-//        }
-//    }
-
-//    void Shoot(Vector3 targetPosition)
-//    {
-//        if (shootSoundOverride != null)
-//        {
-//            SoundManager.GetInstance().Play(shootSoundOverride);
-//        }
-//        else
-//        {
-//            SoundManager.GetInstance().ShootSound();
-//        }
-//        Debug.Log("Shoot sound triggered via SoundManager");
-
-//        if (barrelTip != null)
-//        {
-//            GameObject bullet = Instantiate(projectilePrefab, barrelTip.position, transform.rotation);
-//            Projectile projectileScript = bullet.GetComponent<Projectile>();
-//            if (projectileScript != null)
-//            {
-//                projectileScript.SetTarget(targetPosition);
-//            }
-//        }
-//        else
-//        {
-//            Debug.LogWarning("BarrelTip is null - spawning projectile at turret position instead.");
-//            GameObject bullet = Instantiate(projectilePrefab, transform.position, transform.rotation);
-//            Projectile projectileScript = bullet.GetComponent<Projectile>();
-//            if (projectileScript != null)
-//            {
-//                projectileScript.SetTarget(targetPosition);
-//            }
-//        }
-//    }
-
-//    private Vector3 FindNearestTile(Vector3 position)
-//    {
-//        if (placeTile == null || placeTile.Grid == null)
-//        {
-//            Debug.LogError("PlaceTile or Grid not available");
-//            return Vector3.zero;
-//        }
-
-//        Vector3 nearestPos = placeTile.Grid[0, 0];
-//        float minDistance = Vector3.Distance(position, nearestPos);
-
-//        for (int x = 0; x < placeTile.Grid.GetLength(0); x++)
-//        {
-//            for (int y = 0; y < placeTile.Grid.GetLength(1); y++)
-//            {
-//                float distance = Vector3.Distance(position, placeTile.Grid[x, y]);
-//                if (distance < minDistance)
-//                {
-//                    minDistance = distance;
-//                    nearestPos = placeTile.Grid[x, y];
-//                }
-//            }
-//        }
-
-//        float maxTileDistance = 0.5f;
-//        if (minDistance <= maxTileDistance)
-//        {
-//            return new Vector3(nearestPos.x, nearestPos.y, -1);
-//        }
-//        else
-//        {
-//            return Vector3.zero;
-//        }
-//    }
-//}

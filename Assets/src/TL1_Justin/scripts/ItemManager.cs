@@ -360,9 +360,10 @@ public class ItemManager : MonoBehaviour
                         Debug.LogError("SoundManager.Instance is null! Cannot play healthpickup sound.");
                     }
                 }
-                else if (itemTag == "Missile")
+                else if (itemTag == "missile")
                 {
                     // Handle missile pickup
+                    playerTank.ActivateMissile(true);
                     Debug.Log("Player picked up missile!");
                     
                 }
