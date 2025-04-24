@@ -14,15 +14,22 @@ public class SoundManager : MonoBehaviour
 
     // Sound effect clips
     [SerializeField] private AudioClip shootClip;
+    [SerializeField] private AudioClip missileClip;
     [SerializeField] private AudioClip bossShootClip;
+    [SerializeField] private AudioClip tronShootClip;
     [SerializeField] private AudioClip hurtClip;
     [SerializeField] private AudioClip explodeClip;
     [SerializeField] private AudioClip pickupClip;
     [SerializeField] private AudioClip healthPickupClip;
     [SerializeField] private AudioClip flagPickupClip;
+    [SerializeField] private AudioClip oilPickupClip;
+    [SerializeField] private AudioClip biblePickupClip;
     [SerializeField] private AudioClip playerMoveClip;
     [SerializeField] private AudioClip enemyMoveClip;
     [SerializeField] private AudioClip bossEnemyMoveClip;
+    [SerializeField] private AudioClip animeMoveClip;
+    [SerializeField] private AudioClip demonMoveClip;
+    [SerializeField] private AudioClip tronMoveClip;
     [SerializeField] private AudioClip buttonClip;
 
     // Music clips
@@ -159,7 +166,6 @@ public class SoundManager : MonoBehaviour
             case "level9":
                 winterMusic();
                 break;
-
             case "level10":
                 technoMusic();
                 Debug.Log("Attempting to play TronLevel music.");
@@ -334,15 +340,51 @@ public class SoundManager : MonoBehaviour
         }
     }
 
+    public void oilPickupSound()
+    {
+        if(oilPickupClip != null)
+        {
+            //Debug.Log($"Playing flag pickup sound: {flagPickupClip.name}, volume={effectsVolume}, isPlaying={pickupSource.isPlaying}");
+            pickupSource.PlayOneShot(oilPickupClip, effectsVolume);
+        }
+        else
+        {
+            Debug.LogWarning("oilPickupClip is null in PickupSound!");
+        }
+    }
+
+    public void biblePickupSound()
+    {
+        if (biblePickupClip != null)
+        {
+            //Debug.Log($"Playing flag pickup sound: {flagPickupClip.name}, volume={effectsVolume}, isPlaying={pickupSource.isPlaying}");
+            pickupSource.PlayOneShot(biblePickupClip, effectsVolume);
+        }
+        else
+        {
+            Debug.LogWarning("biblePickupClip is null in PickupSound!");
+        }
+    }
+
     // Sound effect methods
     public void ShootSound()
     {
         Play(shootClip);
     }
 
+    public void missileSound()
+    {
+        Play(missileClip);
+    }
+
     public void enemyBossShootSound()
     {
         Play(bossShootClip);
+    }
+
+    public void tronShootSound()
+    {
+        Play(tronShootClip);
     }
     public void buttonSound()
     {
@@ -372,7 +414,18 @@ public class SoundManager : MonoBehaviour
     {
         PlayMovementSound(bossEnemyMoveClip);
     }
-   
+    public void animeMoveSound()
+    {
+        PlayMovementSound(animeMoveClip);
+    }
+    public void demonMoveSound()
+    {
+        PlayMovementSound(demonMoveClip);
+    }
+    public void tronMoveSound()
+    {
+        PlayMovementSound(tronMoveClip);
+    }
     // Music methods
     public void MenuMusic()
     {

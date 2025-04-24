@@ -359,6 +359,7 @@ public class BattleSystem : MonoBehaviour
             case "Level2": SceneManager.LoadScene("Assets/Scenes/Level3.unity"); break;
             case "Level3": SceneManager.LoadScene("Assets/Scenes/Level4.unity"); break;
             case "Level4": SceneManager.LoadScene("Assets/Scenes/Level5.unity"); break;
+            case "LevelEaster": SceneManager.LoadScene("Assets/Scenes/Level5.unity"); break;
             case "Level5": SceneManager.LoadScene("Assets/Scenes/Level6.unity"); break;
             case "Level6": SceneManager.LoadScene("Assets/Scenes/Level7.unity"); break;
             case "Level7": SceneManager.LoadScene("Assets/Scenes/Level8.unity"); break;
