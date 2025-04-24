@@ -62,9 +62,13 @@ public class AIControl : MonoBehaviour
          }
          Vector3 targetPosition = playerTank.GetTankLocation();
         //Debug.Log("Vector3, bullet gamebobject");
-        if (tank is Level4Tank)
+        if (tank is Level4Tank || tank is Level4377Tank)
         {
             SoundManager.GetInstance().enemyBossShootSound();
+        }
+        else if (tank is Level10Tank1 )
+        {
+            SoundManager.GetInstance().tronShootSound();
         }
         else
         {
@@ -115,6 +119,14 @@ public class AIControl : MonoBehaviour
             else if (tank is Level5Tank)
             {
                 SoundManager.GetInstance().animeMoveSound();
+            }
+            else if (tank is Level10Tank1)
+            {
+                SoundManager.GetInstance().tronMoveSound();
+            }
+            else if (tank is Level4377Tank)
+            {
+                SoundManager.GetInstance().demonMoveSound();
             }
             else
             {

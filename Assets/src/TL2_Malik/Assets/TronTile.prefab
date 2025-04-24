@@ -103,7 +103,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Base: {r: 1, g: 1, b: 1, a: 1}
   Offset: {r: 0, g: 0, b: 0, a: 0}
-  hightlight: {r: 1, g: 1, b: 1, a: 1}
+  hightlight: {r: 0.28315237, g: 0.76194143, b: 0.9528302, a: 1}
   rend: {fileID: 7491683576150760568}
   playerhere: {r: 0.9528302, g: 0, b: 0.80841535, a: 1}
 --- !u!61 &8648067282215973883
@@ -150,5 +150,5 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 2.5939698, y: 2.575378}
+  m_Size: {x: 6, y: 7}
   m_EdgeRadius: 0

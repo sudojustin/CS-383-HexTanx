@@ -149,6 +149,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Base: {r: 1, g: 1, b: 1, a: 1}
   Offset: {r: 0, g: 0, b: 0, a: 0}
-  hightlight: {r: 1, g: 1, b: 1, a: 1}
+  hightlight: {r: 0.764151, g: 0.764151, b: 0.764151, a: 1}
   rend: {fileID: 5952746925295499524}
   playerhere: {r: 0, g: 0, b: 0, a: 0}

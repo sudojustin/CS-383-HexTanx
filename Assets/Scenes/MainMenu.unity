@@ -1978,6 +1978,7 @@ MonoBehaviour:
   musicVolume: 1
   shootClip: {fileID: 8300000, guid: ccc9f98f936239543b641504ccbe69b3, type: 3}
   bossShootClip: {fileID: 8300000, guid: bd3d13cfbe7694c489ae48e44aef3a28, type: 3}
+  tronShootClip: {fileID: 8300000, guid: 04d946d48eb35464daad3d553bacd1bd, type: 3}
   hurtClip: {fileID: 0}
   explodeClip: {fileID: 8300000, guid: 31356047f04d8674aae9ad9d8632bf2f, type: 3}
   pickupClip: {fileID: 8300000, guid: 3ec5a07565395444fade487d5b055724, type: 3}
@@ -1987,6 +1988,8 @@ MonoBehaviour:
   enemyMoveClip: {fileID: 8300000, guid: 4afde902b8823b14bbd212a57d85d211, type: 3}
   bossEnemyMoveClip: {fileID: 8300000, guid: 316fc2e33a5c64944a0d724f2992f733, type: 3}
   animeMoveClip: {fileID: 8300000, guid: c1c06c4c162cf634a9bbb2ca64015c4a, type: 3}
+  demonMoveClip: {fileID: 8300000, guid: cd93174b34186824db1c5a137777f98d, type: 3}
+  tronMoveClip: {fileID: 8300000, guid: 6d2e221ac4dfd0d478441ce8eaa72a5c, type: 3}
   buttonClip: {fileID: 8300000, guid: 72cc2b90da8b11f42b66689e60161404, type: 3}
   menuMusicClip: {fileID: 8300000, guid: 5ee0e9a6c906cb04ab702c8f3ca59bac, type: 3}
   battleMusicClip: {fileID: 8300000, guid: 98a6386ec8337794aba5192894e0bb4a, type: 3}

@@ -15,6 +15,7 @@ public class SoundManager : MonoBehaviour
     // Sound effect clips
     [SerializeField] private AudioClip shootClip;
     [SerializeField] private AudioClip bossShootClip;
+    [SerializeField] private AudioClip tronShootClip;
     [SerializeField] private AudioClip hurtClip;
     [SerializeField] private AudioClip explodeClip;
     [SerializeField] private AudioClip pickupClip;
@@ -24,6 +25,8 @@ public class SoundManager : MonoBehaviour
     [SerializeField] private AudioClip enemyMoveClip;
     [SerializeField] private AudioClip bossEnemyMoveClip;
     [SerializeField] private AudioClip animeMoveClip;
+    [SerializeField] private AudioClip demonMoveClip;
+    [SerializeField] private AudioClip tronMoveClip;
     [SerializeField] private AudioClip buttonClip;
 
     // Music clips
@@ -160,7 +163,6 @@ public class SoundManager : MonoBehaviour
             case "level9":
                 winterMusic();
                 break;
-
             case "level10":
                 technoMusic();
                 Debug.Log("Attempting to play TronLevel music.");
@@ -345,6 +347,11 @@ public class SoundManager : MonoBehaviour
     {
         Play(bossShootClip);
     }
+
+    public void tronShootSound()
+    {
+        Play(tronShootClip);
+    }
     public void buttonSound()
     {
         Play(buttonClip);
@@ -377,7 +384,14 @@ public class SoundManager : MonoBehaviour
     {
         PlayMovementSound(animeMoveClip);
     }
-
+    public void demonMoveSound()
+    {
+        PlayMovementSound(demonMoveClip);
+    }
+    public void tronMoveSound()
+    {
+        PlayMovementSound(tronMoveClip);
+    }
     // Music methods
     public void MenuMusic()
     {
