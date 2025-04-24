@@ -23,6 +23,7 @@ public class SoundManager : MonoBehaviour
     [SerializeField] private AudioClip playerMoveClip;
     [SerializeField] private AudioClip enemyMoveClip;
     [SerializeField] private AudioClip bossEnemyMoveClip;
+    [SerializeField] private AudioClip animeMoveClip;
     [SerializeField] private AudioClip buttonClip;
 
     // Music clips
@@ -372,7 +373,11 @@ public class SoundManager : MonoBehaviour
     {
         PlayMovementSound(bossEnemyMoveClip);
     }
-   
+    public void animeMoveSound()
+    {
+        PlayMovementSound(animeMoveClip);
+    }
+
     // Music methods
     public void MenuMusic()
     {

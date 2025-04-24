@@ -112,6 +112,10 @@ public class AIControl : MonoBehaviour
             {
                 SoundManager.GetInstance().bossEnemyMoveSound();
             }
+            else if (tank is Level5Tank)
+            {
+                SoundManager.GetInstance().animeMoveSound();
+            }
             else
             {
                 SoundManager.GetInstance().EnemyMoveSound();
