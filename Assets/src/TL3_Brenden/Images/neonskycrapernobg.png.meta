@@ -134,7 +134,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      neonskycrapernobg_0: 8452981605837628906
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

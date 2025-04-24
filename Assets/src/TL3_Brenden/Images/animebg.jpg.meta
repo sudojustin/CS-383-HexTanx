@@ -134,7 +134,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      animebg_0: 6608721786804100960
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
