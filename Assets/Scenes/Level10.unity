@@ -934,6 +934,8 @@ MonoBehaviour:
   armorPrefab: {fileID: 3847540538026537556, guid: 695faaae9445ca8418bd85805dca5717, type: 3}
   missilePrefab: {fileID: 6770410816448842570, guid: 79592184049cfe840ab984042e4df8cc, type: 3}
   gasolinePrefab: {fileID: 4092747988097983325, guid: c6c49528d3a2f814287522b7a6dcde87, type: 3}
+  biblePrefab: {fileID: 0}
+  easterEggPrefab: {fileID: 0}
 --- !u!4 &1476425126
 Transform:
   m_ObjectHideFlags: 0
@@ -990,8 +992,8 @@ MonoBehaviour:
   min: 8
   max: 8
   Tile: {fileID: 3187486204259752003, guid: 219338408db1a774a93e51600245002a, type: 3}
-  Terrain1: {fileID: 3591277320102712311, guid: 72ca29d6cca473a49bb60cf2fabf75bd, type: 3}
-  Terrain2: {fileID: 823776615930616340, guid: 0886b4cdd3ebfc5449ec78d0087bbf46, type: 3}
+  Terrain1: {fileID: 3591277320102712311, guid: 40b02475a3ccaa14c87fed740724b6a3, type: 3}
+  Terrain2: {fileID: 823776615930616340, guid: 282bd04810742a84396935526a8f00d3, type: 3}
   Terrain3: {fileID: 6058086397388559358, guid: 6a205ce5ee0eaca4abec3fd00800e90d, type: 3}
   cam: {fileID: 519420031}
 --- !u!4 &1796920186
