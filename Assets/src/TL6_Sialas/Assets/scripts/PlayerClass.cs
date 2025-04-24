@@ -15,6 +15,8 @@ public abstract class Ptank : MonoBehaviour
     private bool hasArmorShield = false; // Tracks if the player has an active armor shield
     private const float armorDamageReduction = 0.5f; // 50% damage reduction for the next shot
 
+    private bool hasMissile = false;
+
     public abstract void Initialize();
     void Start()
     {
@@ -72,6 +74,16 @@ public abstract class Ptank : MonoBehaviour
         hasArmorShield = true;
         Debug.Log("Armor shield activated! Next shot damage will be reduced by 50%.");
     }
+    public bool HasMissile()
+    {
+        Debug.Log($"HasMissile checked: {hasMissile}");
+        return hasMissile;
+    }
+    public void ActivateMissile(bool value) // Add parameter to match usage
+    {
+        hasMissile = value;
+        Debug.Log($"Missile activated: {hasMissile}");
+    }
 
     public void TakeDamage(int damage)
     {
@@ -110,6 +122,7 @@ public abstract class Ptank : MonoBehaviour
     {
         return hasArmorShield;
     }
+
 
     public void SetActionPoints(int newPoints)
     {
