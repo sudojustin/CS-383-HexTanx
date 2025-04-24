@@ -1993,6 +1993,8 @@ MonoBehaviour:
   hellMusicClip: {fileID: 8300000, guid: 210f174e07e5fa049a809ff863df1a8d, type: 3}
   technoMusicClip: {fileID: 8300000, guid: 21b68c3d901c08d4ca62114a74fc1f18, type: 3}
   animeMusicClip: {fileID: 8300000, guid: 727e179b64e7f3a4685cded4a8b86172, type: 3}
+  desertMusicClip: {fileID: 8300000, guid: 25ac40c07d3f7024e90d42011c81ed11, type: 3}
+  winterMusicClip: {fileID: 8300000, guid: fd2fee9170697564cb66b3086cbfb2a4, type: 3}
   pauseMusicClip: {fileID: 8300000, guid: f8d5eddf3e97f064db9fe6a7fd9c441e, type: 3}
   winMusicClip: {fileID: 8300000, guid: 70c952827a8a4734880e6d18e94d76d9, type: 3}
   loseMusicClip: {fileID: 8300000, guid: a0c885cc6b5fa86439a694f7fa2a53eb, type: 3}

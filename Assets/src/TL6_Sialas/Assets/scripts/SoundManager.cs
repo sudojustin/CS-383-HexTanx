@@ -32,6 +32,8 @@ public class SoundManager : MonoBehaviour
     [SerializeField] private AudioClip hellMusicClip;
     [SerializeField] private AudioClip technoMusicClip;
     [SerializeField] private AudioClip animeMusicClip;
+    [SerializeField] private AudioClip desertMusicClip;
+    [SerializeField] private AudioClip winterMusicClip;
     [SerializeField] private AudioClip pauseMusicClip;
     [SerializeField] private AudioClip winMusicClip;
     [SerializeField] private AudioClip loseMusicClip;
@@ -145,12 +147,17 @@ public class SoundManager : MonoBehaviour
                 animeMusic();
                 break;
             case "level6":
+                Debug.Log("Attempting to play desert music.");
+                desertMusic();
                 break;
             case "level7":
+                winterMusic();
                 break;
             case "level8":
+                winterMusic();
                 break;
             case "level9":
+                winterMusic();
                 break;
 
             case "level10":
@@ -395,6 +402,16 @@ public class SoundManager : MonoBehaviour
     public void animeMusic()
     {
         PlayMusic(animeMusicClip);
+    }
+
+    public void desertMusic()
+    {
+        PlayMusic(desertMusicClip);
+    }
+
+    public void winterMusic()
+    {
+        PlayMusic(winterMusicClip);
     }
 
     public void PauseMusic()

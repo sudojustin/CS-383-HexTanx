@@ -287,7 +287,7 @@ public class ItemManager : MonoBehaviour
                     if (battleSystem != null)
                     {
                         Debug.Log("BattleSystem found, calling DecideScene");
-                        //battleSystem.SendMessage("DecideScene");
+                        battleSystem.SendMessage("DecideScene");
                     }
                     else
                     {
