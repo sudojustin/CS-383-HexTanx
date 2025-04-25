@@ -355,7 +355,7 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 1902889949}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -892,7 +892,7 @@ MonoBehaviour:
   max: 8
   Tile: {fileID: 3187486204259752003, guid: c72c19ef24186d04db12131d34714407, type: 3}
   Terrain1: {fileID: 3591277320102712311, guid: 72ca29d6cca473a49bb60cf2fabf75bd, type: 3}
-  Terrain2: {fileID: 823776615930616340, guid: 1e2be90ed208a5d49a7d92e2e6a07206, type: 3}
+  Terrain2: {fileID: 823776615930616340, guid: 3ec15bee1ece60241beacbecf6e20b0a, type: 3}
   Terrain3: {fileID: 6058086397388559358, guid: 6a205ce5ee0eaca4abec3fd00800e90d, type: 3}
   cam: {fileID: 519420031}
 --- !u!4 &1796920186
@@ -939,7 +939,8 @@ Transform:
   m_LocalPosition: {x: -5.2015123, y: 3.1803677, z: -0.081622824}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 396975655}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1902889951
@@ -1164,5 +1165,4 @@ SceneRoots:
   - {fileID: 842686177}
   - {fileID: 51977850}
   - {fileID: 1902889949}
-  - {fileID: 396975655}
   - {fileID: 2055157347}
