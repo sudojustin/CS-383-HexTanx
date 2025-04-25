@@ -23,10 +23,10 @@ public class GameOverLose : MonoBehaviour
         }
         
         // Set position immediately
-        // PositionWebcamDisplay();
+        PositionWebcamDisplay();
         
         // Initialize the webcam immediately
-        // InitializeWebcam();
+        InitializeWebcam();
     }
 
     private void PositionWebcamDisplay()
