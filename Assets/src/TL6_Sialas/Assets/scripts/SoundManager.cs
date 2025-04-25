@@ -24,6 +24,7 @@ public class SoundManager : MonoBehaviour
     [SerializeField] private AudioClip flagPickupClip;
     [SerializeField] private AudioClip oilPickupClip;
     [SerializeField] private AudioClip biblePickupClip;
+    [SerializeField] private AudioClip missilePickupClip;
     [SerializeField] private AudioClip playerMoveClip;
     [SerializeField] private AudioClip enemyMoveClip;
     [SerializeField] private AudioClip bossEnemyMoveClip;
@@ -366,6 +367,18 @@ public class SoundManager : MonoBehaviour
         }
     }
 
+    public void missilePickupSound()
+    {
+        if (missilePickupClip != null)
+        {
+            //Debug.Log($"Playing flag pickup sound: {flagPickupClip.name}, volume={effectsVolume}, isPlaying={pickupSource.isPlaying}");
+            pickupSource.PlayOneShot(missilePickupClip, effectsVolume);
+        }
+        else
+        {
+            Debug.LogWarning("missilePickupClip is null in PickupSound!");
+        }
+    }
     // Sound effect methods
     public void ShootSound()
     {

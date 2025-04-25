@@ -365,7 +365,16 @@ public class ItemManager : MonoBehaviour
                     // Handle missile pickup
                     playerTank.ActivateMissile(true);
                     Debug.Log("Player picked up missile!");
-                    
+                    if (SoundManager.GetInstance() != null)
+                    {
+                        SoundManager.GetInstance().missilePickupSound();
+                        Debug.Log("Played missilepickup sound.");
+                    }
+                    else
+                    {
+                        Debug.LogError("SoundManager.Instance is null! Cannot play missilepickup sound.");
+                    }
+
                 }
                 else if (itemTag == "gasoline")
                 {
