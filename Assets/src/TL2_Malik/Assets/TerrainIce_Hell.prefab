@@ -147,8 +147,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 433468d12f78e25449a8f28d7c11d4d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Base: {r: 1, g: 1, b: 1, a: 1}
+  Base: {r: 0.12156863, g: 0.12156863, b: 0.12156863, a: 1}
   Offset: {r: 0, g: 0, b: 0, a: 0}
-  hightlight: {r: 1, g: 1, b: 1, a: 1}
+  hightlight: {r: 0.3962264, g: 0.3962264, b: 0.3962264, a: 1}
   rend: {fileID: 5952746925295499524}
   playerhere: {r: 0, g: 0, b: 0, a: 0}

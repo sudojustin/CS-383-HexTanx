@@ -17,8 +17,8 @@ public class PlayerModeManager : MonoBehaviour
 
     private void Awake()
     {
-        // Ensure the Canvas persists across scenes
-        DontDestroyOnLoad(gameObject);
+        //// Ensure the Canvas persists across scenes
+        //DontDestroyOnLoad(gameObject);
 
         // Get the Canvas component
         canvas = GetComponent<Canvas>();

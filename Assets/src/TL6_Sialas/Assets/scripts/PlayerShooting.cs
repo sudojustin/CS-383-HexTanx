@@ -98,11 +98,11 @@ public class PlayerShooting : MonoBehaviour
         GameObject prefabToUse = useMissile ? missileProjectilePrefab : projectilePrefab;
         Debug.Log($"Prefab to use: {(prefabToUse != null ? prefabToUse.name : "null")}");
 
-        AudioClip soundToPlay = useMissile ? missileShootSoundOverride : shootSoundOverride;
+        //AudioClip soundToPlay = useMissile ? missileShootSoundOverride : shootSoundOverride;
 
-        if (soundToPlay != null)
+        if (useMissile)
         {
-            SoundManager.GetInstance().Play(soundToPlay);
+            SoundManager.GetInstance().missileSound();
         }
         else
         {
