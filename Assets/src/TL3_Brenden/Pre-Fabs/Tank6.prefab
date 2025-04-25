@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 4669898442683433307}
   - component: {fileID: 3334198850382430982}
   - component: {fileID: 8391401677202167421}
-  - component: {fileID: 2873217012915110936}
   - component: {fileID: -5595282233330397534}
+  - component: {fileID: -3235337434931319446}
   m_Layer: 0
   m_Name: Tank6
   m_TagString: EnemyTank
@@ -106,22 +106,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   projectilePrefab: {fileID: 5096755278267770118, guid: f654c3d41696a0c43834dbb6cd54d24e, type: 3}
---- !u!114 &2873217012915110936
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3397550733788121487}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e2051b77e1e7f9e44982099efa3d586f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  health: 0
-  tankLocation: {x: 0, y: 0, z: 0}
-  damage: 0
-  enemyActionPoints: 0
 --- !u!60 &-5595282233330397534
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -175,6 +159,22 @@ PolygonCollider2D:
       - {x: 0.84, y: 1.22}
       - {x: 0.79999995, y: 1.24}
   m_UseDelaunayMesh: 0
+--- !u!114 &-3235337434931319446
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3397550733788121487}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dd2972a17fcf5fd48838ee2b1290cb5b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 0
+  tankLocation: {x: 0, y: 0, z: 0}
+  damage: 0
+  enemyActionPoints: 0
 --- !u!1 &6445351766608667066
 GameObject:
   m_ObjectHideFlags: 0
