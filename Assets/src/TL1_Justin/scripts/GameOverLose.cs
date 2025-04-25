@@ -53,38 +53,60 @@ public class GameOverLose : MonoBehaviour
     private void InitializeWebcam()
     {
         Debug.Log("Initializing webcam. Available devices: " + WebCamTexture.devices.Length);
-        
+
         // Check if any webcams are available
         if (WebCamTexture.devices.Length > 0)
         {
+            // Log all available devices
             foreach (WebCamDevice device in WebCamTexture.devices)
             {
-                Debug.Log("Found webcam: " + device.name);
+                Debug.Log($"Found webcam: {device.name}, IsFrontFacing: {device.isFrontFacing}");
             }
-            
+
+            // Find the first front-facing camera
+            WebCamDevice? selectedDevice = null;
+            foreach (WebCamDevice device in WebCamTexture.devices)
+            {
+                if (device.isFrontFacing)
+                {
+                    selectedDevice = device;
+                    break;
+                }
+            }
+
             // Simple webcam setup - create webcam texture
-            webcamTexture = new WebCamTexture();
-            Debug.Log("Created WebCamTexture");
-            
+            // If no front-facing camera is found, fall back to the default (first) camera
+            if (selectedDevice.HasValue)
+            {
+                webcamTexture = new WebCamTexture(selectedDevice.Value.name, preferredWidth, preferredHeight, preferredFPS);
+                Debug.Log($"Selected front-facing webcam: {selectedDevice.Value.name}");
+            }
+            else
+            {
+                webcamTexture = new WebCamTexture(preferredWidth, preferredHeight, preferredFPS);
+                Debug.Log("No front-facing webcam found, using default webcam.");
+            }
+
             // Assign to Raw Image
             webcamDisplay.texture = webcamTexture;
             Debug.Log("Assigned webcam texture to RawImage");
-            
+
             // Ensure position is set correctly
             PositionWebcamDisplay();
-            
+
             // Start the webcam
             webcamTexture.Play();
             Debug.Log("Started webcam. Is playing: " + webcamTexture.isPlaying);
-            
-            // Capture the image after a short delay
-            Invoke("CaptureImage", 1.0f);
+
+            Invoke("CaptureImage", 0.25f);
         }
         else
         {
             Debug.LogWarning("No webcam found on this device!");
         }
     }
+
+
 
     private void CaptureImage()
     {
