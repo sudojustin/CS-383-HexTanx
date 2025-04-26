@@ -49,6 +49,10 @@ public abstract class Ptank : MonoBehaviour
     public void SetHealth(int newHealth)
     {
         health = newHealth;
+        if (health > 100)
+        {
+            health = 100;
+        }
     }
 
     public void SetAmmoCount(int newAmmo)
