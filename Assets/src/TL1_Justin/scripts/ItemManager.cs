@@ -380,6 +380,7 @@ public class ItemManager : MonoBehaviour
                 {
                     // Handle gasoline pickup
                     Debug.Log("Player picked up gasoline!");
+                    playerTank.SetActionPoints(playerTank.GetActionPoints() + 3);
                     if (SoundManager.GetInstance() != null)
                     {
                         SoundManager.GetInstance().oilPickupSound();

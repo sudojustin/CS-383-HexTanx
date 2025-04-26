@@ -64,6 +64,15 @@ public abstract class Ptank : MonoBehaviour
         }
     }
 
+    public void SetActionPoints(int newActionPoints)
+    {
+        actionPoints = newActionPoints;
+        if (actionPoints < 0)
+        {
+            actionPoints = 0;
+        }
+    }
+
     public void SetArmorCount(int newArmor)
     {
         armorCount = newArmor;
@@ -121,20 +130,9 @@ public abstract class Ptank : MonoBehaviour
         }
     }
 
-
     public bool HasArmorShield()
     {
         return hasArmorShield;
-    }
-
-
-    public void SetActionPoints(int newPoints)
-    {
-        actionPoints = newPoints;
-        if (actionPoints < 0)
-        {
-            actionPoints = 0;
-        }
     }
 
     public bool UseActionPoint()
