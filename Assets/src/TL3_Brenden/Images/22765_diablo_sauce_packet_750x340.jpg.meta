@@ -134,7 +134,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      22765_diablo_sauce_packet_750x340_0: -8073802489749622853
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
