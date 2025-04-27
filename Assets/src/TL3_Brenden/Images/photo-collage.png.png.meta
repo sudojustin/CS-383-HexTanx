@@ -134,7 +134,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      photo-collage.png_0: 3635280059780471569
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

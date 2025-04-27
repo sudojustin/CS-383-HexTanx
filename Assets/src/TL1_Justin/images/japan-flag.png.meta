@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: f5d4b9a89c45b164694082011e6cdfef
+guid: 2e4034103a137ae43ad52fb9f7926899
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -8073802489749622853
-    second: 22765_diablo_sauce_packet_750x340_0
+      213: -7385891060513316709
+    second: japan-flag-resized_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,13 +100,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: 22765_diablo_sauce_packet_750x340_0
+      name: japan-flag-resized_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 178
-        height: 268
+        x: 5
+        y: 14
+        width: 1185
+        height: 724
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: bbf2fc3996714ff80800000000000000
-      internalID: -8073802489749622853
+      spriteID: b90ee5c663b008990800000000000000
+      internalID: -7385891060513316709
       vertices: []
       indices: 
       edges: []
@@ -135,7 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      22765_diablo_sauce_packet_750x340_0: -8073802489749622853
+      japan-flag-resized_0: -7385891060513316709
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

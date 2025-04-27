@@ -17,6 +17,7 @@ TagManager:
   - gasoline
   - bible
   - easter-egg
+  - japan-flag
   layers:
   - Default
   - TransparentFX

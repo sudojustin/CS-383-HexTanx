@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement; // Add this for SceneManager
 
 public class UIManager : MonoBehaviour
 {
@@ -26,16 +27,26 @@ public class UIManager : MonoBehaviour
     private float healthBarWidth = 0.5f;    // World space width
     private float healthBarHeight = 0.1f;   // World space height
     private float healthBarYOffset = 0.5f;  // How high above the tank
+    
+    // Level indicator
+    private string currentLevelName = "Level 1";
 
     void Start()
     {
         // Instantiate the UI Canvas from the prefab
         GameObject UICanvasInstance = Instantiate(UICanvas, transform);
         
-        uiBackgroundTexture = new Texture2D(1, 1);
-        uiBackgroundTexture.SetPixel(0, 0, new Color(0.25f, 0.25f, 0.27f, 1f)); // Darker gunmetal color
-        uiBackgroundTexture.Apply();
+        // Get current level name
+        currentLevelName = SceneManager.GetActiveScene().name;
         
+        // Format the level name for display
+        FormatLevelName();
+        
+        // Create UI background texture
+        uiBackgroundTexture = new Texture2D(1, 1);
+        uiBackgroundTexture.SetPixel(0, 0, new Color(0f, 0f, 0f, 0.5f)); // Black color with 100% opacity
+        uiBackgroundTexture.Apply();
+
         healthBarTexture = new Texture2D(1, 1);
         healthBarTexture.SetPixel(0, 0, Color.red); // Red health bar
         healthBarTexture.Apply();
@@ -51,6 +62,35 @@ public class UIManager : MonoBehaviour
         
         // Try to find player and enemy
         FindTanks();
+    }
+    
+    // Format the level name for display
+    private void FormatLevelName()
+    {
+        // Handle special level names
+        if (currentLevelName == "Level666")
+        {
+            currentLevelName = "Level 666";
+        }
+        else if (currentLevelName == "LevelEaster")
+        {
+            currentLevelName = "Easter Level";
+        }
+        else if (currentLevelName.StartsWith("Level"))
+        {
+            // For regular levels (Level1, Level2, etc.)
+            string levelNumber = currentLevelName.Substring(5);
+            currentLevelName = "Level " + levelNumber;
+        }
+        // If it's not a level scene, don't display anything
+        else if (currentLevelName == "MainMenu" || 
+                 currentLevelName == "LevelSelector" || 
+                 currentLevelName == "HelpMenu" || 
+                 currentLevelName == "GameOverWin" || 
+                 currentLevelName == "GameOverLose")
+        {
+            currentLevelName = "";
+        }
     }
     
     void FindTanks()
@@ -145,7 +185,7 @@ public class UIManager : MonoBehaviour
         // Create style for UI elements
         GUIStyle style = new GUIStyle(GUI.skin.label);
         style.fontSize = 24;
-        style.normal.textColor = new Color(0.8f, 0.4f, 0.2f); // Rusty orange color
+        style.normal.textColor = Color.white; // White text color
         style.alignment = TextAnchor.MiddleLeft;
         style.fontStyle = FontStyle.Bold;
         
@@ -193,6 +233,15 @@ public class UIManager : MonoBehaviour
             int actionPoints = player.GetActionPoints();
             GUI.Box(new Rect(10, 60, 240, 40), "", boxStyle);
             GUI.Label(new Rect(20, 60, 230, 40), "Action Points: " + actionPoints, style);
+        }
+        
+        // Level indicator in top right (only show if we have a level name)
+        if (!string.IsNullOrEmpty(currentLevelName))
+        {
+            GUIStyle levelStyle = new GUIStyle(style);
+            levelStyle.alignment = TextAnchor.MiddleRight;
+            levelStyle.normal.textColor = Color.white;
+            GUI.Label(new Rect(Screen.width - 250, 10, 230, 40), currentLevelName, levelStyle);
         }
         
         // Draw logo in the bottom left corner

@@ -49,6 +49,10 @@ public abstract class Ptank : MonoBehaviour
     public void SetHealth(int newHealth)
     {
         health = newHealth;
+        if (health > 100)
+        {
+            health = 100;
+        }
     }
 
     public void SetAmmoCount(int newAmmo)
@@ -57,6 +61,15 @@ public abstract class Ptank : MonoBehaviour
         if (ammoCount < 0)
         {
             ammoCount = 0;
+        }
+    }
+
+    public void SetActionPoints(int newActionPoints)
+    {
+        actionPoints = newActionPoints;
+        if (actionPoints < 0)
+        {
+            actionPoints = 0;
         }
     }
 
@@ -117,20 +130,9 @@ public abstract class Ptank : MonoBehaviour
         }
     }
 
-
     public bool HasArmorShield()
     {
         return hasArmorShield;
-    }
-
-
-    public void SetActionPoints(int newPoints)
-    {
-        actionPoints = newPoints;
-        if (actionPoints < 0)
-        {
-            actionPoints = 0;
-        }
     }
 
     public bool UseActionPoint()
