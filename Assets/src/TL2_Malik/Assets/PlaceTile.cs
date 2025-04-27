@@ -55,14 +55,14 @@ public class PlaceTile : MonoBehaviour
             return;
         }
         //set grid height
-        height = Random.Range(min,max);
+        height = 10;
         //set grid width
         width = Random.Range(min, max);
         Grid = null;
         //make grid
         if(runOnStart)
         {
-            MakeMap(width, height+2);
+            MakeMap(width, height);
         }
         
     }

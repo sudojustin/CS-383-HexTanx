@@ -167,7 +167,8 @@ public class ItemManager : MonoBehaviour
             
             // Start spawning different types of items
             StartCoroutine(WaitForGridAndSpawnItem(ItemType.HealthPack));
-            
+            StartCoroutine(WaitForGridAndSpawnItem(ItemType.HealthPack));
+
             // Check current scene to determine if we should spawn Flag or Bible
             if (currentScene == "LevelEaster" || currentScene == "Level666")
             {
@@ -189,9 +190,12 @@ public class ItemManager : MonoBehaviour
             {
                 StartCoroutine(WaitForGridAndSpawnItem(ItemType.EasterEgg));
             }
-            
+
+            StartCoroutine(WaitForGridAndSpawnItem(ItemType.Armor));
             StartCoroutine(WaitForGridAndSpawnItem(ItemType.Armor));
             StartCoroutine(WaitForGridAndSpawnItem(ItemType.Missile));
+            StartCoroutine(WaitForGridAndSpawnItem(ItemType.Missile));
+            StartCoroutine(WaitForGridAndSpawnItem(ItemType.Gasoline));
             StartCoroutine(WaitForGridAndSpawnItem(ItemType.Gasoline));
         }
     }

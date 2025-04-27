@@ -7,7 +7,7 @@ public class Level5Tank : TankType
     public override void Initialize()
     {
         enemyActionPoints = 5;
-        health = 300;  // Set health specific to Level 4 Tank
+        health = 100;  // Set health specific to Level 4 Tank
         // Debug.Log("Level 5 Tank Spawned with " + health + " HP");
         damage = findDamageVal(30);
     }
