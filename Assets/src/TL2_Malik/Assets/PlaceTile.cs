@@ -62,7 +62,7 @@ public class PlaceTile : MonoBehaviour
         //make grid
         if(runOnStart)
         {
-            MakeMap(width, height);
+            MakeMap(width, height+2);
         }
         
     }
