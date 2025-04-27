@@ -829,7 +829,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 1816, y: 1021.5}
+  m_SizeDelta: {x: 1412, y: 794.25}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &564648617
 MonoBehaviour:
@@ -1035,8 +1035,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 118, y: -11.925}
-  m_SizeDelta: {x: 576.062, y: 715.8505}
+  m_AnchoredPosition: {x: 116, y: 34}
+  m_SizeDelta: {x: 600, y: 780}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &824011118
 MonoBehaviour:
@@ -1646,6 +1646,7 @@ MonoBehaviour:
   flagPickupClip: {fileID: 0}
   oilPickupClip: {fileID: 0}
   biblePickupClip: {fileID: 0}
+  missilePickupClip: {fileID: 0}
   playerMoveClip: {fileID: 8300000, guid: 4afde902b8823b14bbd212a57d85d211, type: 3}
   enemyMoveClip: {fileID: 8300000, guid: 4afde902b8823b14bbd212a57d85d211, type: 3}
   bossEnemyMoveClip: {fileID: 0}
@@ -1872,18 +1873,19 @@ MonoBehaviour:
   m_text: 'Controls
 
 
-    Left click: move
+    Select shooting or moving mode
 
-    Right click: shoot
+    Left click tiles to
+    move or shoot depending on the selected mode
 
 
     Rules
 
 
-    Capture
-    the flag
+    Capture the flag
 
-    Destroy the enemy tank
+    Destroy
+    the enemy tank
 
 
     Items

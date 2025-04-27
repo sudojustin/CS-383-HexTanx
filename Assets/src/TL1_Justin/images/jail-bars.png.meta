@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: f5d4b9a89c45b164694082011e6cdfef
+guid: e3662b0ce60f9d24abf2c89b58c36c2d
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -8073802489749622853
-    second: 22765_diablo_sauce_packet_750x340_0
+      213: 2330820974563448616
+    second: jail-bars_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,13 +100,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: 22765_diablo_sauce_packet_750x340_0
+      name: jail-bars_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 178
-        height: 268
+        width: 799
+        height: 599
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: bbf2fc3996714ff80800000000000000
-      internalID: -8073802489749622853
+      spriteID: 82752efb35db85020800000000000000
+      internalID: 2330820974563448616
       vertices: []
       indices: 
       edges: []
@@ -134,8 +134,7 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable:
-      22765_diablo_sauce_packet_750x340_0: -8073802489749622853
+    nameFileIdTable: {}
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

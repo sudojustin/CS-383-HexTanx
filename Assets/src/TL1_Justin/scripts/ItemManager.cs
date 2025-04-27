@@ -174,6 +174,10 @@ public class ItemManager : MonoBehaviour
                 // In Easter level, spawn Bible instead of Flag
                 StartCoroutine(WaitForGridAndSpawnItem(ItemType.Bible));
             }
+            else if (currentScene == "Level5")
+            {
+                StartCoroutine(WaitForGridAndSpawnItem(ItemType.JapanFlag));
+            }
             else
             {
                 // In regular levels, spawn the Flag
@@ -266,7 +270,7 @@ public class ItemManager : MonoBehaviour
                     Debug.Log($"BC Mode: {PlayerPrefs.GetInt("BCMode", 0) == 1}, Healed for: {healAmount}");
                     Debug.Log("Player health after health pack: " + playerTank.GetHealth());
                 }
-                else if (itemTag == "Flag")
+                else if (itemTag == "Flag" || itemTag == "japan-flag")
                 {
                     // Handle flag pickup - likely a game objective
                     Debug.Log("Player picked up the flag!");
@@ -380,6 +384,7 @@ public class ItemManager : MonoBehaviour
                 {
                     // Handle gasoline pickup
                     Debug.Log("Player picked up gasoline!");
+                    playerTank.SetActionPoints(playerTank.GetActionPoints() + 3);
                     if (SoundManager.GetInstance() != null)
                     {
                         SoundManager.GetInstance().oilPickupSound();
@@ -438,7 +443,7 @@ public class ItemManager : MonoBehaviour
             int randY;
 
             // Determine spawn range based on item type
-            if (itemTypeToSpawn == ItemType.Flag || itemTypeToSpawn == ItemType.Bible)
+            if (itemTypeToSpawn == ItemType.Flag || itemTypeToSpawn == ItemType.Bible || itemTypeToSpawn == ItemType.JapanFlag)
             {
                 // Spawn flag/bible in the top 1/6th of the map
                 // This ensures flags/bibles appear in a specific area

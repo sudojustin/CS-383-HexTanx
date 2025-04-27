@@ -6,6 +6,7 @@ public enum ItemType
 {
     HealthPack,
     Flag,
+    JapanFlag,
     Armor,
     Missile,
     Gasoline,
@@ -41,6 +42,7 @@ public class ItemFactory : MonoBehaviour
     // Each prefab represents the visual and physical representation of an item type
     public GameObject healthPackPrefab;
     public GameObject flagPrefab;
+    public GameObject japanFlagPrefab;
     public GameObject armorPrefab;
     public GameObject missilePrefab;
     public GameObject gasolinePrefab;
@@ -63,6 +65,9 @@ public class ItemFactory : MonoBehaviour
                 break;
             case ItemType.Flag:
                 prefabToSpawn = flagPrefab;
+                break;
+            case ItemType.JapanFlag:
+                prefabToSpawn = japanFlagPrefab;
                 break;
             case ItemType.Armor:
                 prefabToSpawn = armorPrefab;
@@ -106,6 +111,7 @@ public class ItemFactory : MonoBehaviour
             case ItemType.Gasoline:   newItem.tag = "gasoline"; break;
             case ItemType.Bible:      newItem.tag = "bible"; break;
             case ItemType.EasterEgg:  newItem.tag = "easter-egg"; break;
+            case ItemType.JapanFlag:  newItem.tag = "japan-flag"; break;
             // TODO: Add cases for other item types here
         }
 
