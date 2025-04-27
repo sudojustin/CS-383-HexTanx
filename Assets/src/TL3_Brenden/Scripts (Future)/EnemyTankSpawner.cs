@@ -136,7 +136,7 @@ public class EnemyTankSpawner : MonoBehaviour
             case "Level9": numberOfEnemiesToSpawn = 1; break;
             case "Level10": numberOfEnemiesToSpawn = 1; break;
             case "Level666": numberOfEnemiesToSpawn = 4; break;
-            case "LevelEaster": numberOfEnemiesToSpawn = 2; break;
+            case "LevelEaster": numberOfEnemiesToSpawn = 5; break;
         }
         for (int i = 0; i < numberOfEnemiesToSpawn; i++)
         {
