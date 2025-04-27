@@ -56,8 +56,8 @@ public abstract class TankType : MonoBehaviour
         if (this is LevelEasterTank) return 2;
         if (this is Level5Tank) return 5;
         if (this is Level6Tank) return 2;
-        if (this is Level7Tank) return 3;
-        if (this is Level8Tank) return 3;
+        if (this is Level7Tank) return 4;
+        if (this is Level8Tank) return 2;
         if (this is Level9Tank1) return 3;
         if (this is Level10Tank1) return 3;
         return 1; // Default fallback

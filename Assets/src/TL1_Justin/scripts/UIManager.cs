@@ -282,8 +282,8 @@ public class UIManager : MonoBehaviour
             else if (tankTypeName == "Level6Tank") maxHealth = 125f;
             else if (tankTypeName == "Level7Tank") maxHealth = 300f;
             else if (tankTypeName == "Level8Tank") maxHealth = 300f;
-            else if (tankTypeName == "Level9Tank1") maxHealth = 300f;
-            else if (tankTypeName == "Level10Tank1") maxHealth = 300f;
+            else if (tankTypeName == "Level9Tank1") maxHealth = 225f;
+            else if (tankTypeName == "Level10Tank1") maxHealth = 100f;
             else if (tankTypeName == "Level666Tank") maxHealth = 666f;
             else if (tankTypeName == "LevelEasterTank") maxHealth = 50f;
             

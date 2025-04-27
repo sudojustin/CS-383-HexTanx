@@ -165,7 +165,7 @@ public class SoundManager : MonoBehaviour
                 winterMusic();
                 break;
             case "level9":
-                winterMusic();
+                StopMusic();
                 break;
             case "level10":
                 technoMusic();
@@ -260,6 +260,15 @@ public class SoundManager : MonoBehaviour
         else
         {
             Debug.LogWarning("AudioClip is null in PlayMusic!");
+        }
+    }
+
+    public void StopMusic()
+    {
+        if (musicSource.isPlaying)
+        {
+            musicSource.Stop();
+            Debug.Log("Stopped effectsSource sounds on scene change.");
         }
     }
 
