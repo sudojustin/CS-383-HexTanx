@@ -1170,7 +1170,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 1722.6666, y: 969}
+  m_SizeDelta: {x: 1920, y: 1080}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &564648617
 MonoBehaviour:
@@ -1338,6 +1338,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3121f91398cae7540b4779158b02a9f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  webcamDisplay: {fileID: 0}
+  preferredWidth: 640
+  preferredHeight: 480
+  preferredFPS: 30
   MainMenuScreen: {fileID: 1989443569}
 --- !u!1 &581267987
 GameObject:
@@ -1980,6 +1984,8 @@ MonoBehaviour:
   missileClip: {fileID: 8300000, guid: 781c1a2b5b04d0148818875ee2a126fb, type: 3}
   bossShootClip: {fileID: 8300000, guid: bd3d13cfbe7694c489ae48e44aef3a28, type: 3}
   tronShootClip: {fileID: 8300000, guid: 04d946d48eb35464daad3d553bacd1bd, type: 3}
+  launcherShootClip: {fileID: 8300000, guid: d2ce9733856d98944a16e39371abb0d3, type: 3}
+  bellShootClip: {fileID: 8300000, guid: b7779ff81d96d6a489bc7653d0101b75, type: 3}
   hurtClip: {fileID: 0}
   explodeClip: {fileID: 8300000, guid: 31356047f04d8674aae9ad9d8632bf2f, type: 3}
   pickupClip: {fileID: 8300000, guid: 3ec5a07565395444fade487d5b055724, type: 3}
@@ -1987,6 +1993,7 @@ MonoBehaviour:
   flagPickupClip: {fileID: 8300000, guid: 8ebabccd33f07b645a32061a33718f55, type: 3}
   oilPickupClip: {fileID: 8300000, guid: 21fcf37b4f08f4f4287b4f767e21e50b, type: 3}
   biblePickupClip: {fileID: 8300000, guid: 39e559fa7ac14f241b865ae5ce7048ae, type: 3}
+  missilePickupClip: {fileID: 8300000, guid: afb960a4583e1694aa9a6356bd2668c6, type: 3}
   playerMoveClip: {fileID: 8300000, guid: 4afde902b8823b14bbd212a57d85d211, type: 3}
   enemyMoveClip: {fileID: 8300000, guid: 4afde902b8823b14bbd212a57d85d211, type: 3}
   bossEnemyMoveClip: {fileID: 8300000, guid: 316fc2e33a5c64944a0d724f2992f733, type: 3}
@@ -2002,6 +2009,7 @@ MonoBehaviour:
   animeMusicClip: {fileID: 8300000, guid: 727e179b64e7f3a4685cded4a8b86172, type: 3}
   desertMusicClip: {fileID: 8300000, guid: 25ac40c07d3f7024e90d42011c81ed11, type: 3}
   winterMusicClip: {fileID: 8300000, guid: fd2fee9170697564cb66b3086cbfb2a4, type: 3}
+  easterMusicClip: {fileID: 8300000, guid: fee8543715406b74883259cfc56115e3, type: 3}
   pauseMusicClip: {fileID: 8300000, guid: f8d5eddf3e97f064db9fe6a7fd9c441e, type: 3}
   winMusicClip: {fileID: 8300000, guid: 70c952827a8a4734880e6d18e94d76d9, type: 3}
   loseMusicClip: {fileID: 8300000, guid: a0c885cc6b5fa86439a694f7fa2a53eb, type: 3}

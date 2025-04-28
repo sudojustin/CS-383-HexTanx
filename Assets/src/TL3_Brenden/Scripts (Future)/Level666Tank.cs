@@ -9,7 +9,7 @@ public class Level4377Tank : TankType
         enemyActionPoints = 6;
         health = 666;
         Debug.Log("Level 4377 Tank Spawned with " + health + " HP");
-        damage = findDamageVal(6);
+        damage = findDamageVal(12);
     }
 
     public int findDamageVal(int baseDamage)

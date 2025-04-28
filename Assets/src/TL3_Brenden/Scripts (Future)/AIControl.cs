@@ -70,6 +70,14 @@ public class AIControl : MonoBehaviour
         {
             SoundManager.GetInstance().tronShootSound();
         }
+        else if (tank is LevelEasterTank || tank is Level7Tank || tank is Level8Tank)
+        {
+            SoundManager.GetInstance().launcherShootSound();
+        }
+        else if (tank is Level9Tank1)
+        {
+            SoundManager.GetInstance().bellShootSound();
+        }
         else
         {
             SoundManager.GetInstance().ShootSound();
