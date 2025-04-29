@@ -6,8 +6,8 @@ public class LevelEasterTank : TankType
 {
     public override void Initialize()
     {
-        enemyActionPoints = 3;
-        health = 366;
+        enemyActionPoints = 2;
+        health = 50;
         Debug.Log("Level 4377 Tank Spawned with " + health + " HP");
         damage = findDamageVal(20);
     }

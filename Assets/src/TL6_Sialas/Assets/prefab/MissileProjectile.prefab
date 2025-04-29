@@ -130,7 +130,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 5
-  damage: 50
+  damage: 100
   explosionSoundOverride: {fileID: 0}
 --- !u!60 &1925263780782395346
 PolygonCollider2D:

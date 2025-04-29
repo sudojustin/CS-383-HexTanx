@@ -17,6 +17,8 @@ public class SoundManager : MonoBehaviour
     [SerializeField] private AudioClip missileClip;
     [SerializeField] private AudioClip bossShootClip;
     [SerializeField] private AudioClip tronShootClip;
+    [SerializeField] private AudioClip launcherShootClip;
+    [SerializeField] private AudioClip bellShootClip;
     [SerializeField] private AudioClip hurtClip;
     [SerializeField] private AudioClip explodeClip;
     [SerializeField] private AudioClip pickupClip;
@@ -42,6 +44,7 @@ public class SoundManager : MonoBehaviour
     [SerializeField] private AudioClip animeMusicClip;
     [SerializeField] private AudioClip desertMusicClip;
     [SerializeField] private AudioClip winterMusicClip;
+    [SerializeField] private AudioClip easterMusicClip;
     [SerializeField] private AudioClip pauseMusicClip;
     [SerializeField] private AudioClip winMusicClip;
     [SerializeField] private AudioClip loseMusicClip;
@@ -165,16 +168,19 @@ public class SoundManager : MonoBehaviour
                 winterMusic();
                 break;
             case "level9":
-                winterMusic();
+                StopMusic();
                 break;
             case "level10":
                 technoMusic();
                 Debug.Log("Attempting to play TronLevel music.");
-
                 break;
             case "level666":
                 Debug.Log("Attempting to play Hell music.");
                 hellMusic();
+                break;
+            case "leveleaster":
+                Debug.Log("Attempting to play Easter music.");
+                easterMusic();
                 break;
             case "pausescene":
                 Debug.Log("Attempting to play Pause music.");
@@ -260,6 +266,15 @@ public class SoundManager : MonoBehaviour
         else
         {
             Debug.LogWarning("AudioClip is null in PlayMusic!");
+        }
+    }
+
+    public void StopMusic()
+    {
+        if (musicSource.isPlaying)
+        {
+            musicSource.Stop();
+            Debug.Log("Stopped effectsSource sounds on scene change.");
         }
     }
 
@@ -399,6 +414,16 @@ public class SoundManager : MonoBehaviour
     {
         Play(tronShootClip);
     }
+
+    public void launcherShootSound()
+    {
+        Play(launcherShootClip);
+    }
+
+    public void bellShootSound()
+    {
+        Play(bellShootClip);
+    }
     public void buttonSound()
     {
         Play(buttonClip);
@@ -478,6 +503,11 @@ public class SoundManager : MonoBehaviour
     public void winterMusic()
     {
         PlayMusic(winterMusicClip);
+    }
+
+    public void easterMusic()
+    {
+        PlayMusic(easterMusicClip);
     }
 
     public void PauseMusic()

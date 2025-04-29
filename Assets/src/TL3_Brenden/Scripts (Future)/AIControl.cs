@@ -71,6 +71,14 @@ public class AIControl : MonoBehaviour
         {
             SoundManager.GetInstance().tronShootSound();
         }
+        else if (tank is LevelEasterTank || tank is Level7Tank || tank is Level8Tank)
+        {
+            SoundManager.GetInstance().launcherShootSound();
+        }
+        else if (tank is Level9Tank1)
+        {
+            SoundManager.GetInstance().bellShootSound();
+        }
         else
         {
             SoundManager.GetInstance().ShootSound();
@@ -190,7 +198,7 @@ public class AIControl : MonoBehaviour
             return validMoves[Random.Range(0, validMoves.Count)];
         }
 
-        return possibleMoves[Random.Range(0, possibleMoves.Length)];
+        return validMoves[Random.Range(0, validMoves.Count)];
     }
 
     private bool IsOccupied(Vector3 position)
@@ -223,7 +231,7 @@ public class AIControl : MonoBehaviour
     private bool IsWithinMapBounds(Vector3 position)
     {
         float hexHeight = Mathf.Sqrt(3) / 2f;
-        if (position.x > 0f && position.x <= placeTileScript.width && position.y >= 0.00f && position.y < (placeTileScript.height - hexHeight- 0.3f))
+        if (position.x > 0f && position.x <= placeTileScript.width && position.y >= 0.00f && position.y < (placeTileScript.height - hexHeight- 0.5f))
         {
             return true;
         }
