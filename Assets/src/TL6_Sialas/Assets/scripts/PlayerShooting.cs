@@ -78,7 +78,7 @@ public class PlayerShooting : MonoBehaviour
                         Shoot(targetTilePos);
                         playerTank.SetAmmoCount(playerTank.GetAmmoCount() - 1);
                         Debug.Log("Shot fired toward tile center: " + targetTilePos);
-                        FindObjectOfType<BattleSystem>().PlayerActionTaken();
+                        //FindObjectOfType<BattleSystem>().PlayerActionTaken();
                     }
                 }
                 else
