@@ -49,10 +49,26 @@ public class Projectile : MonoBehaviour
                 Destroy(enemyTank.gameObject);
                 Destroy(gameObject);  // No delay needed
                 Debug.Log("Enemy tank destroyed!");
+
+                BattleSystem battleSystem = FindObjectOfType<BattleSystem>();
+                if (battleSystem != null)
+                {
+                    battleSystem.PlayerActionTaken();
+                }
+                else
+                {
+                    Debug.LogError("BattleSystem not found after destroying enemy tank!");
+                }
             }
             else
             {
                 Destroy(gameObject);
+
+                BattleSystem battleSystem = FindObjectOfType<BattleSystem>();
+                if (battleSystem != null)
+                {
+                    battleSystem.PlayerActionTaken();
+                }
             }
         }
     }
