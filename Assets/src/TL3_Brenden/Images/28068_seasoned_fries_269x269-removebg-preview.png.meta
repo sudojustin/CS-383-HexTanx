@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 3e3a978c146a9de4a91aed3a7bd38af4
+guid: 56b063b2b7c79a44a92042481c58559b
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -4609142109768900176
-    second: animeBackground_0
+      213: -2301589224340224935
+    second: 28068_seasoned_fries_269x269-removebg-preview_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -96,30 +96,17 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 4
-    buildTarget: Android
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: animeBackground_0
+      name: 28068_seasoned_fries_269x269-removebg-preview_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 3840
-        height: 2160
+        x: 75
+        y: 19
+        width: 140
+        height: 232
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -128,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 0b12ee3eba90900c0800000000000000
-      internalID: -4609142109768900176
+      spriteID: 95485587bcc1f00e0800000000000000
+      internalID: -2301589224340224935
       vertices: []
       indices: 
       edges: []
@@ -147,8 +134,7 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable:
-      animeBackground_0: -4609142109768900176
+    nameFileIdTable: {}
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
