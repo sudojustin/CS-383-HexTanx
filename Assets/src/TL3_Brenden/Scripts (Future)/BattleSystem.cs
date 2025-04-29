@@ -62,7 +62,7 @@ public class BattleSystem : MonoBehaviour
         if (allEnemies.Count == 0)
         {
             Debug.Log("All enemies destroyed. Player wins!");
-            Invoke("DecideScene", 1.0f);
+            Invoke("DecideScene", 3.0f);
             return;
         }
         if (playerTank.GetActionPoints() <= 0)
@@ -176,4 +176,3 @@ public class BattleSystem : MonoBehaviour
         }
     }
 }
-
