@@ -125,25 +125,6 @@ public class GameOverLose : MonoBehaviour
 
                 // Ensure position is correct after setting new texture
                 PositionWebcamDisplay();
-
-                // Add "BUSTED" text
-                GameObject textObject = new GameObject("MugshotLabel");
-                textObject.transform.SetParent(webcamDisplay.transform.parent);
-                Text mugshotText = textObject.AddComponent<Text>();
-                mugshotText.text = "BUSTED";
-                mugshotText.font = Resources.GetBuiltinResource<Font>("Arial.ttf");
-                mugshotText.fontSize = 40;
-                mugshotText.alignment = TextAnchor.MiddleCenter;
-                mugshotText.color = Color.red;
-
-                RectTransform textRT = mugshotText.GetComponent<RectTransform>();
-                textRT.anchorMin = new Vector2(0.5f, 0.5f);
-                textRT.anchorMax = new Vector2(0.5f, 0.5f);
-                textRT.pivot = new Vector2(0.5f, 0.5f);
-                Vector2 textPosition = webcamPosition;
-                textPosition.y -= 250;
-                textRT.anchoredPosition = textPosition;
-                textRT.sizeDelta = new Vector2(600, 60);
             }
             catch (System.Exception e)
             {
